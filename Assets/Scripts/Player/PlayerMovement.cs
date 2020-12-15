@@ -6,56 +6,79 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
-
     Vector2 joystick = Vector2.zero;
-    [SerializeField] float speed = 3f;
-    [SerializeField] float maxSpeedHorizontal = 30f;
-    [SerializeField] float maxSpeedVertical = 60f;
+
+    [SerializeField] float horizontalSpeed = 3f;
+    [SerializeField] float maxHorizontalSpeed = 30f;
+
+    [SerializeField] float verticalSpeed = 2f;
+    [SerializeField] float maxVerticalSpeed = 30f;
+
+    public bool climbingLadder = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
     public void MovementInput(InputAction.CallbackContext context)
     {
         joystick = context.ReadValue<Vector2>();
-        Debug.Log(joystick);
+        RotatePlayer();
     }
 
     void Update()
     {
-        
+        Debug.Log("X: " + joystick.x + "Y:" + joystick.y);
     }
 
     //Movement Update
     private void FixedUpdate()
     {
-        HorizontalMovement();
-        RotatePlayer();
+        Movement();
         ClampVelocity();
     }
 
-    private void HorizontalMovement()
+    private void Movement()
     {
-        float horizontalMovement = Vector3.right.magnitude * joystick.x * speed * Time.deltaTime;
+        float horizontalMovement = 0f;
         float verticalMovement = 0f;
+        Vector3 finalMovement = Vector3.zero;
 
-        Vector3 finalMovement = new Vector3(horizontalMovement, verticalMovement, 0f);
+        horizontalMovement = Vector3.right.magnitude * joystick.x * horizontalSpeed * Time.deltaTime;
+
+        finalMovement.x = horizontalMovement;
+
+        //Desasctivar gravedad
+        if (climbingLadder)
+        {
+            Debug.Log("Trepando");
+
+            rb.useGravity = false;
+
+            verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
+
+            finalMovement.y = verticalMovement;
+        }
+        else
+            rb.useGravity = true;
+
         rb.AddForce(finalMovement, ForceMode.VelocityChange);
     }
 
     private void RotatePlayer()
     {
-        //Eeeeeeew
+        //Izquierda
         if(joystick.x < 0f)
         {
-            transform.RotateAround(transform.position, Vector3.up, 180f);
+            transform.forward = -Vector3.right;
         }
+        //Derecha
         else if (joystick.x > 0f)
         {
-            transform.RotateAround(transform.position, Vector3.up, 180f);
+            transform.forward = Vector3.right;
         }
     }
 
@@ -64,15 +87,41 @@ public class PlayerMovement : MonoBehaviour
         Vector3 clampedVelocity = rb.velocity;
 
         if (joystick.x != 0)
-            clampedVelocity.x = Mathf.Clamp(clampedVelocity.x, -maxSpeedHorizontal, maxSpeedHorizontal);
+            clampedVelocity.x = Mathf.Clamp(clampedVelocity.x, -maxHorizontalSpeed, maxHorizontalSpeed);
         else
             clampedVelocity.x = 0f;
 
-        clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -maxSpeedVertical, maxSpeedVertical);
+        if (climbingLadder)
+        {
+            if (joystick.y != 0)
+                clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -maxVerticalSpeed, maxVerticalSpeed);
+            else
+                clampedVelocity.y = 0f;
+        }
+        else if(clampedVelocity.y > 0f) 
+        {
+            clampedVelocity.y = 0f;
+        }
+
         clampedVelocity.z = 0f;
 
         rb.velocity = clampedVelocity;
+    }
 
-        //Debug.Log(rb.velocity);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Ladder")
+        {
+            climbingLadder = true;
+            //Vector3 aux = rb.velocity;
+            //rb.velocity = new Vector3(0f, aux.y, 0f);
+        }
+            
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Ladder")
+            climbingLadder = false;
     }
 }
