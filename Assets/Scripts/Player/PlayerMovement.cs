@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("X: " + joystick.x + "Y:" + joystick.y);
+        //Debug.Log("X: " + joystick.x + "Y:" + joystick.y);
     }
 
     //Movement Update
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         //Desasctivar gravedad
         if (climbingLadder)
         {
-            Debug.Log("Trepando");
+            //Debug.Log("Trepando");
 
             rb.useGravity = false;
 
