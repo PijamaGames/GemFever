@@ -15,7 +15,7 @@ public class OreSpawnerManager : MonoBehaviour
         SpawnOres();
     }
 
-    private void FindSpawnPoints()
+    void FindSpawnPoints()
     {
         OreSpawnPoint[] foundSpawnPoints = FindObjectsOfType<OreSpawnPoint>();
         if (foundSpawnPoints == null)
@@ -27,7 +27,7 @@ public class OreSpawnerManager : MonoBehaviour
         }
     }
 
-    private void SpawnOres()
+    void SpawnOres()
     {
         int randomIndex = -1;
 

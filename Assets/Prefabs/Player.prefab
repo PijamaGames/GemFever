@@ -127,10 +127,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae9e3b7a9811bc4693f4c9caef6c8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 60
-  maxHorizontalSpeed: 8
-  verticalSpeed: 60
+  horizontalSpeed: 450
+  maxHorizontalSpeed: 10
+  verticalSpeed: 300
   maxVerticalSpeed: 13
+  stunTime: 0.5
+  invulnerabiltyTime: 1
   climbingLadder: 0
 --- !u!114 &390191191207065865
 MonoBehaviour:
@@ -175,14 +177,6 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: dd64c367-97bc-4027-aad4-76f4951800be
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8e187de5-c259-497b-a1fe-278e256a90e8
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 54a21170-a2da-4203-b426-37a442bea1d5
     m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -221,6 +215,21 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bbd8bc4a-16e1-4510-ac2e-4b791ebb9aa0
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1371809310116195677}
+        m_MethodName: PickaxeInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 59623374-75d0-40e0-acb5-07e1e6b23ff5
+    m_ActionName: Player/Pickaxe[/Keyboard/f,/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -238,7 +247,7 @@ GameObject:
   - component: {fileID: 390191192358692950}
   - component: {fileID: 390191192358692945}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -317,8 +326,10 @@ GameObject:
   - component: {fileID: 332586831606755169}
   - component: {fileID: 5917571042322887776}
   - component: {fileID: 5661367139168753278}
+  - component: {fileID: 1371809310116195677}
+  - component: {fileID: 1578943369075542660}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Pickaxe
   m_TagString: Pickaxe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,8 +343,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2446818076243643841}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.244, z: 1.009}
-  m_LocalScale: {x: 1, y: 1.8365, z: 1}
+  m_LocalPosition: {x: 1.4210855e-14, y: 0.2739991, z: 0.8830425}
+  m_LocalScale: {x: 1, y: 2.030133, z: 0.74264014}
   m_Children: []
   m_Father: {fileID: 390191191207065867}
   m_RootOrder: 1
@@ -398,3 +409,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1371809310116195677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446818076243643841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c8a807a02c54542a23782e92e111c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOwner: {fileID: 390191191207065864}
+  hitCooldown: 0.5
+  knockbackForce: 17000
+--- !u!95 &1578943369075542660
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446818076243643841}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c3f79daa8c20025429e11a116c61e897, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

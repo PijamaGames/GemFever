@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//TODO
+/*
+ * Hacer que stun solo bloquee movimiento horizontal (si te stunean en una escalera se empujan, pero no caes)
+ * Hacer que la fuerza del knockback sea un stun y no un teleport
+ */
+
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
@@ -14,12 +20,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float verticalSpeed = 2f;
     [SerializeField] float maxVerticalSpeed = 30f;
 
+    [SerializeField] float stunTime = 0.5f;
+    [SerializeField] float invulnerabiltyTime = 1f;
+
     public bool climbingLadder = false;
+
+    public bool isStunned { get; set; }
+    public bool isInvulnerable { get; set; }
+
+    Vector3 velocity, knockback;
 
     // Start is called before the first frame update
     void Start()
     {
-        
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -32,16 +45,49 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Debug.Log("X: " + joystick.x + "Y:" + joystick.y);
+        //Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
+        //Debug.Log(gameObject.name + " Is Invulnerable: " + isInvulnerable);
+        //Debug.Log(rb.velocity);
     }
 
     //Movement Update
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        Movement();
-        ClampVelocity();
+        velocity = new Vector3(0f, rb.velocity.y, 0f);
+
+        if(!isStunned)
+        {
+            velocity = Movement();
+            rb.AddForce(velocity, ForceMode.VelocityChange);
+
+            velocity = ClampVelocity(velocity);
+        }
+        else
+        {
+            isInvulnerable = true;
+            StartCoroutine(StunTime());
+            StartCoroutine(InvulnerabilityTime());
+        }
+
+        if(climbingLadder)
+        {
+            rb.velocity = velocity;
+        }
+        else if (!climbingLadder && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector3(velocity.x, 0f, velocity.z);
+        }
+        else
+        {
+            rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
+        }
+        
+        rb.AddForce(knockback, ForceMode.Impulse);
+
+        knockback = Vector3.zero;
     }
 
-    private void Movement()
+    Vector3 Movement()
     {
         float horizontalMovement = 0f;
         float verticalMovement = 0f;
@@ -54,8 +100,6 @@ public class PlayerMovement : MonoBehaviour
         //Desasctivar gravedad
         if (climbingLadder)
         {
-            //Debug.Log("Trepando");
-
             rb.useGravity = false;
 
             verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
@@ -65,13 +109,37 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.useGravity = true;
 
-        rb.AddForce(finalMovement, ForceMode.VelocityChange);
+        return finalMovement;
     }
 
-    private void RotatePlayer()
+    Vector3 ClampVelocity(Vector3 velocityToClamp)
+    {
+        if (joystick.x != 0)
+            velocityToClamp.x = Mathf.Clamp(velocityToClamp.x, -maxHorizontalSpeed, maxHorizontalSpeed);
+        else
+            velocityToClamp.x = 0f;
+
+        if (climbingLadder)
+        {
+            if (joystick.y != 0)
+                velocityToClamp.y = Mathf.Clamp(velocityToClamp.y, -maxVerticalSpeed, maxVerticalSpeed);
+            else
+                velocityToClamp.y = 0f;
+        }
+        else if(velocityToClamp.y > 0f) 
+        {
+            velocityToClamp.y = 0f;
+        }
+
+        velocityToClamp.z = 0f;
+
+        return velocityToClamp;
+    }
+
+    void RotatePlayer()
     {
         //Izquierda
-        if(joystick.x < 0f)
+        if (joystick.x < 0f)
         {
             transform.forward = -Vector3.right;
         }
@@ -82,44 +150,37 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void ClampVelocity()
+    public void Knockback(Vector3 knobackDirection, float knockbackForce)
     {
-        Vector3 clampedVelocity = rb.velocity;
-
-        if (joystick.x != 0)
-            clampedVelocity.x = Mathf.Clamp(clampedVelocity.x, -maxHorizontalSpeed, maxHorizontalSpeed);
-        else
-            clampedVelocity.x = 0f;
-
-        if (climbingLadder)
-        {
-            if (joystick.y != 0)
-                clampedVelocity.y = Mathf.Clamp(clampedVelocity.y, -maxVerticalSpeed, maxVerticalSpeed);
-            else
-                clampedVelocity.y = 0f;
-        }
-        else if(clampedVelocity.y > 0f) 
-        {
-            clampedVelocity.y = 0f;
-        }
-
-        clampedVelocity.z = 0f;
-
-        rb.velocity = clampedVelocity;
+        Debug.Log("Knockback");
+        isStunned = true;
+        knockback = knobackDirection * knockbackForce;
+        //rb.AddForce(knobackDirection * knockbackForce, ForceMode.Acceleration);
     }
 
-    private void OnTriggerEnter(Collider other)
+    IEnumerator StunTime()
+    {
+        yield return new WaitForSecondsRealtime(stunTime);
+        isStunned = false;
+    }
+
+    IEnumerator InvulnerabilityTime()
+    {
+        yield return new WaitForSecondsRealtime(invulnerabiltyTime);
+        isInvulnerable = false;
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ladder")
         {
             climbingLadder = true;
             //Vector3 aux = rb.velocity;
             //rb.velocity = new Vector3(0f, aux.y, 0f);
-        }
-            
+        }          
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.tag == "Ladder")
             climbingLadder = false;
