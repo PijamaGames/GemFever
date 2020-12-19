@@ -6,33 +6,62 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public const string menuScene = "MainMenu";
-    public const string configScene = "Configuration";
-    public const string exitScene = "ExitGame";
-    public const string victoryScene = "Victory"; 
-    public const string gameScene = "GameScene";
-    public const string usernameScene = "Username";
-    public const string rankingScene = "Ranking";
-    public const string controlsScene = "Controls";
-    public const string levelsScene = "Levels";
+    public const string signInScene = "SignIn";
+    public const string signUpScene = "SignUp";
+    public const string customizeAvatarScene = "CustomizeAvatar";
+    public const string configScene = "Settings";
+    public const string creditsScene = "Credits";
+    public const string profileScene = "Profile";
+    //public const string victoryScene = "Victory"; 
+    //public const string gameScene = "GameScene";
+    //public const string usernameScene = "Username";
+    //public const string rankingScene = "Ranking";
+    public const string howToPlayScene = "HowToPlay";
+    //public const string levelsScene = "Levels";
 
 
     private static string previousScene = "";
 
     private static string requestedScene = "";
 
-    public static  void LoadMainMenuScene()
+    public void LoadMainMenuScene()
     {
         LoadScene(menuScene);
     }
-    public static void LoadConfigScene()
+
+    public void LoadSingInScene()
+    {
+        LoadScene(signInScene);
+    }
+
+    public void LoadSignUpScene()
+    {
+        LoadScene(signUpScene);
+    }
+    public void LoadCustomizeAvatarScene()
+    {
+        LoadScene(customizeAvatarScene);
+    }
+
+    public void LoadConfigScene()
     {
         LoadScene(configScene);
     }
-    public static void LoadExitGame()
+
+    public void LoadCreditsScene()
     {
-        LoadScene(exitScene);
+        LoadScene(creditsScene);
     }
-    public static void LoadUsernameScene()
+    public void LoadHowToPlayScene()
+    {
+        LoadScene(howToPlayScene);
+    }
+    public void LoadProfileScene()
+    {
+        LoadScene(profileScene);
+    }
+
+    /*public static void LoadUsernameScene()
     {
         LoadScene(usernameScene);
     }
@@ -48,16 +77,13 @@ public class SceneLoader : MonoBehaviour
     {
         LoadScene(gameScene);
     }
-    public static void LoadControlsScene()
-    {
-        LoadScene(controlsScene);
-    }
+    
     public static void LoadRankingScene()
     {
         LoadScene(rankingScene);
-    }
+    }*/
 
-    public static void LoadPreviousScene()
+    public void LoadPreviousScene()
     {
         if (!previousScene.Equals(""))
         {
@@ -69,7 +95,7 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
-    public static void LoadRequestedScene()
+    public void LoadRequestedScene()
     {
         SceneManager.LoadScene(requestedScene, LoadSceneMode.Single);
     }
@@ -79,7 +105,7 @@ public class SceneLoader : MonoBehaviour
         return SceneManager.GetActiveScene().name;
     }
 
-    private static void LoadScene(string name)
+    private void LoadScene(string name)
     {
         previousScene = GetCurrentScene();
         /*if(UITransition.instance != null)

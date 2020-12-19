@@ -51,14 +51,14 @@ public class PersistentAudioSource : MonoBehaviour
         audiosToStop.Clear();
     }
 
-    private static void StopSource(AudioSource source)
+    private void StopSource(AudioSource source)
     {
         source.enabled = false;
         inUseAudioSources.Remove(source);
         avaibleAudioSources.Push(source);
     }
 
-    public static void StopClip(AudioClip clip)
+    public void StopClip(AudioClip clip)
     {
         List<AudioSource> audiosToStop = new List<AudioSource>();
         foreach (AudioSource source in inUseAudioSources)
@@ -76,7 +76,7 @@ public class PersistentAudioSource : MonoBehaviour
         audiosToStop.Clear();
     }
 
-    public static void PlayMusic(AudioClip clip)
+    public void PlayMusic(AudioClip clip)
     {
         if (clip == null) return;
         bool alreadyPlaying = false;
@@ -94,13 +94,13 @@ public class PersistentAudioSource : MonoBehaviour
         }
     }
 
-    public static void PlayEffect(AudioClip clip)
+    public void PlayEffect(AudioClip clip)
     {
         if (clip != null)
             TryPlayClip(clip, false, false);
     }
 
-    private static void TryPlayClip(AudioClip clip, bool isMusic, bool loop = false)
+    private void TryPlayClip(AudioClip clip, bool isMusic, bool loop = false)
     {
         if (avaibleAudioSources.Count > 0)
         {

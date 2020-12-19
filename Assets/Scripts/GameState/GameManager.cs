@@ -33,33 +33,33 @@ public class GameManager : MonoBehaviour
     }
     //PUBLIC FUNCTIONS
 
-    public static void ChangeUsername(string newUsername)
+    public void ChangeUsername(string newUsername)
     {
         Debug.Log("Username changed: " + newUsername);
         User.username = newUsername;
         //username = newUsername;
     }
 
-    public static void OnMusicVolumeChanged(float volume)
+    public void OnMusicVolumeChanged(float volume)
     {
         musicVolume = volume;
         AudioRegulator.UpdateAllVolumes();
     }
 
-    public static void OnEffectsVolumeChanged(float volume)
+    public void OnEffectsVolumeChanged(float volume)
     {
         effectsVolume = volume;
         AudioRegulator.UpdateAllVolumes();
     }
 
     
-    public static void ChangeLanguage()
+    public void ChangeLanguage()
     {
         english = !english;
         Bilingual.UpdateAll();
     }
 
-    private static void CheckPreferencesFile()
+    private void CheckPreferencesFile()
     {
         saveFilePath = Application.persistentDataPath + "/preferences.txt";
         Debug.Log("Persistent save file path: " + saveFilePath);
@@ -70,15 +70,15 @@ public class GameManager : MonoBehaviour
         } else
         {
             ReadPreferences();
-            if(User.username.Trim(' ') != "" && SceneLoader.GetCurrentScene() == SceneLoader.usernameScene)
+            /*if(User.username.Trim(' ') != "" && SceneLoader.GetCurrentScene() == SceneLoader.usernameScene)
             {
-                //DatabaseManager.TryCreateUser();
+                DatabaseManager.TryCreateUser();
                 SceneLoader.LoadMainMenuScene();
-            }
+            }*/
         }
     }
 
-    private static void ReadPreferences()
+    private void ReadPreferences()
     {
         string[] allLines = File.ReadAllLines(saveFilePath);
         if(allLines.Length > 0)
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void SavePreferences()
+    public void SavePreferences()
     {
         List<string> allLines = new List<string>();
 
