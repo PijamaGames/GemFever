@@ -30,7 +30,7 @@ public class Websocket : MonoBehaviour
     [HideInInspector] public delegate void OnErrorCallback(string err);
     [HideInInspector] public OnErrorCallback onErrorCallback = null;
 
-    [HideInInspector] public delegate void OnMessageCallback(string err);
+    [HideInInspector] public delegate void OnMessageCallback(ref string msg);
     [HideInInspector] public OnMessageCallback onMessageCallback;
 
     [DllImport("__Internal")]
@@ -116,13 +116,13 @@ public class Websocket : MonoBehaviour
         onMessageCallback = func;
     }
 
-    public void SendObj(object o)
+    public void SendObj(object obj)
     {
-        string json = JsonUtility.ToJson(o);
+        string json = JsonUtility.ToJson(obj);
         SendMessage(json);
     }
 
-    private new void SendMessage(string json)
+    public new void SendMessage(string json)
     {
         if (!connected) return;
         bool sent = false;
@@ -204,6 +204,6 @@ public class Websocket : MonoBehaviour
     void ReceiveMessage(string msg)
     {
         if (debugMessages) Debug.Log("[SOCKET] received message: " + msg);
-        onMessageCallback?.Invoke(msg);
+        onMessageCallback?.Invoke(ref msg);
     }
 }

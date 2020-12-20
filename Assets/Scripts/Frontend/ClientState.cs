@@ -15,7 +15,7 @@ public class ClientState : MonoBehaviour
         if (client == null) client = GetComponentInParent<Client>();
     }
 
-    public void HandleMessage(string msg)
+    public void HandleMessage(ref string msg)
     {
 
     }
