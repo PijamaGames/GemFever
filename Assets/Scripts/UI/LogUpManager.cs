@@ -6,10 +6,11 @@ using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LogInManager : MonoBehaviour
+public class LogUpManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private TMP_InputField passwordInputField;
+    //[SerializeField] private TMP_InputField confirmPasswordInputField;
     [SerializeField] private Image passwordImgRestrictions;
     [SerializeField] private Image nameImgRestrictions;
     [SerializeField] private TextMeshProUGUI nameRestrictionsText;
@@ -26,11 +27,11 @@ public class LogInManager : MonoBehaviour
         
     }
 
-    public void ChangePasswordVisibility()
+    public void ChangePasswordVisibility(TMP_InputField passInputField)
     {
         visible = !visible;
-        passwordInputField.inputType = visible? TMP_InputField.InputType.Standard: TMP_InputField.InputType.Password;
-        passwordInputField.ActivateInputField();
+        passInputField.inputType = visible? TMP_InputField.InputType.Standard: TMP_InputField.InputType.Password;
+        passInputField.ActivateInputField();
     }
 
     public void ShowPasswordRestrictions()

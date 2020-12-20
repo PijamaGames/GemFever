@@ -12,12 +12,13 @@ public class SceneLoader : MonoBehaviour
     public const string configScene = "Settings";
     public const string creditsScene = "Credits";
     public const string profileScene = "Profile";
-    //public const string victoryScene = "Victory"; 
-    //public const string gameScene = "GameScene";
-    //public const string usernameScene = "Username";
-    //public const string rankingScene = "Ranking";
     public const string howToPlayScene = "HowToPlay";
-    //public const string levelsScene = "Levels";
+    public const string changeNameScene = "ChangeName";
+    public const string changePasswordScene = "ChangePassword";
+    public const string endGameScene = "EndGame";
+    public const string shopScene = "Shop";
+    //public const string gameScene = "GameScene";
+
 
     [SerializeField] int maxPreviousSceneMemory = 10;
     private static List<string> previousScenes = new List<string>();
@@ -60,6 +61,24 @@ public class SceneLoader : MonoBehaviour
     public void LoadProfileScene()
     {
         LoadScene(profileScene);
+    }
+    
+    public void LoadChangeNameScene()
+    {
+        LoadScene(changeNameScene);
+    }
+
+    public void LoadChangePasswordScene()
+    {
+        LoadScene(changePasswordScene);
+    }
+    public void LoadEndGameScene()
+    {
+        LoadScene(endGameScene);
+    }
+    public void LoadShopScene()
+    {
+        LoadScene(shopScene);
     }
 
     /*public static void LoadUsernameScene()

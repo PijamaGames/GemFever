@@ -32,6 +32,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/Profile.unity
     guid: 60b6a744af0a5a548a7aa99cd48501ad
+  - enabled: 1
+    path: Assets/Scenes/UI/ChangeName.unity
+    guid: 9e997d623b29031458829275e75f57ac
+  - enabled: 1
+    path: Assets/Scenes/UI/ChangePassword.unity
+    guid: 5c48e70ce87d2bb488fdc9107d6c1891
+  - enabled: 1
+    path: Assets/Scenes/UI/EndGame.unity
+    guid: 1cfecd68dd9c70c4a946aa485ee3f94e
+  - enabled: 1
+    path: Assets/Scenes/UI/Shop.unity
+    guid: 6f0166e18bdafda4189a1e3648aef1a9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4c94ed76f44eb094484a7c51e29cc47a,
       type: 2}
