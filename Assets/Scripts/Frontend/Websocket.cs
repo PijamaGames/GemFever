@@ -12,23 +12,23 @@ public class Websocket : MonoBehaviour
 {
     [SerializeField] int urlIndex = 0;
     [SerializeField][TextArea] string[] urlList;
-    [SerializeField] bool debugMessages = true;
-    [SerializeField] bool initOnStart = true;
+    [SerializeField] bool debugMessages = false;
+    [SerializeField] bool initOnAwake = false;
     [SerializeField] int messageSizeBytes = 4096;
     private bool connected = false;
 
     [Header("EVENTS")]
     [SerializeField] UnityEvent OnOpenEvent;
     [HideInInspector] public delegate void OnOpenCallback();
-    [HideInInspector] public OnOpenCallback onOpenCallback =() => Debug.Log("[SOCKET] Opened");
+    [HideInInspector] public OnOpenCallback onOpenCallback = null;
 
     [SerializeField] UnityEvent OnCloseEvent;
     [HideInInspector] public delegate void OnCloseCallback();
-    [HideInInspector] public OnCloseCallback onCloseCallback = () => Debug.Log("[SOCKET] Closed");
+    [HideInInspector] public OnCloseCallback onCloseCallback = null;
 
     [SerializeField] UnityEvent OnErrorEvent;
     [HideInInspector] public delegate void OnErrorCallback(string err);
-    [HideInInspector] public OnErrorCallback onErrorCallback = (err)=>Debug.Log("[SOCKET] Error: " + err);
+    [HideInInspector] public OnErrorCallback onErrorCallback = null;
 
     [HideInInspector] public delegate void OnMessageCallback(string err);
     [HideInInspector] public OnMessageCallback onMessageCallback;
@@ -46,12 +46,12 @@ public class Websocket : MonoBehaviour
     //SOCKET VARS
     ClientWebSocket socket = null;
 
-    private void Start()
+    private void Awake()
     {
 #if (!UNITY_EDITOR && UNITY_WEBGL)
         isWebGLPlatform = true;
 #endif
-        if (initOnStart) Init();
+        if (initOnAwake) Init();
 
     }
 
@@ -66,7 +66,8 @@ public class Websocket : MonoBehaviour
 
     private void Update()
     {
-        CheckState();
+        if(socket != null)
+            CheckState();
     }
 
     private void CheckState()
@@ -177,29 +178,32 @@ public class Websocket : MonoBehaviour
 
     void Open()
     {
+        Debug.Log("[SOCKET] Opened");
         connected = true;
         OnOpenEvent.Invoke();
-        onOpenCallback();
+        onOpenCallback?.Invoke();
         //SendObj(new Vector3(1, 2, 3));
     }
 
     void Close()
     {
+        Debug.Log("[SOCKET] Closed");
         connected = false;
         OnCloseEvent.Invoke();
-        onCloseCallback();
+        onCloseCallback?.Invoke();
     }
 
     void Error(string err = "")
     {
+        Debug.Log("[SOCKET] Error: " + err);
         connected = false;
         OnErrorEvent.Invoke();
-        onErrorCallback(err);
+        onErrorCallback?.Invoke(err);
     }
 
     void ReceiveMessage(string msg)
     {
         if (debugMessages) Debug.Log("[SOCKET] received message: " + msg);
-        if(onMessageCallback != null) onMessageCallback(msg);
+        onMessageCallback?.Invoke(msg);
     }
 }

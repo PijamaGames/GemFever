@@ -25,6 +25,12 @@ public class SceneLoader : MonoBehaviour
     //private static string previousScene = "";
 
     private static string requestedScene = "";
+    public static SceneLoader instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void LoadMainMenuScene()
     {

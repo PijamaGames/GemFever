@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static bool english = false;
 
     private static bool firstInstance = true;
-    private static string saveFilePath;
+    //private static string saveFilePath;
 
     private void Awake()
     {
