@@ -47,6 +47,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/Friends.unity
     guid: 5a8a45c4f0911cc41926082daf56b5bc
+  - enabled: 1
+    path: Assets/Scenes/UI/Conection.unity
+    guid: db5939413f1cb494d8b3041193f43c31
+  - enabled: 1
+    path: Assets/Scenes/UI/HUBSettings.unity
+    guid: f2171cf6b392e9340a0cb5d5dee39167
+  - enabled: 1
+    path: Assets/Scenes/UI/HUB.unity
+    guid: 10565115f46263f47bf1fd3391ded464
+  - enabled: 1
+    path: Assets/Scenes/UI/Lobby.unity
+    guid: 75bddbc7a391bd24b9621af74da16ab9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4c94ed76f44eb094484a7c51e29cc47a,
       type: 2}

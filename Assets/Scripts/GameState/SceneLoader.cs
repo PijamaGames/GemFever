@@ -19,6 +19,10 @@ public class SceneLoader : MonoBehaviour
     public const string shopScene = "Shop";
     public const string friendsScene = "Friends";
     public const string connectionScene = "Connection";
+    public const string hubScene = "HUB";
+    public const string hubSettingsScene = "HUBSettings";
+    public const string lobbyScene = "Lobby";
+
     //public const string gameScene = "GameScene";
 
 
@@ -96,7 +100,18 @@ public class SceneLoader : MonoBehaviour
     {
         LoadScene(connectionScene);
     }
-
+    public void LoadHubScene()
+    {
+        LoadScene(hubScene);
+    }
+    public void LoadHubSettingsScene()
+    {
+        LoadScene(hubSettingsScene);
+    }
+    public void LoadLobbyScene()
+    {
+        LoadScene(lobbyScene);
+    }
     /*public static void LoadUsernameScene()
     {
         LoadScene(usernameScene);
