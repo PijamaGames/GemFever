@@ -20,15 +20,15 @@ public class Websocket : MonoBehaviour
     [Header("EVENTS")]
     [SerializeField] UnityEvent OnOpenEvent;
     [HideInInspector] public delegate void OnOpenCallback();
-    [HideInInspector] public OnOpenCallback onOpenCallback =() => Debug.Log("[SOCKET] opened");
+    [HideInInspector] public OnOpenCallback onOpenCallback =() => Debug.Log("[SOCKET] Opened");
 
     [SerializeField] UnityEvent OnCloseEvent;
     [HideInInspector] public delegate void OnCloseCallback();
-    [HideInInspector] public OnCloseCallback onCloseCallback = () => Debug.Log("[SOCKET] closed");
+    [HideInInspector] public OnCloseCallback onCloseCallback = () => Debug.Log("[SOCKET] Closed");
 
     [SerializeField] UnityEvent OnErrorEvent;
-    [HideInInspector] public delegate void OnErrorCallback();
-    [HideInInspector] public OnErrorCallback onErrorCallback = ()=>Debug.Log("[SOCKET] error");
+    [HideInInspector] public delegate void OnErrorCallback(string err);
+    [HideInInspector] public OnErrorCallback onErrorCallback = (err)=>Debug.Log("[SOCKET] Error: " + err);
 
     [HideInInspector] public delegate void OnMessageCallback(string err);
     [HideInInspector] public OnMessageCallback onMessageCallback;
@@ -89,8 +89,8 @@ public class Websocket : MonoBehaviour
     public async void Init()
     {
         if (connected) return;
-        Debug.Log("TRYING TO INIT SOCKET");
         string url = urlList[urlIndex];
+        Debug.Log("CONNECTING TO: " + url);
         if (isWebGLPlatform)
         {
             Debug.Log("IS WEB GL PLATFORM");
@@ -99,7 +99,14 @@ public class Websocket : MonoBehaviour
         else
         {
             socket = new ClientWebSocket();
-            await socket.ConnectAsync(new Uri(url), CancellationToken.None);
+            try
+            {
+                await socket.ConnectAsync(new Uri(url), CancellationToken.None);
+            } catch
+            {
+                Error("connecting socket");
+            }
+            
         }
     }
 
@@ -125,9 +132,17 @@ public class Websocket : MonoBehaviour
         }
         else if (socket.State == WebSocketState.Open)
         {
-            ArraySegment<Byte> bytes = new ArraySegment<byte>(Encoding.UTF8.GetBytes(json));
-            socket.SendAsync(bytes, WebSocketMessageType.Text, true, CancellationToken.None);
-            sent = true;
+            try
+            {
+                ArraySegment<Byte> bytes = new ArraySegment<byte>(Encoding.UTF8.GetBytes(json));
+                socket.SendAsync(bytes, WebSocketMessageType.Text, true, CancellationToken.None);
+                sent = true;
+            }
+            catch
+            {
+                Error("sending message");
+            }
+            
         }
         if (debugMessages && sent)
         {
@@ -154,7 +169,7 @@ public class Websocket : MonoBehaviour
             ReceiveMessage(msg);
         } catch
         {
-            Debug.Log("[SOCKET] Error waiting message");
+            Error("waiting message");
         }
         
         waitingMsg = false;
@@ -175,11 +190,11 @@ public class Websocket : MonoBehaviour
         onCloseCallback();
     }
 
-    void Error()
+    void Error(string err = "")
     {
         connected = false;
         OnErrorEvent.Invoke();
-        onErrorCallback();
+        onErrorCallback(err);
     }
 
     void ReceiveMessage(string msg)

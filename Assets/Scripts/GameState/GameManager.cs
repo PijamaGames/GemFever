@@ -33,12 +33,12 @@ public class GameManager : MonoBehaviour
     }
     //PUBLIC FUNCTIONS
 
-    public void ChangeUsername(string newUsername)
+    /*public void ChangeUsername(string newUsername)
     {
         Debug.Log("Username changed: " + newUsername);
         User.username = newUsername;
         //username = newUsername;
-    }
+    }*/
 
     public void OnMusicVolumeChanged(float volume)
     {
@@ -59,26 +59,26 @@ public class GameManager : MonoBehaviour
         Bilingual.UpdateAll();
     }
 
-    private void CheckPreferencesFile()
-    {
-        saveFilePath = Application.persistentDataPath + "/preferences.txt";
-        Debug.Log("Persistent save file path: " + saveFilePath);
-        if (!File.Exists(saveFilePath))
-        {
-            //File.Create(saveFilePath);
-            SavePreferences();
-        } else
-        {
-            ReadPreferences();
-            /*if(User.username.Trim(' ') != "" && SceneLoader.GetCurrentScene() == SceneLoader.usernameScene)
-            {
-                DatabaseManager.TryCreateUser();
-                SceneLoader.LoadMainMenuScene();
-            }*/
-        }
-    }
+    //private void CheckPreferencesFile()
+    //{
+    //    saveFilePath = Application.persistentDataPath + "/preferences.txt";
+    //    Debug.Log("Persistent save file path: " + saveFilePath);
+    //    if (!File.Exists(saveFilePath))
+    //    {
+    //        //File.Create(saveFilePath);
+    //        SavePreferences();
+    //    } else
+    //    {
+    //        ReadPreferences();
+    //        /*if(User.username.Trim(' ') != "" && SceneLoader.GetCurrentScene() == SceneLoader.usernameScene)
+    //        {
+    //            DatabaseManager.TryCreateUser();
+    //            SceneLoader.LoadMainMenuScene();
+    //        }*/
+    //    }
+    //}
 
-    private void ReadPreferences()
+    /*private void ReadPreferences()
     {
         string[] allLines = File.ReadAllLines(saveFilePath);
         if(allLines.Length > 0)
@@ -88,9 +88,9 @@ public class GameManager : MonoBehaviour
             effectsVolume = float.Parse(allLines[3]);
             musicVolume = float.Parse(allLines[4]);
         }
-    }
+    }*/
 
-    public void SavePreferences()
+    /*public void SavePreferences()
     {
         List<string> allLines = new List<string>();
 
@@ -100,5 +100,5 @@ public class GameManager : MonoBehaviour
         allLines.Add("" + musicVolume);
 
         File.WriteAllLines(saveFilePath, allLines);
-    }
+    }*/
 }
