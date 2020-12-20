@@ -19,8 +19,9 @@ public class SceneLoader : MonoBehaviour
     public const string howToPlayScene = "HowToPlay";
     //public const string levelsScene = "Levels";
 
-
-    private static string previousScene = "";
+    [SerializeField] int maxPreviousSceneMemory = 10;
+    private static List<string> previousScenes = new List<string>();
+    //private static string previousScene = "";
 
     private static string requestedScene = "";
 
@@ -85,9 +86,13 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadPreviousScene()
     {
-        if (!previousScene.Equals(""))
+        int previousScenesCount = previousScenes.Count;
+        if (previousScenesCount > 0)
         {
-            LoadScene(previousScene);
+            string previousScene = previousScenes[previousScenesCount - 1];
+            previousScenes.RemoveAt(previousScenesCount - 1);
+            Debug.Log("PREVIOUS SCENE: " + previousScene);
+            SceneManager.LoadScene(previousScene, LoadSceneMode.Single);
         } else
         {
             LoadMainMenuScene();
@@ -107,7 +112,14 @@ public class SceneLoader : MonoBehaviour
 
     private void LoadScene(string name)
     {
-        previousScene = GetCurrentScene();
+        previousScenes.Add(GetCurrentScene());
+        if(previousScenes.Count > maxPreviousSceneMemory)
+        {
+            previousScenes.RemoveAt(0);
+        }
+        //previousScenes.Push(GetCurrentScene());
+        //previousScenes.
+        //previousScene = GetCurrentScene();
         /*if(UITransition.instance != null)
         {
             requestedScene = name;
