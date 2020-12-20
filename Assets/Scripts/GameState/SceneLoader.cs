@@ -17,6 +17,8 @@ public class SceneLoader : MonoBehaviour
     public const string changePasswordScene = "ChangePassword";
     public const string endGameScene = "EndGame";
     public const string shopScene = "Shop";
+    public const string friendsScene = "Friends";
+    public const string connectionScene = "Connection";
     //public const string gameScene = "GameScene";
 
 
@@ -85,6 +87,14 @@ public class SceneLoader : MonoBehaviour
     public void LoadShopScene()
     {
         LoadScene(shopScene);
+    }
+    public void LoadFriendsScene()
+    {
+        LoadScene(friendsScene);
+    }
+    public void LoadConnectionScene()
+    {
+        LoadScene(connectionScene);
     }
 
     /*public static void LoadUsernameScene()
