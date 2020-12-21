@@ -14,6 +14,8 @@ public class Ore : MonoBehaviour
     private int currentGemValue = 1;
     private bool regrowing = false;
 
+    public GameObject gemPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +51,9 @@ public class Ore : MonoBehaviour
             extractedGems = gemsPerPickaxeHit;
         }
 
-        Debug.Log("Suelto " + extractedGems + " gemas");
+        SpawnGems(extractedGems);
+
+        //Debug.Log("Suelto " + extractedGems + " gemas");
 
         if (!regrowing && gemsLeft <= 0)
         {
@@ -57,6 +61,14 @@ public class Ore : MonoBehaviour
             StartCoroutine(Regrow());
         }
             
+    }
+
+    private void SpawnGems(int gemsToSpawn)
+    {
+        for(int i = 0; i < gemsToSpawn; i++)
+        {
+            Instantiate(gemPrefab, this.transform.position, Quaternion.identity);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

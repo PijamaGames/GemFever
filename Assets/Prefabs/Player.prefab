@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 390191191207065863}
   - component: {fileID: 390191191207065864}
   - component: {fileID: 390191191207065865}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -127,13 +127,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae9e3b7a9811bc4693f4c9caef6c8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 60
+  startingHorizontalSpeed: 120
   maxHorizontalSpeed: 7
-  verticalSpeed: 300
+  startingVerticalSpeed: 120
   maxVerticalSpeed: 5
   stunTime: 0.5
   invulnerabiltyTime: 1
+  maxGemsInPouch: 5
+  knockBackReductionPerGemInPouch: 0.1
+  horizontalMovementReductionPerGemInPouch: 0.1
+  verticalMovementReductionPerGemInPouch: 0.1
   climbingLadder: 0
+  isStunned: 0
+  isInvulnerable: 0
 --- !u!114 &390191191207065865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +252,7 @@ GameObject:
   - component: {fileID: 390191192358692947}
   - component: {fileID: 390191192358692950}
   - component: {fileID: 390191192358692945}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +334,7 @@ GameObject:
   - component: {fileID: 5661367139168753278}
   - component: {fileID: 1371809310116195677}
   - component: {fileID: 1578943369075542660}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pickaxe
   m_TagString: Pickaxe
   m_Icon: {fileID: 0}

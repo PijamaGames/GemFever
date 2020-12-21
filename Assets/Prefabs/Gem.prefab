@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7111589397398434791
+--- !u!1 &2156604997205699141
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8514849453775226427}
-  - component: {fileID: 1832083985804560236}
-  - component: {fileID: 327013357068981278}
-  - component: {fileID: 1693835156362520802}
-  - component: {fileID: -3346184224578098226}
-  m_Layer: 0
-  m_Name: Ore
-  m_TagString: Ore
+  - component: {fileID: 3196457056839768244}
+  - component: {fileID: 522780078421462553}
+  - component: {fileID: 7611294986816231886}
+  - component: {fileID: 6657858181671452078}
+  - component: {fileID: 2610038048614215782}
+  - component: {fileID: 2756243077528134674}
+  m_Layer: 8
+  m_Name: Gem
+  m_TagString: Gem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8514849453775226427
+--- !u!4 &3196457056839768244
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7111589397398434791}
+  m_GameObject: {fileID: 2156604997205699141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1832083985804560236
+--- !u!33 &522780078421462553
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7111589397398434791}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &327013357068981278
+  m_GameObject: {fileID: 2156604997205699141}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7611294986816231886
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7111589397398434791}
+  m_GameObject: {fileID: 2156604997205699141}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3553d8d0d382805429882dc6daf4dd2f, type: 2}
+  - {fileID: 2100000, guid: 4f64cb15fee74974fa5039ac0c236ca2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,34 +82,47 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1693835156362520802
-BoxCollider:
+--- !u!135 &6657858181671452078
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7111589397398434791}
+  m_GameObject: {fileID: 2156604997205699141}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3346184224578098226
+--- !u!54 &2610038048614215782
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156604997205699141}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
+--- !u!114 &2756243077528134674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7111589397398434791}
+  m_GameObject: {fileID: 2156604997205699141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ddfc4ad7ee99e84f9fcb1590bb5e91e, type: 3}
+  m_Script: {fileID: 11500000, guid: 76c4c4b26495c8d47ae054636e8bac96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableGems: 6
-  gemsPerPickaxeHit: 2
-  timeToRegrow: 3
-  valueIncreasePerRegrowth: 1
-  gemPrefab: {fileID: 2156604997205699141, guid: 9f7405ca85c85254d806ce6830ccd6e4,
-    type: 3}
+  value: 1
+  horizontalSpawnForce: 6
+  verticalSpawnForce: 6
