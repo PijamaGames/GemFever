@@ -9,12 +9,13 @@ public class Client : MonoBehaviour
     public static User user = null;
     [HideInInspector] public Websocket socket = null;
 
-    [SerializeField] private ClientState state = null;
-    [HideInInspector] public ClientUnconnected unconnectedState;
-    [HideInInspector] public ClientConnected connectedState;
-    [HideInInspector] public ClientSignedIn signedInState;
+    [HideInInspector] public static ClientState state = null;
+    [HideInInspector] public static ClientUnconnected unconnectedState;
+    [HideInInspector] public static ClientConnected connectedState;
+    [HideInInspector] public static ClientSignedUp signedUpState;
+    [HideInInspector] public static ClientSignedIn signedInState;
 
-    private static Client instance = null;
+    public static Client instance = null;
 
     private void Start()
     {
@@ -28,24 +29,28 @@ public class Client : MonoBehaviour
         instance = this;
         socket = GetComponent<Websocket>();
 
-        GetStates();
+        CreateStates();
         SetState(unconnectedState);
     }
 
-    private void GetStates()
+    private void CreateStates()
     {
-        unconnectedState = GetComponentInChildren<ClientUnconnected>();
-        unconnectedState.gameObject.SetActive(false);
-        connectedState = GetComponentInChildren<ClientConnected>();
-        connectedState.gameObject.SetActive(false);
-        signedInState = GetComponentInChildren<ClientSignedIn>();
-        signedInState.gameObject.SetActive(false);
+        unconnectedState = new ClientUnconnected();
+        connectedState = new ClientConnected();
+        signedUpState = new ClientSignedUp();
+        signedInState = new ClientSignedIn();
     }
 
-    public void SetState(ClientState newState)
+    public static void SetState(ClientState newState)
     {
         state?.Finish();
         state = newState;
         state.Begin();
     }
+
+    public static bool IsCurrentState(ClientState _state)
+    {
+        return state == _state;
+    }
+
 }

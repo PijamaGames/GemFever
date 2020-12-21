@@ -5,19 +5,36 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SignUpManager : MonoBehaviour
+public class SignController : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Fields")]
     [SerializeField] private TMP_InputField nameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private TMP_InputField confirmInputField;
+
     [Header("Restrictions")]
     [SerializeField] private Image passwordImgRestrictions;
     [SerializeField] private Image nameImgRestrictions;
     [SerializeField] private TextMeshProUGUI nameRestrictionsText;
     [SerializeField] private TextMeshProUGUI passwordRestrictionsText;
-    private bool visible=false;
+
+    private void Start()
+    {
+        ClientConnected.wrongDataEvent += ShowWrongData;
+    }
+
+    private void OnDestroy()
+    {
+        ClientConnected.wrongDataEvent -= ShowWrongData;
+    }
+
+    private void ShowWrongData(int errorCode)
+    {
+        Debug.Log("SHOW WRONG DATA: " + errorCode);
+
+        //TODO: Reflejar error en interfaz
+    }
 
     public void TrySignUp()
     {
@@ -28,11 +45,12 @@ public class SignUpManager : MonoBehaviour
         ClientConnected.SignUp();
     }
 
-    public void ChangePasswordVisibility(TMP_InputField passInputField)
+    public void TrySignIn()
     {
-        visible = !visible;
-        passInputField.inputType = visible? TMP_InputField.InputType.Standard: TMP_InputField.InputType.Password;
-        passInputField.ActivateInputField();
+        Client.user = new User();
+        Client.user.id = nameInputField.text.Trim();
+        Client.user.password = passwordInputField.text.Trim();
+        ClientConnected.SignIn();
     }
 
     public void ShowPasswordRestrictions()

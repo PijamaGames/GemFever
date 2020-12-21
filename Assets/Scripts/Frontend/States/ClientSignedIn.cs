@@ -11,11 +11,13 @@ public class ClientSignedIn : ClientState
     {
         base.Begin();
         Debug.Log("Signed in");
+        SceneLoader.instance.LoadMainMenuScene();
     }
 
     public override void HandleMessage(ref string msg)
     {
         base.HandleMessage(ref msg);
+
     }
 
     override public void Finish()

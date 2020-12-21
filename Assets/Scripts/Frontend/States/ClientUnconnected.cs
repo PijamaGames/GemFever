@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ClientUnconnected : ClientState
 {
+
     override public void Begin()
     {
         base.Begin();
-        client.socket.onOpenCallback = () => client.SetState(client.connectedState);
-        client.socket.Init();
+        Client.instance.socket.onOpenCallback = () => Client.SetState(Client.connectedState);
+        Client.instance.socket.Init();
         Debug.Log("UNCONNECTED");
     }
 
@@ -20,6 +21,6 @@ public class ClientUnconnected : ClientState
     override public void Finish()
     {
         base.Finish();
-        client.socket.onOpenCallback = null;
+        Client.instance.socket.onOpenCallback = null;
     }
 }
