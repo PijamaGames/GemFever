@@ -15,13 +15,13 @@ public class SignController : MonoBehaviour
     [SerializeField] private TMP_InputField confirmInputField;
     [SerializeField] private Image restrictionImage;
     private TextMeshProUGUI restrictionsText;
-    private Bilingual bil;
+    private Bilingual billingualRestrictionsText;
 
     private void Start()
     {
         ClientConnected.wrongDataEvent += ShowWrongData;
         restrictionsText=restrictionImage.GetComponentInChildren<TextMeshProUGUI>();
-        bil = restrictionImage.GetComponentInChildren<Bilingual>();
+        billingualRestrictionsText = restrictionImage.GetComponentInChildren<Bilingual>();
     }
 
     private void OnDestroy()
@@ -39,23 +39,23 @@ public class SignController : MonoBehaviour
         switch (errorCode)
         {
             case 0:
-                bil.spanishText = "Contraseña incorrecta";
-                bil.englishText = "Wrog password";
+                billingualRestrictionsText.spanishText = "Contraseña incorrecta";
+                billingualRestrictionsText.englishText = "Wrog password";
                 break;
             case 1:
-                bil.spanishText = "El usuario no existe";
-                bil.englishText = "User don't exist";
+                billingualRestrictionsText.spanishText = "El usuario no existe";
+                billingualRestrictionsText.englishText = "User don't exist";
                 break;
             case 2:
-                bil.spanishText = "Esta sesión de usuario ya está iniciada";
-                bil.englishText = "This user account is already logged in";
+                billingualRestrictionsText.spanishText = "Esta sesión de usuario ya está iniciada";
+                billingualRestrictionsText.englishText = "This user account is already logged in";
                 break;
             case 3:
-                bil.spanishText = "El nombre de usuario ya existe";
-                bil.englishText = "That username already exit";
+                billingualRestrictionsText.spanishText = "El nombre de usuario ya existe";
+                billingualRestrictionsText.englishText = "That username already exit";
                 break;
         }
-        bil.UpdateLanguage();
+        billingualRestrictionsText.UpdateLanguage();
     }
 
     public void TrySignUp()
