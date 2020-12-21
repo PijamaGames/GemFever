@@ -34,7 +34,7 @@ public class SignController : MonoBehaviour
         Debug.Log("SHOW WRONG DATA: " + errorCode);
 
         //TODO: Reflejar error en interfaz
-        String message = "";
+        
         restrictionImage.gameObject.SetActive(true);
         switch (errorCode)
         {
@@ -47,11 +47,11 @@ public class SignController : MonoBehaviour
                 bil.englishText = "User don't exist";
                 break;
             case 2:
-                bil.spanishText = "La sesión de ese usuario ya está abierta";
-                bil.englishText = "That user is already log in";
+                bil.spanishText = "Esta sesión de usuario ya está iniciada";
+                bil.englishText = "This user account is already logged in";
                 break;
             case 3:
-                bil.spanishText = "Este nombre usuario ya existe";
+                bil.spanishText = "El nombre de usuario ya existe";
                 bil.englishText = "That username already exit";
                 break;
         }
