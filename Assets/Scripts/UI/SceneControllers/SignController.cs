@@ -50,6 +50,10 @@ public class SignController : MonoBehaviour
                 bil.spanishText = "La sesión de ese usuario ya está abierta";
                 bil.englishText = "That user is already log in";
                 break;
+            case 3:
+                bil.spanishText = "Este nombre usuario ya existe";
+                bil.englishText = "That username already exit";
+                break;
         }
         bil.UpdateLanguage();
     }
