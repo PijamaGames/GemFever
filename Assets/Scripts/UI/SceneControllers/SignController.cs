@@ -52,7 +52,7 @@ public class SignController : MonoBehaviour
                 break;
             case 3:
                 billingualRestrictionsText.spanishText = "El nombre de usuario ya existe";
-                billingualRestrictionsText.englishText = "That username already exit";
+                billingualRestrictionsText.englishText = "That username already exists";
                 break;
         }
         billingualRestrictionsText.UpdateLanguage();
