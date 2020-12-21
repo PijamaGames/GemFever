@@ -25,7 +25,9 @@ public class ClientConnected : ClientState
             new KeyValuePair<string, object>("user", User.ToJson(Client.user)),
         };
         string msg = UsefulFuncs.CombineJsons(pairs);
-        Client.instance.socket.SendMessage(msg);
+
+        if(Client.instance != null && Client.instance.socket != null)
+            Client.instance.socket.SendMessage(msg);
     }
 
     public static void SignIn()

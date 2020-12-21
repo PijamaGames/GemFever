@@ -3781,7 +3781,7 @@ MonoBehaviour:
   nameInputField: {fileID: 327088919}
   passwordInputField: {fileID: 817930544}
   confirmInputField: {fileID: 1654370544}
-  restrictionImage: {fileID: 0}
+  restrictionImage: {fileID: 659826561}
 --- !u!1 &2034305557
 GameObject:
   m_ObjectHideFlags: 0

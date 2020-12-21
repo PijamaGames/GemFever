@@ -57,7 +57,7 @@ public class Websocket : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(!isWebGLPlatform && connected)
+        if(!isWebGLPlatform && connected && socket != null)
         {
             socket.Abort();
             socket.Dispose();
