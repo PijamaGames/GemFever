@@ -60,11 +60,25 @@ public class SignController : MonoBehaviour
 
     public void TrySignUp()
     {
+        int correctChar=0;
+        char character;
+        for (int i = 0; i < nameInputField.text.Length; i++)
+        {
+            character = nameInputField.text[i];
+            if (Char.IsNumber(character) || Char.IsLetter(character) || character=='-' || character=='_')
+                correctChar++;
+
+        }
+        
         //TODO: Comprobar que se cumplan todas las restricciones
-        Client.user = new User();
-        Client.user.id = nameInputField.text.Trim();
-        Client.user.password = passwordInputField.text.Trim();
-        ClientConnected.SignUp();
+        if (correctChar>0 && correctChar == nameInputField.text.Length)
+        {
+            Client.user = new User();
+            Client.user.id = nameInputField.text.Trim();
+            Client.user.password = passwordInputField.text.Trim();
+            ClientConnected.SignUp();
+        }
+        
     }
 
     public void TrySignIn()
