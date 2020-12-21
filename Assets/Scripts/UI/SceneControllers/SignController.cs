@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
 using TMPro;
@@ -12,11 +13,15 @@ public class SignController : MonoBehaviour
     [SerializeField] private TMP_InputField nameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private TMP_InputField confirmInputField;
-
+    [SerializeField] private Image restrictionImage;
+    private TextMeshProUGUI restrictionsText;
+    private Bilingual bil;
 
     private void Start()
     {
         ClientConnected.wrongDataEvent += ShowWrongData;
+        restrictionsText=restrictionImage.GetComponentInChildren<TextMeshProUGUI>();
+        bil = restrictionImage.GetComponentInChildren<Bilingual>();
     }
 
     private void OnDestroy()
@@ -29,6 +34,24 @@ public class SignController : MonoBehaviour
         Debug.Log("SHOW WRONG DATA: " + errorCode);
 
         //TODO: Reflejar error en interfaz
+        String message = "";
+        restrictionImage.gameObject.SetActive(true);
+        switch (errorCode)
+        {
+            case 0:
+                bil.spanishText = "Contraseña incorrecta";
+                bil.englishText = "Wrog password";
+                break;
+            case 1:
+                bil.spanishText = "El usuario no existe";
+                bil.englishText = "User don't exist";
+                break;
+            case 2:
+                bil.spanishText = "La sesión de ese usuario ya está abierta";
+                bil.englishText = "That user is already log in";
+                break;
+        }
+        bil.UpdateLanguage();
     }
 
     public void TrySignUp()
