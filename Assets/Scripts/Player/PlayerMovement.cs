@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-//TODO
-/*
- * Hacer que stun solo bloquee movimiento horizontal (si te stunean en una escalera se empujan, pero no caes)
- * Hacer que la fuerza del knockback sea un stun y no un teleport
- */
-
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
@@ -47,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("X: " + joystick.x + "Y:" + joystick.y);
         //Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
         //Debug.Log(gameObject.name + " Is Invulnerable: " + isInvulnerable);
-        //Debug.Log(rb.velocity);
+        Debug.Log(rb.velocity);
     }
 
     //Movement Update
@@ -59,8 +53,6 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity = Movement();
             rb.AddForce(velocity, ForceMode.VelocityChange);
-
-            velocity = ClampVelocity(velocity);
         }
         else
         {
@@ -69,21 +61,23 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(InvulnerabilityTime());
         }
 
-        if(climbingLadder)
+        //No conservar movimiento hacia arriba al salir de una escalera
+        if (!climbingLadder && rb.velocity.y > 0f)
         {
-            rb.velocity = velocity;
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         }
-        else if (!climbingLadder && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector3(velocity.x, 0f, velocity.z);
-        }
-        else
-        {
-            rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
-        }
+
+        //Frenar al intentar subir una escalera (más cómodo para escalar)
+        if(climbingLadder && joystick.x == 0 && !isStunned)
+            rb.velocity = new Vector3(0f, rb.velocity.y, rb.velocity.z);
+
+        if (isStunned && !climbingLadder)
+            rb.useGravity = true;
+
+        ClampVelocity();
         
         rb.AddForce(knockback, ForceMode.Impulse);
-
+        
         knockback = Vector3.zero;
     }
 
@@ -112,28 +106,35 @@ public class PlayerMovement : MonoBehaviour
         return finalMovement;
     }
 
-    Vector3 ClampVelocity(Vector3 velocityToClamp)
+    void ClampVelocity()
     {
-        if (joystick.x != 0)
-            velocityToClamp.x = Mathf.Clamp(velocityToClamp.x, -maxHorizontalSpeed, maxHorizontalSpeed);
+        Vector3 clampedVelocity = Vector3.zero;
+
+        //Clamp horizontal
+        if (rb.velocity.x > maxHorizontalSpeed)
+            clampedVelocity.x = maxHorizontalSpeed;
+
+        else if (rb.velocity.x < -maxHorizontalSpeed)
+            clampedVelocity.x = -maxHorizontalSpeed;
+
         else
-            velocityToClamp.x = 0f;
+            clampedVelocity.x = rb.velocity.x;
 
-        if (climbingLadder)
+        if(climbingLadder)
         {
-            if (joystick.y != 0)
-                velocityToClamp.y = Mathf.Clamp(velocityToClamp.y, -maxVerticalSpeed, maxVerticalSpeed);
-            else
-                velocityToClamp.y = 0f;
-        }
-        else if(velocityToClamp.y > 0f) 
-        {
-            velocityToClamp.y = 0f;
-        }
+            if (rb.velocity.y > maxVerticalSpeed)
+                clampedVelocity.y = maxVerticalSpeed;
 
-        velocityToClamp.z = 0f;
+            else if (rb.velocity.y < -maxVerticalSpeed)
+                clampedVelocity.y = -maxVerticalSpeed;
 
-        return velocityToClamp;
+            else if (joystick.y == 0)
+                clampedVelocity.y = 0;
+        }
+        else
+            clampedVelocity.y = rb.velocity.y;
+
+        rb.velocity = clampedVelocity;
     }
 
     void RotatePlayer()
@@ -152,10 +153,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Knockback(Vector3 knobackDirection, float knockbackForce)
     {
-        Debug.Log("Knockback");
         isStunned = true;
         knockback = knobackDirection * knockbackForce;
-        //rb.AddForce(knobackDirection * knockbackForce, ForceMode.Acceleration);
     }
 
     IEnumerator StunTime()
@@ -173,11 +172,7 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ladder")
-        {
-            climbingLadder = true;
-            //Vector3 aux = rb.velocity;
-            //rb.velocity = new Vector3(0f, aux.y, 0f);
-        }          
+            climbingLadder = true;    
     }
 
     void OnTriggerExit(Collider other)

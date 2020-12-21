@@ -84,9 +84,7 @@ public class Pickaxe : MonoBehaviour
 
             if (playerHit == playerOwner || playerHit.isInvulnerable) return;
 
-            //playerHit.GetComponent<Rigidbody>().AddForce(playerOwner.transform.right * knockbackForce, ForceMode.Force);
-            //playerHit.isStunned = true;
-            Debug.Log(playerOwner.transform.forward);
+            //Aplicar la fuerza hacia right si estás trepando una escalera
             playerHit.Knockback(playerOwner.transform.forward, knockbackForce);
         }
     }
