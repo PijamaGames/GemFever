@@ -79,9 +79,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHorizontalSpeed: 120
-  maxHorizontalSpeed: 7
+  startingMaxHorizontalSpeed: 10
   startingVerticalSpeed: 300
-  maxVerticalSpeed: 5
+  startingMaxVerticalSpeed: 7
   stunTime: 0.5
   invulnerabiltyTime: 1
   maxGemsInPouch: 5
@@ -91,6 +91,10 @@ MonoBehaviour:
   climbingLadder: 0
   isStunned: 0
   isInvulnerable: 0
+  horizontalSpeed: 0
+  maxHorizontalSpeed: 7
+  verticalSpeed: 0
+  maxVerticalSpeed: 5
 --- !u!114 &390191191207065865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +191,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 59623374-75d0-40e0-acb5-07e1e6b23ff5
     m_ActionName: Player/Pickaxe[/Keyboard/f,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a3326351-6718-4c67-afc8-76b3a3aa6ba3
+    m_ActionName: Player/ThrowGem[/XInputControllerWindows/buttonSouth,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightTrigger,/VirtualKeyboardDevice/l,/Keyboard/g]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

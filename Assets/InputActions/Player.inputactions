@@ -20,6 +20,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ThrowGem",
+                    "type": "Button",
+                    "id": "a3326351-6718-4c67-afc8-76b3a3aa6ba3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -212,6 +220,28 @@
                 },
                 {
                     "name": "",
+                    "id": "25935c96-8f50-4811-aaa3-5e1a67d75e3e",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pickaxe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87aa20d6-9f43-4106-941e-e1751809f2b1",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pickaxe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d50a43ad-3079-4be7-a600-e443b0a3028e",
                     "path": "<VirtualKeyboardDevice>/k",
                     "interactions": "",
@@ -229,6 +259,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pickaxe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75d4ced6-c6fb-46e3-811f-eb996e2b465d",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ThrowGem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc5fcf16-13e7-483c-9861-579a7b6411be",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ThrowGem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c101981-cf75-4c38-b0d0-b3524ce34c1a",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ThrowGem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "66688012-2c83-4014-b5b7-eea408b2e79a",
+                    "path": "<VirtualKeyboardDevice>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "VirtualKeyboard",
+                    "action": "ThrowGem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bbde6155-c2b9-46d2-abb7-0d99404145e7",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowGem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

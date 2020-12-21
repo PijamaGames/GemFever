@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] float startingHorizontalSpeed = 120f;
-    [SerializeField] float maxHorizontalSpeed = 30f;
+    [SerializeField] float startingMaxHorizontalSpeed = 10f;
 
     [SerializeField] float startingVerticalSpeed = 120f;
-    [SerializeField] float maxVerticalSpeed = 30f;
+    [SerializeField] float startingMaxVerticalSpeed = 7f;
 
     [SerializeField] float stunTime = 0.5f;
     [SerializeField] float invulnerabiltyTime = 1f;
@@ -28,16 +28,23 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool isInvulnerable = false;
 
     float horizontalSpeed;
-    float verticalSpeed;
+    float maxHorizontalSpeed;
 
-    public Queue<Gem> gemPouch = new Queue<Gem>();
+    float verticalSpeed;
+    float maxVerticalSpeed;
+
+    Queue<Gem> gemPouch = new Queue<Gem>();
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+
         horizontalSpeed = startingHorizontalSpeed;
         verticalSpeed = startingVerticalSpeed;
+
+        maxHorizontalSpeed = startingMaxHorizontalSpeed;
+        maxVerticalSpeed = startingMaxVerticalSpeed;
     }
 
     void Update()
@@ -46,6 +53,7 @@ public class Player : MonoBehaviour
         //Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
         //Debug.Log(gameObject.name + " Is Invulnerable: " + isInvulnerable);
         //Debug.Log(rb.velocity);
+        Debug.Log(gemPouch.Count);
     }
 
     //Movement Update
@@ -210,8 +218,11 @@ public class Player : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        horizontalSpeed = startingHorizontalSpeed - (horizontalSpeed * horizontalMovementReductionPerGemInPouch * gemPouch.Count);
-        verticalSpeed = startingVerticalSpeed - (verticalSpeed * verticalMovementReductionPerGemInPouch * gemPouch.Count);
+        horizontalSpeed = startingHorizontalSpeed - (startingHorizontalSpeed * horizontalMovementReductionPerGemInPouch * gemPouch.Count);
+        verticalSpeed = startingVerticalSpeed - (startingVerticalSpeed * verticalMovementReductionPerGemInPouch * gemPouch.Count);
+
+        maxHorizontalSpeed = startingMaxHorizontalSpeed - (startingMaxHorizontalSpeed * horizontalMovementReductionPerGemInPouch * gemPouch.Count);
+        maxVerticalSpeed = startingMaxVerticalSpeed - (startingMaxVerticalSpeed * verticalMovementReductionPerGemInPouch * gemPouch.Count);
     }
 
     private void CheckPouchFull()
