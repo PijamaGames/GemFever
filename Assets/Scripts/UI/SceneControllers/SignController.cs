@@ -13,11 +13,6 @@ public class SignController : MonoBehaviour
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private TMP_InputField confirmInputField;
 
-    [Header("Restrictions")]
-    [SerializeField] private Image passwordImgRestrictions;
-    [SerializeField] private Image nameImgRestrictions;
-    [SerializeField] private TextMeshProUGUI nameRestrictionsText;
-    [SerializeField] private TextMeshProUGUI passwordRestrictionsText;
 
     private void Start()
     {
@@ -53,26 +48,5 @@ public class SignController : MonoBehaviour
         ClientConnected.SignIn();
     }
 
-    public void ShowPasswordRestrictions()
-    {
-        passwordRestrictionsText.enabled = true;
-        passwordImgRestrictions.enabled = true;
-    }
-    public void QuitPasswordRestrictions()
-    {
-        passwordRestrictionsText.enabled = false;
-        passwordImgRestrictions.enabled = false;
-    }
 
-    public void QuitNameRestrictions()
-    {
-        nameRestrictionsText.enabled = false;
-        nameImgRestrictions.enabled = false;
-    }
-
-    public void ShowNameRestrictions()
-    {
-        nameRestrictionsText.enabled = true;
-        nameImgRestrictions.enabled = true;
-    }
 }
