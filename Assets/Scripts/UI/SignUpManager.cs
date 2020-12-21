@@ -5,25 +5,27 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LogUpManager : MonoBehaviour
+public class SignUpManager : MonoBehaviour
 {
     // Start is called before the first frame update
+    [Header("Fields")]
+    [SerializeField] private TMP_InputField nameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
-    //[SerializeField] private TMP_InputField confirmPasswordInputField;
+    [SerializeField] private TMP_InputField confirmInputField;
+    [Header("Restrictions")]
     [SerializeField] private Image passwordImgRestrictions;
     [SerializeField] private Image nameImgRestrictions;
     [SerializeField] private TextMeshProUGUI nameRestrictionsText;
     [SerializeField] private TextMeshProUGUI passwordRestrictionsText;
     private bool visible=false;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void TrySignUp()
     {
-        
+        //TODO: Comprobar que se cumplan todas las restricciones
+        Client.user = new User();
+        Client.user.id = nameInputField.text.Trim();
+        Client.user.password = passwordInputField.text.Trim();
+        ClientConnected.SignUp();
     }
 
     public void ChangePasswordVisibility(TMP_InputField passInputField)

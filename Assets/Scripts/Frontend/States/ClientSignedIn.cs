@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClientUnconnected : ClientState
+public class ClientSignedIn : ClientState
 {
+    private enum FrontendEvents { };
+    private enum BackendEvents { };
+
     override public void Begin()
     {
         base.Begin();
-        client.socket.onOpenCallback = () => client.SetState(client.connectedState);
-        client.socket.Init();
-        Debug.Log("UNCONNECTED");
+        Debug.Log("Signed in");
     }
 
     public override void HandleMessage(ref string msg)
@@ -20,6 +21,5 @@ public class ClientUnconnected : ClientState
     override public void Finish()
     {
         base.Finish();
-        client.socket.onOpenCallback = null;
     }
 }

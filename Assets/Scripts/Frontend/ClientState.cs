@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class ClientState : MonoBehaviour
 {
-    protected Client client = null;
+    protected static Client client = null;
 
     [SerializeField] UnityEvent onBegin;
     [SerializeField] UnityEvent onFinish;
@@ -15,7 +15,7 @@ public class ClientState : MonoBehaviour
         if (client == null) client = GetComponentInParent<Client>();
     }
 
-    public void HandleMessage(ref string msg)
+    virtual public void HandleMessage(ref string msg)
     {
 
     }
@@ -25,7 +25,8 @@ public class ClientState : MonoBehaviour
         if(client == null) client = GetComponentInParent<Client>();
         gameObject.SetActive(true);
         onBegin.Invoke();
-        client.socket.onMessageCallback = HandleMessage;
+        client.socket.onMessageCallback = this.HandleMessage;
+        
     }
     virtual public void Finish()
     {

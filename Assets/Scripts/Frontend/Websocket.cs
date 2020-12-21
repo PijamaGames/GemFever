@@ -161,7 +161,6 @@ public class Websocket : MonoBehaviour
             while (!endOfMessage)
             {
                 WebSocketReceiveResult result = await socket.ReceiveAsync(bytes, CancellationToken.None);
-                Debug.Log("COUNT: " + result.Count);
                 byte[] msgBytes = bytes.Array;
                 string json = Encoding.UTF8.GetString(msgBytes, 0, result.Count);
                 msg += json;

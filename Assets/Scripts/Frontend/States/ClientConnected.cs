@@ -11,16 +11,13 @@ public class ClientConnected : ClientState
     {
         base.Begin();
         SceneLoader.instance.LoadSingInScene();
-
-
-        SignUp();
     }
 
-    public void SignUp()
+    public static void SignUp()
     {
-        Client.user = new User();
+        /*Client.user = new User();
         Client.user.id = "Pedro";
-        Client.user.password = "la vida es dura";
+        Client.user.password = "la vida es dura";*/
         BackendEvents evt = BackendEvents.SignUp;
         var pairs = new KeyValuePair<string, object>[]
         {
@@ -29,6 +26,13 @@ public class ClientConnected : ClientState
         };
         string msg = UsefulFuncs.CombineJsons(pairs);
         client.socket.SendMessage(msg);
+    }
+
+    override public void HandleMessage(ref string msg)
+    {
+        base.HandleMessage(ref msg);
+        //JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(msg);
+        client.SetState(client.signedInState);
     }
 
     override public void Finish()
