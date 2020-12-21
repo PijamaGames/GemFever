@@ -3,37 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    Rigidbody rb;
-    Vector2 joystick = Vector2.zero;
+    [SerializeField] float startingHorizontalSpeed = 120f;
+    [SerializeField] float startingMaxHorizontalSpeed = 10f;
 
-    [SerializeField] float horizontalSpeed = 3f;
-    [SerializeField] float maxHorizontalSpeed = 30f;
-
-    [SerializeField] float verticalSpeed = 2f;
-    [SerializeField] float maxVerticalSpeed = 30f;
+    [SerializeField] float startingVerticalSpeed = 120f;
+    [SerializeField] float startingMaxVerticalSpeed = 7f;
 
     [SerializeField] float stunTime = 0.5f;
     [SerializeField] float invulnerabiltyTime = 1f;
 
-    public bool climbingLadder = false;
+    [SerializeField] int maxGemsInPouch = 5;
+    [SerializeField] float knockBackReductionPerGemInPouch = 0.1f;
+    [SerializeField] float horizontalMovementReductionPerGemInPouch = 0.1f;
+    [SerializeField] float verticalMovementReductionPerGemInPouch = 0.1f;
 
-    public bool isStunned { get; set; }
-    public bool isInvulnerable { get; set; }
-
+    Rigidbody rb;
+    Vector2 joystick = Vector2.zero;
     Vector3 velocity, knockback;
+
+    [HideInInspector] public bool climbingLadder = false;
+    [HideInInspector] public bool isStunned = false;
+    [HideInInspector] public bool isInvulnerable = false;
+
+    float horizontalSpeed;
+    float maxHorizontalSpeed;
+
+    float verticalSpeed;
+    float maxVerticalSpeed;
+
+    Queue<Gem> gemPouch = new Queue<Gem>();
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-    }
 
-    public void MovementInput(InputAction.CallbackContext context)
-    {
-        joystick = context.ReadValue<Vector2>();
-        RotatePlayer();
+        horizontalSpeed = startingHorizontalSpeed;
+        verticalSpeed = startingVerticalSpeed;
+
+        maxHorizontalSpeed = startingMaxHorizontalSpeed;
+        maxVerticalSpeed = startingMaxVerticalSpeed;
     }
 
     void Update()
@@ -41,7 +52,8 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("X: " + joystick.x + "Y:" + joystick.y);
         //Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
         //Debug.Log(gameObject.name + " Is Invulnerable: " + isInvulnerable);
-        Debug.Log(rb.velocity);
+        //Debug.Log(rb.velocity);
+        Debug.Log(gemPouch.Count);
     }
 
     //Movement Update
@@ -79,6 +91,12 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(knockback, ForceMode.Impulse);
         
         knockback = Vector3.zero;
+    }
+
+    public void MovementInput(InputAction.CallbackContext context)
+    {
+        joystick = context.ReadValue<Vector2>();
+        RotatePlayer();
     }
 
     Vector3 Movement()
@@ -154,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
     public void Knockback(Vector3 knobackDirection, float knockbackForce)
     {
         isStunned = true;
+        knockbackForce = knockbackForce - (knockbackForce * knockBackReductionPerGemInPouch * gemPouch.Count);
         knockback = knobackDirection * knockbackForce;
     }
 
@@ -167,6 +186,51 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(invulnerabiltyTime);
         isInvulnerable = false;
+    }
+
+    public bool TryAddGemToPouch(Gem gem)
+    {
+        if (gemPouch.Count < maxGemsInPouch)
+        {
+            gemPouch.Enqueue(gem);
+
+            UpdateSpeed();
+            CheckPouchFull();
+
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public Gem TryRemoveGemFromPouch()
+    {
+        if (gemPouch.Count <= 0) return null;
+
+        //Sacar primera gema de la bolsa y devolverla
+        Gem gem = gemPouch.Dequeue();
+
+        UpdateSpeed();
+        CheckPouchFull();
+
+        return gem;
+    }
+
+    private void UpdateSpeed()
+    {
+        horizontalSpeed = startingHorizontalSpeed - (startingHorizontalSpeed * horizontalMovementReductionPerGemInPouch * gemPouch.Count);
+        verticalSpeed = startingVerticalSpeed - (startingVerticalSpeed * verticalMovementReductionPerGemInPouch * gemPouch.Count);
+
+        maxHorizontalSpeed = startingMaxHorizontalSpeed - (startingMaxHorizontalSpeed * horizontalMovementReductionPerGemInPouch * gemPouch.Count);
+        maxVerticalSpeed = startingMaxVerticalSpeed - (startingMaxVerticalSpeed * verticalMovementReductionPerGemInPouch * gemPouch.Count);
+    }
+
+    private void CheckPouchFull()
+    {
+        if (gemPouch.Count == maxGemsInPouch)
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), true);
+        else
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), false);
     }
 
     void OnTriggerEnter(Collider other)

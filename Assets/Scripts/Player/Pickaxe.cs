@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Pickaxe : MonoBehaviour
 {
-    [SerializeField] PlayerMovement playerOwner;
+    [SerializeField] Player playerOwner;
     BoxCollider boxCollider;
     Animator animator;
 
@@ -80,7 +80,7 @@ public class Pickaxe : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            PlayerMovement playerHit = other.GetComponent<PlayerMovement>();
+            Player playerHit = other.GetComponent<Player>();
 
             if (playerHit == playerOwner || playerHit.isInvulnerable) return;
 
