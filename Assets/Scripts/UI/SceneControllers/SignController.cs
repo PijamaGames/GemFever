@@ -60,18 +60,12 @@ public class SignController : MonoBehaviour
 
     public void TrySignUp()
     {
-        int correctChar=0;
-        char character;
-        for (int i = 0; i < nameInputField.text.Length; i++)
-        {
-            character = nameInputField.text[i];
-            if (Char.IsNumber(character) || Char.IsLetter(character) || character=='-' || character=='_')
-                correctChar++;
-
-        }
+        bool nameOk=CheckValidation(nameInputField);
+        bool passwordOk= CheckValidation(passwordInputField);
+        bool samePassword = passwordInputField.text.Equals(confirmInputField.text);
         
         //TODO: Comprobar que se cumplan todas las restricciones
-        if (correctChar>0 && correctChar == nameInputField.text.Length)
+        if (nameOk && passwordOk && samePassword)
         {
             Client.user = new User();
             Client.user.id = nameInputField.text.Trim();
@@ -79,6 +73,22 @@ public class SignController : MonoBehaviour
             ClientConnected.SignUp();
         }
         
+    }
+
+    private bool CheckValidation(TMP_InputField inputfield)
+    {
+        string withoutSpaces=inputfield.text.Trim();
+        int correctChar = 0;
+        char character;
+        for (int i = 0; i < inputfield.text.Length; i++)
+        {
+            character = inputfield.text[i];
+            if (Char.IsNumber(character) || Char.IsLetter(character) || character == '-' || character == '_')
+                correctChar++;
+
+        }
+
+        return correctChar > 0 && correctChar == inputfield.text.Length && withoutSpaces.Length == inputfield.text.Length;
     }
 
     public void TrySignIn()
