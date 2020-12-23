@@ -9,6 +9,7 @@ TagManager:
   - Pickaxe
   - Gem
   - Minecart
+  - PlayerBack
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - 
   - Gem
   - Player
-  - 
+  - PlayerBack
   - 
   - 
   - 

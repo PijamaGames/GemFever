@@ -7,25 +7,29 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float startingHorizontalSpeed = 120f;
     [SerializeField] float startingMaxHorizontalSpeed = 10f;
+    [Space]
 
     [SerializeField] float startingVerticalSpeed = 120f;
     [SerializeField] float startingMaxVerticalSpeed = 7f;
+    [Space]
 
     [SerializeField] float stunTime = 0.5f;
     [SerializeField] float invulnerabiltyTime = 1f;
+    [Space]
 
     [SerializeField] int maxGemsInPouch = 5;
     [SerializeField] float knockBackReductionPerGemInPouch = 0.1f;
     [SerializeField] float horizontalMovementReductionPerGemInPouch = 0.1f;
     [SerializeField] float verticalMovementReductionPerGemInPouch = 0.1f;
+    [Space]
 
+    [SerializeField] float gemThrowForce = 50f;
+    [SerializeField] float gemThrowCooldown = 2f;
+    [SerializeField] GameObject throwGemPosition;
+
+    //Physics
     Rigidbody rb;
-    Vector2 joystick = Vector2.zero;
     Vector3 velocity, knockback;
-
-    [HideInInspector] public bool climbingLadder = false;
-    [HideInInspector] public bool isStunned = false;
-    [HideInInspector] public bool isInvulnerable = false;
 
     float horizontalSpeed;
     float maxHorizontalSpeed;
@@ -33,7 +37,18 @@ public class Player : MonoBehaviour
     float verticalSpeed;
     float maxVerticalSpeed;
 
+    //Inputs
+    Vector2 joystick = Vector2.zero;
+    float throwGemInput = 0f;
+
+    //States
+    [HideInInspector] public bool climbingLadder = false;
+    [HideInInspector] public bool isStunned = false;
+    [HideInInspector] public bool isInvulnerable = false;
+
+    //Gems
     Queue<Gem> gemPouch = new Queue<Gem>();
+    bool gemThrowOnCooldown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +68,7 @@ public class Player : MonoBehaviour
         //Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
         //Debug.Log(gameObject.name + " Is Invulnerable: " + isInvulnerable);
         //Debug.Log(rb.velocity);
-        Debug.Log(gemPouch.Count);
+        //Debug.Log(gemPouch.Count);
     }
 
     //Movement Update
@@ -93,12 +108,35 @@ public class Player : MonoBehaviour
         knockback = Vector3.zero;
     }
 
+    #region Input Management Methods
     public void MovementInput(InputAction.CallbackContext context)
     {
         joystick = context.ReadValue<Vector2>();
         RotatePlayer();
     }
 
+    public void ThrowGemInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        throwGemInput = context.ReadValue<float>();
+        Debug.Log(throwGemInput);
+
+        if (throwGemInput == 1)
+        {
+            Gem thrownGem = TryRemoveGemFromPouch();
+
+            if(thrownGem != null)
+            {
+                gemThrowOnCooldown = true;
+                //Animación de lanzar
+                thrownGem.ThrowGem(transform.forward, throwGemPosition.transform.position, gemThrowForce, this);
+            }
+        }
+    }
+    #endregion
+
+    #region Movement Methods
     Vector3 Movement()
     {
         float horizontalMovement = 0f;
@@ -109,7 +147,7 @@ public class Player : MonoBehaviour
 
         finalMovement.x = horizontalMovement;
 
-        //Desasctivar gravedad
+        //Desactivar gravedad
         if (climbingLadder)
         {
             rb.useGravity = false;
@@ -169,6 +207,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void UpdateSpeed()
+    {
+        horizontalSpeed = startingHorizontalSpeed - (startingHorizontalSpeed * horizontalMovementReductionPerGemInPouch * gemPouch.Count);
+        verticalSpeed = startingVerticalSpeed - (startingVerticalSpeed * verticalMovementReductionPerGemInPouch * gemPouch.Count);
+
+        maxHorizontalSpeed = startingMaxHorizontalSpeed - (startingMaxHorizontalSpeed * horizontalMovementReductionPerGemInPouch * gemPouch.Count);
+        maxVerticalSpeed = startingMaxVerticalSpeed - (startingMaxVerticalSpeed * verticalMovementReductionPerGemInPouch * gemPouch.Count);
+    }
+    #endregion
+
+    #region Knockback, Stun and Cooldowns methods
     public void Knockback(Vector3 knobackDirection, float knockbackForce)
     {
         isStunned = true;
@@ -188,6 +237,14 @@ public class Player : MonoBehaviour
         isInvulnerable = false;
     }
 
+    IEnumerator GemThrowCooldown()
+    {
+        yield return new WaitForSecondsRealtime(gemThrowCooldown);
+        gemThrowOnCooldown = false;
+    }
+    #endregion
+
+    #region GemPouch Methods
     public bool TryAddGemToPouch(Gem gem)
     {
         if (gemPouch.Count < maxGemsInPouch)
@@ -209,6 +266,7 @@ public class Player : MonoBehaviour
 
         //Sacar primera gema de la bolsa y devolverla
         Gem gem = gemPouch.Dequeue();
+        gem.gameObject.SetActive(true);
 
         UpdateSpeed();
         CheckPouchFull();
@@ -216,14 +274,7 @@ public class Player : MonoBehaviour
         return gem;
     }
 
-    private void UpdateSpeed()
-    {
-        horizontalSpeed = startingHorizontalSpeed - (startingHorizontalSpeed * horizontalMovementReductionPerGemInPouch * gemPouch.Count);
-        verticalSpeed = startingVerticalSpeed - (startingVerticalSpeed * verticalMovementReductionPerGemInPouch * gemPouch.Count);
-
-        maxHorizontalSpeed = startingMaxHorizontalSpeed - (startingMaxHorizontalSpeed * horizontalMovementReductionPerGemInPouch * gemPouch.Count);
-        maxVerticalSpeed = startingMaxVerticalSpeed - (startingMaxVerticalSpeed * verticalMovementReductionPerGemInPouch * gemPouch.Count);
-    }
+    
 
     private void CheckPouchFull()
     {
@@ -232,7 +283,9 @@ public class Player : MonoBehaviour
         else
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), false);
     }
+    #endregion
 
+    #region Trigger Methods
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ladder")
@@ -244,4 +297,5 @@ public class Player : MonoBehaviour
         if (other.tag == "Ladder")
             climbingLadder = false;
     }
+    #endregion
 }

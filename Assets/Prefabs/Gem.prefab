@@ -126,3 +126,19 @@ MonoBehaviour:
   value: 1
   horizontalSpawnForce: 6
   verticalSpawnForce: 6
+  tiers:
+  - minValueForThisTier: 1
+    tierColor: {r: 1, g: 0, b: 0.9943776, a: 1}
+    tierMesh: {fileID: 0}
+  - minValueForThisTier: 2
+    tierColor: {r: 0, g: 0.28763032, b: 1, a: 1}
+    tierMesh: {fileID: 0}
+  - minValueForThisTier: 3
+    tierColor: {r: 0, g: 1, b: 0.10499692, a: 1}
+    tierMesh: {fileID: 0}
+  - minValueForThisTier: 4
+    tierColor: {r: 1, g: 0.03915456, b: 0, a: 1}
+    tierMesh: {fileID: 0}
+  - minValueForThisTier: 5
+    tierColor: {r: 1, g: 0.9420621, b: 0, a: 1}
+    tierMesh: {fileID: 0}

@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class Pickaxe : MonoBehaviour
 {
     [SerializeField] Player playerOwner;
+    [Space]
+
     BoxCollider boxCollider;
     Animator animator;
 
@@ -26,6 +28,8 @@ public class Pickaxe : MonoBehaviour
 
     public void PickaxeInput(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
+
         pickaxeInput = context.ReadValue<float>();
         //Debug.Log(pickaxeInput);
 

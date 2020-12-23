@@ -67,7 +67,7 @@ public class Ore : MonoBehaviour
     {
         for(int i = 0; i < gemsToSpawn; i++)
         {
-            Instantiate(gemPrefab, this.transform.position, Quaternion.identity);
+            Instantiate(gemPrefab, this.transform.position, Quaternion.identity).GetComponent<Gem>().UpdateGemValue(currentGemValue);
         }
     }
 

@@ -4,21 +4,34 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour
 {
-    public int value = 1;
+    [SerializeField] int value = 1;
 
     [SerializeField] float horizontalSpawnForce = 6f;
-
     [SerializeField] float verticalSpawnForce = 6f;
+    [Space]
+
+    [SerializeField] float knockbackForce = 0f;
+    [SerializeField][Range(0f, 1f)] float speedIncrementPerParry = 0.1f;
+
+    [SerializeField] List<GemTier> tiers;
+    GemTier currentTier;
 
     Rigidbody rb;
+    bool isBeingThrown = false;
+    bool isCharged = false;
+
+    float throwSpeedMultiplier = 1f;
+    Vector3 playerForward;
+    public Player playerOwner = null;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        currentTier = tiers[0];
         SpawnnForce();
     }
 
-    public void SpawnnForce()
+    private void SpawnnForce()
     {
         Vector3 force = Vector3.zero;
 
@@ -29,12 +42,125 @@ public class Gem : MonoBehaviour
         rb.AddForce(force, ForceMode.Impulse);
     }
 
+    public void UpdateGemValue(int newValue)
+    {
+        value = newValue;
+
+        bool currentTierFound = false;
+
+        GemTier nextTier;
+
+        for(int i = tiers.IndexOf(currentTier); i < tiers.Count; i++)
+        {
+            if(!currentTierFound)
+            {
+                if (i == tiers.Count - 1)
+                {
+                    currentTierFound = true;
+                }
+                else
+                {
+                    nextTier = tiers[i + 1];
+                    if(value >= nextTier.minValueForThisTier)
+                    {
+                        currentTier = nextTier;
+                    }
+                }
+            }          
+        }
+
+        gameObject.GetComponent<MeshRenderer>().material.color = currentTier.tierColor;
+        //Actualizar modelo de la gema
+    }
+
+    public void ThrowGem(Vector3 playerForward, Vector3 playerPosition, float throwForce, Player playerOwner)
+    {
+        this.playerForward = playerForward;
+        this.playerOwner = playerOwner;
+
+        transform.position = playerPosition;
+
+        rb.AddForce(this.playerForward * throwForce * throwSpeedMultiplier, ForceMode.Impulse);
+        rb.useGravity = false;
+
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), playerOwner.GetComponent<Collider>(), true);
+
+        isBeingThrown = true;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (!isBeingThrown && collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.GetComponent<Player>().TryAddGemToPouch(this))
+            Player player = collision.gameObject.GetComponent<Player>();
+            if (player.isStunned) return;
+
+            if (player.TryAddGemToPouch(this))
                 gameObject.SetActive(false);
         }
+
+
+        //Todo esto si la gema no está cargada
+        //Meterse al minecart
+        //Si toca pared caer hacia el suelo
+        if (isBeingThrown)
+        {
+            //Si es otro jugador se para y lo aturde
+            if (collision.gameObject.tag == "Player")
+            {
+                Debug.Log("Player");
+                StopThrowing();
+
+                collision.gameObject.GetComponent<Player>().Knockback(playerForward, knockbackForce);
+            }
+            else if (collision.gameObject.tag == "Gem")
+            {
+                StopThrowing();
+                collision.gameObject.GetComponent<Gem>().StopThrowing();
+            }
+
+        }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Si le da a otro jugador por la espalda se mete en su bolsa si puede, si no lo aturde
+        if (other.tag == "PlayerBack")
+        {
+            Debug.Log("Espalda");
+            PlayerBack playerBack = other.gameObject.GetComponent<PlayerBack>();
+
+            if (playerBack.TryAddGemToPouch(this))
+            {
+                StopThrowing();
+                gameObject.SetActive(false);
+            }
+            else
+                playerBack.Knockback(playerForward, knockbackForce);
+        }
+    }
+
+    private void StopThrowing()
+    {
+        rb.velocity = Vector3.zero;
+
+        rb.useGravity = true;
+        isBeingThrown = false;
+
+        throwSpeedMultiplier = 1f;
+
+        if(playerOwner != null)
+        {
+            Physics.IgnoreCollision(this.GetComponent<Collider>(), playerOwner.GetComponent<Collider>(), false);
+            playerOwner = null;
+        }
+    }
+}
+
+[System.Serializable]
+public class GemTier 
+{ 
+    [Tooltip("Valor mínimo que debe tener la gema para entrar en este tier")]public int minValueForThisTier; 
+    public Color tierColor; 
+    public Mesh tierMesh; 
 }
