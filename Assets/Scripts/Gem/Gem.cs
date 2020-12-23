@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour
 {
-    [SerializeField] int value = 1;
+    public int value = 1;
 
     [SerializeField] float horizontalSpawnForce = 6f;
     [SerializeField] float verticalSpawnForce = 6f;
@@ -102,9 +102,11 @@ public class Gem : MonoBehaviour
         isBeingThrown = true;
     }
 
-    public void ParryGem(Vector3 newDirection, float throwForce)
+    public void ParryGem(Vector3 newDirection, float throwForce, Player newPlayerOwner)
     {
         if (!isCharged) isCharged = true;
+
+        this.playerOwner = newPlayerOwner;
 
         throwSpeedMultiplier += speedIncrementPerParry;
 
@@ -197,8 +199,16 @@ public class Gem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Si tiras una gema a un minecart la guardas y se suma el score al jugador
+        if( (isBeingThrown || isCharged) && other.tag == "Minecart")
+        {
+            playerOwner.score += this.value;
+            StopThrowing();
+            gameObject.SetActive(false);
+        }
+
         //Si le da a otro jugador por la espalda se mete en su bolsa si puede, si no lo aturde
-        if (isBeingThrown && other.tag == "PlayerBack")
+        else if (isBeingThrown && !isCharged && other.tag == "PlayerBack")
         {
             //Debug.Log("Espalda");
             PlayerBack playerBack = other.gameObject.GetComponent<PlayerBack>();

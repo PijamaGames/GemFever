@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
     public float gemThrowForce = 50f;
     [SerializeField] float gemThrowCooldown = 1f;
     [SerializeField] GameObject throwGemPosition;
+    [Space]
+
+    [SerializeField] float incrementPerGemStored = 0.1f;
+    public int score = 0;
 
     //Physics
     Rigidbody rb;
@@ -303,6 +307,11 @@ public class Player : MonoBehaviour
             //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), false);
             gameObject.layer = LayerMask.NameToLayer("Player");
     }
+
+    public void EmpyPouch()
+    {
+
+    }
     #endregion
 
     #region Trigger Methods
@@ -310,6 +319,25 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "Ladder")
             climbingLadder = true;    
+
+        if(other.tag == "Minecart")
+        {
+            if(gemPouch.Count != 0)
+            {
+                float scoreObtained = 0;
+                float scoreMultiplier = 1f;
+                int currentGems = gemPouch.Count;
+
+                for(int i = 0; i < currentGems; i++)
+                {
+                    scoreObtained += gemPouch.Dequeue().value;
+                    scoreMultiplier += incrementPerGemStored;
+                }
+
+                score += Mathf.CeilToInt(scoreObtained * scoreMultiplier);
+                UpdateSpeed();
+            }
+        }
     }
 
     void OnTriggerExit(Collider other)

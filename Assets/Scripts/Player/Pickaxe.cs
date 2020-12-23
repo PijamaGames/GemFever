@@ -102,7 +102,7 @@ public class Pickaxe : MonoBehaviour
             {
                 Debug.Log("Parry");
                 gem.isCharged = true;
-                gem.ParryGem(playerOwner.transform.forward, gemParryForce);
+                gem.ParryGem(playerOwner.transform.forward, gemParryForce, playerOwner);
             }
         }
     }

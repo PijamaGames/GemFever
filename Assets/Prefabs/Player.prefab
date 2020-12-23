@@ -94,6 +94,8 @@ MonoBehaviour:
   gemThrowForce: 50
   gemThrowCooldown: 1
   throwGemPosition: {fileID: 7575612818429767386}
+  incrementPerGemStored: 0.1
+  score: 0
   climbingLadder: 0
   isStunned: 0
   isInvulnerable: 0
