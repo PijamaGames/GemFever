@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     [Space]
 
     [SerializeField] float gemThrowForce = 50f;
-    [SerializeField] float gemThrowCooldown = 2f;
+    [SerializeField] float gemThrowCooldown = 1f;
     [SerializeField] GameObject throwGemPosition;
 
     //Physics
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Debug.Log("X: " + joystick.x + "Y:" + joystick.y);
-        //Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
+        Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
         //Debug.Log(gameObject.name + " Is Invulnerable: " + isInvulnerable);
         //Debug.Log(rb.velocity);
         //Debug.Log(gemPouch.Count);
@@ -122,13 +122,14 @@ public class Player : MonoBehaviour
         throwGemInput = context.ReadValue<float>();
         Debug.Log(throwGemInput);
 
-        if (throwGemInput == 1)
+        if (!gemThrowOnCooldown && throwGemInput == 1)
         {
             Gem thrownGem = TryRemoveGemFromPouch();
 
             if(thrownGem != null)
             {
                 gemThrowOnCooldown = true;
+                StartCoroutine(GemThrowCooldown());
                 //Animación de lanzar
                 thrownGem.ThrowGem(transform.forward, throwGemPosition.transform.position, gemThrowForce, this);
             }
@@ -220,6 +221,7 @@ public class Player : MonoBehaviour
     #region Knockback, Stun and Cooldowns methods
     public void Knockback(Vector3 knobackDirection, float knockbackForce)
     {
+        gameObject.layer = LayerMask.NameToLayer("PlayerStunned");
         isStunned = true;
         knockbackForce = knockbackForce - (knockbackForce * knockBackReductionPerGemInPouch * gemPouch.Count);
         knockback = knobackDirection * knockbackForce;
@@ -229,6 +231,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(stunTime);
         isStunned = false;
+        CheckPouchFull();
     }
 
     IEnumerator InvulnerabilityTime()
@@ -272,16 +275,17 @@ public class Player : MonoBehaviour
         CheckPouchFull();
 
         return gem;
-    }
-
-    
+    }    
 
     private void CheckPouchFull()
     {
         if (gemPouch.Count == maxGemsInPouch)
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), true);
+            //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), true);
+            gameObject.layer = LayerMask.NameToLayer("PlayerFull");
+
         else
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), false);
+            //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), false);
+            gameObject.layer = LayerMask.NameToLayer("Player");
     }
     #endregion
 

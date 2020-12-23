@@ -19,6 +19,7 @@ public class Gem : MonoBehaviour
     Rigidbody rb;
     bool isBeingThrown = false;
     bool isCharged = false;
+    bool isFalling = false;
 
     float throwSpeedMultiplier = 1f;
     Vector3 playerForward;
@@ -37,7 +38,6 @@ public class Gem : MonoBehaviour
 
         force.x = Random.Range(-horizontalSpawnForce, horizontalSpawnForce);
         force.y = Random.Range(-verticalSpawnForce, verticalSpawnForce);
-
 
         rb.AddForce(force, ForceMode.Impulse);
     }
@@ -84,6 +84,7 @@ public class Gem : MonoBehaviour
         rb.useGravity = false;
 
         Physics.IgnoreCollision(this.GetComponent<Collider>(), playerOwner.GetComponent<Collider>(), true);
+        gameObject.layer = LayerMask.NameToLayer("ThrownGem");
 
         isBeingThrown = true;
     }
@@ -99,10 +100,8 @@ public class Gem : MonoBehaviour
                 gameObject.SetActive(false);
         }
 
-
         //Todo esto si la gema no está cargada
         //Meterse al minecart
-        //Si toca pared caer hacia el suelo
         if (isBeingThrown)
         {
             //Si es otro jugador se para y lo aturde
@@ -113,19 +112,49 @@ public class Gem : MonoBehaviour
 
                 collision.gameObject.GetComponent<Player>().Knockback(playerForward, knockbackForce);
             }
+
+            //Choque con otra gema en el aire
             else if (collision.gameObject.tag == "Gem")
             {
-                StopThrowing();
-                collision.gameObject.GetComponent<Gem>().StopThrowing();
+                if(collision.gameObject.GetComponent<Gem>().isBeingThrown)
+                {
+                    StopThrowing();
+                    collision.gameObject.GetComponent<Gem>().StopThrowing();
+                }
             }
 
+            //Pared/Suelo
+            else if (collision.gameObject.tag == "Map")
+            {
+                StopThrowing();
+                isFalling = true;
+            }
+        }
+
+        else if(isFalling)
+        {
+            //Si mientras cae toca el suelo se para
+            if(collision.gameObject.tag == "Map")
+            {
+                rb.velocity = Vector3.zero;
+                isFalling = false;
+            }
+
+            //Si mientras cae le da a otro jugador le hace daño y se para
+            else if(collision.gameObject.tag == "Player")
+            {
+                collision.gameObject.GetComponent<Player>().Knockback(Vector3.zero, 0f);
+
+                rb.velocity = Vector3.zero;
+                isFalling = false;
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //Si le da a otro jugador por la espalda se mete en su bolsa si puede, si no lo aturde
-        if (other.tag == "PlayerBack")
+        if (isBeingThrown && other.tag == "PlayerBack")
         {
             Debug.Log("Espalda");
             PlayerBack playerBack = other.gameObject.GetComponent<PlayerBack>();
@@ -149,7 +178,9 @@ public class Gem : MonoBehaviour
 
         throwSpeedMultiplier = 1f;
 
-        if(playerOwner != null)
+        gameObject.layer = LayerMask.NameToLayer("Gem");
+
+        if (playerOwner != null)
         {
             Physics.IgnoreCollision(this.GetComponent<Collider>(), playerOwner.GetComponent<Collider>(), false);
             playerOwner = null;

@@ -106,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ddfc4ad7ee99e84f9fcb1590bb5e91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableGems: 15
-  gemsPerPickaxeHit: 15
+  availableGems: 6
+  gemsPerPickaxeHit: 2
   timeToRegrow: 3
   valueIncreasePerRegrowth: 1
   gemPrefab: {fileID: 2156604997205699141, guid: 9f7405ca85c85254d806ce6830ccd6e4,

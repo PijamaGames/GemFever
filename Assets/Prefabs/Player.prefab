@@ -91,7 +91,7 @@ MonoBehaviour:
   horizontalMovementReductionPerGemInPouch: 0.1
   verticalMovementReductionPerGemInPouch: 0.1
   gemThrowForce: 50
-  gemThrowCooldown: 2
+  gemThrowCooldown: 1
   throwGemPosition: {fileID: 7575612818429767386}
   climbingLadder: 0
   isStunned: 0
@@ -240,8 +240,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249681440781985673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.03, z: -0.775}
-  m_LocalScale: {x: 1, y: 1.6726122, z: 0.5656447}
+  m_LocalPosition: {x: -0, y: -0.271, z: -0.719}
+  m_LocalScale: {x: 1, y: 1.1062155, z: 0.5656447}
   m_Children: []
   m_Father: {fileID: 390191191207065867}
   m_RootOrder: 3
