@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1276,6 +1276,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2031257545769086773, guid: 2062de6e4d45d9545b89dc7332e182e2,
+        type: 3}
+      propertyPath: m_text
+      value: Personaliza tu personaje
       objectReference: {fileID: 0}
     - target: {fileID: 2146492001856159310, guid: 2062de6e4d45d9545b89dc7332e182e2,
         type: 3}

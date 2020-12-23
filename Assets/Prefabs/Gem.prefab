@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2156604997205699141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -126,3 +126,22 @@ MonoBehaviour:
   value: 1
   horizontalSpawnForce: 6
   verticalSpawnForce: 6
+  knockbackForce: 0
+  speedIncrementPerParry: 0.1
+  tiers:
+  - minValueForThisTier: 1
+    tierColor: {r: 1, g: 0, b: 0.9943776, a: 1}
+    tierMesh: {fileID: 0}
+  - minValueForThisTier: 2
+    tierColor: {r: 0, g: 0.28763032, b: 1, a: 1}
+    tierMesh: {fileID: 0}
+  - minValueForThisTier: 3
+    tierColor: {r: 0, g: 1, b: 0.10499692, a: 1}
+    tierMesh: {fileID: 0}
+  - minValueForThisTier: 4
+    tierColor: {r: 1, g: 0.03915456, b: 0, a: 1}
+    tierMesh: {fileID: 0}
+  - minValueForThisTier: 5
+    tierColor: {r: 1, g: 0.9420621, b: 0, a: 1}
+    tierMesh: {fileID: 0}
+  playerOwner: {fileID: 0}
