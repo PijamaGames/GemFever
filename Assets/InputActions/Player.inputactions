@@ -15,7 +15,7 @@
                 },
                 {
                     "name": "Pickaxe",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "59623374-75d0-40e0-acb5-07e1e6b23ff5",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -23,7 +23,7 @@
                 },
                 {
                     "name": "ThrowGem",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "a3326351-6718-4c67-afc8-76b3a3aa6ba3",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -257,7 +257,7 @@
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Pickaxe",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -276,7 +276,7 @@
                 {
                     "name": "",
                     "id": "fc5fcf16-13e7-483c-9861-579a7b6411be",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -287,7 +287,7 @@
                 {
                     "name": "",
                     "id": "1c101981-cf75-4c38-b0d0-b3524ce34c1a",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -312,7 +312,7 @@
                     "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "ThrowGem",
                     "isComposite": false,
                     "isPartOfComposite": false

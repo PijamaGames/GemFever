@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] float stunTime = 0.5f;
     [SerializeField] float invulnerabiltyTime = 1f;
+    [SerializeField] int droppedGemsPerHit = 1;
     [Space]
 
     [SerializeField] int maxGemsInPouch = 5;
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] float verticalMovementReductionPerGemInPouch = 0.1f;
     [Space]
 
-    [SerializeField] float gemThrowForce = 50f;
+    public float gemThrowForce = 50f;
     [SerializeField] float gemThrowCooldown = 1f;
     [SerializeField] GameObject throwGemPosition;
 
@@ -65,7 +66,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Debug.Log("X: " + joystick.x + "Y:" + joystick.y);
-        Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
+        //Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
         //Debug.Log(gameObject.name + " Is Invulnerable: " + isInvulnerable);
         //Debug.Log(rb.velocity);
         //Debug.Log(gemPouch.Count);
@@ -117,10 +118,10 @@ public class Player : MonoBehaviour
 
     public void ThrowGemInput(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (!context.performed || !gameObject.scene.IsValid()) return;
 
         throwGemInput = context.ReadValue<float>();
-        Debug.Log(throwGemInput);
+        Debug.Log("ThrowInput: " + throwGemInput);
 
         if (!gemThrowOnCooldown && throwGemInput == 1)
         {
@@ -276,6 +277,21 @@ public class Player : MonoBehaviour
 
         return gem;
     }    
+
+    public void DropGem(Vector3 dropDirection)
+    {
+        for(int i = 0; i < droppedGemsPerHit; i++)
+        {
+            Gem droppedGem = TryRemoveGemFromPouch();
+            if(droppedGem != null)
+            {
+                Debug.Log("Dropped gem");
+                StartCoroutine(droppedGem.IgnoreCollisionsForSomeTime(gameObject.GetComponent<Collider>(), stunTime));
+                droppedGem.transform.position = transform.position;
+                droppedGem.DropForce(dropDirection, 3f);
+            }
+        }
+    }
 
     private void CheckPouchFull()
     {

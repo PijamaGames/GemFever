@@ -12,14 +12,15 @@ public class Gem : MonoBehaviour
 
     [SerializeField] float knockbackForce = 0f;
     [SerializeField][Range(0f, 1f)] float speedIncrementPerParry = 0.1f;
+    [SerializeField] float maxSpeedIncrement = 5f;
 
     [SerializeField] List<GemTier> tiers;
     GemTier currentTier;
 
     Rigidbody rb;
-    bool isBeingThrown = false;
-    bool isCharged = false;
-    bool isFalling = false;
+    [HideInInspector] public bool isBeingThrown = false;
+    /*[HideInInspector]*/ public bool isCharged = false;
+    [HideInInspector] public bool isFalling = false;
 
     float throwSpeedMultiplier = 1f;
     Vector3 playerForward;
@@ -40,6 +41,18 @@ public class Gem : MonoBehaviour
         force.y = Random.Range(-verticalSpawnForce, verticalSpawnForce);
 
         rb.AddForce(force, ForceMode.Impulse);
+    }
+
+    public void DropForce(Vector3 dropDirection, float dropForce)
+    {
+        rb.AddForce(dropDirection * dropForce, ForceMode.Impulse);
+    }
+
+    public IEnumerator IgnoreCollisionsForSomeTime(Collider toIgnore, float timeToIgnore)
+    {
+        Physics.IgnoreCollision(GetComponent<Collider>(), toIgnore, true);
+        yield return new WaitForSecondsRealtime(timeToIgnore);
+        Physics.IgnoreCollision(GetComponent<Collider>(), toIgnore, false);
     }
 
     public void UpdateGemValue(int newValue)
@@ -89,6 +102,20 @@ public class Gem : MonoBehaviour
         isBeingThrown = true;
     }
 
+    public void ParryGem(Vector3 newDirection, float throwForce)
+    {
+        if (!isCharged) isCharged = true;
+
+        throwSpeedMultiplier += speedIncrementPerParry;
+
+        if (throwSpeedMultiplier > maxSpeedIncrement)
+            throwSpeedMultiplier = maxSpeedIncrement;
+
+        rb.velocity = Vector3.zero;
+
+        rb.AddForce(newDirection * throwForce * throwSpeedMultiplier, ForceMode.Impulse);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (!isBeingThrown && collision.gameObject.tag == "Player")
@@ -100,14 +127,31 @@ public class Gem : MonoBehaviour
                 gameObject.SetActive(false);
         }
 
+        //Si está cargada hace que el jugador suelte gemas
+        if (isCharged)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                //Debug.Log("Player charged");
+                rb.velocity = Vector3.zero;
+                isCharged = false;
+
+                StopThrowing();
+                Player playerHit = collision.gameObject.GetComponent<Player>();
+
+                playerHit.Knockback(playerForward, knockbackForce);
+                playerHit.DropGem(-this.transform.forward);
+            }
+        }
+
         //Todo esto si la gema no está cargada
         //Meterse al minecart
-        if (isBeingThrown)
+        else if (isBeingThrown)
         {
             //Si es otro jugador se para y lo aturde
             if (collision.gameObject.tag == "Player")
             {
-                Debug.Log("Player");
+                //Debug.Log("Player not charged");
                 StopThrowing();
 
                 collision.gameObject.GetComponent<Player>().Knockback(playerForward, knockbackForce);
@@ -156,7 +200,7 @@ public class Gem : MonoBehaviour
         //Si le da a otro jugador por la espalda se mete en su bolsa si puede, si no lo aturde
         if (isBeingThrown && other.tag == "PlayerBack")
         {
-            Debug.Log("Espalda");
+            //Debug.Log("Espalda");
             PlayerBack playerBack = other.gameObject.GetComponent<PlayerBack>();
 
             if (playerBack.TryAddGemToPouch(this))
@@ -175,6 +219,7 @@ public class Gem : MonoBehaviour
 
         rb.useGravity = true;
         isBeingThrown = false;
+        isCharged = false;
 
         throwSpeedMultiplier = 1f;
 
