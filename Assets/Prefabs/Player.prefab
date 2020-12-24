@@ -27,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390191191207065862}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 7707147454276104656}
   - {fileID: 442406859235436561}
@@ -80,17 +80,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae9e3b7a9811bc4693f4c9caef6c8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHorizontalSpeed: 120
-  startingMaxHorizontalSpeed: 10
-  startingVerticalSpeed: 300
-  startingMaxVerticalSpeed: 7
+  startingHorizontalSpeed: 45
+  startingMaxHorizontalSpeed: 6
+  startingVerticalSpeed: 150
+  startingMaxVerticalSpeed: 5
   stunTime: 0.5
   invulnerabiltyTime: 1
   droppedGemsPerHit: 1
   maxGemsInPouch: 5
   knockBackReductionPerGemInPouch: 0.1
-  horizontalMovementReductionPerGemInPouch: 0.1
-  verticalMovementReductionPerGemInPouch: 0.1
+  horizontalMovementReductionPerGemInPouch: 0.05
+  verticalMovementReductionPerGemInPouch: 0.05
   gemThrowForce: 50
   gemThrowCooldown: 1
   throwGemPosition: {fileID: 7575612818429767386}
