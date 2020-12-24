@@ -8,19 +8,19 @@ public class GameManager : MonoBehaviour
     public static float musicVolume = 0.5f;
     public static float effectsVolume = 0.5f;
     public static bool english = false;
+    public static string username = "";
 
     private static bool firstInstance = true;
+    public static GameManager instance = null;
     //private static string saveFilePath;
 
     private void Awake()
     {
         if (firstInstance)
         {
+            instance = this;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
-            //User.Init();
-            /*bool success = DatabaseManager.Connect();
-            Debug.Log("CONNECTION TO DATABASE: " + success);*/
-            //CheckPreferencesFile();
+            ReadPreferences();
         }
     }
 
@@ -32,13 +32,6 @@ public class GameManager : MonoBehaviour
         }
     }
     //PUBLIC FUNCTIONS
-
-    /*public void ChangeUsername(string newUsername)
-    {
-        Debug.Log("Username changed: " + newUsername);
-        User.username = newUsername;
-        //username = newUsername;
-    }*/
 
     public void OnMusicVolumeChanged(float volume)
     {
@@ -59,46 +52,19 @@ public class GameManager : MonoBehaviour
         Bilingual.UpdateAll();
     }
 
-    //private void CheckPreferencesFile()
-    //{
-    //    saveFilePath = Application.persistentDataPath + "/preferences.txt";
-    //    Debug.Log("Persistent save file path: " + saveFilePath);
-    //    if (!File.Exists(saveFilePath))
-    //    {
-    //        //File.Create(saveFilePath);
-    //        SavePreferences();
-    //    } else
-    //    {
-    //        ReadPreferences();
-    //        /*if(User.username.Trim(' ') != "" && SceneLoader.GetCurrentScene() == SceneLoader.usernameScene)
-    //        {
-    //            DatabaseManager.TryCreateUser();
-    //            SceneLoader.LoadMainMenuScene();
-    //        }*/
-    //    }
-    //}
-
-    /*private void ReadPreferences()
+    private void ReadPreferences()
     {
-        string[] allLines = File.ReadAllLines(saveFilePath);
-        if(allLines.Length > 0)
-        {
-            User.username = allLines[0];
-            english = bool.Parse(allLines[2]);
-            effectsVolume = float.Parse(allLines[3]);
-            musicVolume = float.Parse(allLines[4]);
-        }
-    }*/
+        if (PlayerPrefs.HasKey("id")) username = PlayerPrefs.GetString("id");
+        if (PlayerPrefs.HasKey("musicVolume")) musicVolume = PlayerPrefs.GetFloat("musicVolume");
+        if (PlayerPrefs.HasKey("effectsVolume")) effectsVolume = PlayerPrefs.GetFloat("effectsVolume");
+        if (PlayerPrefs.HasKey("english")) english = bool.Parse(PlayerPrefs.GetString("english"));
+    }
 
-    /*public void SavePreferences()
+    public void SavePreferences()
     {
-        List<string> allLines = new List<string>();
-
-        allLines.Add("" + User.username);
-        allLines.Add("" + english);
-        allLines.Add("" + effectsVolume);
-        allLines.Add("" + musicVolume);
-
-        File.WriteAllLines(saveFilePath, allLines);
-    }*/
+        PlayerPrefs.SetString("id", Client.user != null ? Client.user.id : "");
+        PlayerPrefs.SetFloat("musicVolume", musicVolume);
+        PlayerPrefs.SetFloat("effectsVolume", effectsVolume);
+        PlayerPrefs.SetString("english", english.ToString());
+    }
 }

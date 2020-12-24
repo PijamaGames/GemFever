@@ -13,15 +13,14 @@ public class SignController : MonoBehaviour
     [SerializeField] private TMP_InputField nameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private TMP_InputField confirmInputField;
-    [SerializeField] private Image restrictionImage;
-    private TextMeshProUGUI restrictionsText;
+    [SerializeField] private GameObject nameRestrictionPanel;
     private Bilingual billingualRestrictionsText;
 
     private void Start()
     {
         ClientConnected.wrongDataEvent += ShowWrongData;
-        restrictionsText=restrictionImage.GetComponentInChildren<TextMeshProUGUI>();
-        billingualRestrictionsText = restrictionImage.GetComponentInChildren<Bilingual>();
+        billingualRestrictionsText = nameRestrictionPanel.GetComponentInChildren<Bilingual>();
+        if(!confirmInputField) nameInputField.text = GameManager.username;
     }
 
     private void OnDestroy()
@@ -35,20 +34,20 @@ public class SignController : MonoBehaviour
 
         //TODO: Reflejar error en interfaz
         
-        restrictionImage.gameObject.SetActive(true);
+        nameRestrictionPanel.gameObject.SetActive(true);
         switch (errorCode)
         {
             case 0:
                 billingualRestrictionsText.spanishText = "Contraseña incorrecta";
-                billingualRestrictionsText.englishText = "Wrog password";
+                billingualRestrictionsText.englishText = "Wrong password";
                 break;
             case 1:
                 billingualRestrictionsText.spanishText = "El usuario no existe";
-                billingualRestrictionsText.englishText = "User don't exist";
+                billingualRestrictionsText.englishText = "User doesn't exist";
                 break;
             case 2:
                 billingualRestrictionsText.spanishText = "Esta sesión de usuario ya está iniciada";
-                billingualRestrictionsText.englishText = "This user account is already logged in";
+                billingualRestrictionsText.englishText = "This user is already logged in";
                 break;
             case 3:
                 billingualRestrictionsText.spanishText = "El nombre de usuario ya existe";

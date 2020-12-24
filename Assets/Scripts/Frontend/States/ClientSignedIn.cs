@@ -12,6 +12,7 @@ public class ClientSignedIn : ClientState
         base.Begin();
         Debug.Log("Signed in");
         SceneLoader.instance.LoadMainMenuScene();
+        GameManager.instance.SavePreferences();
     }
 
     public override void HandleMessage(ref string msg)

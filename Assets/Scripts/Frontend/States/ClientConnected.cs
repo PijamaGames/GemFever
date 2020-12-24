@@ -47,17 +47,21 @@ public class ClientConnected : ClientState
     {
         public int evt = 0;
         public int error = -1;
+        public string user;
     }
 
     override public void HandleMessage(ref string msg)
     {
         base.HandleMessage(ref msg);
-        var data = JsonUtility.FromJson<MsgStructure>(msg);
+        MsgStructure data = JsonUtility.FromJson<MsgStructure>(msg);
         FrontendEvents evt = (FrontendEvents)data.evt;
-        Debug.Log("EVENT: " + data.evt);
+        Debug.Log("EVENT: " + evt);
+        User user = JsonUtility.FromJson<User>(data.user);
+        if (user == null) return;
         switch (evt)
         {
             case FrontendEvents.SignedIn:
+                Client.user = user;
                 Client.SetState(Client.signedInState);
                 break;
             case FrontendEvents.SignedUp:

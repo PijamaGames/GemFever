@@ -10,7 +10,7 @@ public class ClientUnconnected : ClientState
         base.Begin();
         Client.instance.socket.onOpenCallback = () => Client.SetState(Client.connectedState);
         Client.instance.socket.Init();
-        Debug.Log("UNCONNECTED");
+        SceneLoader.instance.LoadConnectionScene();
     }
 
     public override void HandleMessage(ref string msg)

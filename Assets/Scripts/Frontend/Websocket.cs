@@ -13,7 +13,10 @@ public class Websocket : MonoBehaviour
     [SerializeField] int urlIndex = 0;
     [SerializeField][TextArea] string[] urlList;
     [SerializeField] bool debugMessages = false;
+    [SerializeField] bool debugState = false;
     [SerializeField] bool initOnAwake = false;
+    [SerializeField] bool tryReconnect = true; //will be true in build
+    [SerializeField] float keepAliveInterval = 25f;
     [SerializeField] int messageSizeBytes = 4096;
     private bool connected = false;
 
@@ -48,6 +51,10 @@ public class Websocket : MonoBehaviour
 
     private void Awake()
     {
+#if !UNITY_EDITOR
+        tryReconnect = true;
+#endif
+
 #if (!UNITY_EDITOR && UNITY_WEBGL)
         isWebGLPlatform = true;
 #endif
@@ -77,24 +84,29 @@ public class Websocket : MonoBehaviour
         {
             Open();
         }
-        if (connected && socket.State == WebSocketState.Closed)
+        if (connected && socket.State == WebSocketState.Closed || socket.State == WebSocketState.CloseReceived)
         {
+            socket.Abort();
             Close();
         }
         if(connected && !waitingMsg)
         {
             WaitForMessage();
         }
+        if (debugState)
+        {
+            Debug.Log("[SOCKET] State: " + socket.State);
+        }
     }
 
     public async void Init()
     {
         if (connected) return;
+        if (!Application.isPlaying) return;
         string url = urlList[urlIndex];
-        Debug.Log("CONNECTING TO: " + url);
+        Debug.Log("[SOCKET] CONNECTING TO: " + url);
         if (isWebGLPlatform)
         {
-            Debug.Log("IS WEB GL PLATFORM");
             InitWS(gameObject.name, url);
         }
         else
@@ -106,6 +118,10 @@ public class Websocket : MonoBehaviour
             } catch
             {
                 Error("connecting socket");
+                if (tryReconnect && Application.isPlaying)
+                {
+                    Init();
+                }
             }
             
         }
@@ -169,7 +185,7 @@ public class Websocket : MonoBehaviour
             ReceiveMessage(msg);
         } catch
         {
-            Error("waiting message");
+            Debug.Log("[SOCKET] Error waiting message...");
         }
         
         waitingMsg = false;
@@ -177,15 +193,18 @@ public class Websocket : MonoBehaviour
 
     void Open()
     {
+        if (!Application.isPlaying) return;
         Debug.Log("[SOCKET] Opened");
         connected = true;
         OnOpenEvent.Invoke();
         onOpenCallback?.Invoke();
-        //SendObj(new Vector3(1, 2, 3));
+        //StopCoroutine("KeepAliveCoroutine");
+        StartCoroutine(KeepAliveCoroutine());
     }
 
     void Close()
     {
+        if (!Application.isPlaying) return;
         Debug.Log("[SOCKET] Closed");
         connected = false;
         OnCloseEvent.Invoke();
@@ -194,6 +213,7 @@ public class Websocket : MonoBehaviour
 
     void Error(string err = "")
     {
+        if (!Application.isPlaying) return;
         Debug.Log("[SOCKET] Error: " + err);
         connected = false;
         OnErrorEvent.Invoke();
@@ -202,7 +222,17 @@ public class Websocket : MonoBehaviour
 
     void ReceiveMessage(string msg)
     {
+        if (!Application.isPlaying) return;
         if (debugMessages) Debug.Log("[SOCKET] received message: " + msg);
         onMessageCallback?.Invoke(ref msg);
+    }
+
+    IEnumerator KeepAliveCoroutine()
+    {
+        while(socket.State == WebSocketState.Open)
+        {
+            SendMessage("{\"evt\":\"-1\"}");
+            yield return new WaitForSeconds(keepAliveInterval);
+        }
     }
 }

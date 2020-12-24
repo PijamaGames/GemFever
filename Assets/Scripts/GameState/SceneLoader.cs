@@ -162,7 +162,9 @@ public class SceneLoader : MonoBehaviour
 
     private void LoadScene(string name)
     {
-        previousScenes.Add(GetCurrentScene());
+        string currentScene = GetCurrentScene();
+        if (name == currentScene) return;
+        previousScenes.Add(currentScene);
         if(previousScenes.Count > maxPreviousSceneMemory)
         {
             previousScenes.RemoveAt(0);

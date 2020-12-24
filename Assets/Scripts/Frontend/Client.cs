@@ -28,7 +28,8 @@ public class Client : MonoBehaviour
         Debug.Log("START FRONTEND");
         instance = this;
         socket = GetComponent<Websocket>();
-
+        socket.onCloseCallback = () => SetState(unconnectedState);
+        socket.onErrorCallback += (err) => SetState(unconnectedState);
         CreateStates();
         SetState(unconnectedState);
     }
