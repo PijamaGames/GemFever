@@ -336,6 +336,7 @@ public class Player : MonoBehaviour
 
                 score += Mathf.CeilToInt(scoreObtained * scoreMultiplier);
                 UpdateSpeed();
+                CheckPouchFull();
             }
         }
     }
