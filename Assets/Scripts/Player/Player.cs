@@ -55,9 +55,16 @@ public class Player : MonoBehaviour
     Queue<Gem> gemPouch = new Queue<Gem>();
     bool gemThrowOnCooldown = false;
 
+    //UI
+    public int playerNumber = 0;
+    GameUIManager gameUIManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameUIManager = FindObjectOfType<GameUIManager>();
+        gameUIManager.ActivatePlayerUI(playerNumber);
+
         rb = gameObject.GetComponent<Rigidbody>();
 
         horizontalSpeed = startingHorizontalSpeed;
@@ -307,12 +314,13 @@ public class Player : MonoBehaviour
             //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), false);
             gameObject.layer = LayerMask.NameToLayer("Player");
     }
-
-    public void EmpyPouch()
-    {
-
-    }
     #endregion
+
+    public void AddScore(int score)
+    {
+        this.score += score;
+        gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+    }
 
     #region Trigger Methods
     void OnTriggerEnter(Collider other)
@@ -334,8 +342,10 @@ public class Player : MonoBehaviour
                     scoreMultiplier += incrementPerGemStored;
                 }
 
-                score += Mathf.CeilToInt(scoreObtained * scoreMultiplier);
+                AddScore(Mathf.CeilToInt(scoreObtained * scoreMultiplier));
+
                 UpdateSpeed();
+                CheckPouchFull();
             }
         }
     }

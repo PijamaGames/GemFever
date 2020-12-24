@@ -11,6 +11,7 @@ TagManager:
   - Minecart
   - PlayerBack
   - Map
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX
