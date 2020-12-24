@@ -22,7 +22,8 @@ public class ClientConnected : ClientState
         var pairs = new KeyValuePair<string, object>[]
         {
             new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
-            new KeyValuePair<string, object>("user", User.ToJson(Client.user)),
+            new KeyValuePair<string, object>("username", UsefulFuncs.PrimitiveToJsonValue(Client.user.id)),
+            new KeyValuePair<string, object>("password", UsefulFuncs.PrimitiveToJsonValue(Client.user.password)),
         };
         string msg = UsefulFuncs.CombineJsons(pairs);
 
@@ -65,6 +66,7 @@ public class ClientConnected : ClientState
                 Client.SetState(Client.signedInState);
                 break;
             case FrontendEvents.SignedUp:
+                Client.user = user;
                 Client.SetState(Client.signedUpState);
                 break;
             case FrontendEvents.WrongData:
