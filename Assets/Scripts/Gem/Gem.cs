@@ -202,7 +202,7 @@ public class Gem : MonoBehaviour
         //Si tiras una gema a un minecart la guardas y se suma el score al jugador
         if( (isBeingThrown || isCharged) && other.tag == "Minecart")
         {
-            playerOwner.score += this.value;
+            playerOwner.AddScore(this.value);
             StopThrowing();
             gameObject.SetActive(false);
         }

@@ -19,7 +19,9 @@ public class PlayerSpawnerManager : MonoBehaviour
     void SpawnPlayerAtLocation(GameObject player)
     {
         Vector3 availableLocation = playerSpawnLocations[currentPlayers].transform.position;
+
         currentPlayers++;
+        player.GetComponent<Player>().playerNumber = currentPlayers;
 
         player.transform.position = availableLocation;
     }
