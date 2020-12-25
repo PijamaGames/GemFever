@@ -13,23 +13,24 @@ public class SettingsController : MonoBehaviour
     [SerializeField] Toggle allowInvitationsToggle;
 
     [SerializeField] Image languageImg;
-    [SerializeField] Sprite englishBtn;
-    [SerializeField] Sprite spanishBtn;
+    [SerializeField] Sprite englishSprite;
+    [SerializeField] Sprite spanishSprite;
 
     private void Start()
     {
-        musicSlider.value = GameManager.musicVolume;
-        effectsSlider.value = GameManager.effectsVolume;
+        
+        if(musicSlider != null) musicSlider.value = GameManager.musicVolume;
+        if(effectsSlider != null) effectsSlider.value = GameManager.effectsVolume;
         UpdateLanguageImg();
 
         if (!GameManager.isHandheld)
         {
-            touchControlsButton.SetActive(false);
+            if(touchControlsButton != null) touchControlsButton.SetActive(false);
         }
     }
 
     public void UpdateLanguageImg()
     {
-        languageImg.sprite = GameManager.english ? spanishBtn : englishBtn;
+        languageImg.sprite = GameManager.english ? spanishSprite : englishSprite;
     }
 }

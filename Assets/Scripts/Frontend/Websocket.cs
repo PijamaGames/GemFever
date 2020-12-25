@@ -15,7 +15,7 @@ public class Websocket : MonoBehaviour
     [SerializeField] bool debugMessages = false;
     [SerializeField] bool debugState = false;
     [SerializeField] bool initOnAwake = false;
-    [SerializeField] bool tryReconnect = true; //will be true in build
+    //[SerializeField] bool tryReconnect = true; //will be true in build
     [SerializeField] float keepAliveInterval = 25f;
     [SerializeField] int messageSizeBytes = 4096;
     private bool connected = false;
@@ -51,9 +51,9 @@ public class Websocket : MonoBehaviour
 
     private void Awake()
     {
-#if !UNITY_EDITOR
+/*#if !UNITY_EDITOR
         tryReconnect = true;
-#endif
+#endif*/
 
 #if (!UNITY_EDITOR && UNITY_WEBGL)
         isWebGLPlatform = true;
@@ -118,10 +118,12 @@ public class Websocket : MonoBehaviour
             } catch
             {
                 Error("connecting socket");
-                if (tryReconnect && Application.isPlaying)
+                //socket.Abort();
+                //socket.Dispose();
+                /*if (tryReconnect && Application.isPlaying)
                 {
                     Init();
-                }
+                }*/
             }
             
         }
