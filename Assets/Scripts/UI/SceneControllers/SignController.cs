@@ -13,13 +13,11 @@ public class SignController : MonoBehaviour
     [SerializeField] private TMP_InputField nameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private TMP_InputField confirmInputField;
-    [SerializeField] private GameObject nameRestrictionPanel;
-    private Bilingual billingualRestrictionsText;
+    [SerializeField] private Bilingual bilingualRestrictions;
 
     private void Start()
     {
         ClientConnected.wrongDataEvent += ShowWrongData;
-        billingualRestrictionsText = nameRestrictionPanel.GetComponentInChildren<Bilingual>();
         if(!confirmInputField) nameInputField.text = GameManager.username;
     }
 
@@ -28,33 +26,58 @@ public class SignController : MonoBehaviour
         ClientConnected.wrongDataEvent -= ShowWrongData;
     }
 
+    public void ShowNameRestrictions()
+    {
+        bilingualRestrictions.spanishText = "El nombre puede contener letras, números, guion y barra baja";
+        bilingualRestrictions.englishText = "The username can contain letters, numbers, hyphen and underscore";
+        bilingualRestrictions.UpdateLanguage();
+    }
+
+    public void ShowPasswordRestrictions()
+    {
+        bilingualRestrictions.spanishText = "La contraseña puede contener letras, números, guion y barra baja";
+        bilingualRestrictions.englishText = "The password can contain letters, numbers, hyphen and underscore";
+        bilingualRestrictions.UpdateLanguage();
+    }
+
     private void ShowWrongData(int errorCode)
     {
         Debug.Log("SHOW WRONG DATA: " + errorCode);
 
         //TODO: Reflejar error en interfaz
         
-        nameRestrictionPanel.gameObject.SetActive(true);
         switch (errorCode)
         {
             case 0:
-                billingualRestrictionsText.spanishText = "Contraseña incorrecta";
-                billingualRestrictionsText.englishText = "Wrong password";
+                bilingualRestrictions.spanishText = "Contraseña incorrecta";
+                bilingualRestrictions.englishText = "Wrong password";
                 break;
             case 1:
-                billingualRestrictionsText.spanishText = "El usuario no existe";
-                billingualRestrictionsText.englishText = "User doesn't exist";
+                bilingualRestrictions.spanishText = "El usuario no existe";
+                bilingualRestrictions.englishText = "User doesn't exist";
                 break;
             case 2:
-                billingualRestrictionsText.spanishText = "Esta sesión de usuario ya está iniciada";
-                billingualRestrictionsText.englishText = "This user is already logged in";
+                bilingualRestrictions.spanishText = "Esta sesión de usuario ya está iniciada";
+                bilingualRestrictions.englishText = "This user is already logged in";
                 break;
             case 3:
-                billingualRestrictionsText.spanishText = "El nombre de usuario ya existe";
-                billingualRestrictionsText.englishText = "That username already exists";
+                bilingualRestrictions.spanishText = "Ese nombre de usuario ya existe...";
+                bilingualRestrictions.englishText = "That username already exists...";
+                break;
+            case 100:
+                bilingualRestrictions.spanishText = "El nombre contiene caracteres no permitidos o está vacío";
+                bilingualRestrictions.englishText = "The username contains restricted characters or it's empty";
+                break;
+            case 101:
+                bilingualRestrictions.spanishText = "La contraseña contiene caracteres no permitidos o está vacía";
+                bilingualRestrictions.englishText = "The password contains restricted characters or it's empty";
+                break;
+            case 102:
+                bilingualRestrictions.spanishText = "Las contraseñas no coinciden";
+                bilingualRestrictions.englishText = "The password fields don't match";
                 break;
         }
-        billingualRestrictionsText.UpdateLanguage();
+        bilingualRestrictions.UpdateLanguage();
     }
 
     public void TrySignUp()
@@ -70,6 +93,15 @@ public class SignController : MonoBehaviour
             Client.user.id = nameInputField.text.Trim();
             Client.user.password = passwordInputField.text.Trim();
             ClientConnected.SignUp();
+        } else if (!nameOk)
+        {
+            ShowWrongData(100);
+        } else if (!passwordOk)
+        {
+            ShowWrongData(101);
+        } else if (!samePassword)
+        {
+            ShowWrongData(102);
         }
         
     }
@@ -97,6 +129,4 @@ public class SignController : MonoBehaviour
         Client.user.password = passwordInputField.text.Trim();
         ClientConnected.SignIn();
     }
-
-
 }

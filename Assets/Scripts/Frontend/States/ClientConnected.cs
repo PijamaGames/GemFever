@@ -58,7 +58,6 @@ public class ClientConnected : ClientState
         FrontendEvents evt = (FrontendEvents)data.evt;
         Debug.Log("EVENT: " + evt);
         User user = JsonUtility.FromJson<User>(data.user);
-        if (user == null) return;
         switch (evt)
         {
             case FrontendEvents.SignedIn:
