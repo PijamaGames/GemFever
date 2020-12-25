@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f329f882cbd37f048ab34b071499f1ff
+guid: 26373ba8edffa674ebba4a2f97b03843
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: West Test
+  fontName: Duality
   fontNames:
-  - West Test
+  - Duality
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

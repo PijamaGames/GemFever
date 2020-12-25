@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour
 {
+    [SerializeField] GameObject touchControlsButton;
+
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider effectsSlider;
     [SerializeField] Toggle allowFriendsToggle;
@@ -19,6 +21,11 @@ public class SettingsController : MonoBehaviour
         musicSlider.value = GameManager.musicVolume;
         effectsSlider.value = GameManager.effectsVolume;
         UpdateLanguageImg();
+
+        if (!GameManager.isHandheld)
+        {
+            touchControlsButton.SetActive(false);
+        }
     }
 
     public void UpdateLanguageImg()

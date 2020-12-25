@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private static extern bool IsHandheld();
 
     [SerializeField] bool debugMovile = false;
-    private bool isHandheld = false;
+    public static bool isHandheld = false;
 
     private void Awake()
     {
