@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Runtime.InteropServices;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     //private static string saveFilePath;
 
+    [DllImport("__Internal")]
+    private static extern bool IsHandheld();
+
+    [SerializeField] bool debugMovile = false;
+    private bool isHandheld = false;
+
     private void Awake()
     {
         if (firstInstance)
@@ -21,6 +28,14 @@ public class GameManager : MonoBehaviour
             instance = this;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             ReadPreferences();
+
+#if (UNITY_WEBGL && !UNITY_EDITOR)
+            isHandheld = IsHandheld();
+#else
+            isHandheld = debugMovile;
+#endif
+
+
         }
     }
 
