@@ -14,6 +14,7 @@ public class ClientConnected : ClientState
     {
         base.Begin();
         SceneLoader.instance.LoadSingInScene();
+        Client.user = null;
     }
 
     public static void SignUp()

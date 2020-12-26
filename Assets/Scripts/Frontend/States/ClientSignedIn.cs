@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ClientSignedIn : ClientState
 {
-    private enum FrontendEvents { };
-    private enum BackendEvents { };
+    private enum FrontendEvents { SignedOut };
+    private enum BackendEvents { SignOut };
+
+    public static event Action signedOutEvent;
 
     override public void Begin()
     {
@@ -15,10 +18,38 @@ public class ClientSignedIn : ClientState
         GameManager.instance.SavePreferences();
     }
 
+    private class MsgStructure
+    {
+        public int evt = 0;
+    }
+
     public override void HandleMessage(ref string msg)
     {
         base.HandleMessage(ref msg);
+        MsgStructure data = JsonUtility.FromJson<MsgStructure>(msg);
+        FrontendEvents evt = (FrontendEvents)data.evt;
+        Debug.Log("EVENT: " + evt);
+        switch (evt)
+        {
+            case FrontendEvents.SignedOut:
+                Client.SetState(Client.connectedState);
+                signedOutEvent.Invoke();
+                break;
+        }
 
+    }
+
+    public static void TrySignOut()
+    {
+        BackendEvents evt = BackendEvents.SignOut;
+        var pairs = new KeyValuePair<string, object>[]
+        {
+            new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
+        };
+        string msg = UsefulFuncs.CombineJsons(pairs);
+
+        if (Client.instance != null && Client.instance.socket != null)
+            Client.instance.socket.SendMessage(msg);
     }
 
     override public void Finish()
