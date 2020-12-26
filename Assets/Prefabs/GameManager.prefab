@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5beb9f4bd8c81e94ab1080501527455a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMovile: 0
+  blockedUIAlpha: 0.5
 --- !u!114 &2884888735722536222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,3 +58,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328257ff616dbe54ba2601ea9322c998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPreviousSceneMemory: 10

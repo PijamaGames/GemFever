@@ -44,7 +44,8 @@ public class SignController : MonoBehaviour
     {
         Debug.Log("SHOW WRONG DATA: " + errorCode);
 
-        //TODO: Reflejar error en interfaz
+        GameManager.instance.ReleaseUI();
+
         
         switch (errorCode)
         {
@@ -93,6 +94,7 @@ public class SignController : MonoBehaviour
             Client.user.id = nameInputField.text.Trim();
             Client.user.password = passwordInputField.text.Trim();
             ClientConnected.SignUp();
+            GameManager.instance.BlockUI();
         } else if (!nameOk)
         {
             ShowWrongData(100);
@@ -128,5 +130,6 @@ public class SignController : MonoBehaviour
         Client.user.id = nameInputField.text.Trim();
         Client.user.password = passwordInputField.text.Trim();
         ClientConnected.SignIn();
+        GameManager.instance.BlockUI();
     }
 }
