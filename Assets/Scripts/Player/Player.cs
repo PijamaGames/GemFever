@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject throwGemPosition;
     [Space]
 
-    [SerializeField] float incrementPerGemStored = 0.1f;
+    [SerializeField] float scoreIncrementPerGemStored = 0.1f;
     public int score = 0;
 
     //Physics
@@ -51,12 +51,20 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool isStunned = false;
     [HideInInspector] public bool isInvulnerable = false;
 
+    //GemPouch
+    [SerializeField] MeshRenderer pouchMeshRenderer;
+    [SerializeField] MeshFilter pouchMeshFilter;
+    [SerializeField] int maxPouchSize;
+    [SerializeField] List<GemPouchTier> gemPouchTiers = new List<GemPouchTier>();
+    public int currentPouchSize = 0;
+    public GemPouchTier currentTier;
+
     //Gems
     Queue<Gem> gemPouch = new Queue<Gem>();
     bool gemThrowOnCooldown = false;
 
     //UI
-    public int playerNumber = 0;
+    [HideInInspector]public int playerNumber = 0;
     GameUIManager gameUIManager;
 
     // Start is called before the first frame update
@@ -72,6 +80,9 @@ public class Player : MonoBehaviour
 
         maxHorizontalSpeed = startingMaxHorizontalSpeed;
         maxVerticalSpeed = startingMaxVerticalSpeed;
+
+        currentTier = gemPouchTiers[0];
+        ChangePouchSize();
     }
 
     void Update()
@@ -266,8 +277,11 @@ public class Player : MonoBehaviour
         {
             gemPouch.Enqueue(gem);
 
+            currentPouchSize++;
+
             UpdateSpeed();
             CheckPouchFull();
+            ChangePouchSize();
 
             return true;
         }
@@ -283,8 +297,12 @@ public class Player : MonoBehaviour
         Gem gem = gemPouch.Dequeue();
         gem.gameObject.SetActive(true);
 
+        currentPouchSize--;
+        if (currentPouchSize < 0) currentPouchSize = 0;
+
         UpdateSpeed();
         CheckPouchFull();
+        ChangePouchSize();
 
         return gem;
     }    
@@ -314,6 +332,41 @@ public class Player : MonoBehaviour
             //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Gem"), false);
             gameObject.layer = LayerMask.NameToLayer("Player");
     }
+
+    private void ChangePouchSize()
+    {
+        bool currentTierFound = false;
+
+        GemPouchTier nextTier;
+
+        if (currentPouchSize == 0)
+            currentTier = gemPouchTiers[0];
+        else
+        {
+            for (int i = 0; i < gemPouchTiers.Count; i++)
+            {
+                if (!currentTierFound)
+                {
+                    if (i == gemPouchTiers.Count - 1)
+                    {
+                        currentTierFound = true;
+                    }
+
+                    else
+                    {
+                        nextTier = gemPouchTiers[i + 1];
+                        if (currentPouchSize >= nextTier.gemNumberThreshold)
+                        {
+                            currentTier = nextTier;
+                        }
+                    }
+                }
+            }
+        }
+
+        //Cambiar material del meshRenderer?
+        pouchMeshFilter.mesh = currentTier.pouchMesh;
+    }
     #endregion
 
     public void AddScore(int score)
@@ -339,13 +392,17 @@ public class Player : MonoBehaviour
                 for(int i = 0; i < currentGems; i++)
                 {
                     scoreObtained += gemPouch.Dequeue().value;
-                    scoreMultiplier += incrementPerGemStored;
+                    currentPouchSize--;
+                    scoreMultiplier += scoreIncrementPerGemStored;
                 }
+
+                if (currentPouchSize < 0) currentPouchSize = 0;
 
                 AddScore(Mathf.CeilToInt(scoreObtained * scoreMultiplier));
 
                 UpdateSpeed();
                 CheckPouchFull();
+                ChangePouchSize();
             }
         }
     }
@@ -356,4 +413,11 @@ public class Player : MonoBehaviour
             climbingLadder = false;
     }
     #endregion
+}
+
+[System.Serializable]
+public class GemPouchTier
+{
+    public Mesh pouchMesh;
+    public int gemNumberThreshold;
 }
