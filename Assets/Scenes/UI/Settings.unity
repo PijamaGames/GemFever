@@ -611,8 +611,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 1
+      m_Calls:
+      - m_Target: {fileID: 1631843918}
+        m_MethodName: OnAllowInvitationsChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
 --- !u!114 &257252670 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7821723901372258626, guid: b20bd6759b4d33046bac16aafec7f234,
@@ -2090,9 +2101,9 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 59
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 1
   m_Spacing: 35
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
@@ -2442,8 +2453,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 1
+      m_Calls:
+      - m_Target: {fileID: 1631843918}
+        m_MethodName: OnAllowRequestsChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
 --- !u!1 &1063755976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,7 +2523,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2512,7 +2534,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 3c5ba440f75f8ce44b94100213f70fe6, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -4341,17 +4363,87 @@ MonoBehaviour:
   touchControlsButton: {fileID: 1830362495}
   musicSlider: {fileID: 1665807882}
   effectsSlider: {fileID: 634957551}
-  allowFriendsToggle: {fileID: 1036397115}
+  allowRequestsToggle: {fileID: 1036397115}
   allowInvitationsToggle: {fileID: 250969928}
   languageImg: {fileID: 257252670}
   englishSprite: {fileID: 21300000, guid: 22d77bae632cf1c4bbb92224a9226aeb, type: 3}
   spanishSprite: {fileID: 21300000, guid: 1f4a151eae01ae94da61e1f55e1d84b7, type: 3}
+  exitSettingsBtn: {fileID: 1063755978}
 --- !u!224 &1973194053 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7821723899664533817, guid: b20bd6759b4d33046bac16aafec7f234,
     type: 3}
   m_PrefabInstance: {fileID: 7821723901618848892}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2046442549
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1333670681700085073, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_Name
+      value: Frontend
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 506.16837
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 439.87537
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -260.0625
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3ee420d4b657b64b95a136be816224c, type: 3}
 --- !u!1 &2123915564
 GameObject:
   m_ObjectHideFlags: 0

@@ -1021,7 +1021,7 @@ GameObject:
   - component: {fileID: 577649170}
   - component: {fileID: 577649169}
   m_Layer: 5
-  m_Name: RestrictionsName
+  m_Name: Restrictions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2802,11 +2802,12 @@ MonoBehaviour:
   touchControlsButton: {fileID: 0}
   musicSlider: {fileID: 0}
   effectsSlider: {fileID: 0}
-  allowFriendsToggle: {fileID: 0}
+  allowRequestsToggle: {fileID: 0}
   allowInvitationsToggle: {fileID: 0}
   languageImg: {fileID: 840644034}
   englishSprite: {fileID: 21300000, guid: 22d77bae632cf1c4bbb92224a9226aeb, type: 3}
   spanishSprite: {fileID: 21300000, guid: 1f4a151eae01ae94da61e1f55e1d84b7, type: 3}
+  exitSettingsBtn: {fileID: 0}
 --- !u!1 &2034305557
 GameObject:
   m_ObjectHideFlags: 0
@@ -3058,7 +3059,7 @@ PrefabInstance:
     - target: {fileID: 1413803648108900018, guid: a486e93f4b7fb6a4293c3e8b3f9e54c3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -115
+      value: -117
       objectReference: {fileID: 0}
     - target: {fileID: 1413803648108900018, guid: a486e93f4b7fb6a4293c3e8b3f9e54c3,
         type: 3}
@@ -3068,7 +3069,7 @@ PrefabInstance:
     - target: {fileID: 1413803648108900018, guid: a486e93f4b7fb6a4293c3e8b3f9e54c3,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 200
+      value: 340
       objectReference: {fileID: 0}
     - target: {fileID: 1413803648108900018, guid: a486e93f4b7fb6a4293c3e8b3f9e54c3,
         type: 3}

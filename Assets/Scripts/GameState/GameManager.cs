@@ -60,7 +60,22 @@ public class GameManager : MonoBehaviour
         AudioRegulator.UpdateAllVolumes();
     }
 
-    
+    public void OnAllowInvitationsChanged(bool allow)
+    {
+        if (Client.user != null)
+        {
+            Client.user.allowInvitations = allow;
+        }
+    }
+
+    public void OnAllowRequestsChanged(bool allow)
+    {
+        if(Client.user != null)
+        {
+            Client.user.allowRequests = allow;
+        }
+    }
+
     public void ChangeLanguage()
     {
         english = !english;
