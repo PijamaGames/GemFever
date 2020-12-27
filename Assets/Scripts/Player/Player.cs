@@ -47,9 +47,10 @@ public class Player : MonoBehaviour
     float throwGemInput = 0f;
 
     //States
-    [HideInInspector] public bool climbingLadder = false;
-    [HideInInspector] public bool isStunned = false;
-    [HideInInspector] public bool isInvulnerable = false;
+    public bool climbingLadder = false;
+    public bool isInLadder = false;
+    public bool isStunned = false;
+    public bool isInvulnerable = false;
 
     //GemPouch
     [SerializeField] MeshRenderer pouchMeshRenderer;
@@ -66,6 +67,10 @@ public class Player : MonoBehaviour
     //UI
     [HideInInspector]public int playerNumber = 0;
     GameUIManager gameUIManager;
+
+    //Animator
+    [SerializeField] Animator animator;
+    bool isWalking = false;
 
     // Start is called before the first frame update
     void Start()
@@ -101,9 +106,14 @@ public class Player : MonoBehaviour
     {
         velocity = new Vector3(0f, rb.velocity.y, 0f);
 
-        if(!isStunned)
+        if (!isStunned)
         {
             velocity = Movement();
+
+            //Idle or Walk
+            isWalking = velocity.magnitude != 0;
+            WalkOrIdle();          
+
             rb.AddForce(velocity, ForceMode.VelocityChange);
         }
         else
@@ -184,6 +194,8 @@ public class Player : MonoBehaviour
         }
         else
             rb.useGravity = true;
+
+        
 
         return finalMovement;
     }
@@ -383,7 +395,9 @@ public class Player : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ladder")
-            climbingLadder = true;    
+        {
+            climbingLadder = true;
+        }
 
         if(other.tag == "Minecart")
         {
@@ -414,8 +428,43 @@ public class Player : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "Ladder")
+        {
             climbingLadder = false;
+        }
+            
     }
+    #endregion
+
+    #region Animations
+    private void WalkOrIdle()
+    {
+        animator.SetBool("Idle_Walk", isWalking);
+    }
+
+    public void PickaxeAnimation(bool start)
+    {
+        //Trepando escalera
+        if(climbingLadder)
+        {
+            //animator.SetBool("Climb_MineStair", start);
+        }
+
+        else
+        {
+            //Andando
+            if(isWalking)
+            {
+                animator.SetBool("Idle_Mine", start);
+            }
+            //Quieto
+            else
+            {
+                animator.SetBool("Idle_Mine", start);
+            }
+        }
+    }
+    
+
     #endregion
 }
 

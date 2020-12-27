@@ -12,6 +12,7 @@ TagManager:
   - PlayerBack
   - Map
   - PlayerSpawn
+  - PlayerFeet
   layers:
   - Default
   - TransparentFX
