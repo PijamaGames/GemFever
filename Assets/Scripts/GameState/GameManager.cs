@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool debugMovile = false;
     public static bool isHandheld = false;
 
+    [SerializeField] float blockedUIAlpha = 0.9f;
+
     private void Awake()
     {
         if (firstInstance)
@@ -48,6 +50,20 @@ public class GameManager : MonoBehaviour
     }
     //PUBLIC FUNCTIONS
 
+    public void BlockUI()
+    {
+        CanvasGroup group = FindObjectOfType<CanvasGroup>();
+        group.blocksRaycasts = false;
+        group.alpha = blockedUIAlpha;
+    }
+
+    public void ReleaseUI()
+    {
+        CanvasGroup group = FindObjectOfType<CanvasGroup>();
+        group.blocksRaycasts = true;
+        group.alpha = 1f;
+    }
+
     public void OnMusicVolumeChanged(float volume)
     {
         musicVolume = volume;
@@ -60,7 +76,22 @@ public class GameManager : MonoBehaviour
         AudioRegulator.UpdateAllVolumes();
     }
 
-    
+    public void OnAllowInvitationsChanged(bool allow)
+    {
+        if (Client.user != null)
+        {
+            Client.user.allowInvitations = allow;
+        }
+    }
+
+    public void OnAllowRequestsChanged(bool allow)
+    {
+        if(Client.user != null)
+        {
+            Client.user.allowRequests = allow;
+        }
+    }
+
     public void ChangeLanguage()
     {
         english = !english;
