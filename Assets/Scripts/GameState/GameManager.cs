@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     private static bool firstInstance = true;
     public static GameManager instance = null;
+
+    public static bool isLocalGame = true;
+
     //private static string saveFilePath;
 
     [DllImport("__Internal")]
@@ -49,7 +52,10 @@ public class GameManager : MonoBehaviour
         }
     }
     //PUBLIC FUNCTIONS
-
+    public void SetIsLocalGame(bool isLocal)
+    {
+        isLocalGame = isLocal;
+    }
     public void BlockUI()
     {
         CanvasGroup group = FindObjectOfType<CanvasGroup>();

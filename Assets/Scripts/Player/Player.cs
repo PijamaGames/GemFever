@@ -71,7 +71,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         gameUIManager = FindObjectOfType<GameUIManager>();
-        gameUIManager.ActivatePlayerUI(playerNumber);
+
+        if(!PlayerSpawnerManager.isInHub)
+            gameUIManager.ActivatePlayerUI(playerNumber);
 
         rb = gameObject.GetComponent<Rigidbody>();
 
@@ -372,7 +374,9 @@ public class Player : MonoBehaviour
     public void AddScore(int score)
     {
         this.score += score;
-        gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+
+        if(!PlayerSpawnerManager.isInHub)
+            gameUIManager.UpdatePlayerUI(playerNumber, this.score);
     }
 
     #region Trigger Methods

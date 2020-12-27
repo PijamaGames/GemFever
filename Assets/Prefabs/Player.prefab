@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &76430308889188851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6962634519880712507}
+  - component: {fileID: 4179034706740736304}
+  m_Layer: 0
+  m_Name: Prompt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6962634519880712507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76430308889188851}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.06, y: 1.97, z: 0.04}
+  m_LocalScale: {x: 1.9999995, y: 2, z: 1.9999995}
+  m_Children: []
+  m_Father: {fileID: 390191191207065867}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4179034706740736304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76430308889188851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5be0ce9f972e8347ae4115887794fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btn: {fileID: 0}
 --- !u!1 &390191191207065862
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +79,7 @@ Transform:
   - {fileID: 442406859235436561}
   - {fileID: 1624295406637248446}
   - {fileID: 5166099163638912643}
+  - {fileID: 6962634519880712507}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -99,8 +144,8 @@ MonoBehaviour:
   climbingLadder: 0
   isStunned: 0
   isInvulnerable: 0
-  pouchMeshRenderer: {fileID: 54915547189966482}
-  pouchMeshFilter: {fileID: 1624874949602743408}
+  pouchMeshRenderer: {fileID: 6198513585355647616}
+  pouchMeshFilter: {fileID: 7653126298700037791}
   maxPouchSize: 4
   gemPouchTiers:
   - pouchMesh: {fileID: 8479549494945012600, guid: c90ba19c7dc72794282e240b5e4a0e3c,
@@ -576,6 +621,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: character_base
       objectReference: {fileID: 0}
+    - target: {fileID: 7754171746062102885, guid: 218a894895c524841be6a9779e434d48,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8479549494945012600, guid: c90ba19c7dc72794282e240b5e4a0e3c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218a894895c524841be6a9779e434d48, type: 3}
 --- !u!4 &442406859235436561 stripped
@@ -584,15 +635,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 119635440882012154}
   m_PrefabAsset: {fileID: 0}
---- !u!33 &1624874949602743408 stripped
+--- !u!33 &7653126298700037791 stripped
 MeshFilter:
-  m_CorrespondingSourceObject: {fileID: -7555438302588740726, guid: 218a894895c524841be6a9779e434d48,
+  m_CorrespondingSourceObject: {fileID: 7754171746062102885, guid: 218a894895c524841be6a9779e434d48,
     type: 3}
   m_PrefabInstance: {fileID: 119635440882012154}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &54915547189966482 stripped
+--- !u!23 &6198513585355647616 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -9121444377532122776, guid: 218a894895c524841be6a9779e434d48,
+  m_CorrespondingSourceObject: {fileID: 6317578925029434746, guid: 218a894895c524841be6a9779e434d48,
     type: 3}
   m_PrefabInstance: {fileID: 119635440882012154}
   m_PrefabAsset: {fileID: 0}
