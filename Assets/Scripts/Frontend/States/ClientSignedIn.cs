@@ -23,8 +23,11 @@ public class ClientSignedIn : ClientState
         {
             Debug.Log("SPANISH MSG EVENT: " + spanishMsg);
             Debug.Log("ENGLISH MSG EVENT: " + englishMsg);
+            SceneLoader.instance.LoadEventViewScene();
+        } else
+        {
+            SceneLoader.instance.LoadMainMenuScene();
         }
-        SceneLoader.instance.LoadMainMenuScene();
         GameManager.instance.SavePreferences();
     }
 
