@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HowToPlayController : MonoBehaviour
 {
     [SerializeField] Button continueBtn;
+    [SerializeField] Button exitBtn;
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class HowToPlayController : MonoBehaviour
             {
                 ClientSignedUp.SignIn();
             });
+            exitBtn.gameObject.SetActive(false);
         }
     }
 }

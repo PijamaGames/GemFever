@@ -10,10 +10,20 @@ public class ClientSignedIn : ClientState
 
     public static event Action signedOutEvent;
 
+    public static bool hasEvent = false;
+    public static string spanishMsg = "";
+    public static string englishMsg = "";
+
     override public void Begin()
     {
         base.Begin();
         Debug.Log("Signed in");
+        Debug.Log("HAS EVENT: " + hasEvent);
+        if (hasEvent)
+        {
+            Debug.Log("SPANISH MSG EVENT: " + spanishMsg);
+            Debug.Log("ENGLISH MSG EVENT: " + englishMsg);
+        }
         SceneLoader.instance.LoadMainMenuScene();
         GameManager.instance.SavePreferences();
     }

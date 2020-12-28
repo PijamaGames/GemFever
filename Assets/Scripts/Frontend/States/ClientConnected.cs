@@ -50,6 +50,9 @@ public class ClientConnected : ClientState
         public int evt = 0;
         public int error = -1;
         public string user;
+        public bool hasEvent;
+        public string spanishMsg;
+        public string englishMsg;
     }
 
     override public void HandleMessage(ref string msg)
@@ -63,6 +66,9 @@ public class ClientConnected : ClientState
         {
             case FrontendEvents.SignedIn:
                 Client.user = user;
+                ClientSignedIn.hasEvent = data.hasEvent;
+                ClientSignedIn.spanishMsg = data.spanishMsg;
+                ClientSignedIn.englishMsg = data.englishMsg;
                 Client.SetState(Client.signedInState);
                 break;
             case FrontendEvents.SignedUp:
