@@ -129,7 +129,7 @@ MonoBehaviour:
   startingMaxHorizontalSpeed: 6
   startingVerticalSpeed: 150
   startingMaxVerticalSpeed: 5
-  stunTime: 0.5
+  stunTime: 1
   invulnerabiltyTime: 1
   droppedGemsPerHit: 1
   maxGemsInPouch: 5
@@ -141,10 +141,13 @@ MonoBehaviour:
   throwGemPosition: {fileID: 7575612818429767386}
   scoreIncrementPerGemStored: 0.1
   score: 0
+  isOnStair: 0
   climbingLadder: 0
+  isWalking: 0
   isInLadder: 0
   isStunned: 0
   isInvulnerable: 0
+  fallingOnStairs: 0
   pouchMeshRenderer: {fileID: 54915547189966482}
   pouchMeshFilter: {fileID: 1624874949602743408}
   maxPouchSize: 4
@@ -167,6 +170,7 @@ MonoBehaviour:
     gemNumberThreshold: 0
   playerNumber: 0
   animator: {fileID: 6433302771336034677}
+  playerMesh: {fileID: 966143192252347051}
 --- !u!114 &390191191207065865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +319,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickaxe: {fileID: 1371809310116195677}
+--- !u!114 &5907697848165227323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966143192252347051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff040b7b3c8e5040a8f65dd3b26bd67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 390191191207065864}
 --- !u!1 &1249681440781985673
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +381,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249681440781985673}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -472,7 +489,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2446818076243643841}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -530,9 +547,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerOwner: {fileID: 390191191207065864}
-  hitCooldown: 0.1
+  hitCooldown: 0.25
   knockbackForce: 120
-  gemParryForce: 50
+  gemParryForce: 10
+  hitOnCooldown: 0
 --- !u!65 &6386440380760899997
 BoxCollider:
   m_ObjectHideFlags: 0

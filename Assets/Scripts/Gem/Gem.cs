@@ -134,7 +134,7 @@ public class Gem : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                //Debug.Log("Player charged");
+                Debug.Log("Player charged");
                 rb.velocity = Vector3.zero;
                 isCharged = false;
 
@@ -170,7 +170,7 @@ public class Gem : MonoBehaviour
             }
 
             //Pared/Suelo
-            else if (collision.gameObject.tag == "Map")
+            else if (collision.gameObject.tag == "Map" || collision.gameObject.tag == "Floor")
             {
                 StopThrowing();
                 isFalling = true;

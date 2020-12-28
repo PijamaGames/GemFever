@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 11186023}
   m_Layer: 0
   m_Name: Limit
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,9 +226,9 @@ GameObject:
   - component: {fileID: 174489080}
   - component: {fileID: 174489079}
   - component: {fileID: 174489078}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 504728031}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -598,9 +598,9 @@ GameObject:
   - component: {fileID: 554983904}
   - component: {fileID: 554983903}
   - component: {fileID: 554983902}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube (5)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 652432164}
   - component: {fileID: 652432163}
   - component: {fileID: 652432162}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ladder (6)
   m_TagString: Ladder
   m_Icon: {fileID: 0}
@@ -707,7 +707,7 @@ Transform:
   m_GameObject: {fileID: 652432160}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.5, y: 2.24, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 2.1038, z: 1}
   m_Children: []
   m_Father: {fileID: 236683192}
   m_RootOrder: 15
@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 752979722}
   - component: {fileID: 752979721}
   - component: {fileID: 752979720}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ladder (3)
   m_TagString: Ladder
   m_Icon: {fileID: 0}
@@ -1301,9 +1301,9 @@ GameObject:
   - component: {fileID: 1186483274}
   - component: {fileID: 1186483273}
   - component: {fileID: 1186483272}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1400,7 +1400,7 @@ GameObject:
   - component: {fileID: 1240565983}
   - component: {fileID: 1240565982}
   - component: {fileID: 1240565981}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ladder (4)
   m_TagString: Ladder
   m_Icon: {fileID: 0}
@@ -1416,7 +1416,7 @@ Transform:
   m_GameObject: {fileID: 1240565979}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.517, y: 0.3, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 2.179, z: 1}
   m_Children: []
   m_Father: {fileID: 236683192}
   m_RootOrder: 12
@@ -1493,7 +1493,7 @@ GameObject:
   - component: {fileID: 1360612590}
   - component: {fileID: 1360612589}
   - component: {fileID: 1360612588}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ladder (5)
   m_TagString: Ladder
   m_Icon: {fileID: 0}
@@ -1509,7 +1509,7 @@ Transform:
   m_GameObject: {fileID: 1360612586}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.483, y: 0.3, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 2.1362, z: 1}
   m_Children: []
   m_Father: {fileID: 236683192}
   m_RootOrder: 14
@@ -1588,7 +1588,7 @@ GameObject:
   - component: {fileID: 1418629831}
   m_Layer: 0
   m_Name: Limit
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1947,7 +1947,7 @@ GameObject:
   - component: {fileID: 1862475022}
   m_Layer: 0
   m_Name: Limit
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2038,7 +2038,7 @@ GameObject:
   - component: {fileID: 1903988468}
   - component: {fileID: 1903988467}
   - component: {fileID: 1903988466}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ladder (7)
   m_TagString: Ladder
   m_Icon: {fileID: 0}
@@ -2054,7 +2054,7 @@ Transform:
   m_GameObject: {fileID: 1903988464}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.5, y: 2.24, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 2.053, z: 1}
   m_Children: []
   m_Father: {fileID: 236683192}
   m_RootOrder: 16
@@ -2242,7 +2242,7 @@ GameObject:
   - component: {fileID: 2072758354}
   m_Layer: 0
   m_Name: Limit
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2400,7 +2400,7 @@ Transform:
   m_GameObject: {fileID: 2109022581}
   m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
   m_LocalPosition: {x: 0, y: 3.2, z: -2.841}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.2157, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2448,9 +2448,9 @@ GameObject:
   - component: {fileID: 2133972362}
   - component: {fileID: 2133972361}
   - component: {fileID: 2133972360}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube (4)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2561,6 +2561,11 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 505320908}
+    - target: {fileID: 837169728536730163, guid: c72bb167b0e217940863cf4aff01623f,
+        type: 3}
+      propertyPath: oresToSpawn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 837169728536730165, guid: c72bb167b0e217940863cf4aff01623f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2707,7 +2712,7 @@ PrefabInstance:
     - target: {fileID: 6743823637759966948, guid: 2a970a5abe08f9140afa4a385a5478a0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.24
+      value: 4.524
       objectReference: {fileID: 0}
     - target: {fileID: 6743823637759966948, guid: 2a970a5abe08f9140afa4a385a5478a0,
         type: 3}
@@ -2754,6 +2759,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6743823637759966948, guid: 2a970a5abe08f9140afa4a385a5478a0,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.49742
+      objectReference: {fileID: 0}
     - target: {fileID: 6743823637759966949, guid: 2a970a5abe08f9140afa4a385a5478a0,
         type: 3}
       propertyPath: m_Name
@@ -2772,6 +2782,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cube (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400726011672055360, guid: aff0142166e4a714f979085482f7521a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7400726011672055361, guid: aff0142166e4a714f979085482f7521a,
         type: 3}

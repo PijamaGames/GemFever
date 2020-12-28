@@ -14,7 +14,7 @@ public class Pickaxe : MonoBehaviour
     [SerializeField] float knockbackForce = 50f;
     [SerializeField] float gemParryForce = 50f;
 
-    bool hitOnCooldown = false;
+    public bool hitOnCooldown = false;
     float pickaxeInput = 0f;
 
     // Start is called before the first frame update
@@ -29,32 +29,31 @@ public class Pickaxe : MonoBehaviour
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         pickaxeInput = context.ReadValue<float>();
-        Debug.Log("Pickaxe input: " + pickaxeInput);
 
         if(!hitOnCooldown && pickaxeInput == 1)
         {
             hitOnCooldown = true;
-            //PickaxeHitAnimation();
-            //Aniamción pico
-            playerOwner.PickaxeAnimation(true);
+
+            playerOwner.StartPickaxeAnimation();
+            StartCoroutine(HitCooldown());
         }
     }
 
     public void StartPickaxeHit()
     {
         EnableCollisions(true);
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
+        //gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
     }
 
     public void EndPickaxeHit()
     {
         EnableCollisions(false);
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+        //gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+
+        //hitOnCooldown = false;
 
         //terminar animación
-        playerOwner.PickaxeAnimation(false);
-
-        StartCoroutine(HitCooldown());
+        playerOwner.EndPickaxeAnimation();
     }
 
     private void EnableCollisions(bool enabled)
