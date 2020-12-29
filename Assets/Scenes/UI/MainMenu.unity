@@ -333,11 +333,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICamera
       objectReference: {fileID: 0}
-    - target: {fileID: 3549392144459160291, guid: 31ad5462450978f488d719207558fded,
-        type: 3}
-      propertyPath: field of view
-      value: 70
-      objectReference: {fileID: 0}
     - target: {fileID: 3549392144459160316, guid: 31ad5462450978f488d719207558fded,
         type: 3}
       propertyPath: m_LocalPosition.x
