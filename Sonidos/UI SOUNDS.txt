@@ -1,0 +1,18 @@
+Notificacion 1 me lo imagino para todo aquello que te quiera alertar el juego de manera positiva como amigo conectado,
+invitaciones a un lobby, mensajes del juego o eventos... lo de la subasta por ejemplo
+
+Notificacion 2 me lo imagino para errores que te salgan, que supongo que estaría bien que lo acompañe un sonido 
+
+Boton 1 supongo que para cosas de opciones o parametros
+
+Boton 2 quizas selecciones muy tochas como comenzar la partida o puede ser el sonido que suene cuando bajas o subes 
+el volumen de sonidos para ver el volumen
+
+Boton 3 seleccionar, aunque puede servir de notificacion leve, quizas pa elegir las skins 
+
+Boton 4 lo mismo pero al reves, quizas necesitas algo que suene como que se desactiva
+
+Boton 5 otro distinto para opciones o moverte por la pantalla como el 1
+
+
+Tambien te recuerdo que tienes los sonidos de nelu si ves que quieres rehusar alguno de alli
