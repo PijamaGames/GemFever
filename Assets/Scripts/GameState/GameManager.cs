@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     private static bool firstInstance = true;
     public static GameManager instance = null;
+
+    public static bool isLocalGame = true;
+
     //private static string saveFilePath;
 
     [DllImport("__Internal")]
@@ -20,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] bool debugMovile = false;
     public static bool isHandheld = false;
+
+    [SerializeField] float blockedUIAlpha = 0.9f;
 
     private void Awake()
     {
@@ -47,6 +52,23 @@ public class GameManager : MonoBehaviour
         }
     }
     //PUBLIC FUNCTIONS
+    public void SetIsLocalGame(bool isLocal)
+    {
+        isLocalGame = isLocal;
+    }
+    public void BlockUI()
+    {
+        CanvasGroup group = FindObjectOfType<CanvasGroup>();
+        group.blocksRaycasts = false;
+        group.alpha = blockedUIAlpha;
+    }
+
+    public void ReleaseUI()
+    {
+        CanvasGroup group = FindObjectOfType<CanvasGroup>();
+        group.blocksRaycasts = true;
+        group.alpha = 1f;
+    }
 
     public void OnMusicVolumeChanged(float volume)
     {
@@ -60,7 +82,22 @@ public class GameManager : MonoBehaviour
         AudioRegulator.UpdateAllVolumes();
     }
 
-    
+    public void OnAllowInvitationsChanged(bool allow)
+    {
+        if (Client.user != null)
+        {
+            Client.user.allowInvitations = allow;
+        }
+    }
+
+    public void OnAllowRequestsChanged(bool allow)
+    {
+        if(Client.user != null)
+        {
+            Client.user.allowRequests = allow;
+        }
+    }
+
     public void ChangeLanguage()
     {
         english = !english;

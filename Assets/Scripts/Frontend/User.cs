@@ -14,13 +14,13 @@ public class User
     public int avatar_bodyType = 0;
     public int avatar_skinTone = 0;
     public int avatar_color = 0;
-    public int avatar_face = 0;
-    public int avatar_hat = 0;
-    public int avatar_frame = 0;
+    public string avatar_face = "";
+    public string avatar_hat = "";
+    public string avatar_frame = "";
 
-    public int[] items_faces = new int[0];
-    public int[] items_hats = new int[0];
-    public int[] items_frames = new int[0];
+    public string[] items_faces = new string[0];
+    public string[] items_hats = new string[0];
+    public string[] items_frames = new string[0];
 
     public bool allowRequests = true;
     public bool allowInvitations = true;

@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &76430308889188851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6962634519880712507}
+  - component: {fileID: 4179034706740736304}
+  m_Layer: 0
+  m_Name: Prompt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6962634519880712507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76430308889188851}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.06, y: 1.97, z: 0.04}
+  m_LocalScale: {x: 1.9999995, y: 2, z: 1.9999995}
+  m_Children: []
+  m_Father: {fileID: 390191191207065867}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4179034706740736304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76430308889188851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5be0ce9f972e8347ae4115887794fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btn: {fileID: 0}
 --- !u!1 &390191191207065862
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +79,7 @@ Transform:
   - {fileID: 442406859235436561}
   - {fileID: 1624295406637248446}
   - {fileID: 5166099163638912643}
+  - {fileID: 6962634519880712507}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -84,21 +129,25 @@ MonoBehaviour:
   startingMaxHorizontalSpeed: 6
   startingVerticalSpeed: 150
   startingMaxVerticalSpeed: 5
-  stunTime: 0.5
+  stunTime: 1
   invulnerabiltyTime: 1
   droppedGemsPerHit: 1
   maxGemsInPouch: 5
   knockBackReductionPerGemInPouch: 0.1
   horizontalMovementReductionPerGemInPouch: 0.05
   verticalMovementReductionPerGemInPouch: 0.05
-  gemThrowForce: 50
+  gemThrowForce: 10
   gemThrowCooldown: 1
   throwGemPosition: {fileID: 7575612818429767386}
   scoreIncrementPerGemStored: 0.1
   score: 0
+  isOnStair: 0
   climbingLadder: 0
+  isWalking: 0
+  isInLadder: 0
   isStunned: 0
   isInvulnerable: 0
+  fallingOnStairs: 0
   pouchMeshRenderer: {fileID: 54915547189966482}
   pouchMeshFilter: {fileID: 1624874949602743408}
   maxPouchSize: 4
@@ -120,6 +169,8 @@ MonoBehaviour:
     pouchMesh: {fileID: 0}
     gemNumberThreshold: 0
   playerNumber: 0
+  animator: {fileID: 6433302771336034677}
+  playerMesh: {fileID: 966143192252347051}
 --- !u!114 &390191191207065865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +287,51 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &6433302771336034677
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966143192252347051}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 89f05ec719c746e49b5ee722c4f8aae6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3731050307234094805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966143192252347051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f900ce5e20cff4da02b364677286ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickaxe: {fileID: 1371809310116195677}
+--- !u!114 &5907697848165227323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966143192252347051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff040b7b3c8e5040a8f65dd3b26bd67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 390191191207065864}
 --- !u!1 &1249681440781985673
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +381,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249681440781985673}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -356,7 +452,7 @@ GameObject:
   - component: {fileID: 5917571042322887776}
   - component: {fileID: 5661367139168753278}
   - component: {fileID: 1371809310116195677}
-  - component: {fileID: 1578943369075542660}
+  - component: {fileID: 6386440380760899997}
   m_Layer: 9
   m_Name: Pickaxe
   m_TagString: Pickaxe
@@ -393,7 +489,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2446818076243643841}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -451,28 +547,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerOwner: {fileID: 390191191207065864}
-  hitCooldown: 0.1
+  hitCooldown: 0.25
   knockbackForce: 120
-  gemParryForce: 50
---- !u!95 &1578943369075542660
-Animator:
-  serializedVersion: 3
+  gemParryForce: 10
+  hitOnCooldown: 0
+--- !u!65 &6386440380760899997
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2446818076243643841}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c3f79daa8c20025429e11a116c61e897, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 0.3211954, z: 2.0784554}
+  m_Center: {x: -4.245021e-15, y: 0.4310427, z: -0.5314105}
 --- !u!1 &7575612818429767386
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,8 +667,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: character_base
       objectReference: {fileID: 0}
+    - target: {fileID: 7754171746062102885, guid: 218a894895c524841be6a9779e434d48,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8479549494945012600, guid: c90ba19c7dc72794282e240b5e4a0e3c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218a894895c524841be6a9779e434d48, type: 3}
+--- !u!1 &966143192252347051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 218a894895c524841be6a9779e434d48,
+    type: 3}
+  m_PrefabInstance: {fileID: 119635440882012154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &442406859235436561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 218a894895c524841be6a9779e434d48,

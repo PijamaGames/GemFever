@@ -128,7 +128,7 @@ MonoBehaviour:
   verticalSpawnForce: 6
   knockbackForce: 0
   speedIncrementPerParry: 0.1
-  maxSpeedIncrement: 5
+  maxSpeedIncrement: 2.5
   tiers:
   - minValueForThisTier: 1
     tierColor: {r: 1, g: 0, b: 0.9943776, a: 1}

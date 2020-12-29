@@ -53,8 +53,6 @@ public class Ore : MonoBehaviour
 
         SpawnGems(extractedGems);
 
-        //Debug.Log("Suelto " + extractedGems + " gemas");
-
         if (!regrowing && gemsLeft <= 0)
         {
             regrowing = true;
@@ -75,7 +73,6 @@ public class Ore : MonoBehaviour
     {
         if(!regrowing && other.tag == "Pickaxe")
         {
-            Debug.Log("Picado");
             MineGem();
         }
     }

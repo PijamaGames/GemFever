@@ -47,9 +47,13 @@ public class Player : MonoBehaviour
     float throwGemInput = 0f;
 
     //States
-    [HideInInspector] public bool climbingLadder = false;
-    [HideInInspector] public bool isStunned = false;
-    [HideInInspector] public bool isInvulnerable = false;
+    public bool isOnStair = false;
+    public bool climbingLadder = false;
+    public bool isWalking = false;
+    public bool isInLadder = false;
+    public bool isStunned = false;
+    public bool isInvulnerable = false;
+    public bool fallingOnStairs = false;
 
     //GemPouch
     [SerializeField] MeshRenderer pouchMeshRenderer;
@@ -67,11 +71,18 @@ public class Player : MonoBehaviour
     [HideInInspector]public int playerNumber = 0;
     GameUIManager gameUIManager;
 
+    //Animator
+    [SerializeField] Animator animator;
+    Vector3 groundMeshOrientation = Vector3.zero;
+    [SerializeField] GameObject playerMesh;
+    
     // Start is called before the first frame update
     void Start()
     {
         gameUIManager = FindObjectOfType<GameUIManager>();
-        gameUIManager.ActivatePlayerUI(playerNumber);
+
+        if(!PlayerSpawnerManager.isInHub)
+            gameUIManager.ActivatePlayerUI(playerNumber);
 
         rb = gameObject.GetComponent<Rigidbody>();
 
@@ -83,6 +94,8 @@ public class Player : MonoBehaviour
 
         currentTier = gemPouchTiers[0];
         ChangePouchSize();
+
+        groundMeshOrientation = playerMesh.transform.right;
     }
 
     void Update()
@@ -94,14 +107,49 @@ public class Player : MonoBehaviour
         //Debug.Log(gemPouch.Count);
     }
 
+    #region Input Management Methods
+    public void MovementInput(InputAction.CallbackContext context)
+    {
+        joystick = context.ReadValue<Vector2>();
+        RotatePlayer();
+    }
+
+    public void ThrowGemInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed || !gameObject.scene.IsValid()) return;
+
+        throwGemInput = context.ReadValue<float>();
+
+        if (!gemThrowOnCooldown && throwGemInput == 1 && !climbingLadder)
+        {
+            Gem thrownGem = TryRemoveGemFromPouch();
+
+            if (thrownGem != null)
+            {
+                gemThrowOnCooldown = true;
+                StartCoroutine(GemThrowCooldown());
+
+                StartGemAnimation();
+
+                thrownGem.ThrowGem(transform.forward, throwGemPosition.transform.position, gemThrowForce, this);
+            }
+        }
+    }
+    #endregion
+
     //Movement Update
     void FixedUpdate()
     {
         velocity = new Vector3(0f, rb.velocity.y, 0f);
 
-        if(!isStunned)
+        if (!isStunned)
         {
             velocity = Movement();
+
+            //Idle or Walk
+            isWalking = velocity.x != 0;
+            WalkOrIdleOrClimb();          
+
             rb.AddForce(velocity, ForceMode.VelocityChange);
         }
         else
@@ -131,35 +179,6 @@ public class Player : MonoBehaviour
         knockback = Vector3.zero;
     }
 
-    #region Input Management Methods
-    public void MovementInput(InputAction.CallbackContext context)
-    {
-        joystick = context.ReadValue<Vector2>();
-        RotatePlayer();
-    }
-
-    public void ThrowGemInput(InputAction.CallbackContext context)
-    {
-        if (!context.performed || !gameObject.scene.IsValid()) return;
-
-        throwGemInput = context.ReadValue<float>();
-        Debug.Log("ThrowInput: " + throwGemInput);
-
-        if (!gemThrowOnCooldown && throwGemInput == 1)
-        {
-            Gem thrownGem = TryRemoveGemFromPouch();
-
-            if(thrownGem != null)
-            {
-                gemThrowOnCooldown = true;
-                StartCoroutine(GemThrowCooldown());
-                //Animación de lanzar
-                thrownGem.ThrowGem(transform.forward, throwGemPosition.transform.position, gemThrowForce, this);
-            }
-        }
-    }
-    #endregion
-
     #region Movement Methods
     Vector3 Movement()
     {
@@ -172,16 +191,36 @@ public class Player : MonoBehaviour
         finalMovement.x = horizontalMovement;
 
         //Desactivar gravedad
-        if (climbingLadder)
+        if (isOnStair)
         {
-            rb.useGravity = false;
+            if(animator.GetBool("Idle_Climb") && !animator.GetBool("Climb_MineStair") && !animator.GetBool("Stun"))
+            {
+                if (joystick.y == 0) animator.speed = 0f;
+                else animator.speed = 1f;
+            }
+            else
+                animator.speed = 1f;
 
-            verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
+            if (joystick.y != 0)
+            {
+                rb.useGravity = false;
+                climbingLadder = true;
+                verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
+                //gameObject.layer = LayerMask.NameToLayer("PlayerLadder");
+            }
+
+            if (fallingOnStairs)
+            {
+                rb.useGravity = false;
+            }
+
+            if (climbingLadder)
+                playerMesh.transform.forward = Vector3.forward;
 
             finalMovement.y = verticalMovement;
         }
         else
-            rb.useGravity = true;
+            rb.useGravity = true;        
 
         return finalMovement;
     }
@@ -223,11 +262,13 @@ public class Player : MonoBehaviour
         if (joystick.x < 0f)
         {
             transform.forward = -Vector3.right;
+            groundMeshOrientation = -Vector3.right;
         }
         //Derecha
         else if (joystick.x > 0f)
         {
             transform.forward = Vector3.right;
+            groundMeshOrientation = Vector3.right;
         }
     }
 
@@ -246,14 +287,23 @@ public class Player : MonoBehaviour
     {
         gameObject.layer = LayerMask.NameToLayer("PlayerStunned");
         isStunned = true;
-        knockbackForce = knockbackForce - (knockbackForce * knockBackReductionPerGemInPouch * gemPouch.Count);
-        knockback = knobackDirection * knockbackForce;
+
+        animator.speed = 1f;
+        animator.SetBool("Stun", true);
+        
+
+        if(!climbingLadder)
+        {
+            knockbackForce = knockbackForce - (knockbackForce * knockBackReductionPerGemInPouch * gemPouch.Count);
+            knockback = knobackDirection * knockbackForce;
+        }
     }
 
     IEnumerator StunTime()
     {
         yield return new WaitForSecondsRealtime(stunTime);
         isStunned = false;
+        animator.SetBool("Stun", false);
         CheckPouchFull();
     }
 
@@ -372,14 +422,20 @@ public class Player : MonoBehaviour
     public void AddScore(int score)
     {
         this.score += score;
-        gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+
+        if(!PlayerSpawnerManager.isInHub)
+            gameUIManager.UpdatePlayerUI(playerNumber, this.score);
     }
 
     #region Trigger Methods
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ladder")
-            climbingLadder = true;    
+        {
+            //climbingLadder = true;
+            isOnStair = true;
+            fallingOnStairs = rb.velocity.y < -0.01f;
+        }
 
         if(other.tag == "Minecart")
         {
@@ -410,8 +466,64 @@ public class Player : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "Ladder")
+        {
             climbingLadder = false;
+            isOnStair = false;
+            fallingOnStairs = false;
+            animator.speed = 1f;
+            animator.SetBool("Idle_Climb", false);
+
+            playerMesh.transform.forward = groundMeshOrientation;
+            //CheckPouchFull();
+        }
+            
     }
+    #endregion
+
+    #region Animations
+    private void WalkOrIdleOrClimb()
+    {
+        if(!climbingLadder)
+            animator.SetBool("Idle_Walk", isWalking);
+        else
+            animator.SetBool("Idle_Climb", climbingLadder);
+    }
+
+    public void StartPickaxeAnimation()
+    {
+        //Trepando escalera
+        if(climbingLadder /*&& false*/)
+        {
+            animator.SetBool("Climb_MineStair", true);
+        }
+
+        //Quieto o andando
+        else
+        {
+            animator.SetBool("Idle_Mine", true);
+        }
+    }
+
+    public void EndPickaxeAnimation()
+    {
+        if (animator.GetBool("Climb_MineStair"))
+            animator.SetBool("Climb_MineStair", false);
+
+        if (animator.GetBool("Idle_Mine"))
+            animator.SetBool("Idle_Mine", false);
+    }
+
+    public void StartGemAnimation()
+    {
+        animator.SetBool("Idle_Throw", true);
+    }
+
+    public void EndGemAnimation()
+    {
+        animator.SetBool("Idle_Throw", false);
+    }
+
+
     #endregion
 }
 

@@ -22,6 +22,7 @@ public class SceneLoader : MonoBehaviour
     public const string hubScene = "HUB";
     public const string hubSettingsScene = "HUBSettings";
     public const string lobbyScene = "Lobby";
+    public const string eventViewScene = "EventView";
 
     //public const string gameScene = "GameScene";
 
@@ -41,6 +42,11 @@ public class SceneLoader : MonoBehaviour
     public void LoadMainMenuScene()
     {
         LoadScene(menuScene);
+    }
+
+    public void LoadEventViewScene()
+    {
+        LoadScene(eventViewScene);
     }
 
     public void LoadSingInScene()

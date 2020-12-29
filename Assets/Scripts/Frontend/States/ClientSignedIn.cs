@@ -6,15 +6,28 @@ using System;
 public class ClientSignedIn : ClientState
 {
     private enum FrontendEvents { SignedOut };
-    private enum BackendEvents { SignOut };
+    private enum BackendEvents { SignOut, Save };
 
     public static event Action signedOutEvent;
+
+    public static bool hasEvent = false;
+    public static string spanishMsg = "";
+    public static string englishMsg = "";
 
     override public void Begin()
     {
         base.Begin();
         Debug.Log("Signed in");
-        SceneLoader.instance.LoadMainMenuScene();
+        Debug.Log("HAS EVENT: " + hasEvent);
+        if (hasEvent)
+        {
+            Debug.Log("SPANISH MSG EVENT: " + spanishMsg);
+            Debug.Log("ENGLISH MSG EVENT: " + englishMsg);
+            SceneLoader.instance.LoadEventViewScene();
+        } else
+        {
+            SceneLoader.instance.LoadMainMenuScene();
+        }
         GameManager.instance.SavePreferences();
     }
 
@@ -36,7 +49,20 @@ public class ClientSignedIn : ClientState
                 signedOutEvent.Invoke();
                 break;
         }
+    }
 
+    public static void SaveInfo()
+    {
+        BackendEvents evt = BackendEvents.Save;
+        var pairs = new KeyValuePair<string, object>[]
+        {
+            new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
+            new KeyValuePair<string, object>("user", JsonUtility.ToJson(Client.user)),
+        };
+        string msg = UsefulFuncs.CombineJsons(pairs);
+
+        if (Client.instance != null && Client.instance.socket != null)
+            Client.instance.socket.SendMessage(msg);
     }
 
     public static void TrySignOut()

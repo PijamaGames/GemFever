@@ -8,23 +8,20 @@ public class Pickaxe : MonoBehaviour
     [SerializeField] Player playerOwner;
     [Space]
 
-    BoxCollider boxCollider;
-    Animator animator;
+    BoxCollider [] boxColliders;
 
     [SerializeField] float hitCooldown = 0.5f;
     [SerializeField] float knockbackForce = 50f;
     [SerializeField] float gemParryForce = 50f;
 
-    bool hitOnCooldown = false;
+    public bool hitOnCooldown = false;
     float pickaxeInput = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
-        boxCollider.enabled = false;
-
-        animator = GetComponent<Animator>();
+        boxColliders = GetComponents<BoxCollider>();
+        EnableCollisions(false);
     }
 
     public void PickaxeInput(InputAction.CallbackContext context)
@@ -32,54 +29,43 @@ public class Pickaxe : MonoBehaviour
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         pickaxeInput = context.ReadValue<float>();
-        Debug.Log("Pickaxe input: " + pickaxeInput);
 
         if(!hitOnCooldown && pickaxeInput == 1)
         {
             hitOnCooldown = true;
-            PickaxeHitAnimation();
-        }
-    }
 
-    void PickaxeHitAnimation()
-    {
-        //Ejecutar animación de Hit
-        //Esa animación llama en los frames deseados a Start y End Hit
-        
-        animator.SetBool("Hit", true);
+            playerOwner.StartPickaxeAnimation();
+            StartCoroutine(HitCooldown());
+        }
     }
 
     public void StartPickaxeHit()
     {
-        animator.SetBool("Hit", false);
-        boxCollider.enabled = true;
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
+        EnableCollisions(true);
+        //gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
     }
 
     public void EndPickaxeHit()
     {
-        boxCollider.enabled = false;
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+        EnableCollisions(false);
+        //gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
 
-        StartCoroutine(HitCooldown());
+        //hitOnCooldown = false;
+
+        //terminar animación
+        playerOwner.EndPickaxeAnimation();
+    }
+
+    private void EnableCollisions(bool enabled)
+    {
+        foreach (BoxCollider boxCollider in boxColliders)
+            boxCollider.enabled = enabled;
     }
 
     IEnumerator HitCooldown()
     {
         yield return new WaitForSecondsRealtime(hitCooldown);
         hitOnCooldown = false;
-        animator.ResetTrigger("Hit");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void FixedUpdate()
-    {
-        
     }
 
     private void OnTriggerEnter(Collider other)

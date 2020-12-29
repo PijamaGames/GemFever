@@ -11,12 +11,17 @@ public class ClientSignedUp : ClientState
     {
         base.Begin();
         Debug.Log("Signed up");
-        SceneLoader.instance.LoadCustomizeAvatarScene();
+        //SceneLoader.instance.LoadCustomizeAvatarScene();
+        SceneLoader.instance.LoadHowToPlayScene();
     }
 
     private class MsgStructure
     {
         public int evt;
+        public string user;
+        public bool hasEvent;
+        public string spanishMsg;
+        public string englishMsg;
     }
 
     public override void HandleMessage(ref string msg)
@@ -25,9 +30,14 @@ public class ClientSignedUp : ClientState
         var data = JsonUtility.FromJson<MsgStructure>(msg);
         FrontendEvents evt = (FrontendEvents)data.evt;
         Debug.Log("EVENT: " + data.evt);
+        User user = JsonUtility.FromJson<User>(data.user);
         switch (evt)
         {
             case FrontendEvents.SignedIn:
+                Client.user = user;
+                ClientSignedIn.hasEvent = data.hasEvent;
+                ClientSignedIn.spanishMsg = data.spanishMsg;
+                ClientSignedIn.englishMsg = data.englishMsg;
                 Client.SetState(Client.signedInState);
                 break;
         }
