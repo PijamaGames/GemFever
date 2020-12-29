@@ -333,11 +333,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICamera
       objectReference: {fileID: 0}
-    - target: {fileID: 3549392144459160291, guid: 31ad5462450978f488d719207558fded,
-        type: 3}
-      propertyPath: field of view
-      value: 83
-      objectReference: {fileID: 0}
     - target: {fileID: 3549392144459160316, guid: 31ad5462450978f488d719207558fded,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -393,41 +388,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3549392144459160317, guid: 31ad5462450978f488d719207558fded,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3549392144459160317, guid: 31ad5462450978f488d719207558fded,
-        type: 3}
-      propertyPath: m_RenderShadows
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31ad5462450978f488d719207558fded, type: 3}
---- !u!1 &385237066 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3549392144459160289, guid: 31ad5462450978f488d719207558fded,
-    type: 3}
-  m_PrefabInstance: {fileID: 385237065}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &385237067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385237066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 661dd5daeb5eab44d9f547a039674a57, type: 2}
 --- !u!1 &636397734
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &672564442
 Transform:
   m_ObjectHideFlags: 0
