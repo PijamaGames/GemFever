@@ -2500,11 +2500,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2424873281686467804, guid: 2295a096f619d5c428ddea6cb6c61ff5,
-        type: 3}
-      propertyPath: orthographic size
-      value: 5.865
-      objectReference: {fileID: 0}
     - target: {fileID: 2424873281686467806, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
       propertyPath: m_Name
@@ -2512,26 +2507,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2295a096f619d5c428ddea6cb6c61ff5, type: 3}
---- !u!1 &1917160629 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2424873281686467806, guid: 2295a096f619d5c428ddea6cb6c61ff5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1917160628}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1917160630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917160629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbe5c39cf96e183448a5dd94a8a43156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSize: 3.91
-  aspect: 2
 --- !u!1 &2051993448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,7 +2583,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

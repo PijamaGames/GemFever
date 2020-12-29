@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] float defaultSize = 3.91f;
     [SerializeField] float aspect = 2f;
     private Camera cam;
-    Vector3 cameraPos;
     float defaultWidth;
     float lastAspect;
 
