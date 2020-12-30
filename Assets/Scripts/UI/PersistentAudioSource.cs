@@ -5,7 +5,7 @@ using UnityEngine;
 public class PersistentAudioSource : MonoBehaviour
 {
 
-    private const int poolSize = 10;
+    private const int poolSize = 20;
     private static AudioSource[] audioSources = new AudioSource[poolSize];
     private static Stack<AudioSource> avaibleAudioSources = new Stack<AudioSource>();
     private static HashSet<AudioSource> inUseAudioSources = new HashSet<AudioSource>();
