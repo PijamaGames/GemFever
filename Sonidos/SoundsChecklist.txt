@@ -1,0 +1,13 @@
+GemHitMap => Choque de gemas pared
+GemHitGem => GemHitGem
+GemHitPlayer => GemHitPlayer
+GemPickup => Coger gema
+ChargedGemHit => Lanzar_gema
+WalkSound => Andar
+LadderSound=> Hacer
+MineSound=> Minar
+ParrySound=> Parry
+PickaxeSwing=> Hacer
+PickaxeHitPlayer => Hacer
+PlayerIntoMinecraft =>Hacer
+GemIntoMinecradft => Hacer
