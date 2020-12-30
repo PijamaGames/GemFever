@@ -75,11 +75,18 @@ public class Player : MonoBehaviour
     [SerializeField] Animator animator;
     Vector3 groundMeshOrientation = Vector3.zero;
     [SerializeField] GameObject playerMesh;
+
+    //Sound
+    AudioSource audioSource;
+    [SerializeField] AudioClip walkSound;
+    [SerializeField] AudioClip ladderSound;
     
     // Start is called before the first frame update
     void Start()
     {
         gameUIManager = FindObjectOfType<GameUIManager>();
+
+        audioSource = GetComponent<AudioSource>();
 
         if(!PlayerSpawnerManager.isInHub)
             gameUIManager.ActivatePlayerUI(playerNumber);
@@ -463,6 +470,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void PlaySound(AudioClip clip)
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = clip;
+            audioSource.PlayOneShot(clip);
+        }
+    }
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "Ladder")
@@ -483,10 +498,16 @@ public class Player : MonoBehaviour
     #region Animations
     private void WalkOrIdleOrClimb()
     {
-        if(!climbingLadder)
+        if (!climbingLadder)
+        {
+            PlaySound(walkSound);
             animator.SetBool("Idle_Walk", isWalking);
+        }
         else
+        {
+            PlaySound(ladderSound);
             animator.SetBool("Idle_Climb", climbingLadder);
+        }
     }
 
     public void StartPickaxeAnimation()

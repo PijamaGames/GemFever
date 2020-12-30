@@ -16,9 +16,14 @@ public class Ore : MonoBehaviour
 
     public GameObject gemPrefab;
 
+    //Sound
+    AudioSource audioSource;
+    [SerializeField] AudioClip mineSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         gemsLeft = availableGems;
     }
 
@@ -69,10 +74,20 @@ public class Ore : MonoBehaviour
         }
     }
 
+    private void PlaySound(AudioClip clip)
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = clip;
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(!regrowing && other.tag == "Pickaxe")
         {
+            PlaySound(mineSound);
             MineGem();
         }
     }

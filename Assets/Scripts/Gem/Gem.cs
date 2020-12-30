@@ -26,9 +26,18 @@ public class Gem : MonoBehaviour
     Vector3 playerForward;
     public Player playerOwner = null;
 
+    //Sound
+    AudioSource audioSource;
+    [SerializeField] AudioClip gemPickup;
+    [SerializeField] AudioClip gemHitPlayer;
+    [SerializeField] AudioClip gemHitGem;
+    [SerializeField] AudioClip gemHitMap;
+    [SerializeField] AudioClip chargedGemHit;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         currentTier = tiers[0];
         SpawnnForce();
     }
@@ -46,6 +55,15 @@ public class Gem : MonoBehaviour
     public void DropForce(Vector3 dropDirection, float dropForce)
     {
         rb.AddForce(dropDirection * dropForce, ForceMode.Impulse);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = clip;
+            audioSource.PlayOneShot(clip);
+        }
     }
 
     public IEnumerator IgnoreCollisionsForSomeTime(Collider toIgnore, float timeToIgnore)
@@ -125,6 +143,8 @@ public class Gem : MonoBehaviour
             Player player = collision.gameObject.GetComponent<Player>();
             if (player.isStunned) return;
 
+            PlaySound(gemPickup);
+
             if (player.TryAddGemToPouch(this))
                 gameObject.SetActive(false);
         }
@@ -143,11 +163,21 @@ public class Gem : MonoBehaviour
 
                 playerHit.Knockback(playerForward, knockbackForce);
                 playerHit.DropGem(-this.transform.forward);
+
+                PlaySound(chargedGemHit);
+            }
+
+            //Pared/Suelo
+            else if (collision.gameObject.tag == "Map" || collision.gameObject.tag == "Floor")
+            {
+                StopThrowing();
+                PlaySound(gemHitMap);
+
+                isFalling = true;
             }
         }
 
         //Todo esto si la gema no está cargada
-        //Meterse al minecart
         else if (isBeingThrown)
         {
             //Si es otro jugador se para y lo aturde
@@ -157,6 +187,8 @@ public class Gem : MonoBehaviour
                 StopThrowing();
 
                 collision.gameObject.GetComponent<Player>().Knockback(playerForward, knockbackForce);
+
+                PlaySound(gemHitPlayer);
             }
 
             //Choque con otra gema en el aire
@@ -166,12 +198,14 @@ public class Gem : MonoBehaviour
                 {
                     StopThrowing();
                     collision.gameObject.GetComponent<Gem>().StopThrowing();
+                    PlaySound(gemHitGem);
                 }
             }
 
             //Pared/Suelo
             else if (collision.gameObject.tag == "Map" || collision.gameObject.tag == "Floor")
             {
+                PlaySound(gemHitMap);
                 StopThrowing();
                 isFalling = true;
             }
@@ -183,6 +217,7 @@ public class Gem : MonoBehaviour
             if(collision.gameObject.tag == "Map")
             {
                 rb.velocity = Vector3.zero;
+                PlaySound(gemHitMap);
                 isFalling = false;
             }
 
@@ -190,6 +225,8 @@ public class Gem : MonoBehaviour
             else if(collision.gameObject.tag == "Player")
             {
                 collision.gameObject.GetComponent<Player>().Knockback(Vector3.zero, 0f);
+
+                PlaySound(gemHitPlayer);
 
                 rb.velocity = Vector3.zero;
                 isFalling = false;
@@ -215,11 +252,16 @@ public class Gem : MonoBehaviour
 
             if (playerBack.TryAddGemToPouch(this))
             {
+                PlaySound(gemPickup);
                 StopThrowing();
                 gameObject.SetActive(false);
             }
             else
+            {
+                PlaySound(gemHitPlayer);
                 playerBack.Knockback(playerForward, knockbackForce);
+            }
+                
         }
     }
 

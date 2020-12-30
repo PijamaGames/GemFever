@@ -17,10 +17,17 @@ public class Pickaxe : MonoBehaviour
     public bool hitOnCooldown = false;
     float pickaxeInput = 0f;
 
+    //Sound
+    AudioSource audioSource;
+    [SerializeField] AudioClip pickaxeSwing;
+    [SerializeField] AudioClip pickaxeHitPlayer;
+    [SerializeField] AudioClip parrySound;
+
     // Start is called before the first frame update
     void Start()
     {
         boxColliders = GetComponents<BoxCollider>();
+        audioSource = GetComponent<AudioSource>();
         EnableCollisions(false);
     }
 
@@ -33,6 +40,8 @@ public class Pickaxe : MonoBehaviour
         if(!hitOnCooldown && pickaxeInput == 1)
         {
             hitOnCooldown = true;
+
+            PlaySound(pickaxeSwing);
 
             playerOwner.StartPickaxeAnimation();
             StartCoroutine(HitCooldown());
@@ -68,6 +77,15 @@ public class Pickaxe : MonoBehaviour
         hitOnCooldown = false;
     }
 
+    private void PlaySound(AudioClip clip)
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = clip;
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -75,6 +93,8 @@ public class Pickaxe : MonoBehaviour
             Player playerHit = other.GetComponent<Player>();
 
             if (playerHit == playerOwner || playerHit.isInvulnerable) return;
+
+            PlaySound(pickaxeHitPlayer);
 
             //Aplicar la fuerza hacia right si estás trepando una escalera
             playerHit.Knockback(playerOwner.transform.forward, knockbackForce);
@@ -86,7 +106,7 @@ public class Pickaxe : MonoBehaviour
             Gem gem = other.GetComponent<Gem>();
             if(gem.isBeingThrown || gem.isFalling)
             {
-                Debug.Log("Parry");
+                PlaySound(parrySound);
                 gem.isCharged = true;
                 gem.ParryGem(playerOwner.transform.forward, gemParryForce, playerOwner);
             }
