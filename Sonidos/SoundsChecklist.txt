@@ -1,5 +1,5 @@
 GemHitMap => Choque de gemas pared
-GemHitGem => Hacer
+GemHitGem => GemHitGem
 GemHitPlayer => Hacer
 GemPickup => Coger gema
 ChargedGemHit => Hacer
