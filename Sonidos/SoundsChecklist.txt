@@ -1,8 +1,8 @@
 GemHitMap => Choque de gemas pared
 GemHitGem => GemHitGem
-GemHitPlayer => Hacer
+GemHitPlayer => GemHitPlayer
 GemPickup => Coger gema
-ChargedGemHit => Hacer
+ChargedGemHit => Lanzar_gema
 WalkSound => Andar
 LadderSound=> Hacer
 MineSound=> Minar
