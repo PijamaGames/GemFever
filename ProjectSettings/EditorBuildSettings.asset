@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/UI/Connection.unity
-    guid: db5939413f1cb494d8b3041193f43c31
+    guid: 80e530ef4a565ae49b5370b8d8c8bb67
   - enabled: 1
     path: Assets/Scenes/UI/SignIn.unity
     guid: 3c3ae6c96db1bd941bcc8318e065b42d
@@ -21,14 +21,17 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/MainMenu.unity
     guid: 7395eabef9d224846a856585abe1fbf9
   - enabled: 1
+    path: Assets/Scenes/UI/Credits.unity
+    guid: 6cea1661e15a08f4c82a8c5f0a954014
+  - enabled: 1
+    path: Assets/Scenes/UI/EventView.unity
+    guid: 707c0c8e701877d4ba07569a0d1f8fe5
+  - enabled: 1
     path: Assets/Scenes/UI/Unused/CustomizeAvatar.unity
     guid: c224b7b7fd0636e43945bec3baa6a937
   - enabled: 1
     path: Assets/Scenes/UI/Settings.unity
     guid: 516b712b1b572904d9b8f28e753323f7
-  - enabled: 1
-    path: Assets/Scenes/UI/Credits.unity
-    guid: 09b76b96f549c3f439757e1067ead43d
   - enabled: 1
     path: Assets/Scenes/UI/HowToPlay.unity
     guid: 91ea610706b12b0489840b666bd89fac
@@ -59,9 +62,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/Unused/Lobby.unity
     guid: 75bddbc7a391bd24b9621af74da16ab9
-  - enabled: 1
-    path: Assets/Scenes/UI/EventView.unity
-    guid: f3c4e505efd2a5c4ca9cf0c8d5bd8937
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4c94ed76f44eb094484a7c51e29cc47a,
       type: 2}
