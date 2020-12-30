@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spanishText: 
-  englishText: Settings
+  englishText: Ranking
 --- !u!114 &680259391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,7 +878,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2884888736238635860}
-        m_MethodName: LoadHubScene
+        m_MethodName: LoadMainMenuScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -887,17 +887,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2884888736238635861}
-        m_MethodName: SetIsLocalGame
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1839793100
 MonoBehaviour:
@@ -963,7 +952,7 @@ GameObject:
   - component: {fileID: 1868141286}
   - component: {fileID: 1868141289}
   m_Layer: 5
-  m_Name: Online
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1046,19 +1035,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2884888736238635860}
-        m_MethodName: LoadLobbyScene
+        m_MethodName: LoadHubScene
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2884888736238635861}
-        m_MethodName: SetIsLocalGame
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1521,18 +1499,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 328257ff616dbe54ba2601ea9322c998, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2884888736238635861 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2884888735722536221, guid: 7eec1e99c5b42db46880c9b102809f6b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2884888736238635859}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5beb9f4bd8c81e94ab1080501527455a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5483733920953273000
