@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject playerMesh;
 
     //Sound
-    AudioSource audioSource;
+    PersistentAudioSource audioSource;
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip ladderSound;
     
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
     {
         gameUIManager = FindObjectOfType<GameUIManager>();
 
-        audioSource = GetComponent<AudioSource>();
+        audioSource = FindObjectOfType<PersistentAudioSource>();
 
         if(!PlayerSpawnerManager.isInHub)
             gameUIManager.ActivatePlayerUI(playerNumber);
@@ -472,11 +472,7 @@ public class Player : MonoBehaviour
 
     private void PlaySound(AudioClip clip)
     {
-        if (!audioSource.isPlaying)
-        {
-            audioSource.clip = clip;
-            audioSource.PlayOneShot(clip);
-        }
+        audioSource.PlayEffect(clip);
     }
     void OnTriggerExit(Collider other)
     {

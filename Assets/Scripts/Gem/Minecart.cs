@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class Minecart : MonoBehaviour
 {
-    AudioSource audioSource;
+    PersistentAudioSource audioSource;
     [SerializeField] AudioClip gemIntoMinecart;
     [SerializeField] AudioClip playerIntoMinecart;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = FindObjectOfType<PersistentAudioSource>();
     }
 
     private void PlaySound(AudioClip clip)
     {
-        if(!audioSource.isPlaying)
-        {
-            audioSource.clip = clip;
-            audioSource.PlayOneShot(clip);
-        }
+        audioSource.PlayEffect(clip);
     }
 
     private void OnTriggerEnter(Collider other)
