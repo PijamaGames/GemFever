@@ -198,10 +198,13 @@ public class Websocket : MonoBehaviour
         if (!Application.isPlaying) return;
         Debug.Log("[SOCKET] Opened");
         connected = true;
+        Debug.Log("[SOCKET] 1");
         OnOpenEvent.Invoke();
+        Debug.Log("[SOCKET] 2");
         onOpenCallback?.Invoke();
-        //StopCoroutine("KeepAliveCoroutine");
+        Debug.Log("[SOCKET] 3");
         StartCoroutine(KeepAliveCoroutine());
+        Debug.Log("[SOCKET] 4");
     }
 
     void Close()
@@ -231,7 +234,7 @@ public class Websocket : MonoBehaviour
 
     IEnumerator KeepAliveCoroutine()
     {
-        while(socket.State == WebSocketState.Open)
+        while(connected)
         {
             SendMessage("{\"evt\":\"-1\"}");
             yield return new WaitForSeconds(keepAliveInterval);
