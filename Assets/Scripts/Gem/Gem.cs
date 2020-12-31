@@ -27,7 +27,7 @@ public class Gem : MonoBehaviour
     public Player playerOwner = null;
 
     //Sound
-    AudioSource audioSource;
+    PersistentAudioSource audioSource;
     [SerializeField] AudioClip gemPickup;
     [SerializeField] AudioClip gemHitPlayer;
     [SerializeField] AudioClip gemHitGem;
@@ -37,7 +37,7 @@ public class Gem : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = FindObjectOfType<PersistentAudioSource>();
         currentTier = tiers[0];
         SpawnnForce();
     }
@@ -59,11 +59,7 @@ public class Gem : MonoBehaviour
 
     private void PlaySound(AudioClip clip)
     {
-        if (!audioSource.isPlaying)
-        {
-            audioSource.clip = clip;
-            audioSource.PlayOneShot(clip);
-        }
+        audioSource.PlayEffect(clip);
     }
 
     public IEnumerator IgnoreCollisionsForSomeTime(Collider toIgnore, float timeToIgnore)

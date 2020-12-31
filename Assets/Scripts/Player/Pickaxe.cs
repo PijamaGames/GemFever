@@ -18,7 +18,7 @@ public class Pickaxe : MonoBehaviour
     float pickaxeInput = 0f;
 
     //Sound
-    AudioSource audioSource;
+    PersistentAudioSource audioSource;
     [SerializeField] AudioClip pickaxeSwing;
     [SerializeField] AudioClip pickaxeHitPlayer;
     [SerializeField] AudioClip parrySound;
@@ -27,7 +27,7 @@ public class Pickaxe : MonoBehaviour
     void Start()
     {
         boxColliders = GetComponents<BoxCollider>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = FindObjectOfType<PersistentAudioSource>();
         EnableCollisions(false);
     }
 
@@ -79,11 +79,7 @@ public class Pickaxe : MonoBehaviour
 
     private void PlaySound(AudioClip clip)
     {
-        if (!audioSource.isPlaying)
-        {
-            audioSource.clip = clip;
-            audioSource.PlayOneShot(clip);
-        }
+        audioSource.PlayEffect(clip);
     }
 
     private void OnTriggerEnter(Collider other)
