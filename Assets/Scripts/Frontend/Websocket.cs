@@ -198,13 +198,9 @@ public class Websocket : MonoBehaviour
         if (!Application.isPlaying) return;
         Debug.Log("[SOCKET] Opened");
         connected = true;
-        Debug.Log("[SOCKET] 1");
         OnOpenEvent.Invoke();
-        Debug.Log("[SOCKET] 2");
         onOpenCallback?.Invoke();
-        Debug.Log("[SOCKET] 3");
         StartCoroutine(KeepAliveCoroutine());
-        Debug.Log("[SOCKET] 4");
     }
 
     void Close()
