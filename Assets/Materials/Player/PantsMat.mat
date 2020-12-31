@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PickaxeStickMat
+  m_Name: PantsMat
   m_Shader: {fileID: -6465566751694194690, guid: dabe61ede20c2e747a5a33ad934ae139,
     type: 3}
   m_ShaderKeywords: 
@@ -34,7 +34,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_E0F6099E:
-        m_Texture: {fileID: 2800000, guid: 6a41cc7c11095b04fa86c56a1fd3db5e, type: 3}
+        m_Texture: {fileID: 2800000, guid: d6276265f6442f04d939913c8e3b0e21, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:

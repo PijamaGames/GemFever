@@ -6,14 +6,13 @@ mergeInto(LibraryManager.library, {
     return buffer;
   },
   IsHandheld: function(){
-    return true;
-    /*var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
     if (/android/i.test(userAgent) || (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream)) {
       console.log('Movile platform');
       return true;
     } else {
       console.log('Desktop platform');
       return false;
-    }*/
+    }
   }
 });
