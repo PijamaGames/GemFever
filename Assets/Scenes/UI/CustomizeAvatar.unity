@@ -1114,6 +1114,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: NextScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &991646874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3804,7 +3815,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3505737760085970242}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1472752379196349944
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5582,7 +5604,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8388497001527286677}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &2781213391816819796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6127,7 +6160,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1475022835021802965}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedSkin
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3256515638681190702
 GameObject:
   m_ObjectHideFlags: 0
@@ -6737,7 +6781,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6943010257216449712}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedSkin
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3771840494127252145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8871,7 +8926,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4422818504542234778}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5389140684490517463
 GameObject:
   m_ObjectHideFlags: 0
@@ -9597,7 +9663,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4246499050306031774}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedSkin
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &6045028741119511448
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9712,7 +9789,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2227057578652110887}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedSkin
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6141452353992677663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10628,7 +10716,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4495217194193734260}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &6738461417094148164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11062,7 +11161,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2998325848965926405}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedSkin
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &7125975563751762582
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11329,7 +11439,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6960869350784776813}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7543760091500271088
 GameObject:
   m_ObjectHideFlags: 0
@@ -12008,7 +12129,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6017268730227213879}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162954924718062967}
+        m_MethodName: SetSelectedColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8324051396211286689
 MonoBehaviour:
   m_ObjectHideFlags: 0
