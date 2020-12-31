@@ -15,7 +15,6 @@ public class CustomizeAvatarController : MonoBehaviour
     public static Color[] skinColors={ new Color(1f, 0.8789797f, 0.5707547f), new Color(255/255f,216/255f,177/255f), new Color(170/255f,127/255f,82/255f),new Color(125/255f,83/255f,42/255f), new Color(75/255f,44/255f,13/255f)};
     public static Color[] favColors={Color.black, Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta};
 
-
     private void Start()
     {
         skins = skinParent.GetComponentsInChildren<Image>();
