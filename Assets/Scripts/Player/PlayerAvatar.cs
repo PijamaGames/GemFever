@@ -22,6 +22,7 @@ public class PlayerAvatar : MonoBehaviour
 
     private void Start()
     {
+
         skinMat = Instantiate(skinRenderer.sharedMaterial);
         skinRenderer.sharedMaterial = skinMat;
 
@@ -40,7 +41,8 @@ public class PlayerAvatar : MonoBehaviour
 
     public void UpdateVisuals(User user)
     {
-        
+        skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[user.avatar_skinTone]);
     }
+
 
 }
