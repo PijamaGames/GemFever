@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
     {
         if(Client.user != null)
         {
-            welcomeText.spanishText = "¡Bienvenido " + Client.user.id + "!";
+            welcomeText.spanishText = "¡Bienvenido/a " + Client.user.id + "!";
             welcomeText.englishText = "Welcome " + Client.user.id + "!";
             welcomeText.UpdateLanguage();
         }

@@ -20,7 +20,7 @@ public class PlayerAvatar : MonoBehaviour
     [HideInInspector] Material faceMat;
     [SerializeField] Renderer faceRenderer;
 
-    private void Start()
+    private void Awake()
     {
 
         skinMat = Instantiate(skinRenderer.sharedMaterial);
@@ -38,7 +38,6 @@ public class PlayerAvatar : MonoBehaviour
         faceMat = Instantiate(faceRenderer.sharedMaterial);
         faceRenderer.sharedMaterial = faceMat;
 
-        UpdateVisuals(Client.user);
     }
 
     public void UpdateVisuals(User user)

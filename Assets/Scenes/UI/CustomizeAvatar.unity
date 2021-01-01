@@ -1092,7 +1092,7 @@ PrefabInstance:
     - target: {fileID: 1333670681700085073, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085074, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
@@ -2845,6 +2845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b577c5d5ce96b4a9c23b1186f489fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAvatar: {fileID: 7436886741183914778}
   skinParent: {fileID: 1229882836627742468}
   colorParent: {fileID: 2340050793090868734}
 --- !u!224 &171545092544194197
