@@ -40,11 +40,14 @@ public class CustomizeAvatarController : MonoBehaviour
     public void SetSelectedColor(int id)
     {
         Client.user.avatar_color = id;
+        playerAvatar.UpdateVisuals(Client.user);
     }
 
     public void NextScene()
     {
         ClientSignedIn.SaveInfo();
     }
+
+
 
 }
