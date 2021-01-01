@@ -45,8 +45,11 @@ public class ClientSignedIn : ClientState
         switch (evt)
         {
             case FrontendEvents.SignedOut:
+                Debug.Log(00);
                 Client.SetState(Client.connectedState);
-                signedOutEvent.Invoke();
+                Debug.Log(10);
+                signedOutEvent?.Invoke();
+                Debug.Log(20);
                 break;
         }
     }

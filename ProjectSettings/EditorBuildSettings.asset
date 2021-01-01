@@ -29,9 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI/Victory.unity
     guid: e323704e98415bf4db4e15a7df98714d
-  - enabled: 1
-    path: Assets/Scenes/UI/CustomizeAvatar.unity
-    guid: c224b7b7fd0636e43945bec3baa6a937
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/UI/Unused/Profile.unity
     guid: 60b6a744af0a5a548a7aa99cd48501ad
