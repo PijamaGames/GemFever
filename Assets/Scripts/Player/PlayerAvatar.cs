@@ -22,6 +22,7 @@ public class PlayerAvatar : MonoBehaviour
 
     private void Start()
     {
+
         skinMat = Instantiate(skinRenderer.sharedMaterial);
         skinRenderer.sharedMaterial = skinMat;
 
@@ -36,11 +37,18 @@ public class PlayerAvatar : MonoBehaviour
 
         faceMat = Instantiate(faceRenderer.sharedMaterial);
         faceRenderer.sharedMaterial = faceMat;
+
+        UpdateVisuals(Client.user);
     }
 
     public void UpdateVisuals(User user)
     {
-        
+        skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[user.avatar_skinTone]);
+        pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
+        shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
+        hatMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
     }
+
+
 
 }

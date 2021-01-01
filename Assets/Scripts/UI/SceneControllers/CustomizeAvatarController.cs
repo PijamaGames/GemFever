@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CustomizeAvatarController : MonoBehaviour
 {
-
+    [SerializeField] private PlayerAvatar playerAvatar;
     [SerializeField] GameObject skinParent;
     [SerializeField] GameObject colorParent;
     private Image[] skins;
@@ -34,16 +34,20 @@ public class CustomizeAvatarController : MonoBehaviour
     public void SetSelectedSkin(int id)
     {
         Client.user.avatar_skinTone = id;
+        playerAvatar.UpdateVisuals(Client.user);
     }
 
     public void SetSelectedColor(int id)
     {
         Client.user.avatar_color = id;
+        playerAvatar.UpdateVisuals(Client.user);
     }
 
     public void NextScene()
     {
         ClientSignedIn.SaveInfo();
     }
+
+
 
 }
