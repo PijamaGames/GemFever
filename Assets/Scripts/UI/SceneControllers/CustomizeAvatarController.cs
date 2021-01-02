@@ -31,8 +31,9 @@ public class CustomizeAvatarController : MonoBehaviour
     public static bool body1Selected;
 
     private Image[] faces;
+    public static int numBodies=2;
 
-    public static Texture faceTexture;
+    public static int faceTexture=0;
 
     private void Start()
     {
@@ -87,8 +88,10 @@ public class CustomizeAvatarController : MonoBehaviour
     {
         int randomColor= rnd.Next(favColors.Length);
         int randomSkin= rnd.Next(skinColors.Length);
-        int randomBody= rnd.Next(3);
+        int randomBody= rnd.Next(numBodies);
+        int randomFace= rnd.Next(FaceTextures.facesTextures.Length);
 
+        SetFace(randomFace);
         ChangeBody(randomBody==1);
         SetSelectedColor(randomColor);
         SetSelectedSkin(randomSkin);
@@ -96,6 +99,7 @@ public class CustomizeAvatarController : MonoBehaviour
 
     public void ChangeBody(bool body1)
     {
+        Client.user.avatar_bodyType = body1 ? 1 : 2;
         body1Selected = body1;
 
         shirt = body1 ? shirt1 : shirt2;
@@ -106,9 +110,10 @@ public class CustomizeAvatarController : MonoBehaviour
         playerAvatar.UpdateVisuals();
     }
 
-    public void SetFace(Texture text)
+    public void SetFace(int id)
     {
-        faceTexture=text;
+        Client.user.avatar_face = id;
+        faceTexture=id;
         playerAvatar.UpdateVisuals();
     }
 

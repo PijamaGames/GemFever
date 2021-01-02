@@ -27,6 +27,7 @@ public class PlayerAvatar : MonoBehaviour
 
     private int randomColor;
     private int randomSkin;
+    private int randomFace;
 
     private void Awake()
     {
@@ -61,32 +62,34 @@ public class PlayerAvatar : MonoBehaviour
     {
         randomColor = rnd.Next(CustomizeAvatarController.favColors.Length);
         randomSkin = rnd.Next(CustomizeAvatarController.skinColors.Length);
+        randomFace= rnd.Next(FaceTextures.facesTextures.Length);
     }
 
     public void UpdateVisuals()
     {
         int skinId;
         int colorId;
+        int faceId;
 
         if (user == null)
         {
             Random();
             skinId = randomSkin;
             colorId = randomColor;
+            faceId = randomFace;
         }
         else
         {
             skinId = user.avatar_skinTone;
             colorId = user.avatar_color;
+            faceId = user.avatar_face;
         }
 
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
         pantsRenderer.sharedMesh = CustomizeAvatarController.pants;
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
 
-        faceMat.SetTexture("_BaseMap", CustomizeAvatarController.faceTexture);
-        //faceMat.mainTexture = CustomizeAvatarController.faceTexture;
-        //faceMat.SetTexture("Texture2D_E0F6099E", CustomizeAvatarController.faceTexture);
+        faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);
         skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[skinId]);
         pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
         shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
