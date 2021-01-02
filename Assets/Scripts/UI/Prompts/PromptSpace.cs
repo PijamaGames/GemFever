@@ -8,7 +8,8 @@ using UnityEngine.Events;
 public class PromptSpace : MonoBehaviour
 {
     [SerializeField] UnityEvent onPressed;
-    [SerializeField] string text;
+    [SerializeField] string spanishText;
+    [SerializeField] string englishText;
     [SerializeField] Sprite sprite;
     HashSet<Prompt> promptTargets = new HashSet<Prompt>();
 
@@ -26,7 +27,10 @@ public class PromptSpace : MonoBehaviour
                     btn.onClick.RemoveAllListeners();
                     btn.onClick.AddListener(() => onPressed.Invoke());
                     prompt.SetButton(btn);
-                    prompt.btn.GetComponentInChildren<TextMeshProUGUI>().text = text;
+                    Bilingual b = prompt.btn.GetComponentInChildren<Bilingual>();
+                    b.spanishText = spanishText;
+                    b.englishText = englishText;
+                    b.UpdateLanguage();
                     Image img = prompt.btn.GetComponentsInChildren<Image>()[1];
                     img.enabled = sprite != null;
                     img.sprite = sprite;

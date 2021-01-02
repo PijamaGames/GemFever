@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAvatar : MonoBehaviour
 {
+    User user;
 
     [HideInInspector] Material skinMat;
     [SerializeField] Renderer skinRenderer;
@@ -40,8 +41,14 @@ public class PlayerAvatar : MonoBehaviour
 
     }
 
-    public void UpdateVisuals(User user)
+    public void SetUser(User user)
     {
+        this.user = user;
+    }
+
+    public void UpdateVisuals()
+    {
+        if (user == null) return;
         skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[user.avatar_skinTone]);
         pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
         shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
