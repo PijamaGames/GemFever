@@ -54,7 +54,4 @@ public class PlayerAvatar : MonoBehaviour
         shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
         hatMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
     }
-
-
-
 }

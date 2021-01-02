@@ -32,19 +32,19 @@ public class CustomizeAvatarController : MonoBehaviour
             colors[i].color = favColors[i];
         }
 
-
+        playerAvatar.SetUser(Client.user);
     }
 
     public void SetSelectedSkin(int id)
     {
         Client.user.avatar_skinTone = id;
-        playerAvatar.UpdateVisuals(Client.user);
+        playerAvatar.UpdateVisuals();
     }
 
     public void SetSelectedColor(int id)
     {
         Client.user.avatar_color = id;
-        playerAvatar.UpdateVisuals(Client.user);
+        playerAvatar.UpdateVisuals();
     }
 
     public void NextScene()
