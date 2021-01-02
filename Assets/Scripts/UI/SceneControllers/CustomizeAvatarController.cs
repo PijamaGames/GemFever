@@ -17,13 +17,10 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] private Mesh pants2;
     [SerializeField] private Mesh shirt1;
     [SerializeField] private Mesh shirt2;
-    [SerializeField] private Mesh scarf1;
-    [SerializeField] private Mesh scarf2;
 
     private Image[] skins;
     private Image[] colors;
 
-    public static Mesh scarf;
     public static Mesh pants;
     public static Mesh shirt;
 
@@ -33,7 +30,9 @@ public class CustomizeAvatarController : MonoBehaviour
     private System.Random rnd =new System.Random();
     public static bool body1Selected;
 
-    private Image[] faces; 
+    private Image[] faces;
+
+    public static Texture faceTexture;
 
     private void Start()
     {
@@ -51,10 +50,10 @@ public class CustomizeAvatarController : MonoBehaviour
         }
 
         playerAvatar.SetUser(Client.user);
-        scarf = scarf1;
         shirt = shirt1;
         pants = pants1;
         playerAvatar.UpdateVisuals();
+        SetFacesButtonsColor(0);
 
     }
 
@@ -62,6 +61,15 @@ public class CustomizeAvatarController : MonoBehaviour
     {
         Client.user.avatar_skinTone = id;
         playerAvatar.UpdateVisuals();
+        SetFacesButtonsColor(id);
+    }
+
+    private void SetFacesButtonsColor(int id)
+    {
+        foreach (var f in faces)
+        {
+            f.color = skinColors[id];
+        }
     }
 
     public void SetSelectedColor(int id)
@@ -90,12 +98,17 @@ public class CustomizeAvatarController : MonoBehaviour
     {
         body1Selected = body1;
 
-        scarf = body1 ? scarf1 : scarf2;
         shirt = body1 ? shirt1 : shirt2;
         pants = body1 ? pants1 : pants2;
 
         body1Panel.SetActive(body1); 
         body2Panel.SetActive(!body1);
+        playerAvatar.UpdateVisuals();
+    }
+
+    public void SetFace(Texture text)
+    {
+        faceTexture=text;
         playerAvatar.UpdateVisuals();
     }
 

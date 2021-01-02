@@ -83,8 +83,8 @@ public class PlayerAvatar : MonoBehaviour
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
         pantsRenderer.sharedMesh = CustomizeAvatarController.pants;
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
-        //scarfRenderer.sharedMesh = CustomizeAvatarController.scarf;
-
+        
+        faceMat.SetTexture("Texture2D_E0F6099E", CustomizeAvatarController.faceTexture);
         skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[skinId]);
         pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
         shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
