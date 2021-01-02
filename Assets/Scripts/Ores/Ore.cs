@@ -11,10 +11,11 @@ public class Ore : MonoBehaviour
     [SerializeField] int valueIncreasePerRegrowth = 1;
 
     private int gemsLeft;
-    private int currentGemValue = 1;
+    public int currentGemValue = 1;
     private bool regrowing = false;
 
     public GameObject gemPrefab;
+    GemPool gemPool;
 
     //Sound
     PersistentAudioSource audioSource;
@@ -23,6 +24,7 @@ public class Ore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gemPool = FindObjectOfType<GemPool>();
         audioSource = FindObjectOfType<PersistentAudioSource>();
         gemsLeft = availableGems;
     }
@@ -70,7 +72,14 @@ public class Ore : MonoBehaviour
     {
         for(int i = 0; i < gemsToSpawn; i++)
         {
-            Instantiate(gemPrefab, this.transform.position, Quaternion.identity).GetComponent<Gem>().UpdateGemValue(currentGemValue);
+            GameObject gem = gemPool.GetObjectInPool();
+
+            if(gem != null)
+            {
+                gem.transform.position = this.transform.position;
+                gem.transform.rotation = Quaternion.identity;
+                gem.GetComponent<Gem>().UpdateGemValue(currentGemValue);
+            }
         }
     }
 
@@ -83,8 +92,11 @@ public class Ore : MonoBehaviour
     {
         if(!regrowing && other.tag == "Pickaxe")
         {
-            PlaySound(mineSound);
-            MineGem();
+            if(!gemPool.isEmpty)
+            {
+                PlaySound(mineSound);
+                MineGem();
+            }
         }
     }
 }

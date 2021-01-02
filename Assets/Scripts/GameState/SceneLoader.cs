@@ -24,6 +24,7 @@ public class SceneLoader : MonoBehaviour
     public const string lobbyScene = "Lobby";
     public const string eventViewScene = "EventView";
     public const string gameScene = "Game";
+    public const string victoryScene = "Victory";
 
     //public const string gameScene = "GameScene";
 
@@ -48,6 +49,11 @@ public class SceneLoader : MonoBehaviour
     public void LoadGameScene()
     {
         LoadScene(gameScene);
+    }
+
+    public void LoadVictoryScene()
+    {
+        LoadScene(victoryScene);
     }
 
     public void LoadEventViewScene()

@@ -19,6 +19,7 @@ public class Gem : MonoBehaviour
     GemTier currentTier;
 
     Rigidbody rb;
+    GemPool gemPool;
     [HideInInspector] public bool isBeingThrown = false;
     /*[HideInInspector]*/ public bool isCharged = false;
     [HideInInspector] public bool isFalling = false;
@@ -38,6 +39,7 @@ public class Gem : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gemPool = FindObjectOfType<GemPool>();
         audioSource = FindObjectOfType<PersistentAudioSource>();
         currentTier = tiers[0];
         SpawnnForce();
@@ -237,7 +239,7 @@ public class Gem : MonoBehaviour
         {
             playerOwner.AddScore(this.value);
             StopThrowing();
-            gameObject.SetActive(false);
+            gemPool.ReturnObjectToPool(this.gameObject);
         }
 
         //Si le da a otro jugador por la espalda se mete en su bolsa si puede, si no lo aturde
@@ -261,6 +263,7 @@ public class Gem : MonoBehaviour
         }
     }
 
+    //TODO Método de reset de la gema
     private void StopThrowing()
     {
         rb.velocity = Vector3.zero;

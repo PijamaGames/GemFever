@@ -24,7 +24,7 @@ public class GameUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartTimer();
     }
 
     public void StartTimer()
@@ -45,8 +45,7 @@ public class GameUIManager : MonoBehaviour
         string minutesString = "";
         string secondsString = "";
 
-        if (minutes < 10) minutesString = "0" + minutes;
-        else minutesString = minutes.ToString();
+        minutesString = minutes.ToString();
 
         if (seconds < 10) secondsString = "0" + seconds;
         else secondsString = seconds.ToString();
@@ -75,7 +74,10 @@ public class GameUIManager : MonoBehaviour
 
     void CheckTimeUp()
     {
-        if (currentSeconds >= goalTime) Debug.Log("Se acacbó el tiempo");
+        if (currentSeconds >= goalTime)
+        {
+            SceneLoader.instance.LoadVictoryScene();
+        }
         else StartCoroutine(Timer());
     }
 }

@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
     [SerializeField] List<GemPouchTier> gemPouchTiers = new List<GemPouchTier>();
     public int currentPouchSize = 0;
     public GemPouchTier currentTier;
+    GemPool gemPool;
 
     //Gems
     Queue<Gem> gemPouch = new Queue<Gem>();
@@ -75,6 +76,7 @@ public class Player : MonoBehaviour
     [SerializeField] Animator animator;
     Vector3 groundMeshOrientation = Vector3.zero;
     [SerializeField] GameObject playerMesh;
+    bool freeze = false;
 
     //Sound
     PersistentAudioSource audioSource;
@@ -85,6 +87,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         gameUIManager = FindObjectOfType<GameUIManager>();
+
+        gemPool = FindObjectOfType<GemPool>();
 
         audioSource = FindObjectOfType<PersistentAudioSource>();
 
@@ -117,12 +121,16 @@ public class Player : MonoBehaviour
     #region Input Management Methods
     public void MovementInput(InputAction.CallbackContext context)
     {
+        if (freeze) return;
+
         joystick = context.ReadValue<Vector2>();
         RotatePlayer();
     }
 
     public void ThrowGemInput(InputAction.CallbackContext context)
     {
+        if (freeze) return;
+
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         throwGemInput = context.ReadValue<float>();
@@ -454,9 +462,14 @@ public class Player : MonoBehaviour
 
                 for(int i = 0; i < currentGems; i++)
                 {
-                    scoreObtained += gemPouch.Dequeue().value;
+                    Gem gem = gemPouch.Dequeue();
+
+                    scoreObtained += gem.value;
                     currentPouchSize--;
                     scoreMultiplier += scoreIncrementPerGemStored;
+
+                    if (gemPool != null)
+                        gemPool.ReturnObjectToPool(gem.gameObject);
                 }
 
                 if (currentPouchSize < 0) currentPouchSize = 0;
@@ -540,8 +553,42 @@ public class Player : MonoBehaviour
         animator.SetBool("Idle_Throw", false);
     }
 
+    public void PlayVictoryAnimation(int position)
+    {
+        Freeze();
+
+        if (position == 0) PlayFirstPositionAnim();
+        else if (position == 1 || position == 2) PlaySecondOrThirdPositionAnim();
+        else PlayFourthPositionAnim();
+
+    }
+
+    void PlayFirstPositionAnim()
+    {
+        animator.SetBool("Victory1", true);
+    }
+
+    void PlaySecondOrThirdPositionAnim()
+    {
+        animator.SetBool("Victory2_3", true);
+    }
+
+    void PlayFourthPositionAnim()
+    {
+        animator.SetBool("Victory4", true);
+    }
+
 
     #endregion
+
+    private void Freeze()
+    {
+        rb.velocity = Vector3.zero;
+        rb.useGravity = false;
+        rb.isKinematic = true;
+
+        freeze = true;
+    }
 }
 
 [System.Serializable]
