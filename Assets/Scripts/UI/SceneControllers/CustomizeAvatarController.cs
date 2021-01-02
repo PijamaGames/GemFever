@@ -12,14 +12,25 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] GameObject colorParent;
     [SerializeField] private GameObject body1Panel;
     [SerializeField] private GameObject body2Panel;
+    [SerializeField] private Mesh pants1;
+    [SerializeField] private Mesh pants2;
+    [SerializeField] private Mesh shirt1;
+    [SerializeField] private Mesh shirt2;
+    [SerializeField] private Mesh scarf1;
+    [SerializeField] private Mesh scarf2;
 
     private Image[] skins;
     private Image[] colors;
+
+    public static Mesh scarf;
+    public static Mesh pants;
+    public static Mesh shirt;
 
     public static Color[] skinColors={ new Color(1f, 0.8789797f, 0.5707547f), new Color(255/255f,216/255f,177/255f), new Color(170/255f,127/255f,82/255f),new Color(125/255f,83/255f,42/255f), new Color(75/255f,44/255f,13/255f)};
     public static Color[] favColors={Color.black, Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta};
 
     private System.Random rnd =new System.Random();
+    public static bool body1Selected;
 
     private void Start()
     {
@@ -36,6 +47,11 @@ public class CustomizeAvatarController : MonoBehaviour
         }
 
         playerAvatar.SetUser(Client.user);
+        scarf = scarf1;
+        shirt = shirt1;
+        pants = pants1;
+        playerAvatar.UpdateVisuals();
+
     }
 
     public void SetSelectedSkin(int id)
@@ -66,17 +82,15 @@ public class CustomizeAvatarController : MonoBehaviour
 
     public void ChangeBody(bool body1)
     {
-        if (body1)
-        {
-            body1Panel.SetActive(true);
-            body2Panel.SetActive(false);
-        }
-        else
-        {
-            body1Panel.SetActive(false);
-            body2Panel.SetActive(true);
-        }
+        body1Selected = body1;
 
+        scarf = body1 ? scarf1 : scarf2;
+        shirt = body1 ? shirt1 : shirt2;
+        pants = body1 ? pants1 : pants2;
+
+        body1Panel.SetActive(body1); 
+        body2Panel.SetActive(!body1);
+        playerAvatar.UpdateVisuals();
     }
 
 }
