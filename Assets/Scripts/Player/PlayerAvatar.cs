@@ -5,21 +5,28 @@ using UnityEngine;
 public class PlayerAvatar : MonoBehaviour
 {
     User user;
+    private System.Random rnd = new System.Random();
 
     [HideInInspector] Material skinMat;
-    [SerializeField] Renderer skinRenderer;
+    [SerializeField] SkinnedMeshRenderer skinRenderer;
 
     [HideInInspector] Material shirtMat;
-    [SerializeField] Renderer shirtRenderer;
+    [SerializeField] SkinnedMeshRenderer shirtRenderer;
 
     [HideInInspector] Material pantsMat;
-    [SerializeField] Renderer pantsRenderer;
+    [SerializeField] SkinnedMeshRenderer pantsRenderer;
 
     [HideInInspector] Material hatMat;
-    [SerializeField] Renderer hatRenderer;
+    [SerializeField] SkinnedMeshRenderer hatRenderer;
 
     [HideInInspector] Material faceMat;
-    [SerializeField] Renderer faceRenderer;
+    [SerializeField] SkinnedMeshRenderer faceRenderer;
+    
+    [HideInInspector] Material scarfMat;
+    [SerializeField] MeshRenderer scarfRenderer;
+
+    private int randomColor;
+    private int randomSkin;
 
     private void Awake()
     {
@@ -38,7 +45,11 @@ public class PlayerAvatar : MonoBehaviour
 
         faceMat = Instantiate(faceRenderer.sharedMaterial);
         faceRenderer.sharedMaterial = faceMat;
+        
+        scarfMat = Instantiate(scarfRenderer.sharedMaterial);
+        scarfRenderer.sharedMaterial = scarfMat;
 
+        
     }
 
     public void SetUser(User user)
@@ -46,12 +57,39 @@ public class PlayerAvatar : MonoBehaviour
         this.user = user;
     }
 
+    private void Random()
+    {
+        randomColor = rnd.Next(CustomizeAvatarController.favColors.Length);
+        randomSkin = rnd.Next(CustomizeAvatarController.skinColors.Length);
+    }
+
     public void UpdateVisuals()
     {
-        if (user == null) return;
-        skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[user.avatar_skinTone]);
-        pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
-        shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
-        hatMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[user.avatar_color]);
+        int skinId;
+        int colorId;
+
+        if (user == null)
+        {
+            Random();
+            skinId = randomSkin;
+            colorId = randomColor;
+        }
+        else
+        {
+            skinId = user.avatar_skinTone;
+            colorId = user.avatar_color;
+        }
+
+        shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
+        pantsRenderer.sharedMesh = CustomizeAvatarController.pants;
+        shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
+        //scarfRenderer.sharedMesh = CustomizeAvatarController.scarf;
+
+        skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[skinId]);
+        pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
+        shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
+        hatMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
+        scarfMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
+
     }
 }
