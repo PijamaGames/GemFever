@@ -570,7 +570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOwner: {fileID: 390191191207065864}
   hitCooldown: 0.25
-  knockbackForce: 120
+  knockbackForce: 40
   gemParryForce: 10
   hitOnCooldown: 0
   pickaxeSwing: {fileID: 0}
