@@ -10,6 +10,9 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] private PlayerAvatar playerAvatar;
     [SerializeField] GameObject skinParent;
     [SerializeField] GameObject colorParent;
+    [SerializeField] private GameObject body1Panel;
+    [SerializeField] private GameObject body2Panel;
+
     private Image[] skins;
     private Image[] colors;
 
@@ -59,6 +62,21 @@ public class CustomizeAvatarController : MonoBehaviour
 
         SetSelectedColor(randomColor);
         SetSelectedSkin(randomSkin);
+    }
+
+    public void ChangeBody(bool body1)
+    {
+        if (body1)
+        {
+            body1Panel.SetActive(true);
+            body2Panel.SetActive(false);
+        }
+        else
+        {
+            body1Panel.SetActive(false);
+            body2Panel.SetActive(true);
+        }
+
     }
 
 }
