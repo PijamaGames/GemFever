@@ -15,6 +15,7 @@ public class Gem : MonoBehaviour
     [SerializeField] float maxSpeedIncrement = 5f;
 
     [SerializeField] List<GemTier> tiers;
+    [SerializeField] MeshRenderer gemMesh;
     GemTier currentTier;
 
     Rigidbody rb;
@@ -96,8 +97,7 @@ public class Gem : MonoBehaviour
             }          
         }
 
-        gameObject.GetComponent<MeshRenderer>().material.color = currentTier.tierColor;
-        //Actualizar modelo de la gema
+        gemMesh.material.color = currentTier.tierColor;
     }
 
     public void ThrowGem(Vector3 playerForward, Vector3 playerPosition, float throwForce, Player playerOwner)
