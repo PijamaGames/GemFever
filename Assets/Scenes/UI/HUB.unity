@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -202,6 +202,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 824148427}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &47188289
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1333670681700085073, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_Name
+      value: Frontend
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 506.16837
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 439.87537
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -260.0625
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3ee420d4b657b64b95a136be816224c, type: 3}
 --- !u!1001 &80199263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2017,7 +2086,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  text: Salir
+  spanishText: Salir
+  englishText: Exit
   sprite: {fileID: 0}
 --- !u!1 &568528423
 GameObject:
@@ -2084,6 +2154,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 568020381}
+  - {fileID: 810080764}
   m_Father: {fileID: 568528424}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2265,6 +2336,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1239725811}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &810080763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 810080764}
+  - component: {fileID: 810080766}
+  - component: {fileID: 810080765}
+  m_Layer: 0
+  m_Name: PromptPlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &810080764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810080763}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.61, y: -4.71, z: 5.1449213}
+  m_LocalScale: {x: 2.3538, y: 2.3538, z: 2.3538}
+  m_Children: []
+  m_Father: {fileID: 580831888}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &810080765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810080763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cbbc59e28986ee459ec7c27886973e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 164488940}
+        m_MethodName: LoadGameScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  spanishText: Jugar
+  englishText: Play
+  sprite: {fileID: 0}
+--- !u!65 &810080766
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810080763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0130483, y: 0.83256096, z: 0.6565524}
+  m_Center: {x: -0.07284322, y: 0.020280367, z: 0.059501123}
 --- !u!1001 &816445165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8837,7 +8982,7 @@ PrefabInstance:
     - target: {fileID: 2424873281686467804, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
       propertyPath: orthographic size
-      value: 4.39875
+      value: 3.91
       objectReference: {fileID: 0}
     - target: {fileID: 2424873281686467806, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
