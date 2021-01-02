@@ -12,6 +12,7 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] GameObject colorParent;
     [SerializeField] private GameObject body1Panel;
     [SerializeField] private GameObject body2Panel;
+    [SerializeField] private GameObject layoutFaces;
     [SerializeField] private Mesh pants1;
     [SerializeField] private Mesh pants2;
     [SerializeField] private Mesh shirt1;
@@ -32,10 +33,13 @@ public class CustomizeAvatarController : MonoBehaviour
     private System.Random rnd =new System.Random();
     public static bool body1Selected;
 
+    private Image[] faces; 
+
     private void Start()
     {
         skins = skinParent.GetComponentsInChildren<Image>();
         colors = colorParent.GetComponentsInChildren<Image>();
+        faces= layoutFaces.GetComponentsInChildren<Image>();
 
         for (int i=0; i<skins.Length; i++)
         {
@@ -75,7 +79,9 @@ public class CustomizeAvatarController : MonoBehaviour
     {
         int randomColor= rnd.Next(favColors.Length);
         int randomSkin= rnd.Next(skinColors.Length);
+        int randomBody= rnd.Next(3);
 
+        ChangeBody(randomBody==1);
         SetSelectedColor(randomColor);
         SetSelectedSkin(randomSkin);
     }
