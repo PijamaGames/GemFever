@@ -48,13 +48,11 @@ public class Player : MonoBehaviour
     AndroidInputs androidInputs;
 
     //States
-    public bool isOnStair = false;
     public bool climbingLadder = false;
     public bool isWalking = false;
     public bool isInLadder = false;
     public bool isStunned = false;
     public bool isInvulnerable = false;
-    public bool fallingOnStairs = false;
 
     //GemPouch
     [SerializeField] MeshRenderer pouchMeshRenderer;
@@ -78,6 +76,8 @@ public class Player : MonoBehaviour
     Vector3 groundMeshOrientation = Vector3.zero;
     [SerializeField] GameObject playerMesh;
     bool freeze = false;
+    bool climbingAnimation = false;
+    bool rotateAnimation = true;
 
     //Sound
     PersistentAudioSource audioSource;
@@ -122,18 +122,15 @@ public class Player : MonoBehaviour
         //Debug.Log(gemPouch.Count);
 
         //TODO Si usa móvil
-        joystick = androidInputs.GetMovementInput();
+        //joystick = androidInputs.GetMovementInput();
 
-        throwGemInput = androidInputs.GetThrowGemInput();
+        //throwGemInput = androidInputs.GetThrowGemInput();
     }
 
     #region Input Management Methods
     public void MovementInput(InputAction.CallbackContext context)
     {
         if (freeze) return;
-
-
-        if (!context.performed || !gameObject.scene.IsValid()) return;
 
         //TODO Si no usa móvil
         joystick = context.ReadValue<Vector2>();
@@ -178,7 +175,8 @@ public class Player : MonoBehaviour
     //Movement Update
     void FixedUpdate()
     {
-        RotatePlayer();
+        if(rotateAnimation)
+            RotatePlayer();
 
         velocity = new Vector3(0f, rb.velocity.y, 0f);
 
@@ -235,7 +233,7 @@ public class Player : MonoBehaviour
         finalMovement.x = horizontalMovement;
 
         //Desactivar gravedad
-        if (isOnStair)
+        if (/*isOnStair*/ climbingLadder)
         {
             if(animator.GetBool("Idle_Climb") && !animator.GetBool("Climb_MineStair") && !animator.GetBool("Stun"))
             {
@@ -245,21 +243,19 @@ public class Player : MonoBehaviour
             else
                 animator.speed = 1f;
 
+            rb.useGravity = false;
+            verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
+            
             if (joystick.y != 0)
             {
-                rb.useGravity = false;
-                climbingLadder = true;
-                verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
-                //gameObject.layer = LayerMask.NameToLayer("PlayerLadder");
-            }
-
-            if (fallingOnStairs)
-            {
-                rb.useGravity = false;
-            }
-
-            if (climbingLadder)
                 playerMesh.transform.forward = Vector3.forward;
+                climbingAnimation = true;
+                rotateAnimation = false;
+            }
+            else
+            {
+                climbingAnimation = false;
+            }
 
             finalMovement.y = verticalMovement;
         }
@@ -476,9 +472,9 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "Ladder")
         {
-            //climbingLadder = true;
-            isOnStair = true;
-            fallingOnStairs = rb.velocity.y < -0.01f;
+            climbingLadder = true;
+            //isOnStair = true;
+            //fallingOnStairs = rb.velocity.y < -0.01f;
         }
 
         if(other.tag == "Minecart")
@@ -521,8 +517,9 @@ public class Player : MonoBehaviour
         if (other.tag == "Ladder")
         {
             climbingLadder = false;
-            isOnStair = false;
-            fallingOnStairs = false;
+
+            rotateAnimation = true;
+
             animator.speed = 1f;
             animator.SetBool("Idle_Climb", false);
 
@@ -536,22 +533,23 @@ public class Player : MonoBehaviour
     #region Animations
     private void WalkOrIdleOrClimb()
     {
-        if (!climbingLadder)
-        {
-            PlaySound(walkSound);
-            animator.SetBool("Idle_Walk", isWalking);
-        }
-        else
+        if (climbingLadder && climbingAnimation)
         {
             PlaySound(ladderSound);
             animator.SetBool("Idle_Climb", climbingLadder);
+            
+        }
+        else
+        {
+            PlaySound(walkSound);
+            animator.SetBool("Idle_Walk", isWalking);
         }
     }
 
     public void StartPickaxeAnimation()
     {
         //Trepando escalera
-        if(climbingLadder /*&& false*/)
+        if(climbingLadder && climbingAnimation /*&& false*/)
         {
             animator.SetBool("Climb_MineStair", true);
         }
