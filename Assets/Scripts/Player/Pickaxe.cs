@@ -31,7 +31,6 @@ public class Pickaxe : MonoBehaviour
         boxColliders = GetComponents<BoxCollider>();
         audioSource = FindObjectOfType<PersistentAudioSource>();
 
-        //Si es el jugador local
         androidInputs = FindObjectOfType<AndroidInputs>();
 
         EnableCollisions(false);
@@ -51,8 +50,8 @@ public class Pickaxe : MonoBehaviour
         
         if (!hitOnCooldown && pickaxeInput == 1)
         {
-            //TODO solo si usa movil
-            androidInputs.ResetPickaxeInput();
+            if(GameManager.isHandheld)
+                androidInputs.ResetPickaxeInput();
 
             hitOnCooldown = true;
 
@@ -65,10 +64,11 @@ public class Pickaxe : MonoBehaviour
 
     private void Update()
     {
-        //TODO Si usa móvil
-        pickaxeInput = androidInputs.GetPickaxeInput();
-        PickaxeHit();
-
+        if(GameManager.isHandheld)
+        {
+            pickaxeInput = androidInputs.GetPickaxeInput();
+            PickaxeHit();
+        }
     }
 
     public void StartPickaxeHit()

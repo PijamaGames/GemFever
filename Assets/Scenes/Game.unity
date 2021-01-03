@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4697,6 +4697,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2884888735722536221, guid: 7eec1e99c5b42db46880c9b102809f6b,
+        type: 3}
+      propertyPath: debugMovile
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2884888735722536223, guid: 7eec1e99c5b42db46880c9b102809f6b,
         type: 3}
@@ -13076,6 +13081,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2051993452}
     m_Modifications:
+    - target: {fileID: 2204171752188907663, guid: a4ce6f3ab9bf29d419ff551b1fe7e409,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3042320075964287760, guid: a4ce6f3ab9bf29d419ff551b1fe7e409,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13131,10 +13141,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4499818259921959796, guid: a4ce6f3ab9bf29d419ff551b1fe7e409,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6747098421683421689, guid: a4ce6f3ab9bf29d419ff551b1fe7e409,
         type: 3}
       propertyPath: m_Name
       value: Android Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747098421683421689, guid: a4ce6f3ab9bf29d419ff551b1fe7e409,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4ce6f3ab9bf29d419ff551b1fe7e409, type: 3}

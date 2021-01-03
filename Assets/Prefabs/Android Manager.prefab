@@ -118,7 +118,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6183913367668189026}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3827239903731244281}
+        m_MethodName: SpawnPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &650848646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1133426784606861109
 RectTransform:
   m_ObjectHideFlags: 0
@@ -319,7 +330,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2655769703926428294}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3827239903731244281}
+        m_MethodName: SpawnPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &526648485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7598097165845454180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -518,7 +540,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8836372983404550286}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3827239903731244281}
+        m_MethodName: SpawnPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &889469376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,7 +713,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6394862678019288458}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3827239903731244281}
+        m_MethodName: SpawnPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &261305868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,6 +813,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa9c2ff257cdfe4a87bd406e91e0bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobileDPAD: {fileID: 2204171752188907663}
+  mobileButtons: {fileID: 4499818259921959796}
+  playerPrefab: {fileID: 390191191207065864, guid: 4a7e2be968660c748ab3696bf6d6e316,
+    type: 3}
   horizontal: 0
   vertical: 0
 --- !u!1 &7137534900398708010
@@ -889,7 +937,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7043431774873643872}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3827239903731244281}
+        m_MethodName: SpawnPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1480005835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,7 +1110,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3420505486199810205}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3827239903731244281}
+        m_MethodName: SpawnPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &53213654
 MonoBehaviour:
   m_ObjectHideFlags: 0

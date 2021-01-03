@@ -45,10 +45,11 @@ public class Player : MonoBehaviour
     //Inputs
     Vector2 joystick = Vector2.zero;
     float throwGemInput = 0f;
-    AndroidInputs androidInputs;
+    public AndroidInputs androidInputs;
 
     //States
     public bool climbingLadder = false;
+    public bool pickaxeOnLadder = false;
     public bool ladderTopReached = false;
     public bool isWalking = false;
     public bool isInLadder = false;
@@ -122,10 +123,11 @@ public class Player : MonoBehaviour
         //Debug.Log(rb.velocity);
         //Debug.Log(gemPouch.Count);
 
-        //TODO Si usa móvil
-        //joystick = androidInputs.GetMovementInput();
-
-        //throwGemInput = androidInputs.GetThrowGemInput();
+        if(GameManager.isHandheld)
+        {
+            joystick = androidInputs.GetMovementInput();
+            throwGemInput = androidInputs.GetThrowGemInput();
+        }
     }
 
     #region Input Management Methods
@@ -139,8 +141,6 @@ public class Player : MonoBehaviour
     public void ThrowGemInput(InputAction.CallbackContext context)
     {
         if (freeze) return;
-
-        //TODO Si no usa móvil
 
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
@@ -215,8 +215,8 @@ public class Player : MonoBehaviour
         
         knockback = Vector3.zero;
 
-        //TODO si usa móvil
-        ThrowGem();
+        if(GameManager.isHandheld)
+            ThrowGem();
     }
 
     #region Movement Methods
@@ -248,7 +248,11 @@ public class Player : MonoBehaviour
                     verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
             }
             else
+            {
+                pickaxeOnLadder = true;
                 verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
+            }
+                
             
             if (joystick.y != 0 && !ladderTopReached)
             {
@@ -523,6 +527,7 @@ public class Player : MonoBehaviour
     {
         if(other.tag == "LadderTop")
         {
+            pickaxeOnLadder = false;
             ladderTopReached = false;
         }
 
@@ -561,7 +566,7 @@ public class Player : MonoBehaviour
     public void StartPickaxeAnimation()
     {
         //Trepando escalera
-        if(climbingLadder && climbingAnimation /*&& false*/)
+        if(climbingLadder && pickaxeOnLadder /*&& false*/)
         {
             animator.SetBool("Climb_MineStair", true);
         }

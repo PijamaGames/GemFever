@@ -5,15 +5,37 @@ using UnityEngine;
 public class AndroidInputs : MonoBehaviour
 {
     // Start is called before the first frame update
-    Player player;
-
+    [SerializeField] GameObject mobileDPAD, mobileButtons;
+    [SerializeField] Player playerPrefab;
+    Player spawnedPlayer = null;
+    
     //Movement Inputs
-    public int horizontal = 0;
-    public int vertical = 0;
+    [HideInInspector] public int horizontal = 0;
+    [HideInInspector] public int vertical = 0;
 
     //Pickaxe and gem inputs
     int pickaxe = 0;
     int throwGem = 0;
+
+    private void Start()
+    {
+        if(GameManager.isHandheld)
+        {
+            mobileDPAD.SetActive(true);
+            mobileButtons.SetActive(true);
+        }
+    }
+
+    //Crear jugador al pulsar algo
+    public void SpawnPlayer()
+    {
+        if (spawnedPlayer == null && PlayerSpawnerManager.isInHub)
+        {
+            Debug.Log("PlayerSpawned");
+            spawnedPlayer = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+        }
+            
+    }
 
     //Setters
     public void PressUp() { vertical = 1; }
