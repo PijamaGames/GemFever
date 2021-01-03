@@ -60,7 +60,7 @@ public class PlayerAvatar : MonoBehaviour
 
     private void Random()
     {
-        randomColor = rnd.Next(CustomizeAvatarController.favColors.Length);
+        randomColor = rnd.Next(CustomizeAvatarController.characterColors.Length);
         randomSkin = rnd.Next(CustomizeAvatarController.skinColors.Length);
         randomFace= rnd.Next(FaceTextures.facesTextures.Length);
     }
@@ -91,10 +91,10 @@ public class PlayerAvatar : MonoBehaviour
 
         faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);
         skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[skinId]);
-        pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
-        shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
-        hatMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
-        scarfMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
+        pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorPants);
+        shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorShirt);
+        //hatMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
+        scarfMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorScarf);
 
     }
 }
