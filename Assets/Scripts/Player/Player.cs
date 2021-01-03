@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
     //Inputs
     Vector2 joystick = Vector2.zero;
     float throwGemInput = 0f;
+    AndroidInputs androidInputs;
 
     //States
     public bool isOnStair = false;
@@ -86,6 +87,9 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Si es el jugador local
+        androidInputs = FindObjectOfType<AndroidInputs>();
+
         gameUIManager = FindObjectOfType<GameUIManager>();
 
         gemPool = FindObjectOfType<GemPool>();
@@ -116,6 +120,11 @@ public class Player : MonoBehaviour
         //Debug.Log(gameObject.name + " Is Invulnerable: " + isInvulnerable);
         //Debug.Log(rb.velocity);
         //Debug.Log(gemPouch.Count);
+
+        //TODO Si usa móvil
+        joystick = androidInputs.GetMovementInput();
+
+        throwGemInput = androidInputs.GetThrowGemInput();
     }
 
     #region Input Management Methods
@@ -123,20 +132,33 @@ public class Player : MonoBehaviour
     {
         if (freeze) return;
 
+
+        if (!context.performed || !gameObject.scene.IsValid()) return;
+
+        //TODO Si no usa móvil
         joystick = context.ReadValue<Vector2>();
-        RotatePlayer();
     }
 
     public void ThrowGemInput(InputAction.CallbackContext context)
     {
         if (freeze) return;
 
+        //TODO Si no usa móvil
+
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         throwGemInput = context.ReadValue<float>();
 
+        ThrowGem();
+    }
+
+    private void ThrowGem()
+    {
         if (!gemThrowOnCooldown && throwGemInput == 1 && !climbingLadder)
         {
+            //TODO Si usa móvil poner el input a 0
+            androidInputs.ResetGemThrowInput();
+
             Gem thrownGem = TryRemoveGemFromPouch();
 
             if (thrownGem != null)
@@ -150,11 +172,14 @@ public class Player : MonoBehaviour
             }
         }
     }
+
     #endregion
 
     //Movement Update
     void FixedUpdate()
     {
+        RotatePlayer();
+
         velocity = new Vector3(0f, rb.velocity.y, 0f);
 
         if (!isStunned)
@@ -192,6 +217,10 @@ public class Player : MonoBehaviour
         rb.AddForce(knockback, ForceMode.Impulse);
         
         knockback = Vector3.zero;
+
+        //TODO si usa móvil
+        ThrowGem();
+
     }
 
     #region Movement Methods

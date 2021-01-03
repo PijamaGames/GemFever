@@ -17,6 +17,8 @@ public class Pickaxe : MonoBehaviour
     public bool hitOnCooldown = false;
     float pickaxeInput = 0f;
 
+    AndroidInputs androidInputs;
+
     //Sound
     PersistentAudioSource audioSource;
     [SerializeField] AudioClip pickaxeSwing;
@@ -28,6 +30,10 @@ public class Pickaxe : MonoBehaviour
     {
         boxColliders = GetComponents<BoxCollider>();
         audioSource = FindObjectOfType<PersistentAudioSource>();
+
+        //Si es el jugador local
+        androidInputs = FindObjectOfType<AndroidInputs>();
+
         EnableCollisions(false);
     }
 
@@ -37,8 +43,17 @@ public class Pickaxe : MonoBehaviour
 
         pickaxeInput = context.ReadValue<float>();
 
-        if(!hitOnCooldown && pickaxeInput == 1)
+        PickaxeHit();
+    }
+
+    private void PickaxeHit()
+    {
+        
+        if (!hitOnCooldown && pickaxeInput == 1)
         {
+            //TODO solo si usa movil
+            androidInputs.ResetPickaxeInput();
+
             hitOnCooldown = true;
 
             PlaySound(pickaxeSwing);
@@ -46,6 +61,14 @@ public class Pickaxe : MonoBehaviour
             playerOwner.StartPickaxeAnimation();
             StartCoroutine(HitCooldown());
         }
+    }
+
+    private void Update()
+    {
+        //TODO Si usa móvil
+        pickaxeInput = androidInputs.GetPickaxeInput();
+        PickaxeHit();
+
     }
 
     public void StartPickaxeHit()
