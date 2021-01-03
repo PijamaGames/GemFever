@@ -62,27 +62,31 @@ public class PlayerAvatar : MonoBehaviour
     {
         randomColor = rnd.Next(CustomizeAvatarController.characterColors.Length);
         randomSkin = rnd.Next(CustomizeAvatarController.skinColors.Length);
-        randomFace= rnd.Next(FaceTextures.facesTextures.Length);
+        randomFace= rnd.Next(FaceTextures.facesTextures.Count);
     }
 
     public void UpdateVisuals()
     {
+        Debug.Log("PRIMERA"+user);
         int skinId;
         int colorId;
-        int faceId;
+        string faceId;
 
         if (user == null)
         {
             Random();
             skinId = randomSkin;
             colorId = randomColor;
-            faceId = randomFace;
+            faceId = FaceTextures.facesForRandom[randomFace];
         }
         else
         {
             skinId = user.avatar_skinTone;
             colorId = user.avatar_color;
-            faceId = user.avatar_face;
+            if(user.avatar_face=="")
+                faceId=FaceTextures.facesForRandom[0]; 
+            else    
+                faceId = user.avatar_face;
         }
 
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
