@@ -14,6 +14,7 @@ public class Client : MonoBehaviour
     [HideInInspector] public static ClientConnected connectedState;
     [HideInInspector] public static ClientSignedUp signedUpState;
     [HideInInspector] public static ClientSignedIn signedInState;
+    [HideInInspector] public static ClientInRoom inRoomState;
 
     public static Client instance = null;
 
@@ -40,6 +41,7 @@ public class Client : MonoBehaviour
         connectedState = new ClientConnected();
         signedUpState = new ClientSignedUp();
         signedInState = new ClientSignedIn();
+        inRoomState = new ClientInRoom();
     }
 
     public static void SetState(ClientState newState)
@@ -57,5 +59,4 @@ public class Client : MonoBehaviour
     {
         return state == _state;
     }
-
 }

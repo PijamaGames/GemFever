@@ -21,6 +21,7 @@ public class ClientSignedIn : ClientState
         Debug.Log("HAS EVENT: " + hasEvent);
         if (hasEvent)
         {
+            hasEvent = false;
             Debug.Log("SPANISH MSG EVENT: " + spanishMsg);
             Debug.Log("ENGLISH MSG EVENT: " + englishMsg);
             SceneLoader.instance.LoadEventViewScene();
