@@ -81,8 +81,8 @@ public class ClientSignedIn : ClientState
                     {
                         roomInfos.Add(info);
                     }
-                    getRoomsEvent?.Invoke(roomInfos);
                 }
+                getRoomsEvent?.Invoke(roomInfos);
                 break;
         }
     }
