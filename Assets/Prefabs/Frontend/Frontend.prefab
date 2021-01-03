@@ -58,13 +58,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d48411d622c2f49bd562a50e22f115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urlIndex: 0
+  urlIndex: 1
   urlList:
   - ws://localhost:8080/player/websocket
   - wss://gem-fever.herokuapp.com//player/websocket
   debugMessages: 1
+  debugState: 0
   initOnAwake: 0
-  tryReconnect: 1
+  keepAliveInterval: 25
   messageSizeBytes: 4096
   OnOpenEvent:
     m_PersistentCalls:

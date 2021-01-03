@@ -46,7 +46,7 @@ public class ClientSignedIn : ClientState
         public bool isHost = false;
         public bool isClient = false;
         public int error = -1;
-        public string[] playerRoomInfos;
+        public string[] players;
     }
 
     public override void HandleMessage(ref string msg)
@@ -73,7 +73,7 @@ public class ClientSignedIn : ClientState
             case FrontendEvents.GetRooms:
                 var roomInfos = new List<PlayerRoomInfo>();
                 PlayerRoomInfo info;
-                foreach(var json in data.playerRoomInfos)
+                foreach(string json in data.players)
                 {
                     info = JsonUtility.FromJson<PlayerRoomInfo>(json);
                     Debug.Log("Room info: " + json);
