@@ -104,7 +104,9 @@ public class CustomizeAvatarController : MonoBehaviour
         int randomSkin= rnd.Next(skinColors.Length);
         int randomBody= rnd.Next(numBodies);
         int randomFace= rnd.Next(FaceTextures.facesTextures.Count);
+        int randomHat = rnd.Next(HatMeshes.hatsMeshes.Count);
 
+        SetHat(HatMeshes.hatsForRandom[randomHat]);
         SetFace(FaceTextures.facesForRandom[randomFace]);
         ChangeBody(randomBody==1);
         SetSelectedColor(randomColor);
@@ -129,5 +131,12 @@ public class CustomizeAvatarController : MonoBehaviour
         Client.user.avatar_face = id;
         playerAvatar.UpdateVisuals();
     }
+
+    public void SetHat(string id)
+    {
+        Client.user.avatar_hat = id;
+        playerAvatar.UpdateVisuals();
+    }
+    
 
 }

@@ -8,7 +8,7 @@ public class FaceTextures : MonoBehaviour
     [SerializeField] private Texture[] faces;
 
     public static Dictionary<string,Texture> facesTextures;
-    public static String[] facesForRandom;
+    public static string[] facesForRandom;
     private static FaceTextures instance;
 
     void Awake()

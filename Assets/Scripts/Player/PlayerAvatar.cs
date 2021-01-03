@@ -28,6 +28,7 @@ public class PlayerAvatar : MonoBehaviour
     private int randomColor;
     private int randomSkin;
     private int randomFace;
+    private int randomHat;
 
     private void Awake()
     {
@@ -63,14 +64,15 @@ public class PlayerAvatar : MonoBehaviour
         randomColor = rnd.Next(CustomizeAvatarController.characterColors.Length);
         randomSkin = rnd.Next(CustomizeAvatarController.skinColors.Length);
         randomFace= rnd.Next(FaceTextures.facesTextures.Count);
+        randomHat= rnd.Next(HatMeshes.hatsMeshes.Count);
     }
 
     public void UpdateVisuals()
     {
-        Debug.Log("PRIMERA"+user);
         int skinId;
         int colorId;
         string faceId;
+        string hatId;
 
         if (user == null)
         {
@@ -78,12 +80,19 @@ public class PlayerAvatar : MonoBehaviour
             skinId = randomSkin;
             colorId = randomColor;
             faceId = FaceTextures.facesForRandom[randomFace];
+            hatId = HatMeshes.hatsForRandom[randomHat];
         }
         else
         {
             skinId = user.avatar_skinTone;
             colorId = user.avatar_color;
-            if(user.avatar_face=="")
+
+            if (user.avatar_hat == "")
+                hatId = HatMeshes.hatsForRandom[0];
+            else
+                hatId = user.avatar_hat;
+
+            if (user.avatar_face=="")
                 faceId=FaceTextures.facesForRandom[0]; 
             else    
                 faceId = user.avatar_face;
@@ -91,14 +100,14 @@ public class PlayerAvatar : MonoBehaviour
 
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
         pantsRenderer.sharedMesh = CustomizeAvatarController.pants;
-        shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
+        //hatRenderer.sharedMesh = HatMeshes.hatsMeshes[hatId].sharedMesh;
 
         faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);
         skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[skinId]);
         pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorPants);
         shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorShirt);
-        //hatMat.SetColor("Color_398EEC7D", CustomizeAvatarController.favColors[colorId]);
         scarfMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorScarf);
+        //hatMat.SetTexture("_BaseMap", HatMeshes.hatsMeshes[hatId].material.mainTexture);
 
     }
 }
