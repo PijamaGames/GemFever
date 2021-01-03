@@ -14,6 +14,7 @@ TagManager:
   - PlayerSpawn
   - PlayerFeet
   - Floor
+  - LadderTop
   layers:
   - Default
   - TransparentFX

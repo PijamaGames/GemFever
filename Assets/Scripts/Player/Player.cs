@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
 
     //States
     public bool climbingLadder = false;
+    public bool ladderTopReached = false;
     public bool isWalking = false;
     public bool isInLadder = false;
     public bool isStunned = false;
@@ -132,7 +133,6 @@ public class Player : MonoBehaviour
     {
         if (freeze) return;
 
-        //TODO Si no usa móvil
         joystick = context.ReadValue<Vector2>();
     }
 
@@ -153,7 +153,6 @@ public class Player : MonoBehaviour
     {
         if (!gemThrowOnCooldown && throwGemInput == 1 && !climbingLadder)
         {
-            //TODO Si usa móvil poner el input a 0
             androidInputs.ResetGemThrowInput();
 
             Gem thrownGem = TryRemoveGemFromPouch();
@@ -218,7 +217,6 @@ public class Player : MonoBehaviour
 
         //TODO si usa móvil
         ThrowGem();
-
     }
 
     #region Movement Methods
@@ -232,8 +230,7 @@ public class Player : MonoBehaviour
 
         finalMovement.x = horizontalMovement;
 
-        //Desactivar gravedad
-        if (/*isOnStair*/ climbingLadder)
+        if (climbingLadder)
         {
             if(animator.GetBool("Idle_Climb") && !animator.GetBool("Climb_MineStair") && !animator.GetBool("Stun"))
             {
@@ -244,9 +241,16 @@ public class Player : MonoBehaviour
                 animator.speed = 1f;
 
             rb.useGravity = false;
-            verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
+
+            if(ladderTopReached)
+            {
+                if(joystick.y < 0)
+                    verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
+            }
+            else
+                verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
             
-            if (joystick.y != 0)
+            if (joystick.y != 0 && !ladderTopReached)
             {
                 playerMesh.transform.forward = Vector3.forward;
                 climbingAnimation = true;
@@ -470,11 +474,14 @@ public class Player : MonoBehaviour
     #region Trigger Methods
     void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "LadderTop")
+        {
+            ladderTopReached = true;
+        }
+
         if (other.tag == "Ladder")
         {
             climbingLadder = true;
-            //isOnStair = true;
-            //fallingOnStairs = rb.velocity.y < -0.01f;
         }
 
         if(other.tag == "Minecart")
@@ -514,6 +521,11 @@ public class Player : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
+        if(other.tag == "LadderTop")
+        {
+            ladderTopReached = false;
+        }
+
         if (other.tag == "Ladder")
         {
             climbingLadder = false;
@@ -533,7 +545,7 @@ public class Player : MonoBehaviour
     #region Animations
     private void WalkOrIdleOrClimb()
     {
-        if (climbingLadder && climbingAnimation)
+        if (climbingLadder && climbingAnimation && !ladderTopReached)
         {
             PlaySound(ladderSound);
             animator.SetBool("Idle_Climb", climbingLadder);
