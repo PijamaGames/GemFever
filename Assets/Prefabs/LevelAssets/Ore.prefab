@@ -111,6 +111,7 @@ MonoBehaviour:
   gemsPerPickaxeHit: 1
   timeToRegrow: 3
   valueIncreasePerRegrowth: 1
+  currentGemValue: 1
   gemPrefab: {fileID: 2156604997205699141, guid: 9f7405ca85c85254d806ce6830ccd6e4,
     type: 3}
   mineSound: {fileID: 0}
@@ -179,17 +180,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a434ccc43d02c7a45b69825a56e37e3e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 197.93001
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a434ccc43d02c7a45b69825a56e37e3e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 197.93001
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a434ccc43d02c7a45b69825a56e37e3e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 197.93001
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a434ccc43d02c7a45b69825a56e37e3e,
         type: 3}
