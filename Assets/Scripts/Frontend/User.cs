@@ -14,7 +14,7 @@ public class User
     public int avatar_bodyType = 0;
     public int avatar_skinTone = 0;
     public int avatar_color = 0;
-    public string avatar_face = "";
+    public int avatar_face = 0;
     public string avatar_hat = "";
     public string avatar_frame = "";
 

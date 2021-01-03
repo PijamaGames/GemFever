@@ -17,13 +17,10 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] private Mesh pants2;
     [SerializeField] private Mesh shirt1;
     [SerializeField] private Mesh shirt2;
-    [SerializeField] private Mesh scarf1;
-    [SerializeField] private Mesh scarf2;
 
     private Image[] skins;
     private Image[] colors;
 
-    public static Mesh scarf;
     public static Mesh pants;
     public static Mesh shirt;
 
@@ -33,7 +30,10 @@ public class CustomizeAvatarController : MonoBehaviour
     private System.Random rnd =new System.Random();
     public static bool body1Selected;
 
-    private Image[] faces; 
+    private Image[] faces;
+    public static int numBodies=2;
+
+    public static int faceTexture=0;
 
     private void Start()
     {
@@ -51,10 +51,10 @@ public class CustomizeAvatarController : MonoBehaviour
         }
 
         playerAvatar.SetUser(Client.user);
-        scarf = scarf1;
         shirt = shirt1;
         pants = pants1;
         playerAvatar.UpdateVisuals();
+        SetFacesButtonsColor(0);
 
     }
 
@@ -62,6 +62,15 @@ public class CustomizeAvatarController : MonoBehaviour
     {
         Client.user.avatar_skinTone = id;
         playerAvatar.UpdateVisuals();
+        SetFacesButtonsColor(id);
+    }
+
+    private void SetFacesButtonsColor(int id)
+    {
+        foreach (var f in faces)
+        {
+            f.color = skinColors[id];
+        }
     }
 
     public void SetSelectedColor(int id)
@@ -79,8 +88,10 @@ public class CustomizeAvatarController : MonoBehaviour
     {
         int randomColor= rnd.Next(favColors.Length);
         int randomSkin= rnd.Next(skinColors.Length);
-        int randomBody= rnd.Next(3);
+        int randomBody= rnd.Next(numBodies);
+        int randomFace= rnd.Next(FaceTextures.facesTextures.Length);
 
+        SetFace(randomFace);
         ChangeBody(randomBody==1);
         SetSelectedColor(randomColor);
         SetSelectedSkin(randomSkin);
@@ -88,14 +99,21 @@ public class CustomizeAvatarController : MonoBehaviour
 
     public void ChangeBody(bool body1)
     {
+        Client.user.avatar_bodyType = body1 ? 1 : 2;
         body1Selected = body1;
 
-        scarf = body1 ? scarf1 : scarf2;
         shirt = body1 ? shirt1 : shirt2;
         pants = body1 ? pants1 : pants2;
 
         body1Panel.SetActive(body1); 
         body2Panel.SetActive(!body1);
+        playerAvatar.UpdateVisuals();
+    }
+
+    public void SetFace(int id)
+    {
+        Client.user.avatar_face = id;
+        faceTexture=id;
         playerAvatar.UpdateVisuals();
     }
 
