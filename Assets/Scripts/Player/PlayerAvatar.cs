@@ -100,14 +100,14 @@ public class PlayerAvatar : MonoBehaviour
 
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
         pantsRenderer.sharedMesh = CustomizeAvatarController.pants;
-        //hatRenderer.sharedMesh = HatMeshes.hatsMeshes[hatId].sharedMesh;
+        hatRenderer.sharedMesh = HatMeshes.hatsMeshes[hatId].sharedMesh;
 
         faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);
         skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[skinId]);
         pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorPants);
         shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorShirt);
         scarfMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorScarf);
-        //hatMat.SetTexture("_BaseMap", HatMeshes.hatsMeshes[hatId].material.mainTexture);
+        hatMat.SetTexture("Texture2D_E0F6099E", HatMeshes.hatsMeshes[hatId].sharedMaterial.mainTexture);
 
     }
 }
