@@ -4,55 +4,36 @@ using UnityEngine;
 
 public class ClientInRoom : ClientState
 {
-    private enum FrontendEvents { SignedIn, SignedUp, WrongData };
-    private enum BackendEvents { SignIn, SignUp};
+    private enum FrontendEvents { Error, Exit };
+    private enum BackendEvents { Exit };
 
-    public delegate void WrongDataHandler(int error);
-    public static event WrongDataHandler wrongDataEvent;
+    public static int error;
 
     override public void Begin()
     {
         base.Begin();
-        SceneLoader.instance.LoadSingInScene();
+        SceneLoader.instance.LoadHubScene();
         Client.user = null;
+        Debug.Log("In room");
     }
 
-    public static void SignUp()
+    public static void Exit()
     {
-        BackendEvents evt = BackendEvents.SignUp;
+        BackendEvents evt = BackendEvents.Exit;
         var pairs = new KeyValuePair<string, object>[]
         {
             new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
-            new KeyValuePair<string, object>("username", UsefulFuncs.PrimitiveToJsonValue(Client.user.id)),
-            new KeyValuePair<string, object>("password", UsefulFuncs.PrimitiveToJsonValue(Client.user.password)),
         };
         string msg = UsefulFuncs.CombineJsons(pairs);
-
-        if(Client.instance != null && Client.instance.socket != null)
+        if (Client.instance != null && Client.instance.socket != null)
             Client.instance.socket.SendMessage(msg);
-    }
-
-    public static void SignIn()
-    {
-        BackendEvents evt = BackendEvents.SignIn;
-        var pairs = new KeyValuePair<string, object>[]
-        {
-            new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
-            new KeyValuePair<string, object>("username", UsefulFuncs.PrimitiveToJsonValue(Client.user.id)),
-            new KeyValuePair<string, object>("password", UsefulFuncs.PrimitiveToJsonValue(Client.user.password)),
-        };
-        string msg = UsefulFuncs.CombineJsons(pairs);
-        Client.instance.socket.SendMessage(msg);
+        GameManager.instance.BlockUI();
     }
 
     private class MsgStructure
     {
         public int evt = 0;
         public int error = -1;
-        public string user;
-        public bool hasEvent;
-        public string spanishMsg;
-        public string englishMsg;
     }
 
     override public void HandleMessage(ref string msg)
@@ -61,22 +42,14 @@ public class ClientInRoom : ClientState
         MsgStructure data = JsonUtility.FromJson<MsgStructure>(msg);
         FrontendEvents evt = (FrontendEvents)data.evt;
         Debug.Log("EVENT: " + evt);
-        User user = JsonUtility.FromJson<User>(data.user);
         switch (evt)
         {
-            case FrontendEvents.SignedIn:
-                Client.user = user;
-                ClientSignedIn.hasEvent = data.hasEvent;
-                ClientSignedIn.spanishMsg = data.spanishMsg;
-                ClientSignedIn.englishMsg = data.englishMsg;
+            case FrontendEvents.Error:
+                error = data.error;
                 Client.SetState(Client.signedInState);
                 break;
-            case FrontendEvents.SignedUp:
-                Client.user = user;
-                Client.SetState(Client.signedUpState);
-                break;
-            case FrontendEvents.WrongData:
-                wrongDataEvent.Invoke(data.error);
+            case FrontendEvents.Exit:
+                Client.SetState(Client.signedInState);
                 break;
         }
     }
