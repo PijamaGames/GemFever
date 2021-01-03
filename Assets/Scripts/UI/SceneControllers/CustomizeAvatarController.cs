@@ -25,7 +25,6 @@ public class CustomizeAvatarController : MonoBehaviour
     public static Mesh shirt;
 
     public static Color[] skinColors={ new Color(1f, 0.8789797f, 0.5707547f), new Color(255/255f,216/255f,177/255f), new Color(170/255f,127/255f,82/255f),new Color(125/255f,83/255f,42/255f), new Color(75/255f,44/255f,13/255f)};
-    //public static Color[] favColors={Color.black, Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta};
 
     private System.Random rnd =new System.Random();
     public static bool body1Selected;
@@ -33,7 +32,6 @@ public class CustomizeAvatarController : MonoBehaviour
     private Image[] faces;
     public static int numBodies=2;
 
-    public static int faceTexture=0;
 
     public static CharacterColors[] characterColors;
 
@@ -105,9 +103,9 @@ public class CustomizeAvatarController : MonoBehaviour
         int randomColor= rnd.Next(characterColors.Length);
         int randomSkin= rnd.Next(skinColors.Length);
         int randomBody= rnd.Next(numBodies);
-        int randomFace= rnd.Next(FaceTextures.facesTextures.Length);
+        int randomFace= rnd.Next(FaceTextures.facesTextures.Count);
 
-        SetFace(randomFace);
+        SetFace(FaceTextures.facesForRandom[randomFace]);
         ChangeBody(randomBody==1);
         SetSelectedColor(randomColor);
         SetSelectedSkin(randomSkin);
@@ -126,10 +124,9 @@ public class CustomizeAvatarController : MonoBehaviour
         playerAvatar.UpdateVisuals();
     }
 
-    public void SetFace(int id)
+    public void SetFace(string id)
     {
         Client.user.avatar_face = id;
-        faceTexture=id;
         playerAvatar.UpdateVisuals();
     }
 
