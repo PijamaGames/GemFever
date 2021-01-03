@@ -60,7 +60,7 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/HUB.unity
     guid: 10565115f46263f47bf1fd3391ded464
   - enabled: 1
-    path: Assets/Scenes/UI/Unused/Lobby.unity
+    path: Assets/Scenes/UI/Lobby.unity
     guid: 75bddbc7a391bd24b9621af74da16ab9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4c94ed76f44eb094484a7c51e29cc47a,

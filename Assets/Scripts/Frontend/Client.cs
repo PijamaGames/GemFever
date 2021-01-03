@@ -46,13 +46,9 @@ public class Client : MonoBehaviour
 
     public static void SetState(ClientState newState)
     {
-        Debug.Log(1);
         state?.Finish();
-        Debug.Log(4);
         state = newState;
-        Debug.Log(7);
         state.Begin();
-        Debug.Log(9);
     }
 
     public static bool IsCurrentState(ClientState _state)
