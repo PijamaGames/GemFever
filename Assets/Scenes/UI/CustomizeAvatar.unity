@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 2daeb08ad2707d14d8a387721c5c91e8,
+  m_LightingDataAsset: {fileID: 112000000, guid: 11f1179262301ab4bad23c13712fb150,
     type: 2}
   m_UseShadowmask: 0
 --- !u!196 &4
@@ -309,7 +309,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 132662529}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957822080}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 328257ff616dbe54ba2601ea9322c998, type: 3}
@@ -2702,42 +2702,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925948540}
   m_CullTransparentMesh: 0
---- !u!1 &1957822080 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2884888735722536223, guid: 7eec1e99c5b42db46880c9b102809f6b,
-    type: 3}
-  m_PrefabInstance: {fileID: 132662529}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1957822081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957822080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ced9d427e108044ac62480c13b24f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  faces:
-  - {fileID: 2800000, guid: 16f42f067855fde4197fbbc675b1c9a8, type: 3}
-  - {fileID: 2800000, guid: a410e3327be055243a514fb527e98d0d, type: 3}
---- !u!114 &1957822082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957822080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0357e1a72bd43443a787d3337200c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hats:
-  - {fileID: 1630794972795428178, guid: 218a894895c524841be6a9779e434d48, type: 3}
-  - {fileID: 2635460834990549039, guid: 218a894895c524841be6a9779e434d48, type: 3}
 --- !u!1 &1972470472
 GameObject:
   m_ObjectHideFlags: 0
@@ -3224,7 +3188,7 @@ Canvas:
   m_GameObject: {fileID: 2122151184}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1486381397}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
