@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     public bool isInLadder = false;
     public bool isStunned = false;
     public bool isInvulnerable = false;
+    //public bool touchingTheGround = false;
 
     //GemPouch
     [SerializeField] MeshRenderer pouchMeshRenderer;
@@ -254,7 +255,7 @@ public class Player : MonoBehaviour
             }
                 
             
-            if (joystick.y != 0 && !ladderTopReached)
+            if (!ladderTopReached && (joystick.y != 0 /*|| !touchingTheGround*/))
             {
                 playerMesh.transform.forward = Vector3.forward;
                 climbingAnimation = true;
