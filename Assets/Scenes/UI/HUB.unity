@@ -9734,7 +9734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ea74b4b68f0c74db29cb7a9f149ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPlayer: 0
   playerPrefab: {fileID: 390191191207065864, guid: 4a7e2be968660c748ab3696bf6d6e316,
     type: 3}
 --- !u!4 &1675842482
@@ -13335,6 +13334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInHub: 1
+  timeToKickOut: 60
   playerSpawnLocations:
   - {fileID: 3375942996530340426}
   - {fileID: 3375942996032943073}
