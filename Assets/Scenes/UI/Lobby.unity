@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 10
+    m_Top: 0
     m_Bottom: 15
   m_ChildAlignment: 1
   m_Spacing: 10
@@ -2323,7 +2323,7 @@ PrefabInstance:
     - target: {fileID: 1333670681700085073, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
@@ -3127,7 +3127,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1371219566}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.59459454
+  m_Size: 0.6055045
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
