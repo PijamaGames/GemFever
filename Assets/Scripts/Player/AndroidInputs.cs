@@ -34,7 +34,6 @@ public class AndroidInputs : MonoBehaviour
             Debug.Log("PlayerSpawned");
             spawnedPlayer = Instantiate(playerPrefab, transform.position, Quaternion.identity);
         }
-            
     }
 
     //Setters

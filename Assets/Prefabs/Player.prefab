@@ -253,6 +253,7 @@ MonoBehaviour:
   throwGemPosition: {fileID: 7575612818429767386}
   scoreIncrementPerGemStored: 0.1
   score: 0
+  joystick: {x: 0, y: 0}
   androidInputs: {fileID: 0}
   climbingLadder: 0
   pickaxeOnLadder: 0
@@ -261,7 +262,6 @@ MonoBehaviour:
   isInLadder: 0
   isStunned: 0
   isInvulnerable: 0
-  touchingTheGround: 0
   pouchMeshRenderer: {fileID: 54915547189966482}
   pouchMeshFilter: {fileID: 1624874949602743408}
   maxPouchSize: 4

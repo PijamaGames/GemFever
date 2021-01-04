@@ -941,6 +941,11 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "EmpyControlScheme",
+            "bindingGroup": "EmpyControlScheme",
+            "devices": []
         }
     ]
 }

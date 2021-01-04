@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     float maxVerticalSpeed;
 
     //Inputs
-    Vector2 joystick = Vector2.zero;
+    public Vector2 joystick = Vector2.zero;
     float throwGemInput = 0f;
     public AndroidInputs androidInputs;
 
@@ -132,6 +132,7 @@ public class Player : MonoBehaviour
     }
 
     #region Input Management Methods
+
     public void MovementInput(InputAction.CallbackContext context)
     {
         if (freeze) return;
