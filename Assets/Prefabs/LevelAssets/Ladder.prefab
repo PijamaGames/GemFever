@@ -255,6 +255,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ladder
       objectReference: {fileID: 0}
+    - target: {fileID: 1966323800915407497, guid: 4739399be1f45f44b8cb32772c64c4a3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4739399be1f45f44b8cb32772c64c4a3, type: 3}
 --- !u!4 &1654510399092625551 stripped

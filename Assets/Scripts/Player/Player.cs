@@ -55,7 +55,6 @@ public class Player : MonoBehaviour
     public bool isInLadder = false;
     public bool isStunned = false;
     public bool isInvulnerable = false;
-    //public bool touchingTheGround = false;
 
     //GemPouch
     [SerializeField] MeshRenderer pouchMeshRenderer;
@@ -217,7 +216,10 @@ public class Player : MonoBehaviour
         
         knockback = Vector3.zero;
 
-        if(GameManager.isHandheld)
+        if(!climbingLadder)
+            animator.speed = 1f;
+
+        if (GameManager.isHandheld)
             ThrowGem();
     }
 
@@ -246,7 +248,8 @@ public class Player : MonoBehaviour
 
             if(ladderTopReached)
             {
-                if(joystick.y < 0)
+                pickaxeOnLadder = false;
+                if (joystick.y < 0)
                     verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
             }
             else
@@ -530,14 +533,19 @@ public class Player : MonoBehaviour
         if(other.tag == "LadderTop")
         {
             pickaxeOnLadder = false;
+            //climbingLadder = false;
             ladderTopReached = false;
+            animator.speed = 1f;
         }
 
         if (other.tag == "Ladder")
         {
-            climbingLadder = false;
-
             rotateAnimation = true;
+
+            climbingLadder = false;
+            pickaxeOnLadder = false;
+            
+            ladderTopReached = false;
 
             animator.speed = 1f;
             animator.SetBool("Idle_Climb", false);
