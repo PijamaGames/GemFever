@@ -255,7 +255,7 @@ public class Player : MonoBehaviour
             }
                 
             
-            if (!ladderTopReached && (joystick.y != 0 || !touchingTheGround))
+            if (!ladderTopReached && (joystick.y != 0 /*|| !touchingTheGround*/))
             {
                 playerMesh.transform.forward = Vector3.forward;
                 climbingAnimation = true;

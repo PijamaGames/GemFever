@@ -11,7 +11,7 @@ public class PlayerFeet : MonoBehaviour
         if (other.tag == "Ladder")
         {
             Debug.Log("En escalera");
-            player.touchingTheGround = false;
+            //player.touchingTheGround = false;
         }
     }
 
@@ -20,7 +20,7 @@ public class PlayerFeet : MonoBehaviour
         if (other.tag == "Ladder")
         {
             Debug.Log("No en escalera");
-            player.touchingTheGround = true;
+            //player.touchingTheGround = true;
         }
     }
 }
