@@ -9,15 +9,19 @@ public class MoveButtonText : MonoBehaviour
 {
     [SerializeField] float moveYOnPressed = -4.5f;
 
-    private Vector3 originalPos;
+    private Vector3 []originalPos;
     private Button btn;
-    private TextMeshProUGUI text;
+    private TextMeshProUGUI []text;
 
     private void Start()
     {
         btn = GetComponent<Button>();
-        text = GetComponentInChildren<TextMeshProUGUI>();
-        originalPos = text.rectTransform.localPosition;
+        text = GetComponentsInChildren<TextMeshProUGUI>();
+        originalPos = new Vector3[text.Length];
+        for (int i=0;i<text.Length; i++)
+        {
+            originalPos[i] = text[i].rectTransform.localPosition;
+        }
 
         EventTrigger trigger = btn.gameObject.AddComponent<EventTrigger>();
         var pointerDown = new EventTrigger.Entry();
@@ -33,15 +37,26 @@ public class MoveButtonText : MonoBehaviour
 
     public void Pressed()
     {
-        Vector3 pos = originalPos;
-        pos.y += moveYOnPressed;
-        text.rectTransform.localPosition = pos;
+        Vector3 []pos=new Vector3[originalPos.Length];
+        
+        for (int i = 0; i < text.Length; i++)
+        {
+            pos[i] = originalPos[i];
+            pos[i].y+= moveYOnPressed;
+            text[i].rectTransform.localPosition = pos[i];
+        }
     }
 
     public void Released()
     {
-        Vector3 pos = originalPos;
-        pos.y -= moveYOnPressed;
-        text.rectTransform.localPosition = pos;
+        Vector3[] pos = new Vector3[originalPos.Length];
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            pos[i] = originalPos[i];
+            pos[i].y-= moveYOnPressed;
+            text[i].rectTransform.localPosition = pos[i];
+        }
+
     }
 }
