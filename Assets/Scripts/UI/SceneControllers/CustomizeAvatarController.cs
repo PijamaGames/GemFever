@@ -17,12 +17,15 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] private Mesh pants2;
     [SerializeField] private Mesh shirt1;
     [SerializeField] private Mesh shirt2;
+    [SerializeField] private Mesh hair1;
+    [SerializeField] private Mesh hair2;
 
     private Image[] skins;
     private Image[] colors;
 
     public static Mesh pants;
     public static Mesh shirt;
+    public static Mesh hair;
 
     public static Color[] skinColors={ new Color(1f, 0.8789797f, 0.5707547f), new Color(255/255f,216/255f,177/255f), new Color(170/255f,127/255f,82/255f),new Color(125/255f,83/255f,42/255f), new Color(75/255f,44/255f,13/255f)};
 
@@ -56,6 +59,7 @@ public class CustomizeAvatarController : MonoBehaviour
         playerAvatar.SetUser(Client.user);
         shirt = shirt1;
         pants = pants1;
+        hair = hair1;
         playerAvatar.UpdateVisuals();
         SetFacesButtonsColor(0);
 
@@ -120,6 +124,7 @@ public class CustomizeAvatarController : MonoBehaviour
 
         shirt = body1 ? shirt1 : shirt2;
         pants = body1 ? pants1 : pants2;
+        hair = body1 ? hair1 : hair2;
 
         body1Panel.SetActive(body1); 
         body2Panel.SetActive(!body1);

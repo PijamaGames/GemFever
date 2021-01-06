@@ -315,6 +315,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328257ff616dbe54ba2601ea9322c998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!137 &166342676 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4112984690662791721, guid: 218a894895c524841be6a9779e434d48,
+    type: 3}
+  m_PrefabInstance: {fileID: 119635440281787626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &188204366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2652,6 +2658,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: background1
       objectReference: {fileID: 0}
+    - target: {fileID: 4673411655989700176, guid: f3c39e253e2678042a89441a8c44ef1f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5445022989967949034, guid: f3c39e253e2678042a89441a8c44ef1f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3402,6 +3413,8 @@ MonoBehaviour:
   pants2: {fileID: 7666266049737368757, guid: d7816cd8f15055b42830778f5179a5a5, type: 3}
   shirt1: {fileID: 3900480760133451625, guid: 14b87a232f644294e819aaf951081496, type: 3}
   shirt2: {fileID: 3900480760133451625, guid: d7816cd8f15055b42830778f5179a5a5, type: 3}
+  hair1: {fileID: -3014937882001165872, guid: c295e98503be0334a920c264ac554bb0, type: 3}
+  hair2: {fileID: -3014937882001165872, guid: a42506199ba56a64eb4e011bf34fffff, type: 3}
 --- !u!224 &171545092544194197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8628,6 +8641,7 @@ MonoBehaviour:
   hatRenderer: {fileID: 119635440281787630}
   faceRenderer: {fileID: 119635440281787631}
   scarfRenderer: {fileID: 1666730208}
+  hairRenderer: {fileID: 166342676}
 --- !u!114 &7503028717641694391
 MonoBehaviour:
   m_ObjectHideFlags: 0

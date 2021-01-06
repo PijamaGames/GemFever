@@ -25,6 +25,9 @@ public class PlayerAvatar : MonoBehaviour
     [HideInInspector] Material scarfMat;
     [SerializeField] MeshRenderer scarfRenderer;
 
+    [HideInInspector] Material hairMat;
+    [SerializeField] SkinnedMeshRenderer hairRenderer;
+
     private int randomColor;
     private int randomSkin;
     private int randomFace;
@@ -51,7 +54,9 @@ public class PlayerAvatar : MonoBehaviour
         scarfMat = Instantiate(scarfRenderer.sharedMaterial);
         scarfRenderer.sharedMaterial = scarfMat;
 
-        
+        hairMat = Instantiate(hairRenderer.sharedMaterial);
+        hairRenderer.sharedMaterial = hairMat;
+
     }
 
     public void SetUser(User user)
@@ -100,6 +105,7 @@ public class PlayerAvatar : MonoBehaviour
 
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
         pantsRenderer.sharedMesh = CustomizeAvatarController.pants;
+        hairRenderer.sharedMesh = CustomizeAvatarController.hair;
         hatRenderer.sharedMesh = HatMeshes.hatsMeshes[hatId].sharedMesh;
 
         faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);
