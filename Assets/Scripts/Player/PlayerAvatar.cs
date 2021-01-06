@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAvatar : MonoBehaviour
 {
-    User user;
+    UserInfo userInfo;
     private System.Random rnd = new System.Random();
 
     [HideInInspector] Material skinMat;
@@ -28,10 +28,10 @@ public class PlayerAvatar : MonoBehaviour
     [HideInInspector] Material hairMat;
     [SerializeField] SkinnedMeshRenderer hairRenderer;
 
-    private int randomColor;
+    /*private int randomColor;
     private int randomSkin;
     private int randomFace;
-    private int randomHat;
+    private int randomHat;*/
 
     private void Awake()
     {
@@ -61,10 +61,26 @@ public class PlayerAvatar : MonoBehaviour
 
     public void SetUser(User user)
     {
-        this.user = user;
+        userInfo = new UserInfo();
+        userInfo.id = user.id;
+        userInfo.isHost = false;
+        userInfo.isClient = false;
+        userInfo.bodyType = user.avatar_bodyType;
+        userInfo.skinTone = user.avatar_skinTone;
+        userInfo.color = user.avatar_color;
+        userInfo.face = user.avatar_face;
+        userInfo.hat = user.avatar_hat;
+        userInfo.frame = user.avatar_frame;
+        UpdateVisuals();
     }
 
-    private void Random()
+    public void SetUserInfo(UserInfo info)
+    {
+        userInfo = info;
+        UpdateVisuals();
+    }
+
+    private void Random(out int randomColor,out int randomSkin,out int randomFace,out int randomHat)
     {
         randomColor = rnd.Next(CustomizeAvatarController.characterColors.Length);
         randomSkin = rnd.Next(CustomizeAvatarController.skinColors.Length);
@@ -79,9 +95,10 @@ public class PlayerAvatar : MonoBehaviour
         string faceId;
         string hatId;
 
-        if (user == null)
+        if (userInfo == null)
         {
-            Random();
+            int randomSkin, randomColor, randomFace, randomHat;
+            Random(out randomColor, out randomSkin, out randomFace, out randomHat);
             skinId = randomSkin;
             colorId = randomColor;
             faceId = FaceTextures.facesForRandom[randomFace];
@@ -89,18 +106,18 @@ public class PlayerAvatar : MonoBehaviour
         }
         else
         {
-            skinId = user.avatar_skinTone;
-            colorId = user.avatar_color;
+            skinId = userInfo.skinTone;
+            colorId = userInfo.color;
 
-            if (user.avatar_hat == "")
+            if (userInfo.hat == "")
                 hatId = HatMeshes.hatsForRandom[0];
             else
-                hatId = user.avatar_hat;
+                hatId = userInfo.hat;
 
-            if (user.avatar_face=="")
+            if (userInfo.face=="")
                 faceId=FaceTextures.facesForRandom[0]; 
             else    
-                faceId = user.avatar_face;
+                faceId = userInfo.face;
         }
 
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
@@ -114,6 +131,5 @@ public class PlayerAvatar : MonoBehaviour
         shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorShirt);
         scarfMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorScarf);
         hatMat.SetTexture("Texture2D_E0F6099E", HatMeshes.hatsMeshes[hatId].sharedMaterial.mainTexture);
-
     }
 }

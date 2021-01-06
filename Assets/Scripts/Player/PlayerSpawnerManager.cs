@@ -54,7 +54,19 @@ public class PlayerSpawnerManager : MonoBehaviour
                 hasJoined = true;
                 anyInputDone = true;
                 //TODO Avisar al server de que se quiere spawnear el jugador y hacer que lo cree el playerJoiner
-                SpawnPlayerAtLocation(playerInput.gameObject);
+                Player playerComp = SpawnPlayerAtLocation(playerInput.gameObject);
+                UserInfo userInfo = new UserInfo();
+                User user = Client.user;
+                userInfo.id = user.id;
+                userInfo.isHost = false;
+                userInfo.isClient = false;
+                userInfo.bodyType = user.avatar_bodyType;
+                userInfo.skinTone = user.avatar_skinTone;
+                userInfo.color = user.avatar_color;
+                userInfo.face = user.avatar_face;
+                userInfo.hat = user.avatar_hat;
+                userInfo.frame = user.avatar_frame;
+                playerComp.SetUserInfo(userInfo);
             }
             else
                 Destroy(playerInput.gameObject);
@@ -68,13 +80,15 @@ public class PlayerSpawnerManager : MonoBehaviour
             
     }
 
-    void SpawnPlayerAtLocation(GameObject player)
+    private Player SpawnPlayerAtLocation(GameObject player)
     {
         Vector3 availableLocation = playerSpawnLocations[currentPlayers].transform.position;
 
         currentPlayers++;
-        player.GetComponent<Player>().playerNumber = currentPlayers;
+        Player comp = player.GetComponent<Player>();
+        comp.playerNumber = currentPlayers;
 
         player.transform.position = availableLocation;
+        return comp;
     }
 }

@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    private PlayerAvatar avatar;
+    private UserInfo userInfo;
+
     [SerializeField] float startingHorizontalSpeed = 120f;
     [SerializeField] float startingMaxHorizontalSpeed = 10f;
     [Space]
@@ -89,6 +92,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        avatar = GetComponent<PlayerAvatar>();
         //Si es el jugador local
         androidInputs = FindObjectOfType<AndroidInputs>();
 
@@ -128,6 +132,19 @@ public class Player : MonoBehaviour
             joystick = androidInputs.GetMovementInput();
             throwGemInput = androidInputs.GetThrowGemInput();
         }
+    }
+
+    public UserInfo GetUserInfo()
+    {
+        return userInfo;
+    }
+
+    public void SetUserInfo(UserInfo info)
+    {
+        userInfo = info;
+        ClientInRoom.players.Add(info.id, this);
+        if (avatar == null) avatar = GetComponent<PlayerAvatar>();
+        avatar.SetUserInfo(userInfo);
     }
 
     #region Input Management Methods

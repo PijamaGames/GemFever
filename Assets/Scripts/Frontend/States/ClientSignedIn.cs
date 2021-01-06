@@ -47,12 +47,18 @@ public class ClientSignedIn : ClientState
         public bool isClient = false;
         public int error = -1;
         public string[] players;
+        public bool roomEvt = false;
     }
 
     public override void HandleMessage(ref string msg)
     {
         base.HandleMessage(ref msg);
         MsgStructure data = JsonUtility.FromJson<MsgStructure>(msg);
+        if (data.roomEvt)
+        {
+            ClientInRoom.queuedMessages.Add(msg);
+            return;
+        }
         FrontendEvents evt = (FrontendEvents)data.evt;
         Debug.Log("EVENT: " + evt);
         switch (evt)
