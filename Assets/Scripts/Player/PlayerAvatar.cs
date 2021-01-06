@@ -90,8 +90,8 @@ public class PlayerAvatar : MonoBehaviour
 
     private void Random(out int randomColor,out int randomSkin,out int randomFace,out int randomHat)
     {
-        randomColor = rnd.Next(CustomizeAvatarController.characterColors.Length);
-        randomSkin = rnd.Next(CustomizeAvatarController.skinColors.Length);
+        randomColor = rnd.Next(InicializeAvatarVariables.characterColors.Length);
+        randomSkin = rnd.Next(InicializeAvatarVariables.skinColors.Length);
         randomFace= rnd.Next(FaceTextures.facesTextures.Count);
         randomHat= rnd.Next(HatMeshes.hatsMeshes.Count);
     }
@@ -131,16 +131,16 @@ public class PlayerAvatar : MonoBehaviour
 
         if (!materialsInitiated) InitMaterials();
 
-        shirtRenderer.sharedMesh = CustomizeAvatarController.shirts[userInfo.bodyType];
-        pantsRenderer.sharedMesh = CustomizeAvatarController.pants[userInfo.bodyType];
-        hairRenderer.sharedMesh = CustomizeAvatarController.hairs[userInfo.bodyType];
+        shirtRenderer.sharedMesh = InicializeAvatarVariables.shirts[userInfo.bodyType];
+        pantsRenderer.sharedMesh = InicializeAvatarVariables.pants[userInfo.bodyType];
+        hairRenderer.sharedMesh = InicializeAvatarVariables.hairs[userInfo.bodyType];
         hatRenderer.sharedMesh = HatMeshes.hatsMeshes[hatId].sharedMesh;
 
         faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);
-        skinMat.SetColor("Color_398EEC7D", CustomizeAvatarController.skinColors[skinId]);
-        pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorPants);
-        shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorShirt);
-        scarfMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorScarf);
+        skinMat.SetColor("Color_398EEC7D", InicializeAvatarVariables.skinColors[skinId]);
+        pantsMat.SetColor("Color_398EEC7D", InicializeAvatarVariables.characterColors[colorId].colorPants);
+        shirtMat.SetColor("Color_398EEC7D", InicializeAvatarVariables.characterColors[colorId].colorShirt);
+        scarfMat.SetColor("Color_398EEC7D", InicializeAvatarVariables.characterColors[colorId].colorScarf);
         hatMat.SetTexture("Texture2D_E0F6099E", HatMeshes.hatsMeshes[hatId].sharedMaterial.mainTexture);
 
     }
