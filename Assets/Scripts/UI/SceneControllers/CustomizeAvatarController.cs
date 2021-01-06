@@ -14,12 +14,7 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] private GameObject body1Panel;
     [SerializeField] private GameObject body2Panel;
     [SerializeField] private GameObject layoutFaces;
-    [SerializeField] private Mesh pants1;
-    [SerializeField] private Mesh pants2;
-    [SerializeField] private Mesh shirt1;
-    [SerializeField] private Mesh shirt2;
-    [SerializeField] private Mesh hair1;
-    [SerializeField] private Mesh hair2;
+    
     [SerializeField] private Button back;
     [SerializeField] private Button next;
 
@@ -45,12 +40,7 @@ public class CustomizeAvatarController : MonoBehaviour
         }
 
         playerAvatar.SetUser(Client.user);
-        InicializeAvatarVariables.shirts[0] = shirt1;
-        InicializeAvatarVariables.shirts[1] = shirt2;
-        InicializeAvatarVariables.pants[0] = pants1;
-        InicializeAvatarVariables.pants[1] = pants2;
-        InicializeAvatarVariables.hairs[0] = hair1;
-        InicializeAvatarVariables.hairs[1] = hair2;
+        
         playerAvatar.UpdateVisuals();
         SetFacesButtonsColor(0);
 

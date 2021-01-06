@@ -75,7 +75,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faces:
   - {fileID: 2800000, guid: 16f42f067855fde4197fbbc675b1c9a8, type: 3}
-  - {fileID: 2800000, guid: a410e3327be055243a514fb527e98d0d, type: 3}
+  - {fileID: 2800000, guid: 5726bf8c5f7112e44ba4fe8c682836a0, type: 3}
+  - {fileID: 2800000, guid: 4b2caa6737112eb4eb05ee233dafef10, type: 3}
 --- !u!114 &1957822082
 MonoBehaviour:
   m_ObjectHideFlags: 0

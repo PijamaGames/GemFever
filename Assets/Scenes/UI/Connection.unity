@@ -645,6 +645,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b862ba0a397b78948b7098fe30b8bc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pants1: {fileID: 7666266049737368757, guid: 14b87a232f644294e819aaf951081496, type: 3}
+  pants2: {fileID: 7666266049737368757, guid: d7816cd8f15055b42830778f5179a5a5, type: 3}
+  shirt1: {fileID: 3900480760133451625, guid: 14b87a232f644294e819aaf951081496, type: 3}
+  shirt2: {fileID: 3900480760133451625, guid: d7816cd8f15055b42830778f5179a5a5, type: 3}
+  hair1: {fileID: -3014937882001165872, guid: c295e98503be0334a920c264ac554bb0, type: 3}
+  hair2: {fileID: -3014937882001165872, guid: a42506199ba56a64eb4e011bf34fffff, type: 3}
 --- !u!4 &1122728751
 Transform:
   m_ObjectHideFlags: 0

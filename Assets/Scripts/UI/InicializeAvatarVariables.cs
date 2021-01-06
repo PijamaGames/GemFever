@@ -14,12 +14,26 @@ public class InicializeAvatarVariables:MonoBehaviour
     private int numColors = 6;
     public static CharacterColors[] characterColors;
 
+    [SerializeField] private Mesh pants1;
+    [SerializeField] private Mesh pants2;
+    [SerializeField] private Mesh shirt1;
+    [SerializeField] private Mesh shirt2;
+    [SerializeField] private Mesh hair1;
+    [SerializeField] private Mesh hair2;
+
     private void Awake()
     {
         SetColors();
         shirts = new Mesh[numBodies];
         hairs = new Mesh[numBodies];
         pants = new Mesh[numBodies];
+
+        InicializeAvatarVariables.shirts[0] = shirt1;
+        InicializeAvatarVariables.shirts[1] = shirt2;
+        InicializeAvatarVariables.pants[0] = pants1;
+        InicializeAvatarVariables.pants[1] = pants2;
+        InicializeAvatarVariables.hairs[0] = hair1;
+        InicializeAvatarVariables.hairs[1] = hair2;
     }
 
     private void SetColors()

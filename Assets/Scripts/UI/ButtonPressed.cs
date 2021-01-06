@@ -43,6 +43,11 @@ public class ButtonPressed : MonoBehaviour
         pointerClick.callback.AddListener((e) => ChangeButton());
         trigger.triggers.Add(pointerClick);
 
+        if (text.name == "Body")
+        {
+            ChangeButton();
+        }
+
     }
 
     private void ChangeButton()
