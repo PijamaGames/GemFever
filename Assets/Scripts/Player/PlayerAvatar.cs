@@ -21,7 +21,7 @@ public class PlayerAvatar : MonoBehaviour
 
     [HideInInspector] Material faceMat;
     [SerializeField] SkinnedMeshRenderer faceRenderer;
-    
+
     [HideInInspector] Material scarfMat;
     [SerializeField] MeshRenderer scarfRenderer;
 
@@ -50,7 +50,7 @@ public class PlayerAvatar : MonoBehaviour
 
         faceMat = Instantiate(faceRenderer.sharedMaterial);
         faceRenderer.sharedMaterial = faceMat;
-        
+
         scarfMat = Instantiate(scarfRenderer.sharedMaterial);
         scarfRenderer.sharedMaterial = scarfMat;
 
@@ -115,7 +115,7 @@ public class PlayerAvatar : MonoBehaviour
                 hatId = userInfo.hat;
 
             if (userInfo.face=="")
-                faceId=FaceTextures.facesForRandom[0]; 
+                faceId=FaceTextures.facesForRandom[0];
             else    
                 faceId = userInfo.face;
         }
@@ -130,6 +130,7 @@ public class PlayerAvatar : MonoBehaviour
         pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorPants);
         shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorShirt);
         scarfMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorScarf);
-        hatMat.SetTexture("Texture2D_E0F6099E", HatMeshes.hatsMeshes[hatId].sharedMaterial.mainTexture);
+        //hatMat.SetTexture("Texture2D_E0F6099E", HatMeshes.hatsMeshes[hatId].sharedMaterial.mainTexture);
+
     }
 }

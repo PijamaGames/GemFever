@@ -89,5 +89,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hats:
-  - {fileID: 1630794972795428178, guid: 218a894895c524841be6a9779e434d48, type: 3}
-  - {fileID: 2635460834990549039, guid: 218a894895c524841be6a9779e434d48, type: 3}
+  - {fileID: 5765282401118664700, guid: 71944ab221d861043b644f1aa474e426, type: 3}
+  - {fileID: 2635460834990549039, guid: 5b632e027f641674ca6c26a4308b8854, type: 3}
