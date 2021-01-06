@@ -25,7 +25,9 @@ public class PlayerJoiner : MonoBehaviour
     public Player SpawnPlayerWithEmptyControlScheme()
     {
         Player spawnedPlayer = Instantiate(playerPrefab, transform.position, Quaternion.identity);
-        spawnedPlayer.GetComponent<PlayerInput>().SwitchCurrentControlScheme("EmpyControlScheme");
+        PlayerInput playerInput = spawnedPlayer.GetComponent<PlayerInput>();
+        //playerInput.SwitchCurrentControlScheme("EmpyControlScheme");
+        //spawnedPlayer.GetComponent<PlayerInput>().SwitchCurrentControlScheme("EmpyControlScheme");
         return spawnedPlayer;
     }
 

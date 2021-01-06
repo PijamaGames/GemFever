@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClientSignedUp : ClientState
 {
     private enum FrontendEvents { SignedIn };
-    private enum BackendEvents {SignIn };
+    private enum BackendEvents {SignIn, Save };
 
     override public void Begin()
     {
@@ -40,6 +40,20 @@ public class ClientSignedUp : ClientState
                 Client.SetState(Client.signedInState);
                 break;
         }
+    }
+
+    public static void SaveInfo()
+    {
+        BackendEvents evt = BackendEvents.Save;
+        var pairs = new KeyValuePair<string, object>[]
+        {
+            new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
+            new KeyValuePair<string, object>("user", JsonUtility.ToJson(Client.user)),
+        };
+        string msg = UsefulFuncs.CombineJsons(pairs);
+
+        if (Client.instance != null && Client.instance.socket != null)
+            Client.instance.socket.SendMessage(msg);
     }
 
     public static void SignIn()

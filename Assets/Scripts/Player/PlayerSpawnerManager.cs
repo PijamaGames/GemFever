@@ -51,9 +51,9 @@ public class PlayerSpawnerManager : MonoBehaviour
 
             if (!hasJoined)
             {
+                //TODO Avisar al server de que se quiere spawnear el jugador y hacer que lo cree el playerJoiner
                 hasJoined = true;
                 anyInputDone = true;
-                //TODO Avisar al server de que se quiere spawnear el jugador y hacer que lo cree el playerJoiner
                 Player playerComp = SpawnPlayerAtLocation(playerInput.gameObject);
                 UserInfo userInfo = new UserInfo();
                 User user = Client.user;
@@ -77,7 +77,6 @@ public class PlayerSpawnerManager : MonoBehaviour
             anyInputDone = true;
             SpawnPlayerAtLocation(playerInput.gameObject);
         }
-            
     }
 
     private Player SpawnPlayerAtLocation(GameObject player)
