@@ -38,9 +38,8 @@ public class CustomizeAvatarController : MonoBehaviour
 
     public static CharacterColors[] characterColors;
 
-    private void Start()
+    private void Awake()
     {
-       
         skins = skinParent.GetComponentsInChildren<Image>();
         colors = colorParent.GetComponentsInChildren<Image>();
         faces= layoutFaces.GetComponentsInChildren<Image>();
@@ -62,7 +61,6 @@ public class CustomizeAvatarController : MonoBehaviour
         hair = hair1;
         playerAvatar.UpdateVisuals();
         SetFacesButtonsColor(0);
-
     }
 
     private void SetColors()

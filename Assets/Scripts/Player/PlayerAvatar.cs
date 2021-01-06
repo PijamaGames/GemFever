@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAvatar : MonoBehaviour
 {
+    User user;
     UserInfo userInfo;
     private System.Random rnd = new System.Random();
 
@@ -32,9 +33,20 @@ public class PlayerAvatar : MonoBehaviour
     private int randomSkin;
     private int randomFace;
     private int randomHat;*/
+    bool materialsInitiated = false;
 
     private void Awake()
     {
+        if (!materialsInitiated)
+        {
+            InitMaterials();
+        }
+        
+    }
+
+    private void InitMaterials()
+    {
+        materialsInitiated = true;
 
         skinMat = Instantiate(skinRenderer.sharedMaterial);
         skinRenderer.sharedMaterial = skinMat;
@@ -56,11 +68,11 @@ public class PlayerAvatar : MonoBehaviour
 
         hairMat = Instantiate(hairRenderer.sharedMaterial);
         hairRenderer.sharedMaterial = hairMat;
-
     }
 
     public void SetUser(User user)
     {
+        this.user = user;
         userInfo = new UserInfo();
         userInfo.id = user.id;
         userInfo.isHost = false;
@@ -71,7 +83,7 @@ public class PlayerAvatar : MonoBehaviour
         userInfo.face = user.avatar_face;
         userInfo.hat = user.avatar_hat;
         userInfo.frame = user.avatar_frame;
-        UpdateVisuals();
+        //UpdateVisuals();
     }
 
     public void SetUserInfo(UserInfo info)
@@ -90,6 +102,7 @@ public class PlayerAvatar : MonoBehaviour
 
     public void UpdateVisuals()
     {
+        if (user != null) SetUser(user);
         int skinId;
         int colorId;
         string faceId;
@@ -109,16 +122,18 @@ public class PlayerAvatar : MonoBehaviour
             skinId = userInfo.skinTone;
             colorId = userInfo.color;
 
-            if (userInfo.hat == "")
+            if (!HatMeshes.hatsMeshes.ContainsKey(userInfo.hat))
                 hatId = HatMeshes.hatsForRandom[0];
             else
                 hatId = userInfo.hat;
 
-            if (userInfo.face=="")
+            if (!FaceTextures.facesTextures.ContainsKey(userInfo.face))
                 faceId=FaceTextures.facesForRandom[0];
             else    
                 faceId = userInfo.face;
         }
+
+        if (!materialsInitiated) InitMaterials();
 
         shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
         pantsRenderer.sharedMesh = CustomizeAvatarController.pants;

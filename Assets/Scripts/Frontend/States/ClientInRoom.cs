@@ -16,7 +16,6 @@ public class ClientInRoom : ClientState
     {
         base.Begin();
         SceneLoader.instance.LoadHubScene();
-        Client.user = null;
         Debug.Log("In room");
         string message;
         foreach(var m in queuedMessages)

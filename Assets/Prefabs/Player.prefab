@@ -313,6 +313,7 @@ MonoBehaviour:
   hatRenderer: {fileID: 2682472360329684949}
   faceRenderer: {fileID: 1960957945166073310}
   scarfRenderer: {fileID: 7438174893636077708}
+  hairRenderer: {fileID: 1230973479218423835}
 --- !u!114 &388299579251914336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,6 +857,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218a894895c524841be6a9779e434d48, type: 3}
+--- !u!137 &1230973479218423835 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8017449571587430431, guid: 218a894895c524841be6a9779e434d48,
+    type: 3}
+  m_PrefabInstance: {fileID: 119635440882012154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &1960957945166073310 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1918462042684736036, guid: 218a894895c524841be6a9779e434d48,
