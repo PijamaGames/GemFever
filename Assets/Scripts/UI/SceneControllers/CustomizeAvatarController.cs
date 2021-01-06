@@ -4,6 +4,7 @@ using System.Runtime.ExceptionServices;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Events;
 
 public class CustomizeAvatarController : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] private Mesh shirt2;
     [SerializeField] private Mesh hair1;
     [SerializeField] private Mesh hair2;
+    [SerializeField] private Button back;
+    [SerializeField] private Button next;
+
+
 
     private Image[] skins;
     private Image[] colors;
@@ -61,6 +66,16 @@ public class CustomizeAvatarController : MonoBehaviour
         hair = hair1;
         playerAvatar.UpdateVisuals();
         SetFacesButtonsColor(0);
+
+        if (Client.state == Client.signedUpState)
+        {
+            next.gameObject.SetActive(true);
+        }
+        else
+        {
+            back.onClick.AddListener(SaveUserInfo);
+            next.gameObject.SetActive(false);
+        }
     }
 
     private void SetColors()
@@ -95,7 +110,7 @@ public class CustomizeAvatarController : MonoBehaviour
         playerAvatar.UpdateVisuals();
     }
 
-    public void NextScene()
+    public void SaveUserInfo()
     {
         ClientSignedIn.SaveInfo();
     }

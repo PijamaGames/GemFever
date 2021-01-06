@@ -11,8 +11,7 @@ public class ClientSignedUp : ClientState
     {
         base.Begin();
         Debug.Log("Signed up");
-        //SceneLoader.instance.LoadCustomizeAvatarScene();
-        SceneLoader.instance.LoadHowToPlayScene();
+        SceneLoader.instance.LoadCustomizeAvatarScene();
     }
 
     private class MsgStructure
