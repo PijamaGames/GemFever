@@ -113,7 +113,7 @@ public class PlayerAvatar : MonoBehaviour
         pantsMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorPants);
         shirtMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorShirt);
         scarfMat.SetColor("Color_398EEC7D", CustomizeAvatarController.characterColors[colorId].colorScarf);
-        hatMat.SetTexture("Texture2D_E0F6099E", HatMeshes.hatsMeshes[hatId].sharedMaterial.mainTexture);
+        //hatMat.SetTexture("Texture2D_E0F6099E", HatMeshes.hatsMeshes[hatId].sharedMaterial.mainTexture);
 
     }
 }
