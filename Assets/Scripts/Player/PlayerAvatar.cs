@@ -29,10 +29,6 @@ public class PlayerAvatar : MonoBehaviour
     [HideInInspector] Material hairMat;
     [SerializeField] SkinnedMeshRenderer hairRenderer;
 
-    /*private int randomColor;
-    private int randomSkin;
-    private int randomFace;
-    private int randomHat;*/
     bool materialsInitiated = false;
 
     private void Awake()
@@ -135,9 +131,9 @@ public class PlayerAvatar : MonoBehaviour
 
         if (!materialsInitiated) InitMaterials();
 
-        shirtRenderer.sharedMesh = CustomizeAvatarController.shirt;
-        pantsRenderer.sharedMesh = CustomizeAvatarController.pants;
-        hairRenderer.sharedMesh = CustomizeAvatarController.hair;
+        shirtRenderer.sharedMesh = CustomizeAvatarController.shirts[userInfo.bodyType];
+        pantsRenderer.sharedMesh = CustomizeAvatarController.pants[userInfo.bodyType];
+        hairRenderer.sharedMesh = CustomizeAvatarController.hairs[userInfo.bodyType];
         hatRenderer.sharedMesh = HatMeshes.hatsMeshes[hatId].sharedMesh;
 
         faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);

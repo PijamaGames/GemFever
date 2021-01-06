@@ -23,14 +23,12 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] private Button back;
     [SerializeField] private Button next;
 
-
-
     private Image[] skins;
     private Image[] colors;
 
-    public static Mesh pants;
-    public static Mesh shirt;
-    public static Mesh hair;
+    public static Mesh[] pants;
+    public static Mesh[] shirts;
+    public static Mesh[] hairs;
 
     public static Color[] skinColors={ new Color(1f, 0.8789797f, 0.5707547f), new Color(255/255f,216/255f,177/255f), new Color(170/255f,127/255f,82/255f),new Color(125/255f,83/255f,42/255f), new Color(75/255f,44/255f,13/255f)};
 
@@ -48,6 +46,9 @@ public class CustomizeAvatarController : MonoBehaviour
         skins = skinParent.GetComponentsInChildren<Image>();
         colors = colorParent.GetComponentsInChildren<Image>();
         faces= layoutFaces.GetComponentsInChildren<Image>();
+        shirts = new Mesh[numBodies];
+        hairs = new Mesh[numBodies];
+        pants = new Mesh[numBodies];
 
         SetColors();
 
@@ -61,19 +62,28 @@ public class CustomizeAvatarController : MonoBehaviour
         }
 
         playerAvatar.SetUser(Client.user);
-        shirt = shirt1;
-        pants = pants1;
-        hair = hair1;
+        shirts[0] = shirt1;
+        shirts[1] = shirt2;
+        pants[0] = pants1;
+        pants[1] = pants2;
+        hairs[0] = hair1;
+        hairs[1] = hair2;
         playerAvatar.UpdateVisuals();
         SetFacesButtonsColor(0);
+
+        body1Panel.SetActive(Client.user.avatar_bodyType==0);
+        body2Panel.SetActive(Client.user.avatar_bodyType == 1);
 
         if (Client.state == Client.signedUpState)
         {
             next.gameObject.SetActive(true);
+            next.onClick.AddListener(ClientSignedUp.SaveInfo);
+            back.onClick.RemoveListener(ClientSignedIn.SaveInfo);
         }
         else
         {
-            back.onClick.AddListener(SaveUserInfo);
+            next.onClick.RemoveListener(ClientSignedUp.SaveInfo);
+            back.onClick.AddListener(ClientSignedIn.SaveInfo);
             next.gameObject.SetActive(false);
         }
     }
@@ -110,11 +120,6 @@ public class CustomizeAvatarController : MonoBehaviour
         playerAvatar.UpdateVisuals();
     }
 
-    public void SaveUserInfo()
-    {
-        ClientSignedIn.SaveInfo();
-    }
-
     public void Random()
     {
         int randomColor= rnd.Next(characterColors.Length);
@@ -132,12 +137,8 @@ public class CustomizeAvatarController : MonoBehaviour
 
     public void ChangeBody(bool body1)
     {
-        Client.user.avatar_bodyType = body1 ? 1 : 2;
+        Client.user.avatar_bodyType = body1 ? 0 : 1;
         body1Selected = body1;
-
-        shirt = body1 ? shirt1 : shirt2;
-        pants = body1 ? pants1 : pants2;
-        hair = body1 ? hair1 : hair2;
 
         body1Panel.SetActive(body1); 
         body2Panel.SetActive(!body1);
