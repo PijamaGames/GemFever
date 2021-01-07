@@ -43,6 +43,7 @@ public class ShopController : MonoBehaviour
         if (!selectedHat)
         {
             buyBtn.gameObject.SetActive(true);
+            selectedHat = true;
         }
         hat = id;
     }
@@ -51,6 +52,7 @@ public class ShopController : MonoBehaviour
         if (!selectedPack)
         {
             buyBtn.gameObject.SetActive(true);
+            selectedPack=true;
         }
         pack = numGems;
     }
@@ -61,6 +63,7 @@ public class ShopController : MonoBehaviour
         if (!selectedFace)
         {
             buyBtn.gameObject.SetActive(true);
+            selectedFace = true;
         }
         face = id;
     }
@@ -81,7 +84,7 @@ public class ShopController : MonoBehaviour
         }
         else if (selectedPack)
         {
-            Client.user.gems = pack;
+            Client.user.gems += pack;
         }
         UpdateGems();
         ClientSignedIn.SaveInfo();
