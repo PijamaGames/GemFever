@@ -19,8 +19,29 @@ public class ShopController : MonoBehaviour
     [SerializeField] private Button buyBtn;
     [SerializeField] private GameObject confirmPanel;
     [SerializeField] private TextMeshProUGUI numGems;
+    
+    [SerializeField] private Texture[] shopFaces;
+    [SerializeField] private int[] facesPrice;
+    [SerializeField] private Texture[] shopHats;
+    [SerializeField] private int[] hatsPrice;
+
+    private Dictionary<string, int> hats;
+    private Dictionary<string, int> faces;
+
+
     void Start()
     {
+        hats = new Dictionary<string, int>();
+        faces = new Dictionary<string, int>();
+        for (int i=0; i < facesPrice.Length; i++)
+        {
+            faces.Add(shopFaces[i].name, facesPrice[i]);
+        }
+        for (int i = 0; i < hatsPrice.Length; i++)
+        {
+            hats.Add(shopHats[i].name, hatsPrice[i]);
+        }
+
         selectedPack = false;
         selectedFace = false;
         selectedHat = false;
@@ -74,13 +95,15 @@ public class ShopController : MonoBehaviour
         {
             List<string> aux = new List<string>(Client.user.items_faces);
             aux.Add(face);
-            Client.user.items_faces = aux.ToArray();
+            if (Client.user.gems >= faces[face]) Client.user.gems -= faces[face];
+            //Client.user.items_faces = aux.ToArray();
         }
         else if (selectedHat)
         {
             List<string> aux = new List<string>(Client.user.items_hats);
             aux.Add(hat);
-            Client.user.items_hats = aux.ToArray();
+            if(Client.user.gems >= hats[hat])Client.user.gems -= hats[hat];
+            //Client.user.items_hats = aux.ToArray();
         }
         else if (selectedPack)
         {

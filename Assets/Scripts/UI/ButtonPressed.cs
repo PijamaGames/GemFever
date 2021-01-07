@@ -43,7 +43,7 @@ public class ButtonPressed : MonoBehaviour
         pointerClick.callback.AddListener((e) => ChangeButton());
         trigger.triggers.Add(pointerClick);
 
-        if (text.name == "Body")
+        if (text.name == "Body" || text.name=="ShopFace")
         {
             ChangeButton();
         }
