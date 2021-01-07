@@ -48,7 +48,7 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/Unused/Friends.unity
     guid: 5a8a45c4f0911cc41926082daf56b5bc
   - enabled: 1
-    path: Assets/Scenes/UI/Unused/HUBSettings.unity
+    path: Assets/Scenes/UI/Levels.unity
     guid: f2171cf6b392e9340a0cb5d5dee39167
   - enabled: 1
     path: Assets/Scenes/UI/SignIn.unity

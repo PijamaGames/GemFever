@@ -20,7 +20,7 @@ public class SceneLoader : MonoBehaviour
     public const string friendsScene = "Friends";
     public const string connectionScene = "Connection";
     public const string hubScene = "HUB";
-    public const string hubSettingsScene = "HUBSettings";
+    public const string levelsScene = "Levels";
     public const string lobbyScene = "Lobby";
     public const string eventViewScene = "EventView";
     public const string gameScene = "Game";
@@ -122,35 +122,14 @@ public class SceneLoader : MonoBehaviour
     {
         LoadScene(hubScene);
     }
-    public void LoadHubSettingsScene()
+    public void LoadLevelsScene()
     {
-        LoadScene(hubSettingsScene);
+        LoadScene(levelsScene);
     }
     public void LoadLobbyScene()
     {
         LoadScene(lobbyScene);
     }
-    /*public static void LoadUsernameScene()
-    {
-        LoadScene(usernameScene);
-    }
-    public static void LoadVictoryScene()
-    {
-        LoadScene(victoryScene);
-    }
-    public static void LoadLevelsScene()
-    {
-        LoadScene(levelsScene);
-    }
-    public static void LoadGameScene()
-    {
-        LoadScene(gameScene);
-    }
-    
-    public static void LoadRankingScene()
-    {
-        LoadScene(rankingScene);
-    }*/
 
     public void LoadPreviousScene()
     {

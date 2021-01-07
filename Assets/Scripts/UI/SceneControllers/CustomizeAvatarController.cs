@@ -90,8 +90,8 @@ public class CustomizeAvatarController : MonoBehaviour
         int randomFace= rnd.Next(FaceTextures.facesTextures.Count);
         int randomHat = rnd.Next(HatMeshes.hatsMeshes.Count);
 
-        SetHat(HatMeshes.hatsForRandom[randomHat]);
-        SetFace(FaceTextures.facesForRandom[randomFace]);
+        SetCodeHat(HatMeshes.hatsForRandom[randomHat]);
+        SetFaceCode(FaceTextures.facesForRandom[randomFace]);
         ChangeBody(randomBody==1);
         SetSelectedColor(randomColor);
         SetSelectedSkin(randomSkin);
@@ -107,17 +107,30 @@ public class CustomizeAvatarController : MonoBehaviour
         playerAvatar.UpdateVisuals();
     }
 
-    public void SetFace(string id)
+    private void SetFaceCode(String id)
     {
         Client.user.avatar_face = id;
         playerAvatar.UpdateVisuals();
     }
 
-    public void SetHat(string id)
+    public void SetFace(Texture text)
+    {
+        string id = text.name;
+        Client.user.avatar_face = id;
+        playerAvatar.UpdateVisuals();
+    }
+
+    private void SetCodeHat(string id)
     {
         Client.user.avatar_hat = id;
         playerAvatar.UpdateVisuals();
     }
-    
+    public void SetHat(Texture text)
+    {
+        string id = text.name;
+        Client.user.avatar_hat = id;
+        playerAvatar.UpdateVisuals();
+    }
+
 
 }

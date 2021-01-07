@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public static bool english = false;
     public static string username = "";
 
+    public static int levelId=0;
+
     private static bool firstInstance = true;
     public static GameManager instance = null;
 
