@@ -42,14 +42,8 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/Unused/ChangePassword.unity
     guid: 5c48e70ce87d2bb488fdc9107d6c1891
   - enabled: 1
-    path: Assets/Scenes/UI/Shop.unity
-    guid: 6f0166e18bdafda4189a1e3648aef1a9
-  - enabled: 1
     path: Assets/Scenes/UI/Unused/Friends.unity
     guid: 5a8a45c4f0911cc41926082daf56b5bc
-  - enabled: 1
-    path: Assets/Scenes/UI/Levels.unity
-    guid: f2171cf6b392e9340a0cb5d5dee39167
   - enabled: 1
     path: Assets/Scenes/UI/SignIn.unity
     guid: 895c183fe6e60c140afa56abb328fb92
@@ -57,11 +51,17 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/SignUp.unity
     guid: 7a8a3e72506df1e42b5c9fdfc7412dcb
   - enabled: 1
-    path: Assets/Scenes/UI/HUB.unity
-    guid: 10565115f46263f47bf1fd3391ded464
+    path: Assets/Scenes/UI/Levels.unity
+    guid: 17f36e4b187785a4ab2a8cba08418b2c
   - enabled: 1
     path: Assets/Scenes/UI/Lobby.unity
-    guid: 75bddbc7a391bd24b9621af74da16ab9
+    guid: 99195dfe22404b342a5d27e792baf489
+  - enabled: 1
+    path: Assets/Scenes/UI/Shop.unity
+    guid: a1eb839e8351a3644b8d37e3b93612b5
+  - enabled: 1
+    path: Assets/Scenes/UI/HUB.unity
+    guid: 10565115f46263f47bf1fd3391ded464
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4c94ed76f44eb094484a7c51e29cc47a,
       type: 2}

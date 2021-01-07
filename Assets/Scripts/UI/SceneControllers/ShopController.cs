@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Channels;
+using TMPro;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class ShopController : MonoBehaviour
 
     [SerializeField] private Button buyBtn;
     [SerializeField] private GameObject confirmPanel;
+    [SerializeField] private TextMeshProUGUI numGems;
     void Start()
     {
         selectedPack = false;
@@ -24,6 +26,7 @@ public class ShopController : MonoBehaviour
         selectedHat = false;
         buyBtn.gameObject.SetActive(false);
         confirmPanel.SetActive(false);
+        UpdateGems();
     }
 
     public void OnClickChoiceButton()
@@ -80,8 +83,13 @@ public class ShopController : MonoBehaviour
         {
             Client.user.gems = pack;
         }
-
+        UpdateGems();
         ClientSignedIn.SaveInfo();
     }
-   
+
+    private void UpdateGems()
+    {
+        numGems.SetText("" + Client.user.gems); 
+    }
+
 }
