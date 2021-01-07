@@ -1003,7 +1003,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2884888736238635860}
-        m_MethodName: LoadHubScene
+        m_MethodName: LoadLevelsScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2159,7 +2159,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requestRoomsInterval: 4
-  createRoomBtn: {fileID: 908394602}
   joinRandomBtn: {fileID: 734617270}
   roomInfoPrefab: {fileID: 4387724699726121603, guid: 3f30dae14d599394ca1cb426f254bdee,
     type: 3}
@@ -2262,7 +2261,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1371219567}
   m_HandleRect: {fileID: 1371219566}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

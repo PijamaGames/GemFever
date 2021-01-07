@@ -7,7 +7,6 @@ public class LobbyController : MonoBehaviour
 {
     [SerializeField] float requestRoomsInterval = 4f;
 
-    [SerializeField] Button createRoomBtn;
     [SerializeField] Button joinRandomBtn;
 
     [SerializeField] GameObject roomInfoPrefab;
@@ -25,10 +24,7 @@ public class LobbyController : MonoBehaviour
             roomInfoViews[i].UpdateVisuals(null);
         }
 
-        createRoomBtn.onClick.AddListener(() =>
-        {
-            ClientSignedIn.CreateRoom();
-        });
+        
         joinRandomBtn.onClick.AddListener(() =>
         {
             ClientSignedIn.JoinRoom("");

@@ -29,6 +29,6 @@ public class LevelsController : MonoBehaviour
     public void NextScene()
     {
         GameManager.levelId = levelSelected;
+        ClientSignedIn.CreateRoom();
     }
-
 }

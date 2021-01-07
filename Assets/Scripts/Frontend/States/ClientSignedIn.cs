@@ -48,6 +48,7 @@ public class ClientSignedIn : ClientState
         public int error = -1;
         public string[] players;
         public bool roomEvt = false;
+        public int level = 0;
     }
 
     public override void HandleMessage(ref string msg)
@@ -74,6 +75,7 @@ public class ClientSignedIn : ClientState
                 //TODO: DISPLAY ERROR IN LOBBY
                 break;
             case FrontendEvents.InRoom:
+                GameManager.levelId = data.level;
                 Client.SetState(Client.inRoomState);
                 break;
             case FrontendEvents.GetRooms:
@@ -112,6 +114,7 @@ public class ClientSignedIn : ClientState
         var pairs = new KeyValuePair<string, object>[]
         {
             new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
+            new KeyValuePair<string, object>("level", UsefulFuncs.PrimitiveToJsonValue(GameManager.levelId)),
         };
         string msg = UsefulFuncs.CombineJsons(pairs);
 
