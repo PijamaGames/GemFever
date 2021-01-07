@@ -63,9 +63,9 @@ public class Client : MonoBehaviour
     {
         while(true)
         {
-            if(state == inRoomState)
+            yield return new WaitForSeconds(1f / syncRate);
+            if (state == inRoomState)
             {
-                yield return new WaitForSeconds(1f / syncRate);
                 inRoomState.SendNetworkObjs();
             }
         }
