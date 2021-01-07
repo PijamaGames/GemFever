@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Channels;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour
 {
-    private bool selectedFace=false;
-    private bool selectedHat =false;
-    private bool selectedPack =false;
+    private bool selectedFace;
+    private bool selectedHat;
+    private bool selectedPack;
 
     private string face = "";
     private string hat = "";
@@ -18,6 +19,9 @@ public class ShopController : MonoBehaviour
     [SerializeField] private GameObject confirmPanel;
     void Start()
     {
+        selectedPack = false;
+        selectedFace = false;
+        selectedHat = false;
         buyBtn.gameObject.SetActive(false);
         confirmPanel.SetActive(false);
     }
@@ -39,13 +43,13 @@ public class ShopController : MonoBehaviour
         }
         hat = id;
     }
-    public void OnClickPack(int id)
+    public void OnClickPack(int numGems)
     {
         if (!selectedPack)
         {
             buyBtn.gameObject.SetActive(true);
         }
-        pack = id;
+        pack = numGems;
     }
 
     public void OnClickFace(Texture text)
@@ -60,8 +64,24 @@ public class ShopController : MonoBehaviour
 
     public void OnClickConfirm()
     {
-        //METER LO QUE SE HAYA COMPRADO EN LA VARIABLE DE PEDRO
-        
+        if (selectedFace)
+        {
+            List<string> aux = new List<string>(Client.user.items_faces);
+            aux.Add(face);
+            Client.user.items_faces = aux.ToArray();
+        }
+        else if (selectedHat)
+        {
+            List<string> aux = new List<string>(Client.user.items_hats);
+            aux.Add(hat);
+            Client.user.items_hats = aux.ToArray();
+        }
+        else if (selectedPack)
+        {
+            Client.user.gems = pack;
+        }
+
+        ClientSignedIn.SaveInfo();
     }
    
 }
