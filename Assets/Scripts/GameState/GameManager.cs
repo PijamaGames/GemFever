@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
 
     public static bool isLocalGame = true;
 
+    public static bool isHost = false;
+    public static bool isClient = false;
+
     //private static string saveFilePath;
 
     [DllImport("__Internal")]

@@ -18,6 +18,8 @@ public class Client : MonoBehaviour
 
     public static Client instance = null;
 
+    [SerializeField] float syncRate = 10f;
+
     private void Start()
     {
         if (instance != null)
@@ -33,6 +35,7 @@ public class Client : MonoBehaviour
         socket.onErrorCallback += (err) => SetState(unconnectedState);
         CreateStates();
         SetState(unconnectedState);
+        StartCoroutine(UpdateNetworkObjsCoroutine());
     }
 
     private void CreateStates()
@@ -54,5 +57,17 @@ public class Client : MonoBehaviour
     public static bool IsCurrentState(ClientState _state)
     {
         return state == _state;
+    }
+
+    IEnumerator UpdateNetworkObjsCoroutine()
+    {
+        while(true)
+        {
+            if(state == inRoomState)
+            {
+                yield return new WaitForSeconds(1f / syncRate);
+                inRoomState.SendNetworkObjs();
+            }
+        }
     }
 }

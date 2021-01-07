@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAvatar : MonoBehaviour
 {
     User user;
-    UserInfo userInfo;
+    public UserInfo userInfo;
     private System.Random rnd = new System.Random();
 
     [HideInInspector] Material skinMat;

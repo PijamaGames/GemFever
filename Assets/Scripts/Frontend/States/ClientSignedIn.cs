@@ -76,6 +76,8 @@ public class ClientSignedIn : ClientState
                 break;
             case FrontendEvents.InRoom:
                 GameManager.levelId = data.level;
+                GameManager.isHost = data.isHost;
+                GameManager.isClient = data.isClient;
                 Client.SetState(Client.inRoomState);
                 break;
             case FrontendEvents.GetRooms:

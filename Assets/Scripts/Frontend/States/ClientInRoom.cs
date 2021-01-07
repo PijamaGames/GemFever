@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ClientInRoom : ClientState
 {
-    private enum FrontendEvents { Error, Exit, AddPlayer, RemovePlayer };
-    private enum BackendEvents { Exit };
+    private enum FrontendEvents { Error, Exit, AddPlayer, RemovePlayer, GetInfo };
+    private enum BackendEvents { Exit, SendObjects };
     public static int error;
 
     public static List<string> queuedMessages = new List<string>();
@@ -87,7 +87,48 @@ public class ClientInRoom : ClientState
             case FrontendEvents.RemovePlayer:
 
                 break;
+            case FrontendEvents.GetInfo:
+                NetworkObj.BasicStructure structure;
+                ObjsStructure objsStructure = JsonUtility.FromJson<ObjsStructure>(msg);
+                NetworkObj obj;
+                foreach (var str in objsStructure.objs)
+                {
+                    structure = JsonUtility.FromJson<NetworkObj.BasicStructure>(str);
+                    if(NetworkObj.objsDict.TryGetValue(structure.key, out obj))
+                    {
+                        obj.SetInfo(str);
+                    }
+                }
+                break;
         }
+    }
+
+    class ObjsStructure
+    {
+        public int evt;
+        public string[] objs;
+    }
+
+    public void SendNetworkObjs()
+    {
+        ObjsStructure objs = new ObjsStructure();
+        List<string> allInfo = new List<string>();
+        string info;
+        foreach(var obj in NetworkObj.allObjs)
+        {
+            info = obj.CollectInfo();
+            if(info != "" && info != null)
+            {
+                allInfo.Add(info);
+            }
+        }
+        objs.objs = allInfo.ToArray();
+        BackendEvents evt = BackendEvents.SendObjects;
+        objs.evt = (int)evt;
+        string json = JsonUtility.ToJson(objs);
+
+        if (Client.instance != null && Client.instance.socket != null)
+            Client.instance.socket.SendMessage(json);
     }
 
     override public void Finish()
