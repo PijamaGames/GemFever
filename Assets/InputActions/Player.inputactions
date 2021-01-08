@@ -943,8 +943,8 @@
             ]
         },
         {
-            "name": "EmpyControlScheme",
-            "bindingGroup": "EmpyControlScheme",
+            "name": "EmptyControlScheme",
+            "bindingGroup": "EmptyControlScheme",
             "devices": []
         }
     ]

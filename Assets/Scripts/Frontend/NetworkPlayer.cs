@@ -32,8 +32,9 @@ public class NetworkPlayer : NetworkObj
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         player = GetComponent<Player>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         info = new Info();
         inputInfo = new InputInfo();
         allObjs.Add(this);

@@ -18,17 +18,17 @@ public class UserInfo
 
 public class PlayerJoiner : MonoBehaviour
 {
-    [SerializeField] Player playerPrefab;
+    [SerializeField] GameObject playerPrefab;
 
     public static Queue<UserInfo> queuedUsers = new Queue<UserInfo>();
 
     public Player SpawnPlayerWithEmptyControlScheme()
     {
-        Player spawnedPlayer = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+        GameObject spawnedPlayer = Instantiate(playerPrefab, transform.position, Quaternion.identity);
         PlayerInput playerInput = spawnedPlayer.GetComponent<PlayerInput>();
-        //playerInput.SwitchCurrentControlScheme("EmpyControlScheme");
-        //spawnedPlayer.GetComponent<PlayerInput>().SwitchCurrentControlScheme("EmpyControlScheme");
-        return spawnedPlayer;
+        playerInput.SwitchCurrentControlScheme("EmptyControlScheme");
+        Player player = spawnedPlayer.GetComponent<Player>();
+        return player;
     }
 
     private void Update()

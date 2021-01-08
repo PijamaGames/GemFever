@@ -9654,7 +9654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ea74b4b68f0c74db29cb7a9f149ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 390191191207065864, guid: 4a7e2be968660c748ab3696bf6d6e316,
+  playerPrefab: {fileID: 390191191207065862, guid: 4a7e2be968660c748ab3696bf6d6e316,
     type: 3}
 --- !u!4 &1675842482
 Transform:
@@ -12853,7 +12853,7 @@ PrefabInstance:
     - target: {fileID: 2424873281686467804, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
       propertyPath: orthographic size
-      value: 4.8836365
+      value: 5.7201858
       objectReference: {fileID: 0}
     - target: {fileID: 2424873281686467806, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
