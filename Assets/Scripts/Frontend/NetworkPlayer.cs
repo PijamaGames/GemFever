@@ -16,6 +16,9 @@ public class NetworkPlayer : NetworkObj
     public class InputInfo
     {
         public string key = "";
+        public Vector2 joystick = Vector2.zero;
+        public float pickaxeInput = 0f;
+        public float throwGemInput = 0f;
     }
 
     [SerializeField] float lerp = 3f;
