@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         //Online game
-        if (GameManager.isLocalGame)
+        if (!GameManager.isLocalGame)
         {
             //Caso de las máquinas del host
             if (!GameManager.isHost)
@@ -244,6 +244,7 @@ public class Player : MonoBehaviour
                 ThrowGem();
             }
         }
+        //Offline game
         else
         {
             throwGemInput = context.ReadValue<float>();

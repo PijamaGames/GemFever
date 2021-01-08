@@ -41,7 +41,7 @@ public class Pickaxe : MonoBehaviour
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         //Online game
-        if (GameManager.isLocalGame)
+        if (!GameManager.isLocalGame)
         {
             //Caso de las máquinas del host
             if (!GameManager.isHost)
@@ -57,6 +57,7 @@ public class Pickaxe : MonoBehaviour
                 PickaxeHit();
             }
         }
+        //Offline game
         else
         {
             pickaxeInput = context.ReadValue<float>();
