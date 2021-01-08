@@ -9,7 +9,7 @@ public class PlayerSpawnerManager : MonoBehaviour
 
     public static bool isInHub = false;
 
-    private bool hasJoined = false;
+    [SerializeField] bool hasJoined = false;
     private bool anyInputDone = false;
     private bool kicking = false;
 
@@ -40,7 +40,11 @@ public class PlayerSpawnerManager : MonoBehaviour
 
     void OnPlayerJoined(PlayerInput playerInput)
     {
-        if (currentPlayers >= maxPlayers) return;
+        if (currentPlayers >= maxPlayers)
+        {
+            Destroy(playerInput.gameObject);
+            return;
+        }
 
         if(!GameManager.isLocalGame)
         {
@@ -69,7 +73,7 @@ public class PlayerSpawnerManager : MonoBehaviour
                 userInfo.frame = user.avatar_frame;
                 playerComp.SetUserInfo(userInfo);
             }
-            else
+            else if(playerInput.transform.parent != networkPlayersParent)
                 Destroy(playerInput.gameObject);
         }
         //Local Game
