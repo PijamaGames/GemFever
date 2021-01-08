@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClientInRoom : ClientState
 {
-    private enum FrontendEvents { Error, GetInfo, Exit, AddPlayer, RemovePlayer,  Spawn };
+    private enum FrontendEvents { Error, GetInfo, Exit, AddPlayer, RemovePlayer, Spawn };
     private enum BackendEvents { Exit, SendObjects, Spawn };
     public static int error;
 
@@ -12,7 +12,6 @@ public class ClientInRoom : ClientState
 
     public static Dictionary<string, Player> players = new Dictionary<string, Player>();
     private static Dictionary<string, UserInfo> waitingSet = new Dictionary<string, UserInfo>();
-
 
     override public void Begin()
     {
