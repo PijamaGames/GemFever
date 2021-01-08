@@ -160,9 +160,10 @@ public class Player : MonoBehaviour
             else if(GameManager.isClient)
             {
                 animator.speed = networkPlayer.info.animationSpeed;
+                score = networkPlayer.info.score;
+                currentPouchSize = networkPlayer.info.gems;
                 playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
             }
-                
         }
     }
 
