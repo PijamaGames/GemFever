@@ -103,12 +103,6 @@ public class Player : MonoBehaviour
         if(GameManager.isLocalGame || GameManager.isHost)
             androidInputs = FindObjectOfType<AndroidInputs>();
 
-        if(!GameManager.isLocalGame)
-        {
-            if (userInfo.isHost) animator.runtimeAnimatorController = hostAnimator;
-            else if (GameManager.isClient) animator.runtimeAnimatorController = clientAnimator;
-        }
-
         networkPlayer = GetComponent<NetworkPlayer>();
 
         gameUIManager = FindObjectOfType<GameUIManager>();
@@ -130,6 +124,12 @@ public class Player : MonoBehaviour
 
         currentTier = gemPouchTiers[0];
         ChangePouchSize();
+
+        if (!GameManager.isLocalGame)
+        {
+            if (GameManager.isHost) animator.runtimeAnimatorController = hostAnimator;
+            else if (GameManager.isClient) animator.runtimeAnimatorController = clientAnimator;
+        }
 
         groundMeshOrientation = playerMesh.transform.right;
     }
