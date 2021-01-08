@@ -79,6 +79,7 @@ public class NetworkPlayer : NetworkObj
                 {
                     anim.Play(info.animation);
                 }
+                anim.Play("Walk");
             }
         }
     }
@@ -86,6 +87,7 @@ public class NetworkPlayer : NetworkObj
     private void OnDestroy()
     {
         allObjs.Remove(this);
+        objsDict.Remove(playerAvatar.userInfo.id);
     }
 
     void Update()
