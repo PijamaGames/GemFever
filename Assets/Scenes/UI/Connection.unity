@@ -1237,7 +1237,7 @@ PrefabInstance:
     - target: {fileID: 2884888735722536221, guid: 7eec1e99c5b42db46880c9b102809f6b,
         type: 3}
       propertyPath: debugMovile
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2884888735722536223, guid: 7eec1e99c5b42db46880c9b102809f6b,
         type: 3}

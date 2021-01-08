@@ -100,8 +100,8 @@ public class Player : MonoBehaviour
         avatar = GetComponent<PlayerAvatar>();
 
         //Si es el jugador local
-        if(GameManager.isLocalGame || GameManager.isHost)
-            androidInputs = FindObjectOfType<AndroidInputs>();
+        //if(GameManager.isLocalGame || GameManager.isHost)
+        androidInputs = FindObjectOfType<AndroidInputs>();
 
         networkPlayer = GetComponent<NetworkPlayer>();
 
