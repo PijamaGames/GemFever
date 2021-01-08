@@ -154,6 +154,7 @@ public class Player : MonoBehaviour
                 //Recibir input por red
                 joystick = networkPlayer.inputInfo.joystick;
                 throwGemInput = networkPlayer.inputInfo.throwGemInput;
+                animator.speed = networkPlayer.info.animationSpeed;
                 ThrowGem();
             }
         }
@@ -353,9 +354,24 @@ public class Player : MonoBehaviour
             {
                 if (joystick.y == 0) animator.speed = 0f;
                 else animator.speed = 1f;
+
+                if (!GameManager.isHost)
+                {
+                    //Manda input por red
+                    if (joystick.y == 0) networkPlayer.info.animationSpeed = 0f;
+                    else networkPlayer.info.animationSpeed = 1f;
+                }
             }
             else
+            {
                 animator.speed = 1f;
+                if (!GameManager.isHost)
+                {
+                    //Manda input por red
+                    networkPlayer.info.animationSpeed = 1f;
+                }
+            }
+                
 
             rb.useGravity = false;
 
@@ -455,6 +471,11 @@ public class Player : MonoBehaviour
         isStunned = true;
 
         animator.speed = 1f;
+        if (!GameManager.isHost)
+        {
+            //Manda input por red
+            networkPlayer.info.animationSpeed = 1f;
+        }
         animator.SetBool("Stun", true);
         
 
@@ -649,6 +670,11 @@ public class Player : MonoBehaviour
             //climbingLadder = false;
             ladderTopReached = false;
             animator.speed = 1f;
+            if (!GameManager.isHost)
+            {
+                //Manda input por red
+                networkPlayer.info.animationSpeed = 1f;
+            }
         }
 
         if (other.tag == "Ladder")
@@ -661,6 +687,11 @@ public class Player : MonoBehaviour
             ladderTopReached = false;
 
             animator.speed = 1f;
+            if (!GameManager.isHost)
+            {
+                //Manda input por red
+                networkPlayer.info.animationSpeed = 1f;
+            }
             animator.SetBool("Idle_Climb", false);
 
             playerMesh.transform.forward = groundMeshOrientation;
