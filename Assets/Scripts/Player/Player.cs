@@ -357,7 +357,7 @@ public class Player : MonoBehaviour
                 if (joystick.y == 0) animator.speed = 0f;
                 else animator.speed = 1f;
 
-                if (!GameManager.isHost)
+                if (GameManager.isHost)
                 {
                     //Manda input por red
                     if (joystick.y == 0) networkPlayer.info.animationSpeed = 0f;
@@ -367,7 +367,7 @@ public class Player : MonoBehaviour
             else
             {
                 animator.speed = 1f;
-                if (!GameManager.isHost)
+                if (GameManager.isHost)
                 {
                     //Manda input por red
                     networkPlayer.info.animationSpeed = 1f;
@@ -484,7 +484,7 @@ public class Player : MonoBehaviour
         isStunned = true;
 
         animator.speed = 1f;
-        if (!GameManager.isHost)
+        if (GameManager.isHost)
         {
             //Manda input por red
             networkPlayer.info.animationSpeed = 1f;
@@ -683,7 +683,7 @@ public class Player : MonoBehaviour
             //climbingLadder = false;
             ladderTopReached = false;
             animator.speed = 1f;
-            if (!GameManager.isHost)
+            if (GameManager.isHost)
             {
                 //Manda input por red
                 networkPlayer.info.animationSpeed = 1f;
@@ -700,7 +700,7 @@ public class Player : MonoBehaviour
             ladderTopReached = false;
 
             animator.speed = 1f;
-            if (!GameManager.isHost)
+            if (GameManager.isHost)
             {
                 //Manda input por red
                 networkPlayer.info.animationSpeed = 1f;
