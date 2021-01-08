@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerSpawnerManager : MonoBehaviour
 {
+    [SerializeField] Transform networkPlayersParent;
+
     public static bool isInHub = false;
 
     private bool hasJoined = false;
@@ -48,13 +50,12 @@ public class PlayerSpawnerManager : MonoBehaviour
                 Destroy(playerInput.gameObject);
                 return;
             }
-
-            if (!hasJoined)
+            Player playerComp = SpawnPlayerAtLocation(playerInput.gameObject);
+            anyInputDone = true;
+            if (!hasJoined && playerInput.transform.parent != networkPlayersParent)
             {
                 //TODO Avisar al server de que se quiere spawnear el jugador y hacer que lo cree el playerJoiner
                 hasJoined = true;
-                anyInputDone = true;
-                Player playerComp = SpawnPlayerAtLocation(playerInput.gameObject);
                 UserInfo userInfo = new UserInfo();
                 User user = Client.user;
                 userInfo.id = user.id;
