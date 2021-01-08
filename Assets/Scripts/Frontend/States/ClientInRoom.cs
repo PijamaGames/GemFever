@@ -61,6 +61,7 @@ public class ClientInRoom : ClientState
         public bool isHost = false;
         public bool isClient = false;
         public string id = "";
+        public bool spawned = false;
 
         public int avatar_bodyType = -1;
         public int avatar_skinTone = -1;
@@ -97,7 +98,7 @@ public class ClientInRoom : ClientState
                 info.hat = data.avatar_hat;
                 info.frame = data.avatar_frame;
                 waitingSet.Add(info.id, info);
-                //PlayerJoiner.queuedUsers.Enqueue(info);
+                if (data.spawned) goto case FrontendEvents.Spawn;
                 break;
             case FrontendEvents.Spawn:
                 Debug.Log("Spawning " + data.id);

@@ -88,13 +88,20 @@ public class Player : MonoBehaviour
     PersistentAudioSource audioSource;
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip ladderSound;
+
+    //Network
+    NetworkPlayer networkPlayer;
     
     // Start is called before the first frame update
     void Start()
     {
         avatar = GetComponent<PlayerAvatar>();
+
         //Si es el jugador local
-        androidInputs = FindObjectOfType<AndroidInputs>();
+        if(GameManager.isLocalGame || GameManager.isHost)
+            androidInputs = FindObjectOfType<AndroidInputs>();
+
+        networkPlayer = GetComponent<NetworkPlayer>();
 
         gameUIManager = FindObjectOfType<GameUIManager>();
 
@@ -132,6 +139,16 @@ public class Player : MonoBehaviour
             joystick = androidInputs.GetMovementInput();
             throwGemInput = androidInputs.GetThrowGemInput();
         }
+
+        //Máquina del host, pero jugadores clientes
+        if (!GameManager.isLocalGame)
+        {
+            if (GameManager.isHost && userInfo.isClient)
+            {
+                //Recibir input por red
+                joystick = networkPlayer.inputInfo.joystick;
+            }
+        }
     }
 
     public UserInfo GetUserInfo()
@@ -153,7 +170,24 @@ public class Player : MonoBehaviour
     {
         if (freeze) return;
 
-        joystick = context.ReadValue<Vector2>();
+        if (!GameManager.isLocalGame)
+        {
+            //Caso de las máquinas del host
+            if (!GameManager.isHost)
+            {
+                //Manda input por red
+                networkPlayer.inputInfo.joystick = context.ReadValue<Vector2>();
+            }
+
+            else //Máquina host y jugador host
+            {
+                joystick = context.ReadValue<Vector2>();
+            }
+        }
+        else
+        {
+            joystick = context.ReadValue<Vector2>();
+        }
     }
 
     public void ThrowGemInput(InputAction.CallbackContext context)
