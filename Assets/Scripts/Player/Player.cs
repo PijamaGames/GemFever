@@ -358,8 +358,16 @@ public class Player : MonoBehaviour
         {
             if(animator.GetBool("Idle_Climb") && !animator.GetBool("Climb_MineStair") && !animator.GetBool("Stun"))
             {
-                if (joystick.y == 0) animator.speed = 0f;
-                else animator.speed = 1f;
+                if (joystick.y == 0)
+                {
+                    pickaxeOnLadder = false;
+                    animator.speed = 0f;
+                }
+                else
+                {
+                    pickaxeOnLadder = true;
+                    animator.speed = 1f;
+                }
 
                 if (GameManager.isHost)
                 {
@@ -383,13 +391,27 @@ public class Player : MonoBehaviour
 
             if(ladderTopReached)
             {
-                pickaxeOnLadder = false;
+                if (joystick.y == 0)
+                {
+                    pickaxeOnLadder = false;
+                }
+                else
+                {
+                    pickaxeOnLadder = true;
+                }
                 if (joystick.y < 0)
                     verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
             }
             else
             {
-                pickaxeOnLadder = true;
+                if (joystick.y == 0)
+                {
+                    pickaxeOnLadder = false;
+                }
+                else
+                {
+                    pickaxeOnLadder = true;
+                }
                 verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
             }
                 
@@ -725,7 +747,6 @@ public class Player : MonoBehaviour
         {
             PlaySound(ladderSound);
             animator.SetBool("Idle_Climb", climbingLadder);
-            
         }
         else
         {
@@ -737,7 +758,7 @@ public class Player : MonoBehaviour
     public void StartPickaxeAnimation()
     {
         //Trepando escalera
-        if(climbingLadder && pickaxeOnLadder /*&& false*/)
+        if(/*climbingLadder && pickaxeOnLadder*/ animator.GetBool("Idle_Climb")/*&& false*/)
         {
             animator.SetBool("Climb_MineStair", true);
         }
