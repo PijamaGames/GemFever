@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClientInRoom : ClientState
 {
-    private enum FrontendEvents { Error, Exit, AddPlayer, RemovePlayer, GetInfo, Spawn };
+    private enum FrontendEvents { Error, GetInfo, Exit, AddPlayer, RemovePlayer,  Spawn };
     private enum BackendEvents { Exit, SendObjects, Spawn };
     public static int error;
 
