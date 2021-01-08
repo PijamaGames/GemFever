@@ -214,6 +214,8 @@ public class Player : MonoBehaviour
 
     public void MovementInput(InputAction.CallbackContext context)
     {
+        if (GameManager.isHandheld) return;
+
         if (freeze) return;
 
         //Online game
@@ -240,6 +242,8 @@ public class Player : MonoBehaviour
 
     public void ThrowGemInput(InputAction.CallbackContext context)
     {
+        if (GameManager.isHandheld) return;
+
         if (freeze) return;
 
         if (!context.performed || !gameObject.scene.IsValid()) return;
