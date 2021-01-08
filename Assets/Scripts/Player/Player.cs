@@ -214,6 +214,8 @@ public class Player : MonoBehaviour
 
     public void MovementInput(InputAction.CallbackContext context)
     {
+        if (GameManager.isHandheld) return;
+
         if (freeze) return;
 
         //Online game
@@ -240,6 +242,8 @@ public class Player : MonoBehaviour
 
     public void ThrowGemInput(InputAction.CallbackContext context)
     {
+        if (GameManager.isHandheld) return;
+
         if (freeze) return;
 
         if (!context.performed || !gameObject.scene.IsValid()) return;
@@ -740,17 +744,27 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    public void PlayWalkSound()
+    {
+        PlaySound(walkSound);
+    }
+
+    public void PlayLadderSound()
+    {
+        PlaySound(ladderSound);
+    }
+
     #region Animations
     private void WalkOrIdleOrClimb()
     {
         if (climbingLadder && climbingAnimation && !ladderTopReached)
         {
-            PlaySound(ladderSound);
+            //PlaySound(ladderSound);
             animator.SetBool("Idle_Climb", climbingLadder);
         }
         else
         {
-            PlaySound(walkSound);
+            //PlaySound(walkSound);
             animator.SetBool("Idle_Walk", isWalking);
         }
     }
@@ -813,8 +827,6 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("Victory4", true);
     }
-
-
     #endregion
 
     private void Freeze()

@@ -38,6 +38,8 @@ public class Pickaxe : MonoBehaviour
 
     public void PickaxeInput(InputAction.CallbackContext context)
     {
+        if (GameManager.isHandheld) return;
+
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         //Online game
