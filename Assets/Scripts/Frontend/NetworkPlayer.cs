@@ -79,7 +79,6 @@ public class NetworkPlayer : NetworkObj
                 {
                     anim.Play(info.animation);
                 }
-                anim.Play("Walk");
             }
         }
     }
