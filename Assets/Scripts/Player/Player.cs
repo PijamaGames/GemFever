@@ -158,7 +158,11 @@ public class Player : MonoBehaviour
                 ThrowGem();
             }
             else if(GameManager.isClient)
+            {
+                animator.speed = networkPlayer.info.animationSpeed;
                 playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
+            }
+                
         }
     }
 
