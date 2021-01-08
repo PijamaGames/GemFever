@@ -8,6 +8,7 @@ public class NetworkPlayer : NetworkObj
     {
         public string key = "";
         public Vector3 position = Vector3.zero;
+        public Vector3 rotation = Vector3.zero;
         public string animation = "";
         public float animationSpeed = 1f;
         public int gems = 0;
