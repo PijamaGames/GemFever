@@ -170,6 +170,10 @@ public class ClientInRoom : ClientState
     override public void Finish()
     {
         base.Finish();
+        foreach(var pair in players)
+        {
+            GameObject.Destroy(pair.Value.gameObject);
+        }
         players.Clear();
         waitingDict.Clear();
     }
