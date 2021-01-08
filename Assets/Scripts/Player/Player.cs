@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip ladderSound;
 
     //Network
-    public NetworkPlayer networkPlayer;
+    [HideInInspector] public NetworkPlayer networkPlayer;
     
     // Start is called before the first frame update
     void Start()

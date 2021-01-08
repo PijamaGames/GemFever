@@ -180,8 +180,8 @@ MonoBehaviour:
   hostAnimator: {fileID: 9100000, guid: 89f05ec719c746e49b5ee722c4f8aae6, type: 2}
   clientAnimator: {fileID: 9100000, guid: 3e29601889fa79143ab17f1acdde2cd0, type: 2}
   playerMesh: {fileID: 966143192252347051}
-  walkSound: {fileID: 0}
-  ladderSound: {fileID: 0}
+  walkSound: {fileID: 8300000, guid: d8003bacb75c8c44cbb1c4d4971a09f9, type: 3}
+  ladderSound: {fileID: 8300000, guid: 055d605c7e0ee1340b5ddc73ac15562d, type: 3}
   networkPlayer: {fileID: 0}
 --- !u!114 &390191191207065865
 MonoBehaviour:
@@ -362,6 +362,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2707328018490957570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966143192252347051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f912c3cdbe1972b4797b16356bef644b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 390191191207065864}
 --- !u!114 &3731050307234094805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,19 +398,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ff040b7b3c8e5040a8f65dd3b26bd67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 390191191207065864}
---- !u!114 &2707328018490957570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966143192252347051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f912c3cdbe1972b4797b16356bef644b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 390191191207065864}
