@@ -64,8 +64,11 @@ public class GameManager : MonoBehaviour
     public void BlockUI()
     {
         CanvasGroup group = FindObjectOfType<CanvasGroup>();
-        group.blocksRaycasts = false;
-        group.alpha = blockedUIAlpha;
+        if(group != null)
+        {
+            group.blocksRaycasts = false;
+            group.alpha = blockedUIAlpha;
+        }
     }
 
     public void ReleaseUI()
