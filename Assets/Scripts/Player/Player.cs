@@ -155,9 +155,10 @@ public class Player : MonoBehaviour
                 joystick = networkPlayer.inputInfo.joystick;
                 throwGemInput = networkPlayer.inputInfo.throwGemInput;
                 animator.speed = networkPlayer.info.animationSpeed;
-                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
                 ThrowGem();
             }
+            else if(GameManager.isClient)
+                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
         }
     }
 
@@ -392,7 +393,7 @@ public class Player : MonoBehaviour
             if (!ladderTopReached && (joystick.y != 0 /*|| !touchingTheGround*/))
             {
                 playerMesh.transform.forward = Vector3.forward;
-                if (!GameManager.isHost)
+                if (GameManager.isHost)
                 {
                     //Manda input por red
                     networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
@@ -459,7 +460,7 @@ public class Player : MonoBehaviour
             groundMeshOrientation = Vector3.right;
         }
 
-        if (!GameManager.isHost)
+        if (GameManager.isHost)
         {
             //Manda input por red
             networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
