@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class ClientInRoom : ClientState
 {
-    private enum FrontendEvents { Error, Exit, AddPlayer, RemovePlayer, GetInfo };
-    private enum BackendEvents { Exit, SendObjects };
+    private enum FrontendEvents { Error, Exit, AddPlayer, RemovePlayer, GetInfo, Spawn };
+    private enum BackendEvents { Exit, SendObjects, Spawn };
     public static int error;
 
     public static List<string> queuedMessages = new List<string>();
 
     public static Dictionary<string, Player> players = new Dictionary<string, Player>();
+    private static Dictionary<string, UserInfo> waitingSet = new Dictionary<string, UserInfo>();
+
 
     override public void Begin()
     {
@@ -37,6 +39,19 @@ public class ClientInRoom : ClientState
         if (Client.instance != null && Client.instance.socket != null)
             Client.instance.socket.SendMessage(msg);
         GameManager.instance.BlockUI();
+    }
+
+    public static void Spawn()
+    {
+        BackendEvents evt = BackendEvents.Spawn;
+        var pairs = new KeyValuePair<string, object>[]
+        {
+            new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
+            new KeyValuePair<string, object>("id", UsefulFuncs.PrimitiveToJsonValue(Client.user.id)),
+        };
+        string msg = UsefulFuncs.CombineJsons(pairs);
+        if (Client.instance != null && Client.instance.socket != null)
+            Client.instance.socket.SendMessage(msg);
     }
 
     public class MsgStructure
@@ -82,10 +97,21 @@ public class ClientInRoom : ClientState
                 info.face = data.avatar_face;
                 info.hat = data.avatar_hat;
                 info.frame = data.avatar_frame;
-                PlayerJoiner.queuedUsers.Enqueue(info);
+                waitingSet.Add(info.id, info);
+                //PlayerJoiner.queuedUsers.Enqueue(info);
+                break;
+            case FrontendEvents.Spawn:
+                Debug.Log("Spawning " + data.id);
+                UserInfo userInfo;
+                if(waitingSet.TryGetValue(data.id, out userInfo))
+                {
+                    waitingSet.Remove(data.id);
+                    PlayerJoiner.queuedUsers.Enqueue(userInfo);
+                }
                 break;
             case FrontendEvents.RemovePlayer:
-
+                //TODO: sacar de waiting queue
+                //TODO: destruir objeto si ha spawneado
                 break;
             case FrontendEvents.GetInfo:
                 NetworkObj.BasicStructure structure;
@@ -135,5 +161,6 @@ public class ClientInRoom : ClientState
     {
         base.Finish();
         players.Clear();
+        waitingSet.Clear();
     }
 }

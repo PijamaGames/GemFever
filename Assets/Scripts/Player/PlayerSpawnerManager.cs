@@ -24,14 +24,14 @@ public class PlayerSpawnerManager : MonoBehaviour
     {
         isInHub = _isInHub;
 
-        if(!GameManager.isLocalGame || true)
+        if(!GameManager.isLocalGame)
             StartCoroutine(KickCountdown());
     }
 
     IEnumerator KickCountdown()
     {
         yield return new WaitForSecondsRealtime(timeToKickOut);
-        if (!anyInputDone)
+        if (!anyInputDone && GameManager.isClient)
         {
             kicking = true;
             ClientInRoom.Exit();
@@ -58,7 +58,6 @@ public class PlayerSpawnerManager : MonoBehaviour
             anyInputDone = true;
             if (!hasJoined && playerInput.transform.parent != networkPlayersParent)
             {
-                //TODO Avisar al server de que se quiere spawnear el jugador y hacer que lo cree el playerJoiner
                 hasJoined = true;
                 UserInfo userInfo = new UserInfo();
                 User user = Client.user;
@@ -72,6 +71,7 @@ public class PlayerSpawnerManager : MonoBehaviour
                 userInfo.hat = user.avatar_hat;
                 userInfo.frame = user.avatar_frame;
                 playerComp.SetUserInfo(userInfo);
+                ClientInRoom.Spawn();
             }
             else if(playerInput.transform.parent != networkPlayersParent)
                 Destroy(playerInput.gameObject);
