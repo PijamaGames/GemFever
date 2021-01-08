@@ -19,6 +19,7 @@ public class NetworkPlayer : NetworkObj
         public Vector2 joystick = Vector2.zero;
         public float pickaxeInput = 0f;
         public float throwGemInput = 0f;
+
     }
 
     [SerializeField] float lerp = 3f;
@@ -56,7 +57,7 @@ public class NetworkPlayer : NetworkObj
         {
             json = JsonUtility.ToJson(info);
         }
-        else if (GameManager.isClient)
+        else if (GameManager.isClient && userInfo.id == Client.user.id)
         {
             json = JsonUtility.ToJson(inputInfo);
         }

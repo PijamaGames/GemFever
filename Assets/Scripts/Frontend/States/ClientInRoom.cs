@@ -11,7 +11,7 @@ public class ClientInRoom : ClientState
     public static List<string> queuedMessages = new List<string>();
 
     public static Dictionary<string, Player> players = new Dictionary<string, Player>();
-    private static Dictionary<string, UserInfo> waitingSet = new Dictionary<string, UserInfo>();
+    private static Dictionary<string, UserInfo> waitingDict = new Dictionary<string, UserInfo>();
 
     override public void Begin()
     {
@@ -97,21 +97,30 @@ public class ClientInRoom : ClientState
                 info.face = data.avatar_face;
                 info.hat = data.avatar_hat;
                 info.frame = data.avatar_frame;
-                waitingSet.Add(info.id, info);
+                waitingDict.Add(info.id, info);
                 if (data.spawned) goto case FrontendEvents.Spawn;
                 break;
             case FrontendEvents.Spawn:
                 Debug.Log("Spawning " + data.id);
                 UserInfo userInfo;
-                if(waitingSet.TryGetValue(data.id, out userInfo))
+                if(waitingDict.TryGetValue(data.id, out userInfo))
                 {
-                    waitingSet.Remove(data.id);
+                    waitingDict.Remove(data.id);
                     PlayerJoiner.queuedUsers.Enqueue(userInfo);
                 }
                 break;
             case FrontendEvents.RemovePlayer:
-                //TODO: sacar de waiting queue
-                //TODO: destruir objeto si ha spawneado
+                //TODO: sacar de waiting dict
+                if (waitingDict.ContainsKey(data.id))
+                {
+                    waitingDict.Remove(data.id);
+                }
+                Player player;
+                if(players.TryGetValue(data.id, out player))
+                {
+                    GameObject.Destroy(player.gameObject);
+                    players.Remove(data.id);
+                }
                 break;
             case FrontendEvents.GetInfo:
                 NetworkObj.BasicStructure structure;
@@ -162,6 +171,6 @@ public class ClientInRoom : ClientState
     {
         base.Finish();
         players.Clear();
-        waitingSet.Clear();
+        waitingDict.Clear();
     }
 }
