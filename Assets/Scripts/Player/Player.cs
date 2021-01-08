@@ -744,17 +744,27 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    public void PlayWalkSound()
+    {
+        PlaySound(walkSound);
+    }
+
+    public void PlayLadderSound()
+    {
+        PlaySound(ladderSound);
+    }
+
     #region Animations
     private void WalkOrIdleOrClimb()
     {
         if (climbingLadder && climbingAnimation && !ladderTopReached)
         {
-            PlaySound(ladderSound);
+            //PlaySound(ladderSound);
             animator.SetBool("Idle_Climb", climbingLadder);
         }
         else
         {
-            PlaySound(walkSound);
+            //PlaySound(walkSound);
             animator.SetBool("Idle_Walk", isWalking);
         }
     }
@@ -817,8 +827,6 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("Victory4", true);
     }
-
-
     #endregion
 
     private void Freeze()
