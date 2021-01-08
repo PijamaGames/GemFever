@@ -137,6 +137,7 @@ public class ClientInRoom : ClientState
 
     public void SendNetworkObjs()
     {
+        if (NetworkObj.allObjs.Count == 0) return;
         ObjsStructure objs = new ObjsStructure();
         List<string> allInfo = new List<string>();
         string info;
