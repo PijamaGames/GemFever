@@ -146,6 +146,7 @@ public class Player : MonoBehaviour
                 //Recibir input por red
                 joystick = networkPlayer.inputInfo.joystick;
                 throwGemInput = networkPlayer.inputInfo.throwGemInput;
+                ThrowGem();
             }
         }
     }
@@ -169,6 +170,7 @@ public class Player : MonoBehaviour
                 {
                     joystick = androidInputs.GetMovementInput();
                     throwGemInput = androidInputs.GetThrowGemInput();
+                    ThrowGem();
                 }
             }
             //Local game
