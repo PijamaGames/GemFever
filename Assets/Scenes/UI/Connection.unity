@@ -510,25 +510,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1333670681700085072, guid: d3ee420d4b657b64b95a136be816224c,
-        type: 3}
-      propertyPath: syncRate
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085073, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
       propertyPath: m_Name
       value: Frontend (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1333670681700085073, guid: d3ee420d4b657b64b95a136be816224c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1333670681700085074, guid: d3ee420d4b657b64b95a136be816224c,
-        type: 3}
-      propertyPath: urlIndex
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}

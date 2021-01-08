@@ -15,26 +15,25 @@ public class PromptSpace : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.isLocalGame)
+        if (other.gameObject.tag.Equals("Player"))
         {
-            if (other.gameObject.tag.Equals("Player"))
+            var userInfo = other.gameObject.GetComponent<PlayerAvatar>().userInfo;
+            if (userInfo.id != Client.user.id) return;
+            Prompt prompt = other.gameObject.GetComponentInChildren<Prompt>();
+            promptTargets.Add(prompt);
+            Button btn = PromptsManager.RequestPrompt();
+            if(btn != null)
             {
-                Prompt prompt = other.gameObject.GetComponentInChildren<Prompt>();
-                promptTargets.Add(prompt);
-                Button btn = PromptsManager.RequestPrompt();
-                if(btn != null)
-                {
-                    btn.onClick.RemoveAllListeners();
-                    btn.onClick.AddListener(() => onPressed.Invoke());
-                    prompt.SetButton(btn);
-                    Bilingual b = prompt.btn.GetComponentInChildren<Bilingual>();
-                    b.spanishText = spanishText;
-                    b.englishText = englishText;
-                    b.UpdateLanguage();
-                    Image img = prompt.btn.GetComponentsInChildren<Image>()[1];
-                    img.enabled = sprite != null;
-                    img.sprite = sprite;
-                }
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => onPressed.Invoke());
+                prompt.SetButton(btn);
+                Bilingual b = prompt.btn.GetComponentInChildren<Bilingual>();
+                b.spanishText = spanishText;
+                b.englishText = englishText;
+                b.UpdateLanguage();
+                Image img = prompt.btn.GetComponentsInChildren<Image>()[1];
+                img.enabled = sprite != null;
+                img.sprite = sprite;
             }
         }
     }
