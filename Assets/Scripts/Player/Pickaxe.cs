@@ -43,7 +43,7 @@ public class Pickaxe : MonoBehaviour
         //Online game
         if (!GameManager.isLocalGame)
         {
-            //Caso de las máquinas del host
+            //Caso de las máquinas de clientes
             if (!GameManager.isHost)
             {
                 //Manda input por red
@@ -93,6 +93,7 @@ public class Pickaxe : MonoBehaviour
             {
                 //Recibir input por red
                 pickaxeInput = playerOwner.networkPlayer.inputInfo.pickaxeInput;
+                PickaxeHit();
             }
         }
     }
@@ -109,6 +110,7 @@ public class Pickaxe : MonoBehaviour
                 {
                     //Manda input por red
                     playerOwner.networkPlayer.inputInfo.pickaxeInput = androidInputs.GetPickaxeInput();
+                    PickaxeHit();
                 }
 
                 else //Máquina host y jugador host
