@@ -78,6 +78,8 @@ public class Player : MonoBehaviour
 
     //Animator
     [SerializeField] Animator animator;
+    [SerializeField] RuntimeAnimatorController hostAnimator;
+    [SerializeField] RuntimeAnimatorController clientAnimator;
     Vector3 groundMeshOrientation = Vector3.zero;
     [SerializeField] GameObject playerMesh;
     bool freeze = false;
@@ -100,6 +102,12 @@ public class Player : MonoBehaviour
         //Si es el jugador local
         if(GameManager.isLocalGame || GameManager.isHost)
             androidInputs = FindObjectOfType<AndroidInputs>();
+
+        if(!GameManager.isLocalGame)
+        {
+            if (userInfo.isHost) animator.runtimeAnimatorController = hostAnimator;
+            else if (GameManager.isClient) animator.runtimeAnimatorController = clientAnimator;
+        }
 
         networkPlayer = GetComponent<NetworkPlayer>();
 

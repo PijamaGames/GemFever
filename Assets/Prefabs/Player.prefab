@@ -177,9 +177,12 @@ MonoBehaviour:
     gemNumberThreshold: 0
   playerNumber: 0
   animator: {fileID: 6433302771336034677}
+  hostAnimator: {fileID: 9100000, guid: 89f05ec719c746e49b5ee722c4f8aae6, type: 2}
+  clientAnimator: {fileID: 9100000, guid: 3e29601889fa79143ab17f1acdde2cd0, type: 2}
   playerMesh: {fileID: 966143192252347051}
   walkSound: {fileID: 0}
   ladderSound: {fileID: 0}
+  networkPlayer: {fileID: 0}
 --- !u!114 &390191191207065865
 MonoBehaviour:
   m_ObjectHideFlags: 0
