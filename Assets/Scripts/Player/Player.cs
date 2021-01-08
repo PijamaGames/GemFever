@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     private PlayerAvatar avatar;
-    private UserInfo userInfo;
+    public UserInfo userInfo;
 
     [SerializeField] float startingHorizontalSpeed = 120f;
     [SerializeField] float startingMaxHorizontalSpeed = 10f;
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip ladderSound;
 
     //Network
-    NetworkPlayer networkPlayer;
+    public NetworkPlayer networkPlayer;
     
     // Start is called before the first frame update
     void Start()
@@ -134,12 +134,10 @@ public class Player : MonoBehaviour
         //Debug.Log(rb.velocity);
         //Debug.Log(gemPouch.Count);
 
-        if(GameManager.isHandheld)
-        {
-            joystick = androidInputs.GetMovementInput();
-            throwGemInput = androidInputs.GetThrowGemInput();
-        }
+        //Mobile
+        MobileInputs();
 
+        //PC
         //Máquina del host, pero jugadores clientes
         if (!GameManager.isLocalGame)
         {
@@ -147,6 +145,37 @@ public class Player : MonoBehaviour
             {
                 //Recibir input por red
                 joystick = networkPlayer.inputInfo.joystick;
+                throwGemInput = networkPlayer.inputInfo.throwGemInput;
+            }
+        }
+    }
+
+    private void MobileInputs()
+    {
+        if (GameManager.isHandheld)
+        {
+            //Online game
+            if (!GameManager.isLocalGame)
+            {
+                //Caso de las máquinas del host
+                if (!GameManager.isHost)
+                {
+                    //Manda input por red
+                    networkPlayer.inputInfo.joystick = androidInputs.GetMovementInput();
+                    networkPlayer.inputInfo.throwGemInput = androidInputs.GetThrowGemInput();
+                }
+
+                else //Máquina host y jugador host
+                {
+                    joystick = androidInputs.GetMovementInput();
+                    throwGemInput = androidInputs.GetThrowGemInput();
+                }
+            }
+            //Local game
+            else
+            {
+                joystick = androidInputs.GetMovementInput();
+                throwGemInput = androidInputs.GetThrowGemInput();
             }
         }
     }
@@ -170,6 +199,7 @@ public class Player : MonoBehaviour
     {
         if (freeze) return;
 
+        //Online game
         if (!GameManager.isLocalGame)
         {
             //Caso de las máquinas del host
@@ -184,6 +214,7 @@ public class Player : MonoBehaviour
                 joystick = context.ReadValue<Vector2>();
             }
         }
+        //Local game
         else
         {
             joystick = context.ReadValue<Vector2>();
@@ -196,9 +227,29 @@ public class Player : MonoBehaviour
 
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
-        throwGemInput = context.ReadValue<float>();
+        //Online game
+        if (GameManager.isLocalGame)
+        {
+            //Caso de las máquinas del host
+            if (!GameManager.isHost)
+            {
+                //Manda input por red
+                networkPlayer.inputInfo.throwGemInput = context.ReadValue<float>();
+            }
 
-        ThrowGem();
+            else //Máquina host y jugador host
+            {
+                throwGemInput = context.ReadValue<float>();
+
+                ThrowGem();
+            }
+        }
+        else
+        {
+            throwGemInput = context.ReadValue<float>();
+
+            ThrowGem();
+        }
     }
 
     private void ThrowGem()

@@ -40,17 +40,36 @@ public class Pickaxe : MonoBehaviour
     {
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
-        pickaxeInput = context.ReadValue<float>();
+        //Online game
+        if (GameManager.isLocalGame)
+        {
+            //Caso de las máquinas del host
+            if (!GameManager.isHost)
+            {
+                //Manda input por red
+                playerOwner.networkPlayer.inputInfo.pickaxeInput = context.ReadValue<float>();
+            }
 
-        PickaxeHit();
+            else //Máquina host y jugador host
+            {
+                pickaxeInput = context.ReadValue<float>();
+
+                PickaxeHit();
+            }
+        }
+        else
+        {
+            pickaxeInput = context.ReadValue<float>();
+
+            PickaxeHit();
+        }
     }
 
     private void PickaxeHit()
     {
-        
         if (!hitOnCooldown && pickaxeInput == 1)
         {
-            if(GameManager.isHandheld)
+            if (GameManager.isHandheld)
                 androidInputs.ResetPickaxeInput();
 
             hitOnCooldown = true;
@@ -64,10 +83,45 @@ public class Pickaxe : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.isHandheld)
+        MobileInputs();
+
+        //Máquina del host, pero jugadores clientes
+        if (!GameManager.isLocalGame)
         {
-            pickaxeInput = androidInputs.GetPickaxeInput();
-            PickaxeHit();
+            if (GameManager.isHost && playerOwner.userInfo.isClient)
+            {
+                //Recibir input por red
+                pickaxeInput = playerOwner.networkPlayer.inputInfo.pickaxeInput;
+            }
+        }
+    }
+
+    private void MobileInputs()
+    {
+        if (GameManager.isHandheld)
+        {
+            //Online game
+            if (!GameManager.isLocalGame)
+            {
+                //Caso de las máquinas del host
+                if (!GameManager.isHost)
+                {
+                    //Manda input por red
+                    playerOwner.networkPlayer.inputInfo.pickaxeInput = androidInputs.GetPickaxeInput();
+                }
+
+                else //Máquina host y jugador host
+                {
+                    pickaxeInput = androidInputs.GetPickaxeInput();
+                    PickaxeHit();
+                }
+            }
+            //Local game
+            else
+            {
+                pickaxeInput = androidInputs.GetPickaxeInput();
+                PickaxeHit();
+            }
         }
     }
 
