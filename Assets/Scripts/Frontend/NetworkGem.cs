@@ -10,6 +10,7 @@ public class NetworkGem : NetworkObj
     {
         public string key;
         public Vector3 position;
+        public bool active;
     }
 
     Info info;
@@ -31,6 +32,7 @@ public class NetworkGem : NetworkObj
     {
         if (GameManager.isClient) return "";
         info.position = transform.position;
+        info.active = gameObject.activeSelf;
         return JsonUtility.ToJson(info);
     }
 
@@ -38,6 +40,10 @@ public class NetworkGem : NetworkObj
     {
         if (GameManager.isHost) return;
         info = JsonUtility.FromJson<Info>(json);
+        if(info.active != gameObject.activeSelf)
+        {
+            gameObject.SetActive(info.active);
+        }
     }
 
     private void Update()
