@@ -8,7 +8,7 @@ public class GemAnimations : MonoBehaviour
 
     public void EndGemAnimation()
     {
-        Debug.Log("EndGemAnimation");
+        //Debug.Log("EndGemAnimation");
 
         player.EndGemAnimation();
     }

@@ -864,6 +864,16 @@ public class Player : MonoBehaviour
         animator.SetBool("Victory1", false);
         animator.SetBool("Victory2_3", false);
         animator.SetBool("Victory4", false);
+
+        animator.Play("Idle");
+
+        climbingLadder = false;
+        pickaxeOnLadder = false;
+        ladderTopReached = false;
+        isWalking = false;
+        isInLadder = false;
+        isStunned = false;
+        isInvulnerable = false;
     }
     #endregion
 

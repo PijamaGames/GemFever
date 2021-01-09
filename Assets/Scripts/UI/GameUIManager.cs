@@ -76,7 +76,16 @@ public class GameUIManager : MonoBehaviour
     {
         if (currentSeconds >= goalTime)
         {
-            SceneLoader.instance.LoadVictoryScene();
+            //Online game
+            if(!GameManager.isLocalGame)
+            {
+                ClientInRoom.GoToVictoryScene();
+            }
+            //Local Game
+            else
+            {
+                SceneLoader.instance.LoadVictoryScene();
+            }            
         }
         else StartCoroutine(Timer());
     }
