@@ -274,7 +274,7 @@ public class Player : MonoBehaviour
     {
         if (GameManager.isHandheld) return;
 
-        if (!context.performed || !gameObject.scene.IsValid()) return;
+        //if (!context.performed || !gameObject.scene.IsValid()) return;
 
         promptInput = context.ReadValue<float>() == 1;
     }
