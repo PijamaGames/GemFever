@@ -75,7 +75,6 @@ public class NetworkGem : NetworkObj
     {
         if (GameManager.isHost || json == "") return;
         info = JsonUtility.FromJson<Info>(json);
-        Debug.Log("Setting info of gem");
         /*if(info.active != gameObject.activeSelf)
         {*/
         gem.UpdateGemTier(info.tierId);
