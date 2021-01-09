@@ -54,8 +54,7 @@ public class NetworkGem : NetworkObj
     public override string CollectInfo()
     {
         if (GameManager.isClient) return "";
-        if (gameObject.activeSelf) firstFrameInactive = true;
-        if (!gameObject.activeSelf && firstFrameInactive)
+        if (gameObject.activeSelf || (!gameObject.activeSelf && firstFrameInactive))
         {
             firstFrameInactive = false;
             info.position = transform.position;
@@ -71,10 +70,10 @@ public class NetworkGem : NetworkObj
         if (GameManager.isHost || json == "") return;
         info = JsonUtility.FromJson<Info>(json);
         Debug.Log("Setting info of gem");
-        if(info.active != gameObject.activeSelf)
-        {
+        /*if(info.active != gameObject.activeSelf)
+        {*/
             gameObject.SetActive(info.active);
-        }
+        //}
     }
 
     private void Update()
