@@ -6,23 +6,32 @@ using UnityEngine.UI;
 public class FaceButton : MonoBehaviour
 {
     private Button btn;
-    private Texture image;
-    [SerializeField] private CustomizeAvatarController customizeAvatarController;
+    private RawImage image;
+    private Image face;
     
-    void Start()
+    void Awake()
     {
         btn = GetComponent<Button>();
-        image = btn.GetComponentInChildren<Texture>();
+        face = GetComponent<Image>();
+        image = btn.GetComponentInChildren<RawImage>();
+
+        
     }
 
-    public void UpdateVisuals(Texture text)
+    public void UpdateVisuals(Texture text, CustomizeAvatarController customizeAvatarController)
     {
-        image = text;
+        image.texture=text;
         btn.onClick.AddListener(() =>
         {
-            customizeAvatarController.SetFace(text); 
-
+            customizeAvatarController.SetFace(text);
         });
+        face.color = InicializeAvatarVariables.skinColors[Client.user.avatar_skinTone];
     }
+
+    private void Update()
+    {
+        if(face) face.color = InicializeAvatarVariables.skinColors[Client.user.avatar_skinTone];
+    }
+
 
 }

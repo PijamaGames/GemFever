@@ -71,8 +71,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
-    m_SelectedColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
+    m_PressedColor: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    m_SelectedColor: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7131568726815611567}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
@@ -160,7 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c01a8758ac2b344d8db60341e439bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customizeAvatarController: {fileID: 1478536902292741895}
 --- !u!1 &8317401382418841701
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +170,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8317401382418841700}
   - component: {fileID: 8317401382418841702}
-  - component: {fileID: 1478536902292741895}
   - component: {fileID: 8317401382418841703}
   m_Layer: 5
   m_Name: Texture
@@ -207,26 +205,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8317401382418841701}
   m_CullTransparentMesh: 0
---- !u!114 &1478536902292741895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8317401382418841701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5b577c5d5ce96b4a9c23b1186f489fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAvatar: {fileID: 0}
-  skinParent: {fileID: 0}
-  colorParent: {fileID: 0}
-  body1Panel: {fileID: 0}
-  body2Panel: {fileID: 0}
-  layoutFaces: {fileID: 0}
-  back: {fileID: 0}
-  next: {fileID: 0}
 --- !u!114 &8317401382418841703
 MonoBehaviour:
   m_ObjectHideFlags: 0

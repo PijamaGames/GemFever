@@ -19,7 +19,7 @@ public class CustomizeAvatarController : MonoBehaviour
     [SerializeField] private Button next;
 
     private System.Random rnd = new System.Random();
-    private Image[] faces;
+    
     private Image[] skins;
     private Image[] colors;
 
@@ -27,7 +27,6 @@ public class CustomizeAvatarController : MonoBehaviour
     {
         skins = skinParent.GetComponentsInChildren<Image>();
         colors = colorParent.GetComponentsInChildren<Image>();
-        faces= layoutFaces.GetComponentsInChildren<Image>();
         
 
         for (int i=0; i<skins.Length; i++)
@@ -42,7 +41,6 @@ public class CustomizeAvatarController : MonoBehaviour
         playerAvatar.SetUser(Client.user);
         
         playerAvatar.UpdateVisuals();
-        SetFacesButtonsColor(0);
 
         body1Panel.SetActive(Client.user.avatar_bodyType==0);
         body2Panel.SetActive(Client.user.avatar_bodyType == 1);
@@ -65,16 +63,9 @@ public class CustomizeAvatarController : MonoBehaviour
     {
         Client.user.avatar_skinTone = id;
         playerAvatar.UpdateVisuals();
-        SetFacesButtonsColor(id);
     }
 
-    private void SetFacesButtonsColor(int id)
-    {
-        foreach (var f in faces)
-        {
-            f.color = InicializeAvatarVariables.skinColors[id];
-        }
-    }
+    
 
     public void SetSelectedColor(int id)
     {

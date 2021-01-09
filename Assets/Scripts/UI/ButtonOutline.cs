@@ -11,10 +11,13 @@ public class ButtonOutline : MonoBehaviour
     private Button[] buttons;
     private Color selected=new Color(0.3843138f, 0.2313726f, 0.1058824f, 1f);
     private Color unselected=new Color(1f,1f,1f,0f);
+    private Color[] outlineColors;
 
     void Start()
     {
         buttons = GetComponentsInChildren<Button>();
+        outlineColors=new Color[buttons.Length];
+        int i = 0;
         foreach (var button in buttons)
         {
             EventTrigger trigger = button.gameObject.AddComponent<EventTrigger>();
@@ -24,7 +27,10 @@ public class ButtonOutline : MonoBehaviour
             trigger.triggers.Add(pointerClick);
 
             outline = button.GetComponent<Outline>();
+            outlineColors[i] = outline.effectColor;
             outline.effectColor = unselected;
+
+            i++;
         }
         
     }
@@ -33,7 +39,8 @@ public class ButtonOutline : MonoBehaviour
     {
         outline = button.GetComponent<Outline>();
         outline.effectColor=new Color(0f,0f,0f,0f);
-        outline.effectColor=selected;
+        outline.effectColor=outlineColors[0];
+        int i = 0;
         foreach (var b in  buttons)
         {
             if (b != button)
@@ -41,7 +48,9 @@ public class ButtonOutline : MonoBehaviour
                 outline = b.GetComponent<Outline>();
                 outline.effectColor = unselected;
             }
-            
+
+            i++;
+
         }
     }
 

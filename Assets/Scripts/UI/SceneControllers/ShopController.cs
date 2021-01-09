@@ -96,7 +96,7 @@ public class ShopController : MonoBehaviour
             List<string> aux = new List<string>(Client.user.items_faces);
             aux.Add(face);
             if (Client.user.gems >= faces[face]) Client.user.gems -= faces[face];
-            //Client.user.items_faces = aux.ToArray();
+            Client.user.items_faces = aux.ToArray();
         }
         else if (selectedHat)
         {
