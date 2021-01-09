@@ -4,13 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class PromptSpace : MonoBehaviour
 {
     [SerializeField] UnityEvent onPressed;
     [SerializeField] string spanishText;
     [SerializeField] string englishText;
-    [SerializeField] Sprite sprite;
+
+    [SerializeField] Sprite mobileSprite;
+    [SerializeField] Sprite gamepadSprite;
+    [SerializeField] Sprite keyboardPlayer1Sprite;
+    [SerializeField] Sprite keyboardPlayer2Sprite;
+
     [SerializeField] bool hostOnly = false;
     [SerializeField] bool requiresMoreThanOnePlayerInHub = false;
     HashSet<Prompt> promptTargets = new HashSet<Prompt>();
@@ -31,7 +37,6 @@ public class PromptSpace : MonoBehaviour
                 if (userInfo.id != Client.user.id) return;
             }
 
-            //TODO: Detectar tipo de input para cargar el sprite adecuado
             Prompt prompt = other.gameObject.GetComponentInChildren<Prompt>();
             promptTargets.Add(prompt);
             Button btn = PromptsManager.RequestPrompt();
@@ -45,8 +50,32 @@ public class PromptSpace : MonoBehaviour
                 b.englishText = englishText;
                 b.UpdateLanguage();
                 Image img = prompt.btn.GetComponentsInChildren<Image>()[1];
-                img.enabled = sprite != null;
-                img.sprite = sprite;
+
+                if (GameManager.isHandheld)
+                {
+                    img.enabled = mobileSprite != null;
+                    img.sprite = mobileSprite;
+                }
+                else
+                {
+                    PlayerInput playerInput = other.GetComponent<PlayerInput>();
+
+                    switch (playerInput.currentControlScheme)
+                    {
+                        case "Gamepad":
+                            img.enabled = gamepadSprite != null;
+                            img.sprite = gamepadSprite;
+                            break;
+                        case "Keyboard&Mouse":
+                            img.enabled = keyboardPlayer1Sprite != null;
+                            img.sprite = keyboardPlayer1Sprite;
+                            break;
+                        case "VirtualKeyboard":
+                            img.enabled = keyboardPlayer2Sprite != null;
+                            img.sprite = keyboardPlayer2Sprite;
+                            break;
+                    }
+                }
             }
         }
     }
