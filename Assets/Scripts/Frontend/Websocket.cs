@@ -205,7 +205,7 @@ public class Websocket : MonoBehaviour
             Debug.Log("[SOCKET] Closed");
         } else
         {
-            Debug.Log("[SOCKET] Closed: " + socket.CloseStatusDescription);
+            Debug.Log("[SOCKET] Closed: " + socket.CloseStatus);
         }
         
         connected = false;
