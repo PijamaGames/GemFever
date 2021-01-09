@@ -906,7 +906,7 @@ public class Player : MonoBehaviour
         ResetAnimations();
     }
 
-    private void Freeze()
+    public void Freeze()
     {
         rb.velocity = Vector3.zero;
         rb.useGravity = false;
