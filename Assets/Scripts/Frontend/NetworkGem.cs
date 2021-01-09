@@ -17,6 +17,7 @@ public class NetworkGem : NetworkObj
 
     private void Start()
     {
+        if (GameManager.isLocalGame) return;
         info = new Info();
         info.key = gameObject.name;
         allObjs.Add(this);

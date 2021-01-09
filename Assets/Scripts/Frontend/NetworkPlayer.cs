@@ -37,6 +37,7 @@ public class NetworkPlayer : NetworkObj
 
     void Start()
     {
+        if (GameManager.isLocalGame) return;
         rb = GetComponent<Rigidbody>();
         player = GetComponent<Player>();
         anim = GetComponentInChildren<Animator>();
