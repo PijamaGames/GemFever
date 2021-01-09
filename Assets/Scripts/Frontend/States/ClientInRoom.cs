@@ -55,12 +55,12 @@ public class ClientInRoom : ClientState
 
     public static void GoToGameScene()
     {
-        ChangeScene(SceneLoader.gameScene);
+        ChangeScene(SceneLoader.gameScene, true);
     }
 
     public static void GoToVictoryScene()
     {
-        ChangeScene(SceneLoader.victoryScene);
+        ChangeScene(SceneLoader.victoryScene, true);
     }
 
     public static void GoToHUBScene()
@@ -68,7 +68,7 @@ public class ClientInRoom : ClientState
         ChangeScene(SceneLoader.hubScene);
     }
 
-    private static void ChangeScene(string scene)
+    private static void ChangeScene(string scene, bool playing = false)
     {
         if (!GameManager.isHost) return;
         BackendEvents evt = BackendEvents.Spawn;
@@ -76,6 +76,7 @@ public class ClientInRoom : ClientState
         {
             new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
             new KeyValuePair<string, object>("id", UsefulFuncs.PrimitiveToJsonValue(scene)),
+            new KeyValuePair<string, object>("playing", UsefulFuncs.PrimitiveToJsonValue(playing)),
         };
         string msg = UsefulFuncs.CombineJsons(pairs);
         if (Client.instance != null && Client.instance.socket != null)
