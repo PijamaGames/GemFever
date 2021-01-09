@@ -15,6 +15,8 @@ public class ClientInRoom : ClientState
 
     static bool exitRequested = false;
 
+    static int lastMs = -1;
+
     override public void Begin()
     {
         base.Begin();
@@ -160,6 +162,12 @@ public class ClientInRoom : ClientState
             case FrontendEvents.GetInfo:
                 NetworkObj.BasicStructure structure;
                 ObjsStructure objsStructure = JsonUtility.FromJson<ObjsStructure>(msg);
+                if (objsStructure.ms < lastMs)
+                {
+                    Debug.Log("Ignoring info msg");
+                    return;
+                }
+                lastMs = objsStructure.ms;
                 NetworkObj obj;
                 foreach (var str in objsStructure.objs)
                 {
@@ -182,6 +190,7 @@ public class ClientInRoom : ClientState
     class ObjsStructure
     {
         public int evt;
+        public int ms;
         public string[] objs;
     }
 
@@ -189,6 +198,8 @@ public class ClientInRoom : ClientState
     {
         if (NetworkObj.allObjs.Count == 0) return;
         ObjsStructure objs = new ObjsStructure();
+        //objs.ns = Time.
+        objs.ms = (int)(Client.ms + 0.5d);
         List<string> allInfo = new List<string>();
         string info;
         foreach(var obj in NetworkObj.allObjs)
