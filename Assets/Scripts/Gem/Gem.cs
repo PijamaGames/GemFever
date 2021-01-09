@@ -21,7 +21,7 @@ public class Gem : MonoBehaviour
 
     Rigidbody rb;
     GemPool gemPool;
-    [HideInInspector] public bool isBeingThrown = false;
+    /*[HideInInspector]*/ public bool isBeingThrown = false;
     /*[HideInInspector]*/ public bool isCharged = false;
     [HideInInspector] public bool isFalling = false;
 
@@ -122,7 +122,8 @@ public class Gem : MonoBehaviour
         rb.useGravity = false;
         rb.AddForce(this.playerForward * throwForce * throwSpeedMultiplier, ForceMode.Impulse);
 
-        Physics.IgnoreCollision(this.GetComponent<Collider>(), playerOwner.GetComponent<Collider>(), true);
+        //Physics.IgnoreCollision(this.GetComponent<Collider>(), playerOwner.GetComponent<Collider>(), true);
+        StartCoroutine(IgnoreCollisionsForSomeTime(playerOwner.GetComponent<Collider>(), 0.5f));
         gameObject.layer = LayerMask.NameToLayer("ThrownGem");
 
         isBeingThrown = true;
@@ -162,7 +163,7 @@ public class Gem : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                Debug.Log("Player charged");
+                //Debug.Log("Player charged");
                 rb.velocity = Vector3.zero;
                 isCharged = false;
 
