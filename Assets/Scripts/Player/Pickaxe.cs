@@ -103,6 +103,15 @@ public class Pickaxe : MonoBehaviour
         }
     }
 
+    public void ResetPickaxe()
+    {
+        hitOnCooldown = false;
+        pickaxeReset = false;
+        pickaxeInput = 0f;
+
+        EnableCollisions(false);
+    }
+
     private void MobileInputs()
     {
         if (GameManager.isHandheld)

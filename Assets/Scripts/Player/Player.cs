@@ -875,6 +875,8 @@ public class Player : MonoBehaviour
         isStunned = false;
         isInvulnerable = false;
 
+        GetComponent<Pickaxe>().ResetPickaxe();
+
         //Online game
         if (!GameManager.isLocalGame)
         {
