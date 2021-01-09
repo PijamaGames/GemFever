@@ -157,6 +157,7 @@ public class Player : MonoBehaviour
                 animator.speed = networkPlayer.info.animationSpeed;
                 score = networkPlayer.info.score;
                 currentPouchSize = networkPlayer.info.gems;
+                ChangePouchSize();
                 playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
             }
         }
