@@ -111,8 +111,8 @@ public class Gem : MonoBehaviour
 
         transform.position = playerPosition;
 
-        rb.AddForce(this.playerForward * throwForce * throwSpeedMultiplier, ForceMode.Impulse);
         rb.useGravity = false;
+        rb.AddForce(this.playerForward * throwForce * throwSpeedMultiplier, ForceMode.Impulse);
 
         Physics.IgnoreCollision(this.GetComponent<Collider>(), playerOwner.GetComponent<Collider>(), true);
         gameObject.layer = LayerMask.NameToLayer("ThrownGem");
