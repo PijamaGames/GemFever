@@ -126,6 +126,8 @@ public class NetworkPlayer : NetworkObj
 
     private void LerpPosition()
     {
-        transform.position = Vector3.Lerp(transform.position, info.position, lerp * Time.deltaTime);
+        float realLerp = lerp * Time.deltaTime;
+        if (realLerp > 1f) realLerp = 1f;
+        transform.position = Vector3.Lerp(transform.position, info.position, realLerp);
     }
 }

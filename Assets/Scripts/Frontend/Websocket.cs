@@ -160,7 +160,7 @@ public class Websocket : MonoBehaviour
         }
         if(debugMessagesSize && sent)
         {
-            Debug.Log("[SOCKET] sent msg size: " + json.Length * sizeof(char) + " bytes");
+            Debug.Log("[SOCKET] sent msg size: " + json.Length * 8 + " bytes");
         }
     }
     private async void WaitForMessage()

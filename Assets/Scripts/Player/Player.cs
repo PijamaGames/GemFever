@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
                 animator.speed = networkPlayer.info.animationSpeed;
                 ThrowGem();
             }
-            else if(GameManager.isClient)
+            else if(GameManager.isClient && networkPlayer.info != null)
             {
                 animator.speed = networkPlayer.info.animationSpeed;
                 score = networkPlayer.info.score;

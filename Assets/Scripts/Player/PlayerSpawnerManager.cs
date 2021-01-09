@@ -56,9 +56,9 @@ public class PlayerSpawnerManager : MonoBehaviour
                 return;
             }
             Player playerComp = SpawnPlayerAtLocation(playerInput.gameObject);
-            anyInputDone = true;
             if (!hasJoined && playerInput.transform.parent != networkPlayersParent)
             {
+                anyInputDone = true;
                 hasJoined = true;
                 UserInfo userInfo = new UserInfo();
                 User user = Client.user;
