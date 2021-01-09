@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae9e3b7a9811bc4693f4c9caef6c8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialized: 0
   startingHorizontalSpeed: 45
   startingMaxHorizontalSpeed: 6
   startingVerticalSpeed: 150
@@ -181,8 +182,8 @@ MonoBehaviour:
   hostAnimator: {fileID: 9100000, guid: 89f05ec719c746e49b5ee722c4f8aae6, type: 2}
   clientAnimator: {fileID: 9100000, guid: 3e29601889fa79143ab17f1acdde2cd0, type: 2}
   playerMesh: {fileID: 966143192252347051}
-  walkSound: {fileID: 8300000, guid: d8003bacb75c8c44cbb1c4d4971a09f9, type: 3}
-  ladderSound: {fileID: 8300000, guid: 055d605c7e0ee1340b5ddc73ac15562d, type: 3}
+  walkSound: {fileID: 0}
+  ladderSound: {fileID: 0}
   networkPlayer: {fileID: 0}
 --- !u!114 &390191191207065865
 MonoBehaviour:
@@ -334,6 +335,7 @@ MonoBehaviour:
   faceRenderer: {fileID: 1960957945166073310}
   scarfRenderer: {fileID: 7438174893636077708}
   hairRenderer: {fileID: 1230973479218423835}
+  customizeAvatarController: {fileID: 0}
 --- !u!114 &388299579251914336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb5cf4f11f0480439b975c8c0604bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 1
   lerp: 11
 --- !u!95 &6433302771336034677
 Animator:
@@ -636,6 +639,7 @@ MonoBehaviour:
   knockbackForce: 40
   gemParryForce: 10
   hitOnCooldown: 0
+  pickaxeReset: 0
   pickaxeSwing: {fileID: 0}
   pickaxeHitPlayer: {fileID: 0}
   parrySound: {fileID: 0}
