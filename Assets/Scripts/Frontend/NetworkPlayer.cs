@@ -8,7 +8,9 @@ public class NetworkPlayer : NetworkObj
     {
         public string key = "";
         public Vector3 position = Vector3.zero;
+        public Vector3 rotation = Vector3.zero;
         public string animation = "";
+        public float animationSpeed = 1f;
         public int gems = 0;
         public int score = 0;
     }
@@ -19,7 +21,6 @@ public class NetworkPlayer : NetworkObj
         public Vector2 joystick = Vector2.zero;
         public float pickaxeInput = 0f;
         public float throwGemInput = 0f;
-
     }
 
     [SerializeField] float lerp = 3f;
@@ -86,6 +87,7 @@ public class NetworkPlayer : NetworkObj
     private void OnDestroy()
     {
         allObjs.Remove(this);
+        objsDict.Remove(playerAvatar.userInfo.id);
     }
 
     void Update()

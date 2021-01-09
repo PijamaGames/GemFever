@@ -4304,26 +4304,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3175037214903216567}
   m_CullTransparentMesh: 0
---- !u!114 &1371809309525442125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2446818076845088465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c8a807a02c54542a23782e92e111c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerOwner: {fileID: 0}
-  hitCooldown: 0.25
-  knockbackForce: 120
-  gemParryForce: 10
-  hitOnCooldown: 0
-  pickaxeSwing: {fileID: 0}
-  pickaxeHitPlayer: {fileID: 0}
-  parrySound: {fileID: 0}
 --- !u!1 &1385546914061908349
 GameObject:
   m_ObjectHideFlags: 0
@@ -5117,7 +5097,6 @@ GameObject:
   - component: {fileID: 332586832199842929}
   - component: {fileID: 5917571041706764144}
   - component: {fileID: 5661367138710177134}
-  - component: {fileID: 1371809309525442125}
   - component: {fileID: 6386440381368373901}
   m_Layer: 17
   m_Name: Pickaxe
@@ -5711,7 +5690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f900ce5e20cff4da02b364677286ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickaxe: {fileID: 1371809309525442125}
+  pickaxe: {fileID: 0}
 --- !u!114 &3737027059266415207
 MonoBehaviour:
   m_ObjectHideFlags: 0

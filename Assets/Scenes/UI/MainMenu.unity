@@ -1134,7 +1134,6 @@ GameObject:
   - component: {fileID: 531361376}
   - component: {fileID: 531361375}
   - component: {fileID: 531361374}
-  - component: {fileID: 531361372}
   - component: {fileID: 531361373}
   m_Layer: 17
   m_Name: Pickaxe
@@ -1143,26 +1142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &531361372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 531361371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c8a807a02c54542a23782e92e111c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerOwner: {fileID: 0}
-  hitCooldown: 0.25
-  knockbackForce: 120
-  gemParryForce: 10
-  hitOnCooldown: 0
-  pickaxeSwing: {fileID: 0}
-  pickaxeHitPlayer: {fileID: 0}
-  parrySound: {fileID: 0}
 --- !u!65 &531361373
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5406,7 +5385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f900ce5e20cff4da02b364677286ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickaxe: {fileID: 531361372}
+  pickaxe: {fileID: 0}
 --- !u!95 &225562760018039930
 Animator:
   serializedVersion: 3

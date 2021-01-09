@@ -10,11 +10,14 @@ public class PersistentAudioSource : MonoBehaviour
     private static Stack<AudioSource> avaibleAudioSources = new Stack<AudioSource>();
     private static HashSet<AudioSource> inUseAudioSources = new HashSet<AudioSource>();
     private static GameObject pool;
+    [SerializeField] private AudioClip[] allClips;
+    static Dictionary<string, AudioClip> allClipsDict = new Dictionary<string, AudioClip>();
 
     private void Awake()
     {
         if(pool == null)
         {
+            foreach (var clip in allClips) allClipsDict.Add(clip.name, clip);
             pool = new GameObject("AudioPool");
             pool.transform.position = Camera.main.transform.position;
             GameObject obj;
@@ -94,10 +97,22 @@ public class PersistentAudioSource : MonoBehaviour
         }
     }
 
+    public void PlayEffect(string clipName)
+    {
+        AudioClip clip;
+        if (allClipsDict.TryGetValue(clipName, out clip))
+            PlayEffect(clip);
+    }
+
     public void PlayEffect(AudioClip clip)
     {
         if (clip != null)
             TryPlayClip(clip, false, false);
+
+        if (GameManager.isHost)
+        {
+            NetworkAudio.allEffects.Add(clip.name);
+        }
     }
 
     private void TryPlayClip(AudioClip clip, bool isMusic, bool loop = false)

@@ -78,6 +78,8 @@ public class Player : MonoBehaviour
 
     //Animator
     [SerializeField] Animator animator;
+    [SerializeField] RuntimeAnimatorController hostAnimator;
+    [SerializeField] RuntimeAnimatorController clientAnimator;
     Vector3 groundMeshOrientation = Vector3.zero;
     [SerializeField] GameObject playerMesh;
     bool freeze = false;
@@ -90,7 +92,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip ladderSound;
 
     //Network
-    public NetworkPlayer networkPlayer;
+    [HideInInspector] public NetworkPlayer networkPlayer;
     
     // Start is called before the first frame update
     void Start()
@@ -98,8 +100,8 @@ public class Player : MonoBehaviour
         avatar = GetComponent<PlayerAvatar>();
 
         //Si es el jugador local
-        if(GameManager.isLocalGame || GameManager.isHost)
-            androidInputs = FindObjectOfType<AndroidInputs>();
+        //if(GameManager.isLocalGame || GameManager.isHost)
+        androidInputs = FindObjectOfType<AndroidInputs>();
 
         networkPlayer = GetComponent<NetworkPlayer>();
 
@@ -122,6 +124,12 @@ public class Player : MonoBehaviour
 
         currentTier = gemPouchTiers[0];
         ChangePouchSize();
+
+        if (!GameManager.isLocalGame)
+        {
+            if (GameManager.isHost) animator.runtimeAnimatorController = hostAnimator;
+            else if (GameManager.isClient) animator.runtimeAnimatorController = clientAnimator;
+        }
 
         groundMeshOrientation = playerMesh.transform.right;
     }
@@ -146,6 +154,15 @@ public class Player : MonoBehaviour
                 //Recibir input por red
                 joystick = networkPlayer.inputInfo.joystick;
                 throwGemInput = networkPlayer.inputInfo.throwGemInput;
+                animator.speed = networkPlayer.info.animationSpeed;
+                ThrowGem();
+            }
+            else if(GameManager.isClient)
+            {
+                animator.speed = networkPlayer.info.animationSpeed;
+                score = networkPlayer.info.score;
+                currentPouchSize = networkPlayer.info.gems;
+                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
             }
         }
     }
@@ -169,6 +186,7 @@ public class Player : MonoBehaviour
                 {
                     joystick = androidInputs.GetMovementInput();
                     throwGemInput = androidInputs.GetThrowGemInput();
+                    ThrowGem();
                 }
             }
             //Local game
@@ -197,6 +215,8 @@ public class Player : MonoBehaviour
 
     public void MovementInput(InputAction.CallbackContext context)
     {
+        if (GameManager.isHandheld) return;
+
         if (freeze) return;
 
         //Online game
@@ -223,12 +243,14 @@ public class Player : MonoBehaviour
 
     public void ThrowGemInput(InputAction.CallbackContext context)
     {
+        if (GameManager.isHandheld) return;
+
         if (freeze) return;
 
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         //Online game
-        if (GameManager.isLocalGame)
+        if (!GameManager.isLocalGame)
         {
             //Caso de las máquinas del host
             if (!GameManager.isHost)
@@ -244,6 +266,7 @@ public class Player : MonoBehaviour
                 ThrowGem();
             }
         }
+        //Offline game
         else
         {
             throwGemInput = context.ReadValue<float>();
@@ -340,23 +363,60 @@ public class Player : MonoBehaviour
         {
             if(animator.GetBool("Idle_Climb") && !animator.GetBool("Climb_MineStair") && !animator.GetBool("Stun"))
             {
-                if (joystick.y == 0) animator.speed = 0f;
-                else animator.speed = 1f;
+                if (joystick.y == 0)
+                {
+                    pickaxeOnLadder = false;
+                    animator.speed = 0f;
+                }
+                else
+                {
+                    pickaxeOnLadder = true;
+                    animator.speed = 1f;
+                }
+
+                if (GameManager.isHost)
+                {
+                    //Manda input por red
+                    if (joystick.y == 0) networkPlayer.info.animationSpeed = 0f;
+                    else networkPlayer.info.animationSpeed = 1f;
+                }
             }
             else
+            {
                 animator.speed = 1f;
+                if (GameManager.isHost)
+                {
+                    //Manda input por red
+                    networkPlayer.info.animationSpeed = 1f;
+                }
+            }
+                
 
             rb.useGravity = false;
 
             if(ladderTopReached)
             {
-                pickaxeOnLadder = false;
+                if (joystick.y == 0)
+                {
+                    pickaxeOnLadder = false;
+                }
+                else
+                {
+                    pickaxeOnLadder = true;
+                }
                 if (joystick.y < 0)
                     verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
             }
             else
             {
-                pickaxeOnLadder = true;
+                if (joystick.y == 0)
+                {
+                    pickaxeOnLadder = false;
+                }
+                else
+                {
+                    pickaxeOnLadder = true;
+                }
                 verticalMovement = Vector3.up.magnitude * joystick.y * verticalSpeed * Time.deltaTime;
             }
                 
@@ -364,6 +424,11 @@ public class Player : MonoBehaviour
             if (!ladderTopReached && (joystick.y != 0 /*|| !touchingTheGround*/))
             {
                 playerMesh.transform.forward = Vector3.forward;
+                if (GameManager.isHost)
+                {
+                    //Manda input por red
+                    networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+                }
                 climbingAnimation = true;
                 rotateAnimation = false;
             }
@@ -425,6 +490,12 @@ public class Player : MonoBehaviour
             transform.forward = Vector3.right;
             groundMeshOrientation = Vector3.right;
         }
+
+        if (GameManager.isHost)
+        {
+            //Manda input por red
+            networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+        }
     }
 
     private void UpdateSpeed()
@@ -444,6 +515,11 @@ public class Player : MonoBehaviour
         isStunned = true;
 
         animator.speed = 1f;
+        if (GameManager.isHost)
+        {
+            //Manda input por red
+            networkPlayer.info.animationSpeed = 1f;
+        }
         animator.SetBool("Stun", true);
         
 
@@ -638,6 +714,11 @@ public class Player : MonoBehaviour
             //climbingLadder = false;
             ladderTopReached = false;
             animator.speed = 1f;
+            if (GameManager.isHost)
+            {
+                //Manda input por red
+                networkPlayer.info.animationSpeed = 1f;
+            }
         }
 
         if (other.tag == "Ladder")
@@ -650,6 +731,11 @@ public class Player : MonoBehaviour
             ladderTopReached = false;
 
             animator.speed = 1f;
+            if (GameManager.isHost)
+            {
+                //Manda input por red
+                networkPlayer.info.animationSpeed = 1f;
+            }
             animator.SetBool("Idle_Climb", false);
 
             playerMesh.transform.forward = groundMeshOrientation;
@@ -659,18 +745,27 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    public void PlayWalkSound()
+    {
+        PlaySound(walkSound);
+    }
+
+    public void PlayLadderSound()
+    {
+        PlaySound(ladderSound);
+    }
+
     #region Animations
     private void WalkOrIdleOrClimb()
     {
         if (climbingLadder && climbingAnimation && !ladderTopReached)
         {
-            PlaySound(ladderSound);
+            //PlaySound(ladderSound);
             animator.SetBool("Idle_Climb", climbingLadder);
-            
         }
         else
         {
-            PlaySound(walkSound);
+            //PlaySound(walkSound);
             animator.SetBool("Idle_Walk", isWalking);
         }
     }
@@ -678,7 +773,7 @@ public class Player : MonoBehaviour
     public void StartPickaxeAnimation()
     {
         //Trepando escalera
-        if(climbingLadder && pickaxeOnLadder /*&& false*/)
+        if(/*climbingLadder && pickaxeOnLadder*/ animator.GetBool("Idle_Climb")/*&& false*/)
         {
             animator.SetBool("Climb_MineStair", true);
         }
@@ -733,8 +828,6 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("Victory4", true);
     }
-
-
     #endregion
 
     private void Freeze()

@@ -38,12 +38,14 @@ public class Pickaxe : MonoBehaviour
 
     public void PickaxeInput(InputAction.CallbackContext context)
     {
+        if (GameManager.isHandheld) return;
+
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         //Online game
-        if (GameManager.isLocalGame)
+        if (!GameManager.isLocalGame)
         {
-            //Caso de las máquinas del host
+            //Caso de las máquinas de clientes
             if (!GameManager.isHost)
             {
                 //Manda input por red
@@ -57,6 +59,7 @@ public class Pickaxe : MonoBehaviour
                 PickaxeHit();
             }
         }
+        //Offline game
         else
         {
             pickaxeInput = context.ReadValue<float>();
@@ -92,6 +95,7 @@ public class Pickaxe : MonoBehaviour
             {
                 //Recibir input por red
                 pickaxeInput = playerOwner.networkPlayer.inputInfo.pickaxeInput;
+                PickaxeHit();
             }
         }
     }
@@ -108,6 +112,7 @@ public class Pickaxe : MonoBehaviour
                 {
                     //Manda input por red
                     playerOwner.networkPlayer.inputInfo.pickaxeInput = androidInputs.GetPickaxeInput();
+                    PickaxeHit();
                 }
 
                 else //Máquina host y jugador host
