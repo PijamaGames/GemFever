@@ -107,11 +107,12 @@ public class PersistentAudioSource : MonoBehaviour
     public void PlayEffect(AudioClip clip)
     {
         if (clip != null)
-            TryPlayClip(clip, false, false);
-
-        if (GameManager.isHost)
         {
-            NetworkAudio.allEffects.Add(clip.name);
+            TryPlayClip(clip, false, false);
+            if (GameManager.isHost)
+            {
+                NetworkAudio.allEffects.Add(clip.name);
+            }
         }
     }
 
