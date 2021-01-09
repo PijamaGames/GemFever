@@ -93,7 +93,7 @@ public class ShopController : MonoBehaviour
     {
         if (selectedFace)
         {
-            if (!Client.user.items_hats.Contains(face) && Client.user.gems >= faces[face])
+            if (!Client.user.items_faces.Contains(face) && Client.user.gems >= faces[face])
             {
                 List<string> aux = new List<string>(Client.user.items_faces);
                 aux.Add(face);
