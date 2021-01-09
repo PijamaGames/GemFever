@@ -228,5 +228,6 @@ public class ClientInRoom : ClientState
         }
         players.Clear();
         waitingDict.Clear();
+        lastMs = -1;
     }
 }
