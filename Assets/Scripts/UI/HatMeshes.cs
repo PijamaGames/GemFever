@@ -13,7 +13,7 @@ public class HatMeshes : MonoBehaviour
 
     void Awake()
     {
-        hatsForRandom = new string[hats.Length];
+        //hatsForRandom = new string[hats.Length];
         hatsMeshes = new Dictionary<string, SkinnedMeshRenderer>();
         if (instance == null)
         {
@@ -22,7 +22,7 @@ public class HatMeshes : MonoBehaviour
             foreach (var hat in hats)
             {
                 hatsMeshes.Add(hat.name, hat);
-                hatsForRandom[i] = hat.name;
+                //hatsForRandom[i] = hat.name;
                 i++;
             }
 

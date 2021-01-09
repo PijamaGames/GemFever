@@ -13,7 +13,7 @@ public class FaceTextures : MonoBehaviour
 
     void Awake()
     {
-        facesForRandom=new string[faces.Length];
+        //facesForRandom=new string[faces.Length];
         facesTextures=new Dictionary<string, Texture>();
         if (instance == null)
         {
@@ -22,7 +22,7 @@ public class FaceTextures : MonoBehaviour
             foreach (var face in faces)
             {
                 facesTextures.Add(face.name, face);
-                facesForRandom[i] = face.name;
+                //facesForRandom[i] = face.name;
                 i++;
             }
 

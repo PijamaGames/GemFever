@@ -29,6 +29,8 @@ public class PlayerAvatar : MonoBehaviour
     [HideInInspector] Material hairMat;
     [SerializeField] SkinnedMeshRenderer hairRenderer;
 
+    [SerializeField] private CustomizeAvatarController customizeAvatarController;
+
     bool materialsInitiated = false;
 
     private void Awake()
@@ -92,8 +94,8 @@ public class PlayerAvatar : MonoBehaviour
     {
         randomColor = rnd.Next(InicializeAvatarVariables.characterColors.Length);
         randomSkin = rnd.Next(InicializeAvatarVariables.skinColors.Length);
-        randomFace= rnd.Next(FaceTextures.facesTextures.Count);
-        randomHat= rnd.Next(HatMeshes.hatsMeshes.Count);
+        randomFace= rnd.Next(customizeAvatarController.randFaceList.Count);
+        randomHat= rnd.Next(customizeAvatarController.randHatList.Count);
     }
 
     public void UpdateVisuals()
@@ -110,8 +112,8 @@ public class PlayerAvatar : MonoBehaviour
             Random(out randomColor, out randomSkin, out randomFace, out randomHat);
             skinId = randomSkin;
             colorId = randomColor;
-            faceId = FaceTextures.facesForRandom[randomFace];
-            hatId = HatMeshes.hatsForRandom[randomHat];
+            faceId = customizeAvatarController.randFaceList[randomFace];
+            hatId = customizeAvatarController.randHatList[randomHat];
         }
         else
         {
@@ -119,13 +121,13 @@ public class PlayerAvatar : MonoBehaviour
             colorId = userInfo.color;
 
             if (!HatMeshes.hatsMeshes.ContainsKey(userInfo.hat))
-                hatId = HatMeshes.hatsForRandom[0];
+                hatId = customizeAvatarController.randHatList[0];
             else
                 hatId = userInfo.hat;
 
             if (!FaceTextures.facesTextures.ContainsKey(userInfo.face))
-                faceId=FaceTextures.facesForRandom[0];
-            else    
+                faceId = customizeAvatarController.randFaceList[0];
+            else
                 faceId = userInfo.face;
         }
 
