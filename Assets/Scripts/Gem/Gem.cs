@@ -100,7 +100,7 @@ public class Gem : MonoBehaviour
         }
 
         //TODO: Cambiarle el material entero no el tint
-        gemMesh.material.color = currentTier.tierColor;
+        gemMesh.material = currentTier.tierMaterial;
     }
 
     public void ThrowGem(Vector3 playerForward, Vector3 playerPosition, float throwForce, Player playerOwner)
@@ -289,6 +289,6 @@ public class Gem : MonoBehaviour
 public class GemTier 
 { 
     [Tooltip("Valor mínimo que debe tener la gema para entrar en este tier")]public int minValueForThisTier; 
-    public Color tierColor; 
-    public Mesh tierMesh; 
+    //public Color tierColor;
+    public Material tierMaterial; 
 }

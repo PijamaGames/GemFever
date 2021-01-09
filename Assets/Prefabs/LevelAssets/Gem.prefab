@@ -133,20 +133,13 @@ MonoBehaviour:
   maxSpeedIncrement: 2.5
   tiers:
   - minValueForThisTier: 1
-    tierColor: {r: 1, g: 0, b: 0.9943776, a: 1}
-    tierMesh: {fileID: 0}
+    tierMaterial: {fileID: 2100000, guid: a279c9b2f6feca3469581e0abf8e3123, type: 2}
   - minValueForThisTier: 2
-    tierColor: {r: 0, g: 0.28763032, b: 1, a: 1}
-    tierMesh: {fileID: 0}
+    tierMaterial: {fileID: 2100000, guid: 0a45abb260be9914a973afd1cb11709f, type: 2}
   - minValueForThisTier: 3
-    tierColor: {r: 0, g: 1, b: 0.10499692, a: 1}
-    tierMesh: {fileID: 0}
+    tierMaterial: {fileID: 2100000, guid: 22478f4fdc9d8294595dfcc32daa8b08, type: 2}
   - minValueForThisTier: 4
-    tierColor: {r: 1, g: 0.03915456, b: 0, a: 1}
-    tierMesh: {fileID: 0}
-  - minValueForThisTier: 5
-    tierColor: {r: 1, g: 0.9420621, b: 0, a: 1}
-    tierMesh: {fileID: 0}
+    tierMaterial: {fileID: 2100000, guid: 2e94011d682099c4a88d075791d1ba10, type: 2}
   gemMesh: {fileID: 3035767833483093718}
   isBeingThrown: 0
   isCharged: 0
