@@ -76,10 +76,11 @@ public class PlayerSpawnerManager : MonoBehaviour
             else if(playerInput.transform.parent != networkPlayersParent)
                 Destroy(playerInput.gameObject);
         }
-        //Local Game
+        //Local Game (Random skin)
         else
         {
             anyInputDone = true;
+            playerInput.GetComponent<PlayerAvatar>().UpdateVisuals();     
             SpawnPlayerAtLocation(playerInput.gameObject);
         }
     }
