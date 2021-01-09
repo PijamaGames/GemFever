@@ -162,7 +162,7 @@ public class ClientInRoom : ClientState
             case FrontendEvents.GetInfo:
                 NetworkObj.BasicStructure structure;
                 ObjsStructure objsStructure = JsonUtility.FromJson<ObjsStructure>(msg);
-                if (objsStructure.ms < lastMs)
+                if (objsStructure.ms < lastMs && GameManager.isClient)
                 {
                     Debug.Log("Ignoring info msg");
                     return;

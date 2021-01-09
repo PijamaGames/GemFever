@@ -75,11 +75,11 @@ public class NetworkGem : NetworkObj
     {
         if (GameManager.isHost || json == "") return;
         info = JsonUtility.FromJson<Info>(json);
-        /*if(info.active != gameObject.activeSelf)
-        {*/
-        gem.UpdateGemTier(info.tierId);
-        gameObject.SetActive(info.active);
-        //}
+        if(info.active != gameObject.activeSelf)
+        {
+            gem.UpdateGemTier(info.tierId);
+            gameObject.SetActive(info.active);
+        }
     }
 
     private void Update()
