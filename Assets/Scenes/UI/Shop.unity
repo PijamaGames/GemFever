@@ -4381,7 +4381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: ef6320b5ebf4dc243acea4001368f230, type: 3}
+  m_Texture: {fileID: 2800000, guid: 9cda804d527149543a79e9e175d577da, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -4770,7 +4770,7 @@ MonoBehaviour:
         m_MethodName: OnClickFace
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2800000, guid: 75b45d2af3a0adf438920556c9e2df63,
+          m_ObjectArgument: {fileID: 2800000, guid: de4faf4d77fcff3439f79a4111f45ef6,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Texture, UnityEngine
           m_IntArgument: 3
@@ -7140,9 +7140,9 @@ MonoBehaviour:
   shopFaces:
   - {fileID: 2800000, guid: 4b05ba7846fd82e4bb46180a7100e727, type: 3}
   - {fileID: 2800000, guid: d3799a19827f99b44bd4593ff16c9c22, type: 3}
-  - {fileID: 2800000, guid: 75b45d2af3a0adf438920556c9e2df63, type: 3}
-  - {fileID: 2800000, guid: 1845f5a25d9960046aa51acfffb9acad, type: 3}
-  - {fileID: 2800000, guid: ef6320b5ebf4dc243acea4001368f230, type: 3}
+  - {fileID: 2800000, guid: de4faf4d77fcff3439f79a4111f45ef6, type: 3}
+  - {fileID: 2800000, guid: 73d6cdd0d82caa54b8b51b1b830dd6e5, type: 3}
+  - {fileID: 2800000, guid: 9cda804d527149543a79e9e175d577da, type: 3}
   facesPrice: 9600000096000000c8000000fa0000002c010000
   shopHats:
   - {fileID: 2800000, guid: c64ca3e54cda88942a6f51fe8a7c9e7e, type: 3}
@@ -11653,7 +11653,7 @@ MonoBehaviour:
         m_MethodName: OnClickFace
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2800000, guid: ef6320b5ebf4dc243acea4001368f230,
+          m_ObjectArgument: {fileID: 2800000, guid: 9cda804d527149543a79e9e175d577da,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Texture, UnityEngine
           m_IntArgument: 3
@@ -12824,7 +12824,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 1845f5a25d9960046aa51acfffb9acad, type: 3}
+  m_Texture: {fileID: 2800000, guid: 73d6cdd0d82caa54b8b51b1b830dd6e5, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -13043,7 +13043,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 75b45d2af3a0adf438920556c9e2df63, type: 3}
+  m_Texture: {fileID: 2800000, guid: de4faf4d77fcff3439f79a4111f45ef6, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -13875,7 +13875,7 @@ MonoBehaviour:
         m_MethodName: OnClickFace
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2800000, guid: 1845f5a25d9960046aa51acfffb9acad,
+          m_ObjectArgument: {fileID: 2800000, guid: 73d6cdd0d82caa54b8b51b1b830dd6e5,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Texture, UnityEngine
           m_IntArgument: 3
