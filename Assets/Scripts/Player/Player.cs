@@ -295,7 +295,9 @@ public class Player : MonoBehaviour
 
                 StartGemAnimation();
 
-                thrownGem.ThrowGem(playerMesh.transform.forward, throwGemPosition.transform.position, gemThrowForce, this);
+                Vector3 direction = Vector3.ProjectOnPlane(playerMesh.transform.forward, Vector3.up);
+
+                thrownGem.ThrowGem(/*playerMesh.transform.forward*/ direction, throwGemPosition.transform.position, gemThrowForce, this);
             }
         }
     }
