@@ -25,7 +25,8 @@ public class NetworkGem : NetworkObj
     private void OnDestroy()
     {
         allObjs.Remove(this);
-        objsDict.Remove(info.key);
+        if(info != null)
+            objsDict.Remove(info.key);
     }
 
     public override string CollectInfo()
