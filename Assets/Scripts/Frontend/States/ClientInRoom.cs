@@ -107,7 +107,6 @@ public class ClientInRoom : ClientState
         base.HandleMessage(ref msg);
         MsgStructure data = JsonUtility.FromJson<MsgStructure>(msg);
         FrontendEvents evt = (FrontendEvents)data.evt;
-        Debug.Log("EVENT: " + evt);
         switch (evt)
         {
             case FrontendEvents.Error:
