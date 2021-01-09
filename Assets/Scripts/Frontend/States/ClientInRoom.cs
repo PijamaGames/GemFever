@@ -78,7 +78,7 @@ public class ClientInRoom : ClientState
     private static void ChangeScene(string scene, bool playing = false)
     {
         if (!GameManager.isHost) return;
-        BackendEvents evt = BackendEvents.Spawn;
+        BackendEvents evt = BackendEvents.ChangeScene;
         var pairs = new KeyValuePair<string, object>[]
         {
             new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
