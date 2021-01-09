@@ -20,6 +20,8 @@ public class Client : MonoBehaviour
 
     [SerializeField] float syncRate = 10f;
 
+    public static double ms = 0d;
+
     private void Start()
     {
         if (instance != null)
@@ -36,6 +38,11 @@ public class Client : MonoBehaviour
         CreateStates();
         SetState(unconnectedState);
         StartCoroutine(UpdateNetworkObjsCoroutine());
+    }
+
+    private void Update()
+    {
+        ms += (Time.deltaTime * 1000d);
     }
 
     private void CreateStates()
