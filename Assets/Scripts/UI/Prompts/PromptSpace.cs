@@ -19,16 +19,19 @@ public class PromptSpace : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Player"))
         {
-            if(!GameManager.isLocalGame)
+            Debug.Log("Player prompt");
+
+            var userInfo = other.gameObject.GetComponent<PlayerAvatar>().userInfo;
+
+            if (!GameManager.isLocalGame)
             {
-                if (hostOnly && !(GameManager.isHost && other.GetComponent<Player>().userInfo.isHost)) return;
+                if (hostOnly && !(GameManager.isHost && userInfo.isHost)) return;
                 if (requiresMoreThanOnePlayerInHub && ClientInRoom.players.Count <= 1) return;
+
+                if (userInfo.id != Client.user.id) return;
             }
 
             //TODO: Detectar tipo de input para cargar el sprite adecuado
-
-            var userInfo = other.gameObject.GetComponent<PlayerAvatar>().userInfo;
-            if (userInfo.id != Client.user.id) return;
             Prompt prompt = other.gameObject.GetComponentInChildren<Prompt>();
             promptTargets.Add(prompt);
             Button btn = PromptsManager.RequestPrompt();
@@ -52,10 +55,14 @@ public class PromptSpace : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Player"))
         {
+            var userInfo = other.gameObject.GetComponent<PlayerAvatar>().userInfo;
+
             if (!GameManager.isLocalGame)
             {
-                if (hostOnly && !(GameManager.isHost && other.GetComponent<Player>().userInfo.isHost)) return;
+                if (hostOnly && !(GameManager.isHost && userInfo.isHost)) return;
                 if (requiresMoreThanOnePlayerInHub && ClientInRoom.players.Count <= 1) return;
+
+                if (userInfo.id != Client.user.id) return;
             }
 
             Prompt prompt = other.gameObject.GetComponentInChildren<Prompt>();
