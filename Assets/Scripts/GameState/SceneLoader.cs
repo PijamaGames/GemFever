@@ -15,7 +15,6 @@ public class SceneLoader : MonoBehaviour
     public const string howToPlayScene = "HowToPlay";
     public const string changeNameScene = "ChangeName";
     public const string changePasswordScene = "ChangePassword";
-    public const string endGameScene = "EndGame";
     public const string shopScene = "Shop";
     public const string friendsScene = "Friends";
     public const string connectionScene = "Connection";
@@ -102,10 +101,6 @@ public class SceneLoader : MonoBehaviour
     {
         LoadScene(changePasswordScene);
     }
-    public void LoadEndGameScene()
-    {
-        LoadScene(endGameScene);
-    }
     public void LoadShopScene()
     {
         LoadScene(shopScene);
@@ -157,7 +152,7 @@ public class SceneLoader : MonoBehaviour
         return SceneManager.GetActiveScene().name;
     }
 
-    private void LoadScene(string name)
+    public void LoadScene(string name)
     {
         string currentScene = GetCurrentScene();
         if (name == currentScene) return;

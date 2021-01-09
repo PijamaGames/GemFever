@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ClientInRoom : ClientState
 {
-    private enum FrontendEvents { Error, GetInfo, Exit, AddPlayer, RemovePlayer, Spawn };
-    private enum BackendEvents { Exit, SendObjects, Spawn };
+    private enum FrontendEvents { Error, GetInfo, Exit, AddPlayer, RemovePlayer, Spawn, ChangeScene };
+    private enum BackendEvents { Exit, SendObjects, Spawn, ChangeScene };
     public static int error;
 
     public static List<string> queuedMessages = new List<string>();
@@ -51,6 +51,36 @@ public class ClientInRoom : ClientState
         string msg = UsefulFuncs.CombineJsons(pairs);
         if (Client.instance != null && Client.instance.socket != null)
             Client.instance.socket.SendMessage(msg);
+    }
+
+    public static void GoToGameScene()
+    {
+        ChangeScene(SceneLoader.gameScene);
+    }
+
+    public static void GoToVictoryScene()
+    {
+        ChangeScene(SceneLoader.victoryScene);
+    }
+
+    public static void GoToHUBScene()
+    {
+        ChangeScene(SceneLoader.hubScene);
+    }
+
+    private static void ChangeScene(string scene)
+    {
+        if (!GameManager.isHost) return;
+        BackendEvents evt = BackendEvents.Spawn;
+        var pairs = new KeyValuePair<string, object>[]
+        {
+            new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
+            new KeyValuePair<string, object>("id", UsefulFuncs.PrimitiveToJsonValue(scene)),
+        };
+        string msg = UsefulFuncs.CombineJsons(pairs);
+        if (Client.instance != null && Client.instance.socket != null)
+            Client.instance.socket.SendMessage(msg);
+        SceneLoader.instance.LoadScene(scene);
     }
 
     public class MsgStructure
@@ -133,6 +163,12 @@ public class ClientInRoom : ClientState
                     {
                         obj.SetInfo(str);
                     }
+                }
+                break;
+            case FrontendEvents.ChangeScene:
+                if (GameManager.isClient)
+                {
+                    SceneLoader.instance.LoadScene(data.id);
                 }
                 break;
         }

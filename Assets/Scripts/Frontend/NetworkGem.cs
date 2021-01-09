@@ -38,7 +38,7 @@ public class NetworkGem : NetworkObj
 
     public override void SetInfo(string json)
     {
-        if (GameManager.isHost) return;
+        if (GameManager.isHost || json == "") return;
         info = JsonUtility.FromJson<Info>(json);
         if(info.active != gameObject.activeSelf)
         {
