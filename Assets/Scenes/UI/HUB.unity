@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -12593,7 +12593,7 @@ PrefabInstance:
     - target: {fileID: 2424873281686467804, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
       propertyPath: orthographic size
-      value: 6.2927666
+      value: 5.865
       objectReference: {fileID: 0}
     - target: {fileID: 2424873281686467806, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
@@ -13012,7 +13012,7 @@ MonoBehaviour:
   networkPlayersParent: {fileID: 1565009487}
   hasJoined: 0
   _isInHub: 1
-  timeToKickOut: 60
+  timeToKickOut: 5
   playerSpawnLocations:
   - {fileID: 3375942996530340426}
   - {fileID: 3375942996032943073}
