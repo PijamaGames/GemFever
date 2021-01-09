@@ -875,7 +875,22 @@ public class Player : MonoBehaviour
         isStunned = false;
         isInvulnerable = false;
 
-        playerMesh.transform.forward = -Vector3.forward;
+        //Online game
+        if (!GameManager.isLocalGame)
+        {
+            //Caso de las máquinas del host
+            if (!GameManager.isHost)
+            {
+                //Manda input por red
+                playerMesh.transform.forward = -Vector3.forward;
+                networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+            }
+        }
+        //Local game
+        else
+        {
+            playerMesh.transform.forward = -Vector3.forward;
+        }         
     }
     #endregion
 
