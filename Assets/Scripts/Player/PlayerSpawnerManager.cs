@@ -47,43 +47,55 @@ public class PlayerSpawnerManager : MonoBehaviour
             return;
         }
 
-        if(!GameManager.isLocalGame)
+        Player player = playerInput.GetComponent<Player>();
+
+        if (isInHub && !player.initialized)
         {
-            //Online Game
-            if (kicking)
+            player.initialized = true;
+
+            if (!GameManager.isLocalGame)
             {
-                Destroy(playerInput.gameObject);
-                return;
+                //Online Game
+                if (kicking)
+                {
+                    Destroy(playerInput.gameObject);
+                    return;
+                }
+                Player playerComp = SpawnPlayerAtLocation(playerInput.gameObject);
+                if (!hasJoined && playerInput.transform.parent != networkPlayersParent)
+                {
+                    anyInputDone = true;
+                    hasJoined = true;
+                    UserInfo userInfo = new UserInfo();
+                    User user = Client.user;
+                    userInfo.id = user.id;
+                    userInfo.isHost = GameManager.isHost;
+                    userInfo.isClient = GameManager.isClient;
+                    userInfo.bodyType = user.avatar_bodyType;
+                    userInfo.skinTone = user.avatar_skinTone;
+                    userInfo.color = user.avatar_color;
+                    userInfo.face = user.avatar_face;
+                    userInfo.hat = user.avatar_hat;
+                    userInfo.frame = user.avatar_frame;
+                    playerComp.SetUserInfo(userInfo);
+
+
+
+                    ClientInRoom.Spawn();
+                }
+                else if (playerInput.transform.parent != networkPlayersParent)
+                    Destroy(playerInput.gameObject);
             }
-            Player playerComp = SpawnPlayerAtLocation(playerInput.gameObject);
-            if (!hasJoined && playerInput.transform.parent != networkPlayersParent)
+            //Local Game (Random skin)
+            else
             {
                 anyInputDone = true;
-                hasJoined = true;
-                UserInfo userInfo = new UserInfo();
-                User user = Client.user;
-                userInfo.id = user.id;
-                userInfo.isHost = GameManager.isHost;
-                userInfo.isClient = GameManager.isClient;
-                userInfo.bodyType = user.avatar_bodyType;
-                userInfo.skinTone = user.avatar_skinTone;
-                userInfo.color = user.avatar_color;
-                userInfo.face = user.avatar_face;
-                userInfo.hat = user.avatar_hat;
-                userInfo.frame = user.avatar_frame;
-                playerComp.SetUserInfo(userInfo);
-                ClientInRoom.Spawn();
+                //playerInput.GetComponent<PlayerAvatar>().UpdateVisuals();     
+                SpawnPlayerAtLocation(playerInput.gameObject);
             }
-            else if(playerInput.transform.parent != networkPlayersParent)
-                Destroy(playerInput.gameObject);
         }
-        //Local Game (Random skin)
         else
-        {
-            anyInputDone = true;
-            //playerInput.GetComponent<PlayerAvatar>().UpdateVisuals();     
-            SpawnPlayerAtLocation(playerInput.gameObject);
-        }
+            SpawnPlayerAtLocation(player.gameObject);
     }
 
     private Player SpawnPlayerAtLocation(GameObject player)

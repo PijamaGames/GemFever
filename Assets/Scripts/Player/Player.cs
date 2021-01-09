@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private PlayerAvatar avatar;
     public UserInfo userInfo;
 
+    public bool initialized = false;
+
     [SerializeField] float startingHorizontalSpeed = 120f;
     [SerializeField] float startingMaxHorizontalSpeed = 10f;
     [Space]
