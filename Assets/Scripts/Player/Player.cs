@@ -850,6 +850,21 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("Victory4", true);
     }
+
+    void ResetAnimations()
+    {
+        animator.SetBool("Idle_Walk", false);
+        animator.SetBool("Idle_Climb", false);
+        animator.SetBool("Idle_Mine", false);
+        animator.SetBool("Idle_Throw", false);
+
+        animator.SetBool("Stun", false);
+        animator.SetBool("ClimbMineStair", false);
+
+        animator.SetBool("Victory1", false);
+        animator.SetBool("Victory2_3", false);
+        animator.SetBool("Victory4", false);
+    }
     #endregion
 
     public void Reset()
@@ -857,6 +872,7 @@ public class Player : MonoBehaviour
         currentPouchSize = 0;
         promptInput = false;
         score = 0;
+        ResetAnimations();
     }
 
     private void Freeze()

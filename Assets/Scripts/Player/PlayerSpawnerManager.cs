@@ -24,7 +24,7 @@ public class PlayerSpawnerManager : MonoBehaviour
     {
         isInHub = _isInHub;
 
-        if(!GameManager.isLocalGame)
+        if(!GameManager.isLocalGame && isInHub)
             StartCoroutine(KickCountdown());
     }
 
