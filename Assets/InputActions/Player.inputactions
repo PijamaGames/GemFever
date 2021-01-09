@@ -28,6 +28,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Prompt",
+                    "type": "Button",
+                    "id": "b0a55370-47d5-44a1-abe1-580c9dccc8d1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -358,6 +366,39 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "ThrowGem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6fc2b03-db45-4edc-94c6-ecef021a1542",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Prompt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2858a7fd-d809-4eeb-a151-4a7d90de2a48",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Prompt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f1792ba-c338-4c5a-848e-0ef3acc93aba",
+                    "path": "<VirtualKeyboardDevice>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "VirtualKeyboard",
+                    "action": "Prompt",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

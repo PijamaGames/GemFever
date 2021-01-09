@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     public Vector2 joystick = Vector2.zero;
     float throwGemInput = 0f;
     public AndroidInputs androidInputs;
+    public bool promptInput = false;
 
     //States
     public bool climbingLadder = false;
@@ -136,12 +137,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log("X: " + joystick.x + "Y:" + joystick.y);
-        //Debug.Log(gameObject.name + " Is Stunned: " + isStunned);
-        //Debug.Log(gameObject.name + " Is Invulnerable: " + isInvulnerable);
-        //Debug.Log(rb.velocity);
-        //Debug.Log(gemPouch.Count);
-
         //Mobile
         MobileInputs();
 
@@ -273,6 +268,15 @@ public class Player : MonoBehaviour
 
             ThrowGem();
         }
+    }
+
+    public void PromptInput(InputAction.CallbackContext context)
+    {
+        if (GameManager.isHandheld) return;
+
+        if (!context.performed || !gameObject.scene.IsValid()) return;
+
+        promptInput = context.ReadValue<float>() == 1;
     }
 
     private void ThrowGem()
@@ -846,6 +850,7 @@ public class Player : MonoBehaviour
     public void Reset()
     {
         currentPouchSize = 0;
+        promptInput = false;
         score = 0;
     }
 

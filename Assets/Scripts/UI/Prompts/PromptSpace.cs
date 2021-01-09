@@ -25,8 +25,6 @@ public class PromptSpace : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("Player prompt");
-
             var userInfo = other.gameObject.GetComponent<PlayerAvatar>().userInfo;
 
             if (!GameManager.isLocalGame)
@@ -76,6 +74,30 @@ public class PromptSpace : MonoBehaviour
                             break;
                     }
                 }
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag.Equals("Player"))
+        {
+            Player player = other.GetComponent<Player>();
+
+            var userInfo = other.gameObject.GetComponent<PlayerAvatar>().userInfo;
+
+            if (!GameManager.isLocalGame)
+            {
+                if (hostOnly && !(GameManager.isHost && userInfo.isHost)) return;
+                if (requiresMoreThanOnePlayerInHub && ClientInRoom.players.Count <= 1) return;
+
+                if (userInfo.id != Client.user.id) return;
+            }
+
+            if (player.promptInput)
+            {
+                player.promptInput = false;
+                onPressed?.Invoke();
             }
         }
     }
