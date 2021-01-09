@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
 
                 StartGemAnimation();
 
-                thrownGem.ThrowGem(transform.forward, throwGemPosition.transform.position, gemThrowForce, this);
+                thrownGem.ThrowGem(playerMesh.transform.forward, throwGemPosition.transform.position, gemThrowForce, this);
             }
         }
     }
