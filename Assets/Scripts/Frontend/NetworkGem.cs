@@ -79,7 +79,11 @@ public class NetworkGem : NetworkObj
 
     private void Update()
     {
-        if(GameManager.isClient)
-            transform.position = Vector3.Lerp(transform.position, info.position, lerp * Time.deltaTime);
+        if (GameManager.isClient)
+        {
+            float realLerp = lerp * Time.deltaTime;
+            if (realLerp > 1f) realLerp = 1f;
+            transform.position = Vector3.Lerp(transform.position, info.position, realLerp);
+        }
     }
 }
