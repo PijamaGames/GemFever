@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Remoting.Channels;
 using TMPro;
 using UnityEditor.UI;
@@ -93,17 +94,25 @@ public class ShopController : MonoBehaviour
     {
         if (selectedFace)
         {
-            List<string> aux = new List<string>(Client.user.items_faces);
-            aux.Add(face);
-            if (Client.user.gems >= faces[face]) Client.user.gems -= faces[face];
-            Client.user.items_faces = aux.ToArray();
+            if (!Client.user.items_hats.Contains(face))
+            {
+                List<string> aux = new List<string>(Client.user.items_faces);
+                aux.Add(face);
+                if (Client.user.gems >= faces[face]) Client.user.gems -= faces[face];
+                Client.user.items_faces = aux.ToArray();
+            }
+            
         }
         else if (selectedHat)
         {
-            List<string> aux = new List<string>(Client.user.items_hats);
-            aux.Add(hat);
-            if(Client.user.gems >= hats[hat])Client.user.gems -= hats[hat];
-            //Client.user.items_hats = aux.ToArray();
+            if (!Client.user.items_hats.Contains(hat))
+            {
+                List<string> aux = new List<string>(Client.user.items_hats);
+                aux.Add(hat);
+                if (Client.user.gems >= hats[hat]) Client.user.gems -= hats[hat];
+                Client.user.items_hats = aux.ToArray();
+            }
+            
         }
         else if (selectedPack)
         {
