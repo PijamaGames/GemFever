@@ -830,6 +830,12 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    public void Reset()
+    {
+        currentPouchSize = 0;
+        score = 0;
+    }
+
     private void Freeze()
     {
         rb.velocity = Vector3.zero;

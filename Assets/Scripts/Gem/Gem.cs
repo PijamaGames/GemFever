@@ -99,6 +99,7 @@ public class Gem : MonoBehaviour
             }          
         }
 
+        //TODO: Cambiarle el material entero no el tint
         gemMesh.material.color = currentTier.tierColor;
     }
 
