@@ -513,7 +513,7 @@ PrefabInstance:
     - target: {fileID: 1333670681700085072, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
       propertyPath: syncRate
-      value: 12
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085073, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
