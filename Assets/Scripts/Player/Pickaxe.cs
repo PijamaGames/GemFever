@@ -15,6 +15,7 @@ public class Pickaxe : MonoBehaviour
     [SerializeField] float gemParryForce = 50f;
 
     public bool hitOnCooldown = false;
+    public bool pickaxeReset = false;
     float pickaxeInput = 0f;
 
     AndroidInputs androidInputs;
@@ -76,6 +77,8 @@ public class Pickaxe : MonoBehaviour
                 androidInputs.ResetPickaxeInput();
 
             hitOnCooldown = true;
+
+            pickaxeReset = true;
 
             PlaySound(pickaxeSwing);
 
@@ -142,9 +145,10 @@ public class Pickaxe : MonoBehaviour
         //gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
 
         //hitOnCooldown = false;
-
+        
         //terminar animación
         playerOwner.EndPickaxeAnimation();
+        pickaxeReset = false;
     }
 
     private void EnableCollisions(bool enabled)
@@ -157,6 +161,9 @@ public class Pickaxe : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(hitCooldown);
         hitOnCooldown = false;
+
+        if(!pickaxeReset)
+            EndPickaxeHit();
     }
 
     private void PlaySound(AudioClip clip)

@@ -13,6 +13,7 @@ public class Websocket : MonoBehaviour
     [SerializeField] int urlIndex = 0;
     [SerializeField][TextArea] string[] urlList;
     [SerializeField] bool debugMessages = false;
+    [SerializeField] bool debugMessagesSize = false;
     [SerializeField] bool debugState = false;
     [SerializeField] bool initOnAwake = false;
     [SerializeField] float keepAliveInterval = 25f;
@@ -156,6 +157,10 @@ public class Websocket : MonoBehaviour
         if (debugMessages && sent)
         {
             Debug.Log("[SOCKET] sent message: " + json);
+        }
+        if(debugMessagesSize && sent)
+        {
+            Debug.Log("[SOCKET] sent msg size: " + json.Length * 8 + " bytes");
         }
     }
     private async void WaitForMessage()

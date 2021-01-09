@@ -16,7 +16,7 @@ mergeInto(LibraryManager.library, {
     };
     _socket.onerror = function(evt){
       console.log("[WEBSOCKET] ERROR");
-      gameInstance.SendMessage(invoker, "Error")
+      gameInstance.SendMessage(invoker, "Error", "")
     };
     _socket.onmessage = function(msg){
       gameInstance.SendMessage(invoker, "ReceiveMessage", msg.data);

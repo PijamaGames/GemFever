@@ -510,6 +510,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1333670681700085072, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: syncRate
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085073, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
       propertyPath: m_Name
@@ -524,6 +529,11 @@ PrefabInstance:
         type: 3}
       propertyPath: urlIndex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085074, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: debugMessagesSize
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
@@ -563,7 +573,7 @@ PrefabInstance:
     - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
@@ -1247,7 +1257,7 @@ PrefabInstance:
     - target: {fileID: 2884888735722536220, guid: 7eec1e99c5b42db46880c9b102809f6b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2884888735722536220, guid: 7eec1e99c5b42db46880c9b102809f6b,
         type: 3}

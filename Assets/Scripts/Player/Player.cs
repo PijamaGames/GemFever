@@ -152,11 +152,12 @@ public class Player : MonoBehaviour
                 animator.speed = networkPlayer.info.animationSpeed;
                 ThrowGem();
             }
-            else if(GameManager.isClient)
+            else if(GameManager.isClient && networkPlayer.info != null)
             {
                 animator.speed = networkPlayer.info.animationSpeed;
                 score = networkPlayer.info.score;
                 currentPouchSize = networkPlayer.info.gems;
+                ChangePouchSize();
                 playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
             }
         }
@@ -294,7 +295,9 @@ public class Player : MonoBehaviour
 
                 StartGemAnimation();
 
-                thrownGem.ThrowGem(transform.forward, throwGemPosition.transform.position, gemThrowForce, this);
+                Vector3 direction = Vector3.ProjectOnPlane(playerMesh.transform.forward, Vector3.up);
+
+                thrownGem.ThrowGem(/*playerMesh.transform.forward*/ direction, throwGemPosition.transform.position, gemThrowForce, this);
             }
         }
     }

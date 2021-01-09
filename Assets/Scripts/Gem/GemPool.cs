@@ -12,13 +12,16 @@ public class GemPool : MonoBehaviour
 
     private void Awake()
     {
+        NetworkGem networkGem;
         for(int i = 0; i < objectsInPool; i++)
         {
-            GameObject gameObject = Instantiate(prefab, transform.position, Quaternion.identity);
-            gameObject.name = gameObject.name + i.ToString();
-            gameObject.transform.SetParent(this.gameObject.transform);
-            pool.Push(gameObject);
-            gameObject.SetActive(false);
+            GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
+            obj.name = obj.name + i.ToString();
+            obj.transform.SetParent(this.gameObject.transform);
+            pool.Push(obj);
+            obj.SetActive(false);
+            networkGem = obj.GetComponent<NetworkGem>();
+            networkGem.Init();
         }
     }
 

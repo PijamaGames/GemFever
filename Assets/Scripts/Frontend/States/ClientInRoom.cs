@@ -13,9 +13,12 @@ public class ClientInRoom : ClientState
     public static Dictionary<string, Player> players = new Dictionary<string, Player>();
     private static Dictionary<string, UserInfo> waitingDict = new Dictionary<string, UserInfo>();
 
+    static bool exitRequested = false;
+
     override public void Begin()
     {
         base.Begin();
+        exitRequested = false;
         SceneLoader.instance.LoadHubScene();
         Debug.Log("In room");
         string message;
@@ -29,6 +32,8 @@ public class ClientInRoom : ClientState
 
     public static void Exit()
     {
+        if (exitRequested) return;
+        exitRequested = true;
         BackendEvents evt = BackendEvents.Exit;
         var pairs = new KeyValuePair<string, object>[]
         {
