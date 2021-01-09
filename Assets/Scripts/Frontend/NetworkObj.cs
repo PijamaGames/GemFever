@@ -7,11 +7,6 @@ public abstract class NetworkObj : MonoBehaviour
     public static HashSet<NetworkObj> allObjs = new HashSet<NetworkObj>();
     public static Dictionary<string, NetworkObj> objsDict = new Dictionary<string, NetworkObj>();
 
-    private void Awake()
-    {
-        if (GameManager.isLocalGame) Destroy(this);
-    }
-
     public class BasicStructure
     {
         public string key = "";

@@ -37,7 +37,11 @@ public class NetworkPlayer : NetworkObj
 
     void Start()
     {
-        if (GameManager.isLocalGame) return;
+        if (GameManager.isLocalGame)
+        {
+            Destroy(this);
+            return;
+        }
         rb = GetComponent<Rigidbody>();
         player = GetComponent<Player>();
         anim = GetComponentInChildren<Animator>();
@@ -87,8 +91,11 @@ public class NetworkPlayer : NetworkObj
 
     private void OnDestroy()
     {
-        allObjs.Remove(this);
-        objsDict.Remove(playerAvatar.userInfo.id);
+        if (!GameManager.isLocalGame)
+        {
+            allObjs.Remove(this);
+            objsDict.Remove(playerAvatar.userInfo.id);
+        }
     }
 
     void Update()

@@ -17,7 +17,11 @@ public class NetworkGem : NetworkObj
 
     private void Start()
     {
-        if (GameManager.isLocalGame) return;
+        if (GameManager.isLocalGame)
+        {
+            Destroy(this);
+            return;
+        }
         info = new Info();
         info.key = gameObject.name;
         allObjs.Add(this);
@@ -26,9 +30,12 @@ public class NetworkGem : NetworkObj
 
     private void OnDestroy()
     {
-        allObjs.Remove(this);
-        if(info != null)
-            objsDict.Remove(info.key);
+        if (!GameManager.isLocalGame)
+        {
+            allObjs.Remove(this);
+            if (info != null)
+                objsDict.Remove(info.key);
+        }
     }
 
     public override string CollectInfo()
