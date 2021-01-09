@@ -33,6 +33,7 @@ public class PlayerSpawnerManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(timeToKickOut);
         if (!anyInputDone && GameManager.isClient)
         {
+            Debug.Log("kicking");
             kicking = true;
             ClientInRoom.Exit();
         }
