@@ -18,8 +18,9 @@ public class NetworkGem : NetworkObj
     private void Start()
     {
         info = new Info();
+        info.key = gameObject.name;
         allObjs.Add(this);
-        objsDict.Add(gameObject.name, this);
+        objsDict.Add(info.key, this);
     }
 
     private void OnDestroy()
@@ -49,6 +50,7 @@ public class NetworkGem : NetworkObj
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, info.position, lerp * Time.deltaTime);
+        if(GameManager.isClient)
+            transform.position = Vector3.Lerp(transform.position, info.position, lerp * Time.deltaTime);
     }
 }
