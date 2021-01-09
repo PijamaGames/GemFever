@@ -161,7 +161,8 @@ public class Pickaxe : MonoBehaviour
 
     private void PlaySound(AudioClip clip)
     {
-        audioSource.PlayEffect(clip);
+        if(clip != null)
+            audioSource.PlayEffect(clip);
     }
 
     private void OnTriggerEnter(Collider other)

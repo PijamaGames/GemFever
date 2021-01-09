@@ -62,7 +62,8 @@ public class Gem : MonoBehaviour
 
     private void PlaySound(AudioClip clip)
     {
-        audioSource.PlayEffect(clip);
+        if(clip != null)
+            audioSource.PlayEffect(clip);
     }
 
     public IEnumerator IgnoreCollisionsForSomeTime(Collider toIgnore, float timeToIgnore)

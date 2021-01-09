@@ -704,7 +704,8 @@ public class Player : MonoBehaviour
 
     private void PlaySound(AudioClip clip)
     {
-        audioSource.PlayEffect(clip);
+        if(clip != null)
+            audioSource.PlayEffect(clip);
     }
     void OnTriggerExit(Collider other)
     {
@@ -758,6 +759,8 @@ public class Player : MonoBehaviour
     #region Animations
     private void WalkOrIdleOrClimb()
     {
+        if (!GameManager.isLocalGame && !GameManager.isHost) return;
+
         if (climbingLadder && climbingAnimation && !ladderTopReached)
         {
             //PlaySound(ladderSound);
@@ -772,8 +775,10 @@ public class Player : MonoBehaviour
 
     public void StartPickaxeAnimation()
     {
+        if (!GameManager.isLocalGame && !GameManager.isHost) return;
+
         //Trepando escalera
-        if(/*climbingLadder && pickaxeOnLadder*/ animator.GetBool("Idle_Climb")/*&& false*/)
+        if (/*climbingLadder && pickaxeOnLadder*/ animator.GetBool("Idle_Climb")/*&& false*/)
         {
             animator.SetBool("Climb_MineStair", true);
         }
@@ -787,6 +792,8 @@ public class Player : MonoBehaviour
 
     public void EndPickaxeAnimation()
     {
+        if (!GameManager.isLocalGame && !GameManager.isHost) return;
+
         if (animator.GetBool("Climb_MineStair"))
             animator.SetBool("Climb_MineStair", false);
 
@@ -796,17 +803,23 @@ public class Player : MonoBehaviour
 
     public void StartGemAnimation()
     {
+        if (!GameManager.isLocalGame && !GameManager.isHost) return;
+
         animator.SetBool("Idle_Throw", true);
     }
 
     public void EndGemAnimation()
     {
+        if (!GameManager.isLocalGame && !GameManager.isHost) return;
+
         animator.SetBool("Idle_Throw", false);
     }
 
     public void PlayVictoryAnimation(int position)
     {
         Freeze();
+
+        if (!GameManager.isLocalGame && !GameManager.isHost) return;
 
         if (position == 0) PlayFirstPositionAnim();
         else if (position == 1 || position == 2) PlaySecondOrThirdPositionAnim();

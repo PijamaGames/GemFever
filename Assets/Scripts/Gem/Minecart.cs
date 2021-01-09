@@ -15,7 +15,8 @@ public class Minecart : MonoBehaviour
 
     private void PlaySound(AudioClip clip)
     {
-        audioSource.PlayEffect(clip);
+        if(clip != null)
+            audioSource.PlayEffect(clip);
     }
 
     private void OnTriggerEnter(Collider other)
