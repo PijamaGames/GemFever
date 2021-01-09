@@ -874,6 +874,8 @@ public class Player : MonoBehaviour
         isInLadder = false;
         isStunned = false;
         isInvulnerable = false;
+
+        playerMesh.transform.forward = -Vector3.forward;
     }
     #endregion
 

@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerOwner: {fileID: 390191191207065864}
-  hitCooldown: 0.25
+  hitCooldown: 0.4
   knockbackForce: 40
   gemParryForce: 10
   hitOnCooldown: 0
