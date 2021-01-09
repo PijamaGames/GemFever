@@ -6,7 +6,24 @@ public class PrompFunctions : MonoBehaviour
 {
     public void ExitHub()
     {
-        ClientInRoom.Exit();
+        //Online game
+        if(!GameManager.isLocalGame)
+        {
+            ClientInRoom.Exit();
+        }
+        //Local game
+        else
+        {
+            Player[] players = FindObjectsOfType<Player>();
+
+            foreach (Player player in players)
+            {
+                Destroy(player.gameObject);
+            }
+
+            SceneLoader.instance.LoadMainMenuScene();
+        }
+            
     }
 
     public void EnterLevel()
@@ -18,6 +35,17 @@ public class PrompFunctions : MonoBehaviour
             player.Reset();
         }
 
-        ClientInRoom.GoToGameScene();
+        //Online game
+        if(!GameManager.isLocalGame)
+        {
+            ClientInRoom.GoToGameScene();
+        }
+        //Local game
+        else
+        {
+            SceneLoader.instance.LoadGameScene();
+        }
+
+        
     }
 }
