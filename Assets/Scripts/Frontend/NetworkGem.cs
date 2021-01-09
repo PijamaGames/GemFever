@@ -16,8 +16,18 @@ public class NetworkGem : NetworkObj
     Info info;
     Rigidbody rb;
 
+    bool firstFrameInactive = true;
+    bool init = false;
+
     private void Start()
     {
+        if (!init) Init();
+    }
+
+    public void Init()
+    {
+        if (init) return;
+        init = true;
         if (GameManager.isLocalGame)
         {
             Destroy(this);
@@ -44,9 +54,16 @@ public class NetworkGem : NetworkObj
     public override string CollectInfo()
     {
         if (GameManager.isClient) return "";
-        info.position = transform.position;
-        info.active = gameObject.activeSelf;
-        return JsonUtility.ToJson(info);
+        if (gameObject.activeSelf) firstFrameInactive = true;
+        if (!gameObject.activeSelf && firstFrameInactive)
+        {
+            firstFrameInactive = false;
+            info.position = transform.position;
+            info.active = gameObject.activeSelf;
+            return JsonUtility.ToJson(info);
+        }
+        else return "";
+        
     }
 
     public override void SetInfo(string json)
