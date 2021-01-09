@@ -81,7 +81,7 @@ public class Websocket : MonoBehaviour
         {
             Open();
         }
-        if (connected && socket.State == WebSocketState.Closed || socket.State == WebSocketState.CloseReceived)
+        if (connected && socket.State != WebSocketState.Open)
         {
             socket.Abort();
             Close();
@@ -116,7 +116,6 @@ public class Websocket : MonoBehaviour
             {
                 Error("connecting socket");
             }
-            
         }
     }
 
