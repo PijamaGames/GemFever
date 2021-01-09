@@ -14,6 +14,7 @@ public class NetworkGem : NetworkObj
     }
 
     Info info;
+    Rigidbody rb;
 
     private void Start()
     {
@@ -26,6 +27,8 @@ public class NetworkGem : NetworkObj
         info.key = gameObject.name;
         allObjs.Add(this);
         objsDict.Add(info.key, this);
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = GameManager.isClient;
     }
 
     private void OnDestroy()
