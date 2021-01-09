@@ -63,8 +63,8 @@ public class PlayerSpawnerManager : MonoBehaviour
                 UserInfo userInfo = new UserInfo();
                 User user = Client.user;
                 userInfo.id = user.id;
-                userInfo.isHost = false;
-                userInfo.isClient = false;
+                userInfo.isHost = GameManager.isHost;
+                userInfo.isClient = GameManager.isClient;
                 userInfo.bodyType = user.avatar_bodyType;
                 userInfo.skinTone = user.avatar_skinTone;
                 userInfo.color = user.avatar_color;
