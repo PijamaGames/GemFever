@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gem : MonoBehaviour
 {
     public int value = 1;
+    public int tierIndex = 0;
 
     [SerializeField] float horizontalSpawnForce = 6f;
     [SerializeField] float verticalSpawnForce = 6f;
@@ -100,8 +101,15 @@ public class Gem : MonoBehaviour
             }          
         }
 
+        tierIndex = tiers.IndexOf(currentTier);
         //TODO: Cambiarle el material entero no el tint
         gemMesh.material = currentTier.tierMaterial;
+    }
+
+    public void UpdateGemTier(int tierIndex)
+    {
+        this.tierIndex = tierIndex;
+        gemMesh.material = tiers[this.tierIndex].tierMaterial;
     }
 
     public void ThrowGem(Vector3 playerForward, Vector3 playerPosition, float throwForce, Player playerOwner)
@@ -111,8 +119,8 @@ public class Gem : MonoBehaviour
 
         transform.position = playerPosition;
 
-        rb.AddForce(this.playerForward * throwForce * throwSpeedMultiplier, ForceMode.Impulse);
         rb.useGravity = false;
+        rb.AddForce(this.playerForward * throwForce * throwSpeedMultiplier, ForceMode.Impulse);
 
         Physics.IgnoreCollision(this.GetComponent<Collider>(), playerOwner.GetComponent<Collider>(), true);
         gameObject.layer = LayerMask.NameToLayer("ThrownGem");
