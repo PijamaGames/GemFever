@@ -200,7 +200,14 @@ public class Websocket : MonoBehaviour
     void Close()
     {
         if (!Application.isPlaying) return;
-        Debug.Log("[SOCKET] Closed");
+        if (isWebGLPlatform)
+        {
+            Debug.Log("[SOCKET] Closed");
+        } else
+        {
+            Debug.Log("[SOCKET] Closed: " + socket.CloseStatusDescription);
+        }
+        
         connected = false;
         OnCloseEvent.Invoke();
         onCloseCallback?.Invoke();

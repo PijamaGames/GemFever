@@ -540,6 +540,11 @@ PrefabInstance:
       propertyPath: messageSizeBytes
       value: 16384
       objectReference: {fileID: 0}
+    - target: {fileID: 1333670681700085074, guid: d3ee420d4b657b64b95a136be816224c,
+        type: 3}
+      propertyPath: debugState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
       propertyPath: m_LocalPosition.x
