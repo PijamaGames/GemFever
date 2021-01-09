@@ -15,12 +15,11 @@ public class GemPool : MonoBehaviour
         for(int i = 0; i < objectsInPool; i++)
         {
             GameObject gameObject = Instantiate(prefab, transform.position, Quaternion.identity);
+            gameObject.name = gameObject.name + i.ToString();
             gameObject.transform.SetParent(this.gameObject.transform);
             pool.Push(gameObject);
             gameObject.SetActive(false);
         }
-
-        
     }
 
     public GameObject GetObjectInPool()
