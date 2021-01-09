@@ -1341,9 +1341,9 @@ RectTransform:
   m_Father: {fileID: 1904909670}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -25, y: 70.00003}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 85}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1839793099
@@ -1509,9 +1509,9 @@ RectTransform:
   m_Father: {fileID: 1904909670}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 25, y: 70}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 85}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1868141286
@@ -1652,6 +1652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1904909670}
   - component: {fileID: 1904909671}
+  - component: {fileID: 1904909672}
   m_Layer: 5
   m_Name: Group
   m_TagString: Untagged
@@ -1692,6 +1693,31 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1904909672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904909669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 16
+  m_ChildAlignment: 7
+  m_Spacing: 41.86
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
 --- !u!1 &1950774551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,6 +1815,7 @@ GameObject:
   - component: {fileID: 1969516142}
   - component: {fileID: 1969516141}
   - component: {fileID: 1969516140}
+  - component: {fileID: 1969516144}
   m_Layer: 5
   m_Name: VictoryCanvas
   m_TagString: Untagged
@@ -1876,6 +1903,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1969516144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969516139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63e564b2f1b487e4abc7f7fa3321d3eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playAgainBtn: {fileID: 1868141286}
+  exitBtn: {fileID: 1839793099}
 --- !u!1001 &1991905532
 PrefabInstance:
   m_ObjectHideFlags: 0

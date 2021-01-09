@@ -850,6 +850,54 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("Victory4", true);
     }
+
+    void ResetAnimations()
+    {
+        animator.SetBool("Idle_Walk", false);
+        animator.SetBool("Idle_Climb", false);
+        animator.SetBool("Idle_Mine", false);
+        animator.SetBool("Idle_Throw", false);
+
+        animator.SetBool("Stun", false);
+        animator.SetBool("ClimbMineStair", false);
+
+        animator.SetBool("Victory1", false);
+        animator.SetBool("Victory2_3", false);
+        animator.SetBool("Victory4", false);
+
+        animator.Play("Idle");
+
+        climbingLadder = false;
+        pickaxeOnLadder = false;
+        ladderTopReached = false;
+        isWalking = false;
+        isInLadder = false;
+        isStunned = false;
+        isInvulnerable = false;
+
+        GetComponent<Pickaxe>().ResetPickaxe();
+
+        //Online game
+        if (!GameManager.isLocalGame)
+        {
+            //Caso de las máquinas del host
+            if (GameManager.isHost)
+            {
+                //Manda input por red
+                playerMesh.transform.forward = -Vector3.forward;
+                networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+            }
+            else
+            {
+                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
+            }
+        }
+        //Local game
+        else
+        {
+            playerMesh.transform.forward = -Vector3.forward;
+        }         
+    }
     #endregion
 
     public void Reset()
@@ -857,9 +905,10 @@ public class Player : MonoBehaviour
         currentPouchSize = 0;
         promptInput = false;
         score = 0;
+        ResetAnimations();
     }
 
-    private void Freeze()
+    public void Freeze()
     {
         rb.velocity = Vector3.zero;
         rb.useGravity = false;
