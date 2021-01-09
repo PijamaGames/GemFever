@@ -23,6 +23,7 @@ public class NetworkPlayer : NetworkObj
         public float throwGemInput = 0f;
     }
 
+    [SerializeField] float maxDistance = 1f;
     [SerializeField] float lerp = 3f;
 
     [HideInInspector] public Info info;
@@ -128,6 +129,8 @@ public class NetworkPlayer : NetworkObj
     {
         float realLerp = lerp * Time.deltaTime;
         if (realLerp > 1f) realLerp = 1f;
-        transform.position = Vector3.Lerp(transform.position, info.position, realLerp);
+        float dist = Vector3.Distance(transform.position, info.position);
+        if (dist > maxDistance) transform.position = info.position;
+        else transform.position = Vector3.Lerp(transform.position, info.position, realLerp);
     }
 }

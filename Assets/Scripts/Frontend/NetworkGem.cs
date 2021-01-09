@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NetworkGem : NetworkObj
 {
+    [SerializeField] float maxDistance = 1f;
     [SerializeField] float lerp = 11f;
 
     public class Info
@@ -88,7 +89,9 @@ public class NetworkGem : NetworkObj
         {
             float realLerp = lerp * Time.deltaTime;
             if (realLerp > 1f) realLerp = 1f;
-            transform.position = Vector3.Lerp(transform.position, info.pos, realLerp);
+            float dist = Vector3.Distance(transform.position, info.pos);
+            if (dist > maxDistance) transform.position = info.pos;
+            else transform.position = Vector3.Lerp(transform.position, info.pos, realLerp);
         }
     }
 }
