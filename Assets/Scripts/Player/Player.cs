@@ -879,11 +879,15 @@ public class Player : MonoBehaviour
         if (!GameManager.isLocalGame)
         {
             //Caso de las máquinas del host
-            if (!GameManager.isHost)
+            if (GameManager.isHost)
             {
                 //Manda input por red
                 playerMesh.transform.forward = -Vector3.forward;
                 networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+            }
+            else
+            {
+                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
             }
         }
         //Local game
