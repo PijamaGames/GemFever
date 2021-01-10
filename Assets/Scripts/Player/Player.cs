@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
     PersistentAudioSource audioSource;
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip ladderSound;
+    [SerializeField] AudioClip gemThrowSound;
 
     //Network
     [HideInInspector] public NetworkPlayer networkPlayer;
@@ -139,6 +140,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!PlayerSpawnerManager.isInHub && gameUIManager == null)
+        {
+            gameUIManager = FindObjectOfType<GameUIManager>();
+            if (gameUIManager != null)
+            {
+                gameUIManager.ActivatePlayerUI(playerNumber);
+            }
+        }
+
         //Mobile
         MobileInputs();
 
@@ -294,6 +304,8 @@ public class Player : MonoBehaviour
             {
                 gemThrowOnCooldown = true;
                 StartCoroutine(GemThrowCooldown());
+
+                PlaySound(gemThrowSound);
 
                 StartGemAnimation();
 
@@ -664,7 +676,20 @@ public class Player : MonoBehaviour
         this.score += score;
 
         if(!PlayerSpawnerManager.isInHub)
-            gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+        {
+            if(gameUIManager == null)
+            {
+                gameUIManager = FindObjectOfType<GameUIManager>();
+                if(gameUIManager != null)
+                {
+                    gameUIManager.ActivatePlayerUI(playerNumber);
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+                }
+            }
+            else
+                gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+        }
+            
     }
 
     #region Trigger Methods
@@ -875,7 +900,7 @@ public class Player : MonoBehaviour
         isStunned = false;
         isInvulnerable = false;
 
-        GetComponent<Pickaxe>().ResetPickaxe();
+        GetComponentInChildren<Pickaxe>().ResetPickaxe();
 
         //Online game
         if (!GameManager.isLocalGame)

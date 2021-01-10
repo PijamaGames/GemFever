@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  tierIndex: 0
   horizontalSpawnForce: 6
   verticalSpawnForce: 6
   knockbackForce: 0
@@ -145,11 +146,11 @@ MonoBehaviour:
   isCharged: 0
   isFalling: 0
   playerOwner: {fileID: 0}
-  gemPickup: {fileID: 0}
-  gemHitPlayer: {fileID: 0}
-  gemHitGem: {fileID: 0}
-  gemHitMap: {fileID: 0}
-  chargedGemHit: {fileID: 0}
+  gemPickup: {fileID: 8300000, guid: bef4fa4556d2cf747b4b82eed8a1d0af, type: 3}
+  gemHitPlayer: {fileID: 8300000, guid: 682202e4ad6e1774aa84b2b8f65f0113, type: 3}
+  gemHitGem: {fileID: 8300000, guid: 90ac9f228e97b99409fdb86abffc224d, type: 3}
+  gemHitMap: {fileID: 8300000, guid: 90ac9f228e97b99409fdb86abffc224d, type: 3}
+  chargedGemHit: {fileID: 8300000, guid: 682202e4ad6e1774aa84b2b8f65f0113, type: 3}
 --- !u!114 &252783465586813850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba2842065f30aa4db104ab95800c73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 1
   lerp: 11
 --- !u!1001 &6881307691642504579
 PrefabInstance:

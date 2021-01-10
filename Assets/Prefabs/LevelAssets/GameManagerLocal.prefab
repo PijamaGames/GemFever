@@ -238,7 +238,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c90f9434d0bf3834ebf9b28b04144c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkPlayersParent: {fileID: 0}
+  hasJoined: 0
   _isInHub: 0
+  timeToKickOut: 10
   playerSpawnLocations:
   - {fileID: 837169727655171263}
   - {fileID: 837169729359742228}
