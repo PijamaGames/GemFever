@@ -109,7 +109,7 @@ public class PlayerAvatar : MonoBehaviour
         string faceId;
         string hatId;
 
-        if (userInfo == null)
+        if (GameManager.isLocalGame || userInfo == null)
         {
             int randomSkin, randomColor, randomFace, randomHat;
             Random(out randomColor, out randomSkin, out randomFace, out randomHat);

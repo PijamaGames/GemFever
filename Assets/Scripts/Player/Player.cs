@@ -893,26 +893,47 @@ public class Player : MonoBehaviour
 
     void PlayFirstPositionAnim()
     {
-        if (GameManager.isClient)
-            animator.Play("Victory1");
+        if (!GameManager.isLocalGame)
+        {
+            if (GameManager.isClient)
+                animator.Play("Victory1");
+            else
+                animator.SetBool("Victory1", true);
+        }
         else
-            animator.SetBool("Victory1", true);
+        {
+            animator.Play("Victory1");
+        }
     }
 
     void PlaySecondOrThirdPositionAnim()
     {
-        if (GameManager.isClient)
-            animator.Play("Victory2_3");
+        if(!GameManager.isLocalGame)
+        {
+            if (GameManager.isClient)
+                animator.Play("Victory2_3");
+            else
+                animator.SetBool("Victory2_3", true);
+        }
         else
-            animator.SetBool("Victory2_3", true);
+        {
+            animator.Play("Victory2_3");
+        }
     }
 
     void PlayFourthPositionAnim()
     {
-        if (GameManager.isClient)
-            animator.Play("Victory4");
+        if (!GameManager.isLocalGame)
+        {
+            if (GameManager.isClient)
+                animator.Play("Victory4");
+            else
+                animator.SetBool("Victory4", true);
+        }
         else
-            animator.SetBool("Victory4", true);
+        {
+            animator.Play("Victory4");
+        }
     }
 
     void ResetAnimations()
