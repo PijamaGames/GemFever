@@ -49495,6 +49495,11 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 505320908}
+    - target: {fileID: 837169728536730161, guid: c72bb167b0e217940863cf4aff01623f,
+        type: 3}
+      propertyPath: goalTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 837169728536730165, guid: c72bb167b0e217940863cf4aff01623f,
         type: 3}
       propertyPath: m_LocalPosition.x
