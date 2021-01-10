@@ -204,7 +204,7 @@ RectTransform:
   - {fileID: 6516737981332644816}
   - {fileID: 1305990567470699696}
   - {fileID: 6647954634117437845}
-  m_Father: {fileID: 3042320075964287760}
+  m_Father: {fileID: 1813706858551214448}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -414,7 +414,7 @@ RectTransform:
   m_Children:
   - {fileID: 1831858249306217195}
   - {fileID: 2884996691917549193}
-  m_Father: {fileID: 3042320075964287760}
+  m_Father: {fileID: 1813706858551214448}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -776,7 +776,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3042320075964287760}
+  - component: {fileID: 1813706858551214448}
   - component: {fileID: 3827239903731244281}
   m_Layer: 0
   m_Name: Android Manager
@@ -785,15 +785,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3042320075964287760
-Transform:
+--- !u!224 &1813706858551214448
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6747098421683421689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 228.9699, y: 62.65057, z: -193.64331}
+  m_LocalPosition: {x: 0, y: 0, z: -193.64331}
   m_LocalScale: {x: 3.123644, y: 3.123644, z: 3.123644}
   m_Children:
   - {fileID: 1133426784606861109}
@@ -801,6 +801,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 228.9699, y: 62.65057}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3827239903731244281
 MonoBehaviour:
   m_ObjectHideFlags: 0
