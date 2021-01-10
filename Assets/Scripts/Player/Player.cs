@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
     [SerializeField] RuntimeAnimatorController clientAnimator;
     Vector3 groundMeshOrientation = Vector3.zero;
     [SerializeField] GameObject playerMesh;
-    bool freeze = false;
+    public bool freeze = false;
     bool climbingAnimation = false;
     bool rotateAnimation = true;
 
@@ -893,17 +893,26 @@ public class Player : MonoBehaviour
 
     void PlayFirstPositionAnim()
     {
-        animator.SetBool("Victory1", true);
+        if (GameManager.isClient)
+            animator.Play("Victory1");
+        else
+            animator.SetBool("Victory1", true);
     }
 
     void PlaySecondOrThirdPositionAnim()
     {
-        animator.SetBool("Victory2_3", true);
+        if (GameManager.isClient)
+            animator.Play("Victory2_3");
+        else
+            animator.SetBool("Victory2_3", true);
     }
 
     void PlayFourthPositionAnim()
     {
-        animator.SetBool("Victory4", true);
+        if (GameManager.isClient)
+            animator.Play("Victory4");
+        else
+            animator.SetBool("Victory4", true);
     }
 
     void ResetAnimations()
@@ -919,6 +928,8 @@ public class Player : MonoBehaviour
         animator.SetBool("Victory1", false);
         animator.SetBool("Victory2_3", false);
         animator.SetBool("Victory4", false);
+
+        animator.speed = 1f;
 
         animator.Play("Idle");
 
@@ -965,6 +976,9 @@ public class Player : MonoBehaviour
 
     public void Freeze()
     {
+        joystick = Vector2.zero;
+        throwGemInput = 0f;
+
         ResetAnimations();
 
         rb.velocity = Vector3.zero;

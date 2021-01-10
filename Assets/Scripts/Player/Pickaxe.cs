@@ -41,6 +41,8 @@ public class Pickaxe : MonoBehaviour
     {
         if (GameManager.isHandheld) return;
 
+        if (playerOwner.freeze) return;
+
         if (!context.performed || !gameObject.scene.IsValid()) return;
 
         //Online game
@@ -105,9 +107,10 @@ public class Pickaxe : MonoBehaviour
 
     public void ResetPickaxe()
     {
+        pickaxeInput = 0f;
+
         hitOnCooldown = false;
         pickaxeReset = false;
-        pickaxeInput = 0f;
 
         EnableCollisions(false);
     }

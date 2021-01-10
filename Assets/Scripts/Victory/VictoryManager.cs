@@ -11,7 +11,7 @@ public class VictoryManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         FindPlayers();
         if (!GameManager.isLocalGame)
