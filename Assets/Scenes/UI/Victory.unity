@@ -603,7 +603,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1015243371
 GameObject:
@@ -914,11 +914,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349786282}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.28, z: -3.73}
+  m_LocalPosition: {x: 0, y: 1.5899999, z: -3.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5483733920953273001}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &1349786284
 Light:
@@ -932,8 +932,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 4
-  m_Range: 13
+  m_Intensity: 6
+  m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1304,7 +1304,7 @@ Transform:
   - {fileID: 1991905533}
   - {fileID: 1097102934}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1839793097
 GameObject:
@@ -1887,6 +1887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  gemsEarnedInLocal: 10
 --- !u!1001 &1991905532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2156,7 +2157,7 @@ PrefabInstance:
     - target: {fileID: 5445022989967949034, guid: f3c39e253e2678042a89441a8c44ef1f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5445022989967949034, guid: f3c39e253e2678042a89441a8c44ef1f,
         type: 3}
@@ -2175,12 +2176,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3c39e253e2678042a89441a8c44ef1f, type: 3}
---- !u!4 &5483733920953273001 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 672564442, guid: f3c39e253e2678042a89441a8c44ef1f,
-    type: 3}
-  m_PrefabInstance: {fileID: 5483733920953273000}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5596872244343588933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2256,7 +2251,7 @@ PrefabInstance:
     - target: {fileID: 7918498599163911868, guid: e717db2988477474181c7fa5c74335c6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7918498599163911868, guid: e717db2988477474181c7fa5c74335c6,
         type: 3}
