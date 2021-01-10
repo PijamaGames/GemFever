@@ -43,6 +43,10 @@ public class Client : MonoBehaviour
     private void Update()
     {
         ms += (Time.deltaTime * 1000d);
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Y) && state == inRoomState) ClientInRoom.GoToVictoryScene();
+#endif
     }
 
     private void CreateStates()
