@@ -39,7 +39,7 @@ public class Prompt : MonoBehaviour
 
             //now you can set the position of the ui element
             btnRect.anchoredPosition = WorldObject_ScreenPosition;
-
+            btnRect.localPosition = new Vector3(btnRect.localPosition.x, btnRect.localPosition.y, 0f);
             //Debug.Log(viewportPos);
         }
     }
