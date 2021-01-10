@@ -20,6 +20,10 @@ public class Ore : MonoBehaviour
     [SerializeField] List<MeshRenderer> gemMeshes = new List<MeshRenderer>();
     [SerializeField] List<GemOreTiers> gemOreTiers = new List<GemOreTiers>();
 
+    //Network parameters
+    public bool depleted = false;
+    public int oreTierIndex = 0;
+
     //Sound
     PersistentAudioSource audioSource;
     [SerializeField] AudioClip mineSound;
@@ -38,10 +42,14 @@ public class Ore : MonoBehaviour
     {
         ShowGemMeshes(false);
 
+        depleted = true;
+
         yield return new WaitForSecondsRealtime(timeToRegrow);
         currentGemValue += valueIncreasePerRegrowth;
         gemsLeft = availableGems;
         regrowing = false;
+
+        depleted = false;
 
         UpdateGemColorInOre();
         ShowGemMeshes(true);
@@ -81,9 +89,11 @@ public class Ore : MonoBehaviour
             }
         }
 
+        oreTierIndex = gemOreTiers.IndexOf(currentTier);
+
         foreach(MeshRenderer gemMesh in gemMeshes)
         {
-            gemMesh.material = currentTier.tierMaterial;
+            gemMesh.material = gemOreTiers[oreTierIndex].tierMaterial;
         }
 
     }

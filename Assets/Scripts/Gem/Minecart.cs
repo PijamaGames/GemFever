@@ -12,6 +12,9 @@ public class Minecart : MonoBehaviour
     [SerializeField] TextMeshProUGUI comboText;
     [SerializeField] float textFadeTime = 2f;
 
+    //Network parameters
+    public int comboNumber = 0;
+
     private void Start()
     {
         audioSource = FindObjectOfType<PersistentAudioSource>();
@@ -35,7 +38,8 @@ public class Minecart : MonoBehaviour
             PlaySound(gemIntoMinecart);
 
             comboText.enabled = true;
-            comboText.text = "x1";
+            comboNumber = 1;
+            comboText.text = "x " + comboNumber;
 
             StopCoroutine(FadeText());
             StartCoroutine(FadeText());
@@ -50,8 +54,10 @@ public class Minecart : MonoBehaviour
 
     public void PlayerComboText(int combo)
     {
+        comboNumber = combo;
+
         comboText.enabled = true;
-        comboText.text = "x " + combo.ToString();
+        comboText.text = "x " + comboNumber.ToString();
 
         StopCoroutine(FadeText());
         StartCoroutine(FadeText());
