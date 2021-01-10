@@ -89,7 +89,8 @@ public class PlayerSpawnerManager : MonoBehaviour
                     userInfo.frame = user.avatar_frame;
                     playerComp.SetUserInfo(userInfo);
 
-                    joinButtons.SetActive(false);
+                    if(joinButtons != null)
+                        joinButtons.SetActive(false);
 
                     ClientInRoom.Spawn();
                 }
