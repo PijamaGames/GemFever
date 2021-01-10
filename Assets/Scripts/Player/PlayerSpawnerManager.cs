@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerSpawnerManager : MonoBehaviour
 {
-    [SerializeField] Transform networkPlayersParent;
+    Transform networkPlayersParent;
 
     public static bool isInHub = false;
 
@@ -22,6 +22,7 @@ public class PlayerSpawnerManager : MonoBehaviour
 
     private void Start()
     {
+        networkPlayersParent = GameObject.FindGameObjectWithTag("NetworkPlayers").transform;
         isInHub = _isInHub;
 
         if(!GameManager.isLocalGame && isInHub)
