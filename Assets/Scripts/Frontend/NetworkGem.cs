@@ -89,7 +89,8 @@ public class NetworkGem : NetworkObj
         if(info.a || info.d)
         {
             gem.UpdateGemTier(info.t);
-            gameObject.SetActive(info.a);
+            if (info.a) gameObject.SetActive(true);
+            if (info.d) gameObject.SetActive(false);
         }
     }
 
