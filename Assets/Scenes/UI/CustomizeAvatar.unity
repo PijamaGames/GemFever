@@ -1310,7 +1310,7 @@ MonoBehaviour:
     m_Right: 20
     m_Top: 20
     m_Bottom: 20
-  m_ChildAlignment: 1
+  m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 150, y: 150}
@@ -3304,6 +3304,8 @@ MonoBehaviour:
   layoutFaces: {fileID: 1385546914061908349}
   back: {fileID: 343812933}
   next: {fileID: 991646873}
+  randHatList: []
+  randFaceList: []
 --- !u!224 &171545092544194197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7135,7 +7137,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 20
     m_Bottom: 20
-  m_ChildAlignment: 1
+  m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 110, y: 110}
