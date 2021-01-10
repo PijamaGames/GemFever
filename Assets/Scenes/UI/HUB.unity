@@ -13317,7 +13317,7 @@ MonoBehaviour:
         m_CallState: 2
   spanishText: Salir
   englishText: Exit
-  mobileSprite: {fileID: 21300000, guid: c4a4e6d2ffc87604aa215aafde2be881, type: 3}
+  mobileSprite: {fileID: 0}
   gamepadSprite: {fileID: 21300000, guid: 4b3327c78a8aa9d4a951db9b23fb89d1, type: 3}
   keyboardPlayer1Sprite: {fileID: 21300000, guid: 0fc6c90fdc1ad764faeb14b54287b684,
     type: 3}
@@ -17616,11 +17616,11 @@ MonoBehaviour:
         m_CallState: 2
   spanishText: Jugar
   englishText: Play
-  mobileSprite: {fileID: 21300000, guid: c4a4e6d2ffc87604aa215aafde2be881, type: 3}
-  gamepadSprite: {fileID: 21300000, guid: 4b3327c78a8aa9d4a951db9b23fb89d1, type: 3}
-  keyboardPlayer1Sprite: {fileID: 21300000, guid: 0fc6c90fdc1ad764faeb14b54287b684,
+  mobileSprite: {fileID: 0}
+  gamepadSprite: {fileID: 21300000, guid: 01a85b81d5bea6c498e99625fc7af1f0, type: 3}
+  keyboardPlayer1Sprite: {fileID: 21300000, guid: f2e815888426f5d42a436f32bb5eff46,
     type: 3}
-  keyboardPlayer2Sprite: {fileID: 21300000, guid: 3f352dd4e3c8d9345a18e783231129e8,
+  keyboardPlayer2Sprite: {fileID: 21300000, guid: 0fc3aa5c59639f146a8bac50a3651a35,
     type: 3}
   hostOnly: 1
   requiresMoreThanOnePlayerInHub: 1
@@ -49929,7 +49929,7 @@ PrefabInstance:
     - target: {fileID: 2424873281686467804, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
       propertyPath: orthographic size
-      value: 3.91
+      value: 5.865
       objectReference: {fileID: 0}
     - target: {fileID: 2424873281686467806, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
