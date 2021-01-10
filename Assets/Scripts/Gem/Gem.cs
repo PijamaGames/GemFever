@@ -40,14 +40,21 @@ public class Gem : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (GameManager.isClient) {
+            rb.isKinematic = true;
+            var colliders = GetComponentsInChildren<Collider>();
+            foreach(var c in colliders) c.enabled = false;
+        }
         gemPool = FindObjectOfType<GemPool>();
         audioSource = FindObjectOfType<PersistentAudioSource>();
         currentTier = tiers[0];
+        
         SpawnnForce();
     }
 
     private void SpawnnForce()
     {
+        if (GameManager.isClient) return;
         Vector3 force = Vector3.zero;
 
         force.x = Random.Range(-horizontalSpawnForce, horizontalSpawnForce);
@@ -58,11 +65,13 @@ public class Gem : MonoBehaviour
 
     public void DropForce(Vector3 dropDirection, float dropForce)
     {
+        if (GameManager.isClient) return;
         rb.AddForce(dropDirection * dropForce, ForceMode.Impulse);
     }
 
     private void PlaySound(AudioClip clip)
     {
+        if (GameManager.isClient) return;
         if(clip != null)
             audioSource.PlayEffect(clip);
     }
@@ -76,6 +85,7 @@ public class Gem : MonoBehaviour
 
     public void UpdateGemValue(int newValue)
     {
+        if (GameManager.isClient) return;
         value = newValue;
 
         bool currentTierFound = false;
@@ -114,6 +124,7 @@ public class Gem : MonoBehaviour
 
     public void ThrowGem(Vector3 playerForward, Vector3 playerPosition, float throwForce, Player playerOwner)
     {
+        if (GameManager.isClient) return;
         this.playerForward = playerForward;
         this.playerOwner = playerOwner;
 
@@ -132,6 +143,7 @@ public class Gem : MonoBehaviour
 
     public void ParryGem(Vector3 newDirection, float throwForce, Player newPlayerOwner)
     {
+        if (GameManager.isClient) return;
         if (!isCharged) isCharged = true;
 
         this.playerOwner = newPlayerOwner;
@@ -148,6 +160,7 @@ public class Gem : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (GameManager.isClient) return;
         if (!isBeingThrown && collision.gameObject.tag == "Player")
         {
             Player player = collision.gameObject.GetComponent<Player>();
@@ -246,6 +259,7 @@ public class Gem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (GameManager.isClient) return;
         //Si tiras una gema a un minecart la guardas y se suma el score al jugador
         if( (isBeingThrown || isCharged) && other.tag == "Minecart")
         {
@@ -278,6 +292,7 @@ public class Gem : MonoBehaviour
     //TODO Método de reset de la gema
     private void StopThrowing()
     {
+        if (GameManager.isClient) return;
         rb.velocity = Vector3.zero;
 
         rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
