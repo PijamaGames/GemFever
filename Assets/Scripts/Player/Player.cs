@@ -168,6 +168,18 @@ public class Player : MonoBehaviour
             {
                 animator.speed = networkPlayer.info.animationSpeed;
                 score = networkPlayer.info.score;
+
+                if (gameUIManager == null)
+                {
+                    gameUIManager = FindObjectOfType<GameUIManager>();
+                    if (gameUIManager != null)
+                    {
+                        gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
+                    }
+                }
+                else
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
+
                 currentPouchSize = networkPlayer.info.gems;
                 ChangePouchSize();
                 playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
@@ -944,6 +956,8 @@ public class Player : MonoBehaviour
 
     public void Freeze()
     {
+        ResetAnimations();
+
         rb.velocity = Vector3.zero;
         rb.useGravity = false;
         rb.isKinematic = true;
