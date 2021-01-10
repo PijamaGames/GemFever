@@ -56,8 +56,8 @@ LightmapSettings:
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 2
-    m_BakeResolution: 40
-    m_AtlasSize: 512
+    m_BakeResolution: 30
+    m_AtlasSize: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -1839,8 +1839,8 @@ Transform:
   - {fileID: 1372231222}
   - {fileID: 1798487754}
   - {fileID: 395504516}
-  - {fileID: 383385451}
   - {fileID: 1124277247}
+  - {fileID: 383385451}
   - {fileID: 1197605790}
   m_Father: {fileID: 0}
   m_RootOrder: 11
@@ -14377,6 +14377,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583600406661252275, guid: 0217f236c07a8a844bded464fec9c68a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.06162845
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583600406661252275, guid: 0217f236c07a8a844bded464fec9c68a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70441604
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583600406661252275, guid: 0217f236c07a8a844bded464fec9c68a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.06162845
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583600406661252275, guid: 0217f236c07a8a844bded464fec9c68a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70441604
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583600406661252275, guid: 0217f236c07a8a844bded464fec9c68a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662927466324178410, guid: 0217f236c07a8a844bded464fec9c68a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662927466324178410, guid: 0217f236c07a8a844bded464fec9c68a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662927466324178410, guid: 0217f236c07a8a844bded464fec9c68a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.07
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0217f236c07a8a844bded464fec9c68a, type: 3}
@@ -50820,11 +50860,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2424873281686467778, guid: 2295a096f619d5c428ddea6cb6c61ff5,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2424873281686467779, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -50833,7 +50868,7 @@ PrefabInstance:
     - target: {fileID: 2424873281686467779, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.13
       objectReference: {fileID: 0}
     - target: {fileID: 2424873281686467779, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
@@ -50892,29 +50927,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2295a096f619d5c428ddea6cb6c61ff5, type: 3}
---- !u!1 &1217968884807994809 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2424873281686467806, guid: 2295a096f619d5c428ddea6cb6c61ff5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1217968884807994808}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1217968884807994810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1217968884807994809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 1863d9c15582f8a40af3a554b36b032e, type: 2}
 --- !u!1001 &2884888736238635859
 PrefabInstance:
   m_ObjectHideFlags: 0

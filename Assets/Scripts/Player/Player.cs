@@ -687,7 +687,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        //Cambiar material del meshRenderer?
         pouchMeshFilter.mesh = currentTier.pouchMesh;
     }
     #endregion
@@ -707,17 +706,28 @@ public class Player : MonoBehaviour
 
         if (!PlayerSpawnerManager.isInHub)
         {
-            if(gameUIManager == null)
+            if(!GameManager.isLocalGame)
             {
-                gameUIManager = FindObjectOfType<GameUIManager>();
-                if(gameUIManager != null)
+                if (gameUIManager == null)
                 {
-                    gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
-                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
+                    gameUIManager = FindObjectOfType<GameUIManager>();
+                    if (gameUIManager != null)
+                    {
+                        gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
+                        gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
+                    }
                 }
+                else
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
             }
             else
-                gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
+            {
+                if(GameManager.english)
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, "P");
+                else
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, "J");
+            }
+            
         }
             
     }
