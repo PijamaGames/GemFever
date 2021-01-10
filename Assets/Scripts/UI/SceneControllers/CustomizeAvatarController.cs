@@ -48,6 +48,7 @@ public class CustomizeAvatarController : MonoBehaviour
 
         playerAvatar.UpdateVisuals();
 
+
         body1Panel.SetActive(Client.user.avatar_bodyType==0);
         body2Panel.SetActive(Client.user.avatar_bodyType == 1);
 
@@ -56,9 +57,11 @@ public class CustomizeAvatarController : MonoBehaviour
             next.gameObject.SetActive(true);
             next.onClick.AddListener(ClientSignedUp.SaveInfo);
             back.onClick.RemoveListener(ClientSignedIn.SaveInfo);
+            back.gameObject.SetActive(false);
         }
         else
         {
+            back.gameObject.SetActive(true);
             next.onClick.RemoveListener(ClientSignedUp.SaveInfo);
             back.onClick.AddListener(ClientSignedIn.SaveInfo);
             next.gameObject.SetActive(false);

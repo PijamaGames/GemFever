@@ -117,6 +117,12 @@ public class PlayerAvatar : MonoBehaviour
             colorId = randomColor;
             faceId = customizeAvatarController.randFaceList[randomFace];
             hatId = customizeAvatarController.randHatList[randomHat];
+
+            Client.user.avatar_skinTone = skinId;
+            Client.user.avatar_color = colorId;
+            Client.user.avatar_face = faceId;
+            Client.user.avatar_hat = hatId;
+
         }
         else
         {
@@ -124,14 +130,25 @@ public class PlayerAvatar : MonoBehaviour
             colorId = userInfo.color;
 
             if (!HatMeshes.hatsMeshes.ContainsKey(userInfo.hat))
-                hatId = customizeAvatarController.randHatList[0];
-            else
-                hatId = userInfo.hat;
+            {
+                int randomSkin, randomColor, randomFace, randomHat;
+                Random(out randomColor, out randomSkin, out randomFace, out randomHat);
+                skinId = randomSkin;
+                colorId = randomColor;
+                faceId = customizeAvatarController.randFaceList[randomFace];
+                hatId = customizeAvatarController.randHatList[randomHat];
 
-            if (!FaceTextures.facesTextures.ContainsKey(userInfo.face))
-                faceId = customizeAvatarController.randFaceList[0];
+                Client.user.avatar_skinTone = skinId;
+                Client.user.avatar_color = colorId;
+                Client.user.avatar_face = faceId;
+                Client.user.avatar_hat = hatId;
+            }
             else
+            {
                 faceId = userInfo.face;
+                hatId = userInfo.hat;
+            }
+
         }
 
         shirtRenderer.sharedMesh = InicializeAvatarVariables.shirts[userInfo.bodyType];
@@ -147,4 +164,5 @@ public class PlayerAvatar : MonoBehaviour
         hatMat.SetTexture("Texture2D_E0F6099E", HatMeshes.hatsMeshes[hatId].sharedMaterial.mainTexture);
 
     }
+
 }
