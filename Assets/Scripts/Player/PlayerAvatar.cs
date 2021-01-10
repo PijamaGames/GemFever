@@ -29,7 +29,7 @@ public class PlayerAvatar : MonoBehaviour
     [HideInInspector] Material hairMat;
     [SerializeField] SkinnedMeshRenderer hairRenderer;
 
-    [SerializeField] private CustomizeAvatarController customizeAvatarController;
+    private CustomizeAvatarController customizeAvatarController;
 
     bool materialsInitiated = false;
 
@@ -44,6 +44,8 @@ public class PlayerAvatar : MonoBehaviour
 
     private void InitMaterials()
     {
+        customizeAvatarController = FindObjectOfType<CustomizeAvatarController>();
+
         materialsInitiated = true;
 
         skinMat = Instantiate(skinRenderer.sharedMaterial);
@@ -100,6 +102,7 @@ public class PlayerAvatar : MonoBehaviour
 
     public void UpdateVisuals()
     {
+        if (!materialsInitiated) InitMaterials();
         if (user != null) SetUser(user);
         int skinId;
         int colorId;
@@ -130,8 +133,6 @@ public class PlayerAvatar : MonoBehaviour
             else
                 faceId = userInfo.face;
         }
-
-        if (!materialsInitiated) InitMaterials();
 
         shirtRenderer.sharedMesh = InicializeAvatarVariables.shirts[userInfo.bodyType];
         pantsRenderer.sharedMesh = InicializeAvatarVariables.pants[userInfo.bodyType];
