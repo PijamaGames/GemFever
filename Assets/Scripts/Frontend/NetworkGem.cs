@@ -7,13 +7,19 @@ public class NetworkGem : NetworkObj
     [SerializeField] float maxDistance = 1f;
     [SerializeField] float lerp = 11f;
 
+
+
     public class Info
     {
         public string key; //key
         public Vector3 p; //position
-        public bool a; //active
+        public bool a; //activate
+        public bool d; //deactivate
         public int t; //tierId
     }
+
+    bool lastActive = false;
+    bool lastInactive = false;
 
     Info info;
     Rigidbody rb;
@@ -63,7 +69,10 @@ public class NetworkGem : NetworkObj
             if (gameObject.activeSelf) firstFrameInactive = true;
             else firstFrameInactive = false;
             info.p = transform.position;
-            info.a = gameObject.activeSelf;
+            info.a = gameObject.activeSelf && !lastActive;
+            info.d = !gameObject.activeSelf && !lastInactive;
+            lastActive = gameObject.activeSelf;
+            lastInactive = !gameObject.activeSelf;
             info.t = gem.tierIndex;
             return JsonUtility.ToJson(info);
         }
@@ -77,7 +86,7 @@ public class NetworkGem : NetworkObj
     {
         if (GameManager.isHost || json == "") return;
         info = JsonUtility.FromJson<Info>(json);
-        if(info.a != gameObject.activeSelf)
+        if(info.a || info.d)
         {
             gem.UpdateGemTier(info.t);
             gameObject.SetActive(info.a);
