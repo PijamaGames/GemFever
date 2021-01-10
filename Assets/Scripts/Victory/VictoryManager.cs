@@ -7,20 +7,28 @@ public class VictoryManager : MonoBehaviour
     //Cuando salgas de la escena destruir a los jugadores y a sí mismo.
 
     public List<Player> players = new List<Player>();
+    [SerializeField] int gemsEarnedInLocal = 10;
 
 
     // Start is called before the first frame update
     void Start()
     {
         FindPlayers();
-        foreach(var p in players)
+        if (!GameManager.isLocalGame)
         {
-            if(p.userInfo.id == Client.user.id)
+            foreach (var p in players)
             {
-                Client.user.gems += p.score;
+                if (p.userInfo.id == Client.user.id)
+                {
+                    Client.user.gems += p.score;
+                }
             }
+            ClientInRoom.SaveGems();
+        } else
+        {
+            Client.user.gems += gemsEarnedInLocal;
+            ClientSignedIn.SaveInfo();
         }
-        ClientInRoom.SaveGems();
     }
 
     void FindPlayers()
