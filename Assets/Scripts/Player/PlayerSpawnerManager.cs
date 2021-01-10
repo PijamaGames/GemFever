@@ -18,10 +18,19 @@ public class PlayerSpawnerManager : MonoBehaviour
 
     [SerializeField] List<GameObject> playerSpawnLocations = new List<GameObject>();
     [SerializeField] int maxPlayers = 4;
+    [SerializeField] GameObject joinButtons;
     int currentPlayers = 0;
 
     private void Start()
     {
+        if(joinButtons != null)
+        {
+            if (GameManager.isHandheld)
+                joinButtons.SetActive(false);
+            else
+                joinButtons.SetActive(true);
+        }
+
         networkPlayersParent = GameObject.FindGameObjectWithTag("NetworkPlayers").transform;
         isInHub = _isInHub;
 
@@ -80,7 +89,7 @@ public class PlayerSpawnerManager : MonoBehaviour
                     userInfo.frame = user.avatar_frame;
                     playerComp.SetUserInfo(userInfo);
 
-
+                    joinButtons.SetActive(false);
 
                     ClientInRoom.Spawn();
                 }

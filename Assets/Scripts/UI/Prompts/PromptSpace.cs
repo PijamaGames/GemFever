@@ -52,7 +52,9 @@ public class PromptSpace : MonoBehaviour
                 if (GameManager.isHandheld)
                 {
                     img.enabled = mobileSprite != null;
-                    img.sprite = mobileSprite;
+
+                    if(mobileSprite != null)
+                        img.sprite = mobileSprite;
                 }
                 else
                 {
