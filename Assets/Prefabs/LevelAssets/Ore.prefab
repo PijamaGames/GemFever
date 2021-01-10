@@ -65,6 +65,20 @@ MonoBehaviour:
   currentGemValue: 1
   gemPrefab: {fileID: 2156604997205699141, guid: 9f7405ca85c85254d806ce6830ccd6e4,
     type: 3}
+  gemMeshes:
+  - {fileID: 1424656222051123085}
+  - {fileID: 1505958062055620133}
+  - {fileID: 8433515608606773238}
+  - {fileID: 8842581908688842087}
+  gemOreTiers:
+  - tierMaterial: {fileID: 2100000, guid: a279c9b2f6feca3469581e0abf8e3123, type: 2}
+    minValue: 1
+  - tierMaterial: {fileID: 2100000, guid: 0a45abb260be9914a973afd1cb11709f, type: 2}
+    minValue: 2
+  - tierMaterial: {fileID: 2100000, guid: 22478f4fdc9d8294595dfcc32daa8b08, type: 2}
+    minValue: 3
+  - tierMaterial: {fileID: 2100000, guid: 2e94011d682099c4a88d075791d1ba10, type: 2}
+    minValue: 4
   mineSound: {fileID: 8300000, guid: 60430e5c313421f43bb4e7c513d3e192, type: 3}
 --- !u!1001 &7422567686329897
 PrefabInstance:
@@ -203,6 +217,30 @@ PrefabInstance:
 --- !u!4 &545190316416610754 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a434ccc43d02c7a45b69825a56e37e3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7422567686329897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1424656222051123085 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7791443408913176156, guid: a434ccc43d02c7a45b69825a56e37e3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7422567686329897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1505958062055620133 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1512191506632812556, guid: a434ccc43d02c7a45b69825a56e37e3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7422567686329897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8433515608606773238 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -787141429326784033, guid: a434ccc43d02c7a45b69825a56e37e3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7422567686329897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8842581908688842087 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -383518810844267698, guid: a434ccc43d02c7a45b69825a56e37e3e,
     type: 3}
   m_PrefabInstance: {fileID: 7422567686329897}
   m_PrefabAsset: {fileID: 0}

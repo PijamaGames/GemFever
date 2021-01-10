@@ -17,6 +17,9 @@ public class Ore : MonoBehaviour
     public GameObject gemPrefab;
     GemPool gemPool;
 
+    [SerializeField] List<MeshRenderer> gemMeshes = new List<MeshRenderer>();
+    [SerializeField] List<GemOreTiers> gemOreTiers = new List<GemOreTiers>();
+
     //Sound
     PersistentAudioSource audioSource;
     [SerializeField] AudioClip mineSound;
@@ -27,18 +30,62 @@ public class Ore : MonoBehaviour
         gemPool = FindObjectOfType<GemPool>();
         audioSource = FindObjectOfType<PersistentAudioSource>();
         gemsLeft = availableGems;
+
+        UpdateGemColorInOre();
     }
 
     private IEnumerator Regrow()
     {
-        //Debug.Log("Creciendo");
+        ShowGemMeshes(false);
 
         yield return new WaitForSecondsRealtime(timeToRegrow);
         currentGemValue += valueIncreasePerRegrowth;
         gemsLeft = availableGems;
         regrowing = false;
 
-        //Debug.Log("Crecido");
+        UpdateGemColorInOre();
+        ShowGemMeshes(true);
+    }
+
+    private void ShowGemMeshes(bool active)
+    {
+        foreach(MeshRenderer meshRenderer in gemMeshes)
+        {
+            meshRenderer.enabled = active;
+        }
+    }
+
+    private void UpdateGemColorInOre()
+    {
+        bool currentTierFound = false;
+
+        GemOreTiers nextTier;
+        GemOreTiers currentTier = gemOreTiers[0];
+
+        for (int i = 0; i < gemOreTiers.Count; i++)
+        {
+            if (!currentTierFound)
+            {
+                if (i == gemOreTiers.Count - 1)
+                {
+                    currentTierFound = true;
+                }
+                else
+                {
+                    nextTier = gemOreTiers[i + 1];
+                    if (currentGemValue >= nextTier.minValue)
+                    {
+                        currentTier = nextTier;
+                    }
+                }
+            }
+        }
+
+        foreach(MeshRenderer gemMesh in gemMeshes)
+        {
+            gemMesh.material = currentTier.tierMaterial;
+        }
+
     }
 
     private void MineGem()
@@ -100,4 +147,11 @@ public class Ore : MonoBehaviour
             }
         }
     }
+}
+
+[System.Serializable]
+public class GemOreTiers
+{
+    public Material tierMaterial;
+    public int minValue;
 }
