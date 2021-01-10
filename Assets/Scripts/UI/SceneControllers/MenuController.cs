@@ -9,6 +9,9 @@ public class MenuController : MonoBehaviour
     [SerializeField] private PlayerAvatar playerAvatar;
     [SerializeField] Bilingual welcomeText;
     [SerializeField] Button exitButton;
+    [SerializeField] private Image onlyPC;
+
+    private Button local;
 
     private void Start()
     {
@@ -19,6 +22,15 @@ public class MenuController : MonoBehaviour
             welcomeText.UpdateLanguage();
             playerAvatar.SetUser(Client.user);
             playerAvatar.UpdateVisuals();
+            local = onlyPC.GetComponentInParent<Button>();
+
+
+            onlyPC.gameObject.SetActive(GameManager.isHandheld);
+            local.interactable=!GameManager.isHandheld;
+            
+            
+
+
         }
         //ClientSignedIn.signedOutEvent += ()=>
         exitButton.onClick.AddListener(() => ClientSignedIn.TrySignOut());
