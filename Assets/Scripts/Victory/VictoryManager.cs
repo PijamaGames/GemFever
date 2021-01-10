@@ -13,6 +13,14 @@ public class VictoryManager : MonoBehaviour
     void Start()
     {
         FindPlayers();
+        foreach(var p in players)
+        {
+            if(p.userInfo.id == Client.user.id)
+            {
+                Client.user.gems += p.score;
+            }
+        }
+        ClientInRoom.SaveGems();
     }
 
     void FindPlayers()
