@@ -55,7 +55,7 @@ public class Ore : MonoBehaviour
         ShowGemMeshes(true);
     }
 
-    private void ShowGemMeshes(bool active)
+    public void ShowGemMeshes(bool active)
     {
         foreach(MeshRenderer meshRenderer in gemMeshes)
         {
@@ -96,6 +96,14 @@ public class Ore : MonoBehaviour
             gemMesh.material = gemOreTiers[oreTierIndex].tierMaterial;
         }
 
+    }
+
+    public void UpdateColorInOre(int index)
+    {
+        foreach (MeshRenderer gemMesh in gemMeshes)
+        {
+            gemMesh.material = gemOreTiers[oreTierIndex].tierMaterial;
+        }
     }
 
     private void MineGem()
