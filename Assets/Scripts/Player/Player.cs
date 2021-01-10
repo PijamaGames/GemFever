@@ -140,6 +140,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!PlayerSpawnerManager.isInHub && gameUIManager == null)
+        {
+            gameUIManager = FindObjectOfType<GameUIManager>();
+            if (gameUIManager != null)
+            {
+                gameUIManager.ActivatePlayerUI(playerNumber);
+            }
+        }
+
         //Mobile
         MobileInputs();
 
@@ -667,7 +676,20 @@ public class Player : MonoBehaviour
         this.score += score;
 
         if(!PlayerSpawnerManager.isInHub)
-            gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+        {
+            if(gameUIManager == null)
+            {
+                gameUIManager = FindObjectOfType<GameUIManager>();
+                if(gameUIManager != null)
+                {
+                    gameUIManager.ActivatePlayerUI(playerNumber);
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+                }
+            }
+            else
+                gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+        }
+            
     }
 
     #region Trigger Methods
