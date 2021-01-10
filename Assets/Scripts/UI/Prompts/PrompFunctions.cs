@@ -14,13 +14,6 @@ public class PrompFunctions : MonoBehaviour
         //Local game
         else
         {
-            Player[] players = FindObjectsOfType<Player>();
-
-            foreach (Player player in players)
-            {
-                Destroy(player.gameObject);
-            }
-
             SceneLoader.instance.LoadMainMenuScene();
         }
             
