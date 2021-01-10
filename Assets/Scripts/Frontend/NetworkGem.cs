@@ -9,7 +9,7 @@ public class NetworkGem : NetworkObj
 
     public class Info
     {
-        public string k; //key
+        public string key; //key
         public Vector3 p; //position
         public bool a; //active
         public int t; //tierId
@@ -37,9 +37,9 @@ public class NetworkGem : NetworkObj
             return;
         }
         info = new Info();
-        info.k = gameObject.name;
+        info.key = gameObject.name;
         allObjs.Add(this);
-        objsDict.Add(info.k, this);
+        objsDict.Add(info.key, this);
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = GameManager.isClient;
         gem = GetComponent<Gem>();
@@ -51,23 +51,23 @@ public class NetworkGem : NetworkObj
         {
             allObjs.Remove(this);
             if (info != null)
-                objsDict.Remove(info.k);
+                objsDict.Remove(info.key);
         }
     }
 
     public override string CollectInfo()
     {
         if (GameManager.isClient) return "";
-        /*if (gameObject.activeSelf || (!gameObject.activeSelf && firstFrameInactive))
+        if (gameObject.activeSelf || (!gameObject.activeSelf && firstFrameInactive))
         {
             if (gameObject.activeSelf) firstFrameInactive = true;
-            else firstFrameInactive = false;*/
+            else firstFrameInactive = false;
             info.p = transform.position;
             info.a = gameObject.activeSelf;
             info.t = gem.tierIndex;
             return JsonUtility.ToJson(info);
-        //}
-        //return "";
+        }
+        return "";
         
         //else return "";
         
@@ -77,11 +77,11 @@ public class NetworkGem : NetworkObj
     {
         if (GameManager.isHost || json == "") return;
         info = JsonUtility.FromJson<Info>(json);
-        /*if(info.a != gameObject.activeSelf)
-        {*/
+        if(info.a != gameObject.activeSelf)
+        {
             gem.UpdateGemTier(info.t);
             gameObject.SetActive(info.a);
-        //}
+        }
     }
 
     private void Update()
