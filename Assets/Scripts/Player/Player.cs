@@ -145,7 +145,16 @@ public class Player : MonoBehaviour
             gameUIManager = FindObjectOfType<GameUIManager>();
             if (gameUIManager != null)
             {
-                gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
+                if(!GameManager.isLocalGame)
+                    gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
+                else
+                {
+                    if(GameManager.english)
+                        gameUIManager.ActivatePlayerUI(playerNumber, "P");
+                    else
+                        gameUIManager.ActivatePlayerUI(playerNumber, "J");
+                }
+                    
             }
         }
 

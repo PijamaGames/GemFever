@@ -55,13 +55,24 @@ public class GameUIManager : MonoBehaviour
 
     public void UpdatePlayerUI(int playerNumber, int score, string playerName)
     {
-        playerScores[playerNumber - 1].text = playerName + "\n" + score;
+        if (!GameManager.isLocalGame)
+            playerScores[playerNumber - 1].text = playerName + "\n" + score;
+        else
+        {
+            playerScores[playerNumber - 1].text = playerName + "" + playerNumber + ": " + score;
+        }
     }
 
     public void ActivatePlayerUI(int playerNumber, string playerName)
     {
         playerScores[playerNumber - 1].enabled = true;
-        playerScores[playerNumber - 1].text = playerName + "\n" + "0";
+
+        if(!GameManager.isLocalGame)
+            playerScores[playerNumber - 1].text = playerName + "\n" + "0";
+        else
+        {
+            playerScores[playerNumber - 1].text = playerName + "" + playerNumber + " :0";
+        }
 
         //TODO cambiar lo de P número al nombre de usuario y debajo las gemas que tiene
     }
