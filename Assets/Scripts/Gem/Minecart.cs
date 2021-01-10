@@ -14,6 +14,7 @@ public class Minecart : MonoBehaviour
 
     //Network parameters
     public int comboNumber = 0;
+    public bool textActive = false;
 
     private void Start()
     {
@@ -37,29 +38,39 @@ public class Minecart : MonoBehaviour
         {
             PlaySound(gemIntoMinecart);
 
-            comboText.enabled = true;
-            comboNumber = 1;
-            comboText.text = "x " + comboNumber;
+            if(GameManager.isLocalGame || GameManager.isHost)
+            {
+                comboText.enabled = true;
+                comboNumber = 1;
+                comboText.text = "x " + comboNumber;
 
-            StopCoroutine(FadeText());
-            StartCoroutine(FadeText());
+                StopCoroutine(FadeText());
+                StartCoroutine(FadeText());
+            }
         }
     }
 
     private IEnumerator FadeText()
     {
+        textActive = true;
+
         yield return new WaitForSecondsRealtime(textFadeTime);
         comboText.enabled = false;
+
+        textActive = false;
     }
 
     public void PlayerComboText(int combo)
     {
-        comboNumber = combo;
+        if (GameManager.isLocalGame || GameManager.isHost)
+        {
+            comboNumber = combo;
 
-        comboText.enabled = true;
-        comboText.text = "x " + comboNumber.ToString();
+            comboText.enabled = true;
+            comboText.text = "x " + comboNumber.ToString();
 
-        StopCoroutine(FadeText());
-        StartCoroutine(FadeText());
+            StopCoroutine(FadeText());
+            StartCoroutine(FadeText());
+        }
     }
 }
