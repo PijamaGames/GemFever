@@ -102,7 +102,7 @@ public class Ore : MonoBehaviour
     {
         foreach (MeshRenderer gemMesh in gemMeshes)
         {
-            gemMesh.material = gemOreTiers[oreTierIndex].tierMaterial;
+            gemMesh.material = gemOreTiers[index].tierMaterial;
         }
     }
 
