@@ -110,7 +110,11 @@ public class NetworkPlayer : NetworkObj
             if (GameManager.isHost)
             {
                 info.position = transform.position;
-                info.animation = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+                var animClipInfo = anim.GetCurrentAnimatorClipInfo(0);
+                if(animClipInfo.Length > 0)
+                {
+                    info.animation = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+                }
                 info.gems = player.currentPouchSize;
                 info.score = player.score;
             }
