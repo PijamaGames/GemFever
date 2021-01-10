@@ -42,7 +42,10 @@ public class CustomizeAvatarController : MonoBehaviour
         }
 
         playerAvatar.SetUser(Client.user);
-        
+
+        PrepareHatList();
+        PrepareFaceList();
+
         playerAvatar.UpdateVisuals();
 
         body1Panel.SetActive(Client.user.avatar_bodyType==0);
@@ -60,10 +63,6 @@ public class CustomizeAvatarController : MonoBehaviour
             back.onClick.AddListener(ClientSignedIn.SaveInfo);
             next.gameObject.SetActive(false);
         }
-
-
-        PrepareHatList();
-        PrepareFaceList();
     }
 
     public void SetSelectedSkin(int id)
@@ -71,8 +70,6 @@ public class CustomizeAvatarController : MonoBehaviour
         Client.user.avatar_skinTone = id;
         playerAvatar.UpdateVisuals();
     }
-
-    
 
     public void SetSelectedColor(int id)
     {
