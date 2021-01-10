@@ -182,8 +182,9 @@ MonoBehaviour:
   hostAnimator: {fileID: 9100000, guid: 89f05ec719c746e49b5ee722c4f8aae6, type: 2}
   clientAnimator: {fileID: 9100000, guid: 3e29601889fa79143ab17f1acdde2cd0, type: 2}
   playerMesh: {fileID: 966143192252347051}
-  walkSound: {fileID: 0}
+  walkSound: {fileID: 8300000, guid: f003c12049a7107448de6e63cc9fcf7b, type: 3}
   ladderSound: {fileID: 0}
+  gemThrowSound: {fileID: 8300000, guid: f983119dd636e8c4f940474d015b561c, type: 3}
   networkPlayer: {fileID: 0}
 --- !u!114 &390191191207065865
 MonoBehaviour:
@@ -335,7 +336,6 @@ MonoBehaviour:
   faceRenderer: {fileID: 1960957945166073310}
   scarfRenderer: {fileID: 7438174893636077708}
   hairRenderer: {fileID: 1230973479218423835}
-  customizeAvatarController: {fileID: 0}
 --- !u!114 &388299579251914336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,8 +641,8 @@ MonoBehaviour:
   hitOnCooldown: 0
   pickaxeReset: 0
   pickaxeSwing: {fileID: 0}
-  pickaxeHitPlayer: {fileID: 0}
-  parrySound: {fileID: 0}
+  pickaxeHitPlayer: {fileID: 8300000, guid: 90ac9f228e97b99409fdb86abffc224d, type: 3}
+  parrySound: {fileID: 8300000, guid: 9509424fbdf067e439434420dcfc678b, type: 3}
 --- !u!65 &6386440380760899997
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
     PersistentAudioSource audioSource;
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip ladderSound;
+    [SerializeField] AudioClip gemThrowSound;
 
     //Network
     [HideInInspector] public NetworkPlayer networkPlayer;
@@ -294,6 +295,8 @@ public class Player : MonoBehaviour
             {
                 gemThrowOnCooldown = true;
                 StartCoroutine(GemThrowCooldown());
+
+                PlaySound(gemThrowSound);
 
                 StartGemAnimation();
 
@@ -875,7 +878,7 @@ public class Player : MonoBehaviour
         isStunned = false;
         isInvulnerable = false;
 
-        GetComponent<Pickaxe>().ResetPickaxe();
+        GetComponentInChildren<Pickaxe>().ResetPickaxe();
 
         //Online game
         if (!GameManager.isLocalGame)
