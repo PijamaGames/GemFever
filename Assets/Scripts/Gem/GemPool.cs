@@ -16,7 +16,7 @@ public class GemPool : MonoBehaviour
         for(int i = 0; i < objectsInPool; i++)
         {
             GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
-            obj.name = obj.name + i.ToString();
+            obj.name = i.ToString();
             obj.transform.SetParent(this.gameObject.transform);
             pool.Push(obj);
             obj.SetActive(false);
