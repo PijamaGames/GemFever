@@ -91,7 +91,7 @@ public class PlayerSpawnerManager : MonoBehaviour
             else
             {
                 anyInputDone = true;
-                //playerInput.GetComponent<PlayerAvatar>().UpdateVisuals();     
+                playerInput.GetComponent<PlayerAvatar>().UpdateVisuals();     
                 SpawnPlayerAtLocation(playerInput.gameObject);
             }
         }

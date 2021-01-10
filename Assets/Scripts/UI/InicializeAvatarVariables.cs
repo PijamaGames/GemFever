@@ -21,6 +21,9 @@ public class InicializeAvatarVariables:MonoBehaviour
     [SerializeField] private Mesh hair1;
     [SerializeField] private Mesh hair2;
 
+    public static List<string> randHatList;
+    public static List<string> randFaceList;
+
     private void Awake()
     {
         SetColors();
@@ -28,14 +31,23 @@ public class InicializeAvatarVariables:MonoBehaviour
         hairs = new Mesh[numBodies];
         pants = new Mesh[numBodies];
 
-        InicializeAvatarVariables.shirts[0] = shirt1;
-        InicializeAvatarVariables.shirts[1] = shirt2;
-        InicializeAvatarVariables.pants[0] = pants1;
-        InicializeAvatarVariables.pants[1] = pants2;
-        InicializeAvatarVariables.hairs[0] = hair1;
-        InicializeAvatarVariables.hairs[1] = hair2;
+        shirts[0] = shirt1;
+        shirts[1] = shirt2;
+        pants[0] = pants1;
+        pants[1] = pants2;
+        hairs[0] = hair1;
+        hairs[1] = hair2;
     }
-
+    public static void PrepareHatList()
+    {
+        randHatList = new List<string>(Client.user.items_hats);
+        randHatList.RemoveAll((x) => !HatMeshes.hatsMeshes.ContainsKey(x));
+    }
+    public static void PrepareFaceList()
+    {
+        randFaceList = new List<string>(Client.user.items_faces);
+        randFaceList.RemoveAll((x) => !FaceTextures.facesTextures.ContainsKey(x));
+    }
     private void SetColors()
     {
         characterColors = new CharacterColors[numColors];

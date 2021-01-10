@@ -29,7 +29,6 @@ public class PlayerAvatar : MonoBehaviour
     [HideInInspector] Material hairMat;
     [SerializeField] SkinnedMeshRenderer hairRenderer;
 
-    private CustomizeAvatarController customizeAvatarController;
 
     bool materialsInitiated = false;
 
@@ -44,7 +43,6 @@ public class PlayerAvatar : MonoBehaviour
 
     private void InitMaterials()
     {
-        customizeAvatarController = FindObjectOfType<CustomizeAvatarController>();
 
         materialsInitiated = true;
 
@@ -96,12 +94,14 @@ public class PlayerAvatar : MonoBehaviour
     {
         randomColor = rnd.Next(InicializeAvatarVariables.characterColors.Length);
         randomSkin = rnd.Next(InicializeAvatarVariables.skinColors.Length);
-        randomFace= rnd.Next(customizeAvatarController.randFaceList.Count);
-        randomHat= rnd.Next(customizeAvatarController.randHatList.Count);
+        randomFace= rnd.Next(InicializeAvatarVariables.randFaceList.Count);
+        randomHat= rnd.Next(InicializeAvatarVariables.randHatList.Count);
     }
 
     public void UpdateVisuals()
     {
+        InicializeAvatarVariables.PrepareHatList();
+        InicializeAvatarVariables.PrepareFaceList();
         if (!materialsInitiated) InitMaterials();
         if (user != null) SetUser(user);
         int skinId;
@@ -115,8 +115,8 @@ public class PlayerAvatar : MonoBehaviour
             Random(out randomColor, out randomSkin, out randomFace, out randomHat);
             skinId = randomSkin;
             colorId = randomColor;
-            faceId = customizeAvatarController.randFaceList[randomFace];
-            hatId = customizeAvatarController.randHatList[randomHat];
+            faceId = InicializeAvatarVariables.randFaceList[randomFace];
+            hatId = InicializeAvatarVariables.randHatList[randomHat];
 
             Client.user.avatar_skinTone = skinId;
             Client.user.avatar_color = colorId;
@@ -134,8 +134,8 @@ public class PlayerAvatar : MonoBehaviour
                 Random(out randomColor, out randomSkin, out randomFace, out randomHat);
                 skinId = randomSkin;
                 colorId = randomColor;
-                faceId = customizeAvatarController.randFaceList[randomFace];
-                hatId = customizeAvatarController.randHatList[randomHat];
+                faceId = InicializeAvatarVariables.randFaceList[randomFace];
+                hatId = InicializeAvatarVariables.randHatList[randomHat];
 
                 Client.user.avatar_skinTone = skinId;
                 Client.user.avatar_color = colorId;
@@ -150,9 +150,9 @@ public class PlayerAvatar : MonoBehaviour
 
         }
 
-        shirtRenderer.sharedMesh = InicializeAvatarVariables.shirts[userInfo.bodyType];
-        pantsRenderer.sharedMesh = InicializeAvatarVariables.pants[userInfo.bodyType];
-        hairRenderer.sharedMesh = InicializeAvatarVariables.hairs[userInfo.bodyType];
+        shirtRenderer.sharedMesh = InicializeAvatarVariables.shirts[Client.user.avatar_bodyType];
+        pantsRenderer.sharedMesh = InicializeAvatarVariables.pants[Client.user.avatar_bodyType];
+        hairRenderer.sharedMesh = InicializeAvatarVariables.hairs[Client.user.avatar_bodyType];
         hatRenderer.sharedMesh = HatMeshes.hatsMeshes[hatId].sharedMesh;
 
         faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);
