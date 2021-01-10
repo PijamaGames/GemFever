@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClientInRoom : ClientState
 {
     private enum FrontendEvents { Error, GetInfo, Exit, AddPlayer, RemovePlayer, Spawn, ChangeScene };
-    private enum BackendEvents { Exit, SendObjects, Spawn, ChangeScene };
+    private enum BackendEvents { Exit, SendObjects, Spawn, ChangeScene, SaveGems };
     public static int error;
 
     public static List<string> queuedMessages = new List<string>();
@@ -45,6 +45,19 @@ public class ClientInRoom : ClientState
         if (Client.instance != null && Client.instance.socket != null)
             Client.instance.socket.SendMessage(msg);
         GameManager.instance.BlockUI();
+    }
+
+    public static void SaveGems()
+    {
+        BackendEvents evt = BackendEvents.SaveGems;
+        var pairs = new KeyValuePair<string, object>[]
+        {
+            new KeyValuePair<string, object>("evt", UsefulFuncs.PrimitiveToJsonValue((int)evt)),
+            new KeyValuePair<string, object>("gems", UsefulFuncs.PrimitiveToJsonValue(Client.user.gems)),
+        };
+        string msg = UsefulFuncs.CombineJsons(pairs);
+        if (Client.instance != null && Client.instance.socket != null)
+            Client.instance.socket.SendMessage(msg);
     }
 
     public static void Spawn()
