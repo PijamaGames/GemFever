@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Minecart : MonoBehaviour
 {
@@ -8,9 +9,13 @@ public class Minecart : MonoBehaviour
     [SerializeField] AudioClip gemIntoMinecart;
     [SerializeField] AudioClip playerIntoMinecart;
 
+    [SerializeField] TextMeshProUGUI comboText;
+    [SerializeField] float textFadeTime = 2f;
+
     private void Start()
     {
         audioSource = FindObjectOfType<PersistentAudioSource>();
+        comboText.enabled = false;
     }
 
     private void PlaySound(AudioClip clip)
@@ -28,6 +33,27 @@ public class Minecart : MonoBehaviour
         else if(other.tag == "Gem")
         {
             PlaySound(gemIntoMinecart);
+
+            comboText.enabled = true;
+            comboText.text = "x1";
+
+            StopCoroutine(FadeText());
+            StartCoroutine(FadeText());
         }
+    }
+
+    private IEnumerator FadeText()
+    {
+        yield return new WaitForSecondsRealtime(textFadeTime);
+        comboText.enabled = false;
+    }
+
+    public void PlayerComboText(int combo)
+    {
+        comboText.enabled = true;
+        comboText.text = "x " + combo.ToString();
+
+        StopCoroutine(FadeText());
+        StartCoroutine(FadeText());
     }
 }

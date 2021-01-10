@@ -743,6 +743,8 @@ public class Player : MonoBehaviour
                 float scoreMultiplier = 1f;
                 int currentGems = gemPouch.Count;
 
+                other.GetComponent<Minecart>().PlayerComboText(currentGems);
+
                 for(int i = 0; i < currentGems; i++)
                 {
                     Gem gem = gemPouch.Dequeue();
