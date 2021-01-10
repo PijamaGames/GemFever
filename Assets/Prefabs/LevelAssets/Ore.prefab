@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8514849453775226427}
   - component: {fileID: 1693835156362520802}
   - component: {fileID: -3346184224578098226}
+  - component: {fileID: 580539574}
   m_Layer: 0
   m_Name: Ore
   m_TagString: Ore
@@ -79,7 +80,21 @@ MonoBehaviour:
     minValue: 3
   - tierMaterial: {fileID: 2100000, guid: 2e94011d682099c4a88d075791d1ba10, type: 2}
     minValue: 4
+  depleted: 0
+  oreTierIndex: 0
   mineSound: {fileID: 8300000, guid: 60430e5c313421f43bb4e7c513d3e192, type: 3}
+--- !u!114 &580539574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7111589397398434791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb17cebc5ec1bd445b0a98e61b24d651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7422567686329897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,17 +105,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a434ccc43d02c7a45b69825a56e37e3e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.003
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a434ccc43d02c7a45b69825a56e37e3e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.29400003
+      value: -0.387
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a434ccc43d02c7a45b69825a56e37e3e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6099999
+      value: 0.849
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a434ccc43d02c7a45b69825a56e37e3e,
         type: 3}
