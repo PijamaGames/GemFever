@@ -110,6 +110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gemIntoMinecart: {fileID: 0}
   playerIntoMinecart: {fileID: 0}
+  comboText: {fileID: 6835241650620784070}
+  textFadeTime: 2
 --- !u!1 &5990160502205109906
 GameObject:
   m_ObjectHideFlags: 0
