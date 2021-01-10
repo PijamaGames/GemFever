@@ -58,16 +58,16 @@ public class NetworkGem : NetworkObj
     public override string CollectInfo()
     {
         if (GameManager.isClient) return "";
-        if (gameObject.activeSelf || (!gameObject.activeSelf && firstFrameInactive))
+        /*if (gameObject.activeSelf || (!gameObject.activeSelf && firstFrameInactive))
         {
             if (gameObject.activeSelf) firstFrameInactive = true;
-            else firstFrameInactive = false;
+            else firstFrameInactive = false;*/
             info.p = transform.position;
             info.a = gameObject.activeSelf;
             info.t = gem.tierIndex;
             return JsonUtility.ToJson(info);
-        }
-        return "";
+        //}
+        //return "";
         
         //else return "";
         
