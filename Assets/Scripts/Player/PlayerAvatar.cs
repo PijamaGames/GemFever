@@ -122,7 +122,6 @@ public class PlayerAvatar : MonoBehaviour
             Client.user.avatar_color = colorId;
             Client.user.avatar_face = faceId;
             Client.user.avatar_hat = hatId;
-
         }
         else
         {
