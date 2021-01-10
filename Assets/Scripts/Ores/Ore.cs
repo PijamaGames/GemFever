@@ -31,14 +31,14 @@ public class Ore : MonoBehaviour
 
     private IEnumerator Regrow()
     {
-        Debug.Log("Creciendo");
+        //Debug.Log("Creciendo");
 
         yield return new WaitForSecondsRealtime(timeToRegrow);
         currentGemValue += valueIncreasePerRegrowth;
         gemsLeft = availableGems;
         regrowing = false;
 
-        Debug.Log("Crecido");
+        //Debug.Log("Crecido");
     }
 
     private void MineGem()
