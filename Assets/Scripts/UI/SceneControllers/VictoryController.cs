@@ -8,7 +8,6 @@ public class VictoryController : MonoBehaviour
     [SerializeField] Button playAgainBtn;
     [SerializeField] Button exitBtn;
 
-
     private void Start()
     {
         playAgainBtn.gameObject.SetActive(GameManager.isHost);
