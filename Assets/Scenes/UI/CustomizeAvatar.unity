@@ -241,6 +241,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1957822082, guid: 7eec1e99c5b42db46880c9b102809f6b, type: 3}
+      propertyPath: hats.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1957822082, guid: 7eec1e99c5b42db46880c9b102809f6b, type: 3}
+      propertyPath: hats.Array.data[2]
+      value: 
+      objectReference: {fileID: -3725396437973503332, guid: 367b82d95f2f7f043a2b57c29e1c981e,
+        type: 3}
     - target: {fileID: 2884888735722536220, guid: 7eec1e99c5b42db46880c9b102809f6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -301,6 +310,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5517282067866330701, guid: 7eec1e99c5b42db46880c9b102809f6b,
+        type: 3}
+      propertyPath: hats.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517282067866330701, guid: 7eec1e99c5b42db46880c9b102809f6b,
+        type: 3}
+      propertyPath: hats.Array.data[2]
+      value: 
+      objectReference: {fileID: 2800000, guid: a00311cba9c4d67499e6491e01192b4a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eec1e99c5b42db46880c9b102809f6b, type: 3}
 --- !u!114 &132662530 stripped
