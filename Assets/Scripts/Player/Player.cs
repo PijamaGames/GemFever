@@ -675,7 +675,16 @@ public class Player : MonoBehaviour
     {
         this.score += score;
 
-        if(!PlayerSpawnerManager.isInHub)
+        if(!GameManager.isLocalGame)
+        {
+            if (GameManager.isHost)
+            {
+                //Manda input por red
+                networkPlayer.info.score = score;
+            }
+        }
+
+        if (!PlayerSpawnerManager.isInHub)
         {
             if(gameUIManager == null)
             {
