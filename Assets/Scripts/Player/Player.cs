@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
         audioSource = FindObjectOfType<PersistentAudioSource>();
 
         if(!PlayerSpawnerManager.isInHub)
-            gameUIManager.ActivatePlayerUI(playerNumber);
+            gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
 
         rb = gameObject.GetComponent<Rigidbody>();
 
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
             gameUIManager = FindObjectOfType<GameUIManager>();
             if (gameUIManager != null)
             {
-                gameUIManager.ActivatePlayerUI(playerNumber);
+                gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
             }
         }
 
@@ -682,12 +682,12 @@ public class Player : MonoBehaviour
                 gameUIManager = FindObjectOfType<GameUIManager>();
                 if(gameUIManager != null)
                 {
-                    gameUIManager.ActivatePlayerUI(playerNumber);
-                    gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+                    gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
                 }
             }
             else
-                gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+                gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
         }
             
     }

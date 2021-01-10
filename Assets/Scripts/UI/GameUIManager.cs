@@ -53,15 +53,17 @@ public class GameUIManager : MonoBehaviour
         timer.text = minutesString + ":" + secondsString;
     }
 
-    public void UpdatePlayerUI(int playerNumber, int score)
+    public void UpdatePlayerUI(int playerNumber, int score, string playerName)
     {
-        playerScores[playerNumber - 1].text = "P" + playerNumber + ": " + score;
+        playerScores[playerNumber - 1].text = playerName + "\n" + score;
     }
 
-    public void ActivatePlayerUI(int playerNumber)
+    public void ActivatePlayerUI(int playerNumber, string playerName)
     {
         playerScores[playerNumber - 1].enabled = true;
-        playerScores[playerNumber - 1].text = "P" + playerNumber + ": 0";
+        playerScores[playerNumber - 1].text = playerName + "\n" + "0";
+
+        //TODO cambiar lo de P número al nombre de usuario y debajo las gemas que tiene
     }
 
     IEnumerator Timer()
