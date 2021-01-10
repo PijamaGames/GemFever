@@ -107,7 +107,7 @@ public class PlayerSpawnerManager : MonoBehaviour
         comp.playerNumber = currentPlayers;
 
         player.transform.position = availableLocation;
-        player.transform.SetParent(null);
+        //player.transform.SetParent(null);
         return comp;
     }
 }
