@@ -9,10 +9,10 @@ public class NetworkGem : NetworkObj
 
     public class Info
     {
-        public string key;
-        public Vector3 pos;
-        public bool active;
-        public int tierId;
+        public string k; //key
+        public Vector3 p; //position
+        public bool a; //active
+        public int t; //tierId
     }
 
     Info info;
@@ -37,9 +37,9 @@ public class NetworkGem : NetworkObj
             return;
         }
         info = new Info();
-        info.key = gameObject.name;
+        info.k = gameObject.name;
         allObjs.Add(this);
-        objsDict.Add(info.key, this);
+        objsDict.Add(info.k, this);
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = GameManager.isClient;
         gem = GetComponent<Gem>();
@@ -51,7 +51,7 @@ public class NetworkGem : NetworkObj
         {
             allObjs.Remove(this);
             if (info != null)
-                objsDict.Remove(info.key);
+                objsDict.Remove(info.k);
         }
     }
 
@@ -62,9 +62,9 @@ public class NetworkGem : NetworkObj
         {
             if (gameObject.activeSelf) firstFrameInactive = true;
             else firstFrameInactive = false;
-            info.pos = transform.position;
-            info.active = gameObject.activeSelf;
-            info.tierId = gem.tierIndex;
+            info.p = transform.position;
+            info.a = gameObject.activeSelf;
+            info.t = gem.tierIndex;
             return JsonUtility.ToJson(info);
         }
         return "";
@@ -77,10 +77,10 @@ public class NetworkGem : NetworkObj
     {
         if (GameManager.isHost || json == "") return;
         info = JsonUtility.FromJson<Info>(json);
-        if(info.active != gameObject.activeSelf)
+        if(info.a != gameObject.activeSelf)
         {
-            gem.UpdateGemTier(info.tierId);
-            gameObject.SetActive(info.active);
+            gem.UpdateGemTier(info.t);
+            gameObject.SetActive(info.a);
         }
     }
 
@@ -90,9 +90,9 @@ public class NetworkGem : NetworkObj
         {
             float realLerp = lerp * Time.deltaTime;
             if (realLerp > 1f) realLerp = 1f;
-            float dist = Vector3.Distance(transform.position, info.pos);
-            if (dist > maxDistance) transform.position = info.pos;
-            else transform.position = Vector3.Lerp(transform.position, info.pos, realLerp);
+            float dist = Vector3.Distance(transform.position, info.p);
+            if (dist > maxDistance) transform.position = info.p;
+            else transform.position = Vector3.Lerp(transform.position, info.p, realLerp);
         }
     }
 }
