@@ -19,6 +19,8 @@ public class PromptsManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        avaiblePrompts.Clear();
+        inUsePrompts.Clear();
         canvasRect = _canvasRect;
         GameObject obj;
         Button btn;
