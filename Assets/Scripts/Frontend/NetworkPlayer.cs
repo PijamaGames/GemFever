@@ -7,12 +7,16 @@ public class NetworkPlayer : NetworkObj
     public class Info
     {
         public string key = "";
-        public Vector3 position = Vector3.zero;
-        public Vector3 rotation = Vector3.zero;
-        public string animation = "";
-        public float animationSpeed = 1f;
-        public int gems = 0;
-        public int score = 0;
+        public int x = 0;
+        public int y = 0;
+        public int z = 0;
+        public int rx = 0;
+        public int ry = 0;
+        public int rz = 0;
+        public string a = ""; //animation
+        public float s = 1f; //animation speed
+        public int g = 0; //gems
+        public int sc = 0; //score
     }
 
     public class InputInfo
@@ -35,6 +39,8 @@ public class NetworkPlayer : NetworkObj
 
     Animator anim;
     Player player;
+
+    Vector3 targetPos = Vector3.zero;
 
     void Start()
     {
@@ -82,10 +88,11 @@ public class NetworkPlayer : NetworkObj
             {
                 Info lastInfo = info;
                 info = JsonUtility.FromJson<Info>(json);
-                if(lastInfo.animation != info.animation)
+                if(lastInfo.a != info.a)
                 {
-                    anim.Play(info.animation);
+                    anim.Play(info.a);
                 }
+                targetPos = new Vector3(info.x, info.y, info.z) * 0.01f;
             }
         }
     }
@@ -109,14 +116,18 @@ public class NetworkPlayer : NetworkObj
         {
             if (GameManager.isHost)
             {
-                info.position = transform.position;
+                //info.p = transform.position;
+                info.x = Mathf.RoundToInt(transform.position.x * 100f);
+                info.y = Mathf.RoundToInt(transform.position.y * 100f);
+                info.z = Mathf.RoundToInt(transform.position.z * 100f);
+
                 var animClipInfo = anim.GetCurrentAnimatorClipInfo(0);
                 if(animClipInfo.Length > 0)
                 {
-                    info.animation = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+                    info.a = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
                 }
-                info.gems = player.currentPouchSize;
-                info.score = player.score;
+                info.g = player.currentPouchSize;
+                info.sc = player.score;
             }
             else if (GameManager.isClient)
             {
@@ -133,8 +144,8 @@ public class NetworkPlayer : NetworkObj
     {
         float realLerp = lerp * Time.deltaTime;
         if (realLerp > 1f) realLerp = 1f;
-        float dist = Vector3.Distance(transform.position, info.position);
-        if (dist > maxDistance) transform.position = info.position;
-        else transform.position = Vector3.Lerp(transform.position, info.position, realLerp);
+        float dist = Vector3.Distance(transform.position, targetPos);
+        if (dist > maxDistance) transform.position = targetPos;
+        else transform.position = Vector3.Lerp(transform.position, targetPos, realLerp);
     }
 }

@@ -51209,9 +51209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff7ecdc211e2c5d47ac1dba46ff567bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsInPool: 35
+  objectsInPool: 25
   prefab: {fileID: 2156604997205699141, guid: 9f7405ca85c85254d806ce6830ccd6e4, type: 3}
-  availableObjects: 35
   isEmpty: 0
 --- !u!114 &3375942996856155333
 MonoBehaviour:

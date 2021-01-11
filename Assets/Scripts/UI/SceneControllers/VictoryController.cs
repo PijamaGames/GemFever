@@ -10,7 +10,7 @@ public class VictoryController : MonoBehaviour
 
     private void Start()
     {
-        playAgainBtn.gameObject.SetActive(GameManager.isHost);
+        playAgainBtn.gameObject.SetActive(GameManager.isHost || GameManager.isLocalGame);
         playAgainBtn.onClick.AddListener(() => PlayAgain());
         exitBtn.onClick.AddListener(() => GoToMainMenu());
     }

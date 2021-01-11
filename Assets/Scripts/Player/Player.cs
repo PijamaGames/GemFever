@@ -170,13 +170,13 @@ public class Player : MonoBehaviour
                 //Recibir input por red
                 joystick = networkPlayer.inputInfo.joystick;
                 throwGemInput = networkPlayer.inputInfo.throwGemInput;
-                animator.speed = networkPlayer.info.animationSpeed;
+                animator.speed = networkPlayer.info.s;
                 ThrowGem();
             }
             else if(GameManager.isClient && networkPlayer.info != null)
             {
-                animator.speed = networkPlayer.info.animationSpeed;
-                score = networkPlayer.info.score;
+                animator.speed = networkPlayer.info.s;
+                score = networkPlayer.info.sc;
 
                 if (gameUIManager == null)
                 {
@@ -189,9 +189,9 @@ public class Player : MonoBehaviour
                 else
                     gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
 
-                currentPouchSize = networkPlayer.info.gems;
+                currentPouchSize = networkPlayer.info.g;
                 ChangePouchSize();
-                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
+                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rx*0.01f, networkPlayer.info.ry*0.01f, networkPlayer.info.rz*0.01f);
             }
         }
     }
@@ -419,8 +419,8 @@ public class Player : MonoBehaviour
                 if (GameManager.isHost)
                 {
                     //Manda input por red
-                    if (joystick.y == 0) networkPlayer.info.animationSpeed = 0f;
-                    else networkPlayer.info.animationSpeed = 1f;
+                    if (joystick.y == 0) networkPlayer.info.s = 0f;
+                    else networkPlayer.info.s = 1f;
                 }
             }
             else
@@ -429,7 +429,7 @@ public class Player : MonoBehaviour
                 if (GameManager.isHost)
                 {
                     //Manda input por red
-                    networkPlayer.info.animationSpeed = 1f;
+                    networkPlayer.info.s = 1f;
                 }
             }
                 
@@ -469,7 +469,10 @@ public class Player : MonoBehaviour
                 if (GameManager.isHost)
                 {
                     //Manda input por red
-                    networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+                    Vector3 eulerAngles = playerMesh.transform.rotation.eulerAngles;
+                    networkPlayer.info.rx = Mathf.RoundToInt(eulerAngles.x * 100f);
+                    networkPlayer.info.ry = Mathf.RoundToInt(eulerAngles.y * 100f);
+                    networkPlayer.info.rz = Mathf.RoundToInt(eulerAngles.z * 100f);
                 }
                 climbingAnimation = true;
                 rotateAnimation = false;
@@ -536,7 +539,10 @@ public class Player : MonoBehaviour
         if (GameManager.isHost)
         {
             //Manda input por red
-            networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+            Vector3 eulerAngles = playerMesh.transform.rotation.eulerAngles;
+            networkPlayer.info.rx = Mathf.RoundToInt(eulerAngles.x * 100f);
+            networkPlayer.info.ry = Mathf.RoundToInt(eulerAngles.y * 100f);
+            networkPlayer.info.rz = Mathf.RoundToInt(eulerAngles.z * 100f);
         }
     }
 
@@ -560,7 +566,7 @@ public class Player : MonoBehaviour
         if (GameManager.isHost)
         {
             //Manda input por red
-            networkPlayer.info.animationSpeed = 1f;
+            networkPlayer.info.s = 1f;
         }
         animator.SetBool("Stun", true);
         
@@ -700,7 +706,7 @@ public class Player : MonoBehaviour
             if (GameManager.isHost)
             {
                 //Manda input por red
-                networkPlayer.info.score = score;
+                networkPlayer.info.sc = score;
             }
         }
 
@@ -795,7 +801,7 @@ public class Player : MonoBehaviour
             if (GameManager.isHost)
             {
                 //Manda input por red
-                networkPlayer.info.animationSpeed = 1f;
+                networkPlayer.info.s = 1f;
             }
         }
 
@@ -812,7 +818,7 @@ public class Player : MonoBehaviour
             if (GameManager.isHost)
             {
                 //Manda input por red
-                networkPlayer.info.animationSpeed = 1f;
+                networkPlayer.info.s = 1f;
             }
             animator.SetBool("Idle_Climb", false);
 
@@ -985,11 +991,15 @@ public class Player : MonoBehaviour
             {
                 //Manda input por red
                 playerMesh.transform.forward = -Vector3.forward;
-                networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+                Vector3 eulerAngles = playerMesh.transform.rotation.eulerAngles;
+                networkPlayer.info.rx = Mathf.RoundToInt(eulerAngles.x * 100f);
+                networkPlayer.info.ry = Mathf.RoundToInt(eulerAngles.y * 100f);
+                networkPlayer.info.rz = Mathf.RoundToInt(eulerAngles.z * 100f);
             }
             else
             {
-                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
+                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rx*0.01f
+                    , networkPlayer.info.ry*0.01f, networkPlayer.info.rz*0.01f);
             }
         }
         //Local game

@@ -12,14 +12,12 @@ public class NetworkGem : NetworkObj
     public class Info
     {
         public string key; //key
-        public Vector3 p; //position
-        public bool a; //activate
-        public bool d; //deactivate
+        public int x; //position
+        public int y;
+        public int z;
         public int t; //tierId
+        public bool a; //active
     }
-
-    bool lastActive = false;
-    bool lastInactive = false;
 
     Info info;
     Rigidbody rb;
@@ -27,6 +25,8 @@ public class NetworkGem : NetworkObj
 
     bool firstFrameInactive = true;
     bool init = false;
+
+    Vector3 targetPos = Vector3.zero;
 
     private void Start()
     {
@@ -68,12 +68,11 @@ public class NetworkGem : NetworkObj
         {
             if (gameObject.activeSelf) firstFrameInactive = true;
             else firstFrameInactive = false;
-            info.p = transform.position;
-            info.a = gameObject.activeSelf && !lastActive;
-            info.d = !gameObject.activeSelf && !lastInactive;
-            lastActive = gameObject.activeSelf;
-            lastInactive = !gameObject.activeSelf;
+            info.x = Mathf.RoundToInt(transform.position.x*100f);
+            info.y = Mathf.RoundToInt(transform.position.y*100f);
+            info.z = Mathf.RoundToInt(transform.position.z*100f);
             info.t = gem.tierIndex;
+            info.a = gameObject.activeSelf;
             return JsonUtility.ToJson(info);
         }
         return "";
@@ -87,19 +86,11 @@ public class NetworkGem : NetworkObj
         if (GameManager.isHost || json == "") return;
         info = JsonUtility.FromJson<Info>(json);
         gem.UpdateGemTier(info.t);
-        if (info.a || info.d)
+        if(gameObject.activeSelf != info.a)
         {
-            if (info.a)
-            {
-                Debug.Log("activate gem");
-                gameObject.SetActive(true);
-            }
-            if (info.d)
-            {
-                Debug.Log("deactivate gem");
-                gameObject.SetActive(false);
-            }
+            gameObject.SetActive(info.a);
         }
+        targetPos = new Vector3(info.x, info.y, info.z)*0.01f;
     }
 
     private void Update()
@@ -108,9 +99,9 @@ public class NetworkGem : NetworkObj
         {
             float realLerp = lerp * Time.deltaTime;
             if (realLerp > 1f) realLerp = 1f;
-            float dist = Vector3.Distance(transform.position, info.p);
-            if (dist > maxDistance) transform.position = info.p;
-            else transform.position = Vector3.Lerp(transform.position, info.p, realLerp);
+            float dist = Vector3.Distance(transform.position, targetPos);
+            if (dist > maxDistance) transform.position = targetPos;
+            else transform.position = Vector3.Lerp(transform.position, targetPos, realLerp);
         }
     }
 }
