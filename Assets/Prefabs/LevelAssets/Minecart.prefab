@@ -112,6 +112,8 @@ MonoBehaviour:
   playerIntoMinecart: {fileID: 0}
   comboText: {fileID: 6835241650620784070}
   textFadeTime: 2
+  comboNumber: 0
+  textActive: 0
 --- !u!1 &5990160502205109906
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +279,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 283.3, y: -201.5}
-  m_SizeDelta: {x: 100.97818, y: 18.057312}
+  m_SizeDelta: {x: 49.4, y: 11.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5426811782448421863
 CanvasRenderer:
@@ -308,8 +310,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: x5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5cc6a4dde19a84049bffe4d61ec34a92, type: 2}
+  m_sharedMaterial: {fileID: 8230927105336383023, guid: 5cc6a4dde19a84049bffe4d61ec34a92,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
