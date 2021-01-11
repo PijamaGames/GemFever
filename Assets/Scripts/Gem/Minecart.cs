@@ -66,7 +66,7 @@ public class Minecart : MonoBehaviour
         StartCoroutine(FadeText());
     }
 
-    public void SetCombotText(string text)
+    public void SetComboText(string text)
     {
         comboText.text = text;
 
