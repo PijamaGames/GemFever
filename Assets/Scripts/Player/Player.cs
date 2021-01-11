@@ -192,11 +192,11 @@ public class Player : MonoBehaviour
                 currentPouchSize = networkPlayer.info.g;
                 ChangePouchSize();
                 playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rx*0.01f, networkPlayer.info.ry*0.01f, networkPlayer.info.rz*0.01f);
+
+                if (rotateAnimation)
+                    RotatePlayer();
             }
         }
-
-        if (rotateAnimation)
-            RotatePlayer();
     }
 
     private void MobileInputs()
