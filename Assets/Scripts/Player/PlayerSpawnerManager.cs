@@ -115,7 +115,11 @@ public class PlayerSpawnerManager : MonoBehaviour
 
     private Player SpawnPlayerAtLocation(GameObject player)
     {
-        Vector3 availableLocation = playerSpawnLocations[currentPlayers].transform.position;
+        //TODO CAMBIAR PUNTOS DE SPAWN SEGÚN EL NIVEL
+
+        GameObject[] spawnLocations = playerSpawnLocations[GameManager.levelId].GetComponentsInChildren<GameObject>();
+
+        Vector3 availableLocation = spawnLocations[currentPlayers].transform.position;
 
         currentPlayers++;
         Player comp = player.GetComponent<Player>();
