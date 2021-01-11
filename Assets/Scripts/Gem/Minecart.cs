@@ -12,14 +12,17 @@ public class Minecart : MonoBehaviour
     [SerializeField] TextMeshProUGUI comboText;
     [SerializeField] float textFadeTime = 2f;
 
+    int comboNumber = 0;
+
     //Network parameters
-    public int comboNumber = 0;
-    public bool textActive = false;
+    public string comboString = "";
 
     private void Start()
     {
         audioSource = FindObjectOfType<PersistentAudioSource>();
         comboText.text = "";
+
+        comboString = comboText.text;
     }
 
     private void PlaySound(AudioClip clip)
@@ -38,30 +41,35 @@ public class Minecart : MonoBehaviour
         {
             PlaySound(gemIntoMinecart);
 
-            ComboText(1);
+            if (GameManager.isLocalGame || GameManager.isHost)
+                ComboText(1);
         }
     }
 
     private IEnumerator FadeText()
     {
-        textActive = true;
-
         yield return new WaitForSecondsRealtime(textFadeTime);
         comboText.text = "";
 
-        textActive = false;
+        comboString = comboText.text;
     }
 
     public void ComboText(int combo)
     {
-        if (GameManager.isLocalGame || GameManager.isHost)
-        {
-            comboNumber = combo;
+        comboNumber = combo;
 
-            comboText.text = "x " + comboNumber.ToString();
+        comboText.text = "x " + comboNumber.ToString();
 
-            StopCoroutine(FadeText());
-            StartCoroutine(FadeText());
-        }
+        comboString = comboText.text;
+
+        StopCoroutine(FadeText());
+        StartCoroutine(FadeText());
+    }
+
+    public void SetCombotText(string text)
+    {
+        comboText.text = text;
+
+        comboString = comboText.text;
     }
 }

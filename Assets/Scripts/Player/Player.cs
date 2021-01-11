@@ -753,7 +753,8 @@ public class Player : MonoBehaviour
                 float scoreMultiplier = 1f;
                 int currentGems = gemPouch.Count;
 
-                other.GetComponent<Minecart>().ComboText(currentGems);
+                if (GameManager.isLocalGame || GameManager.isHost)
+                    other.GetComponent<Minecart>().ComboText(currentGems);
 
                 for(int i = 0; i < currentGems; i++)
                 {
