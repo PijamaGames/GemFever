@@ -19,7 +19,7 @@ public class Minecart : MonoBehaviour
     private void Start()
     {
         audioSource = FindObjectOfType<PersistentAudioSource>();
-        comboText.enabled = false;
+        comboText.text = "";
     }
 
     private void PlaySound(AudioClip clip)
@@ -38,15 +38,7 @@ public class Minecart : MonoBehaviour
         {
             PlaySound(gemIntoMinecart);
 
-            if(GameManager.isLocalGame || GameManager.isHost)
-            {
-                comboText.enabled = true;
-                comboNumber = 1;
-                comboText.text = "x " + comboNumber;
-
-                StopCoroutine(FadeText());
-                StartCoroutine(FadeText());
-            }
+            ComboText(1);
         }
     }
 
@@ -55,18 +47,17 @@ public class Minecart : MonoBehaviour
         textActive = true;
 
         yield return new WaitForSecondsRealtime(textFadeTime);
-        comboText.enabled = false;
+        comboText.text = "";
 
         textActive = false;
     }
 
-    public void PlayerComboText(int combo)
+    public void ComboText(int combo)
     {
         if (GameManager.isLocalGame || GameManager.isHost)
         {
             comboNumber = combo;
 
-            comboText.enabled = true;
             comboText.text = "x " + comboNumber.ToString();
 
             StopCoroutine(FadeText());
