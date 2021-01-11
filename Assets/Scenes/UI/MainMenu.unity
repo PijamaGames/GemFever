@@ -4513,7 +4513,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2884888736238635860}
-        m_MethodName: LoadHubScene
+        m_MethodName: LoadLevelsScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
