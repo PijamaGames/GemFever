@@ -50746,7 +50746,7 @@ PrefabInstance:
     - target: {fileID: 2424873281686467804, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
       propertyPath: orthographic size
-      value: 5.9964223
+      value: 5.9901476
       objectReference: {fileID: 0}
     - target: {fileID: 2424873281686467806, guid: 2295a096f619d5c428ddea6cb6c61ff5,
         type: 3}
@@ -51091,13 +51091,12 @@ MonoBehaviour:
   - {fileID: 3375942995365703710}
   - {fileID: 3375942996135052556}
   hubSpawnLocations:
-  - {fileID: 3375942996530340426}
-  - {fileID: 3375942996032943073}
-  - {fileID: 3375942995365703710}
-  - {fileID: 3375942996135052556}
+  - {fileID: 3375942996530340425}
+  - {fileID: 3375942996032943072}
+  - {fileID: 3375942995365703709}
+  - {fileID: 3375942996135052563}
   maxPlayers: 4
   joinButtons: {fileID: 1044050273}
-  debugID: 0
 --- !u!114 &3375942996856155335
 MonoBehaviour:
   m_ObjectHideFlags: 0
