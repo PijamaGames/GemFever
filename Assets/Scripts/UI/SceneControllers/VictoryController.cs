@@ -33,6 +33,13 @@ public class VictoryController : MonoBehaviour
 
     private void PlayAgain()
     {
+        var players = FindObjectsOfType<Player>();
+
+        foreach (var player in players)
+        {
+            player.UnFreeze();
+        }
+
         if (GameManager.isLocalGame)
         {
             SceneLoader.instance.LoadHubScene();
