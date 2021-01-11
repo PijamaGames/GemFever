@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> levels = new List<GameObject>();ç
+    [SerializeField] List<GameObject> levels = new List<GameObject>();
 
     private void Awake()
     {
