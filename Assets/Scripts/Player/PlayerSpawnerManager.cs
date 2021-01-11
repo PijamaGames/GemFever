@@ -31,6 +31,8 @@ public class PlayerSpawnerManager : MonoBehaviour
                 joinButtons.SetActive(false);
             else if(firstTimeInHub)
                 joinButtons.SetActive(true);
+            else
+                joinButtons.SetActive(false);
         }
 
         networkPlayersParent = GameObject.FindGameObjectWithTag("NetworkPlayers").transform;
@@ -91,7 +93,7 @@ public class PlayerSpawnerManager : MonoBehaviour
                     userInfo.frame = user.avatar_frame;
                     playerComp.SetUserInfo(userInfo);
 
-                    if(joinButtons != null && firstTimeInHub)
+                    if(joinButtons != null)
                         joinButtons.SetActive(false);
 
                     ClientInRoom.Spawn();
