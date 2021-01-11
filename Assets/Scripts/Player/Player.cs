@@ -194,6 +194,9 @@ public class Player : MonoBehaviour
                 playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rx*0.01f, networkPlayer.info.ry*0.01f, networkPlayer.info.rz*0.01f);
             }
         }
+
+        if (rotateAnimation)
+            RotatePlayer();
     }
 
     private void MobileInputs()
@@ -1012,6 +1015,8 @@ public class Player : MonoBehaviour
 
     public void Reset()
     {
+        gemPouch.Clear();
+
         currentPouchSize = 0;
         promptInput = false;
         score = 0;
