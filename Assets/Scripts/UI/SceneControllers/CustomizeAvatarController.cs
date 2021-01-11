@@ -40,9 +40,6 @@ public class CustomizeAvatarController : MonoBehaviour
 
         playerAvatar.SetUser(Client.user);
 
-        InicializeAvatarVariables.PrepareHatList();
-        InicializeAvatarVariables.PrepareFaceList();
-
         playerAvatar.UpdateVisuals();
 
 
@@ -92,8 +89,6 @@ public class CustomizeAvatarController : MonoBehaviour
         SetSelectedSkin(randomSkin);
     }
 
-    
-
     public void ChangeBody(bool body1)
     {
         Client.user.avatar_bodyType = body1 ? 0 : 1;
@@ -104,7 +99,7 @@ public class CustomizeAvatarController : MonoBehaviour
         playerAvatar.UpdateVisuals();
     }
 
-    private void SetFaceCode(String id)
+    private void SetFaceCode(string id)
     {
         Client.user.avatar_face = id;
         playerAvatar.UpdateVisuals();
