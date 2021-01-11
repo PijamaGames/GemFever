@@ -7,8 +7,6 @@ public class NetworkGem : NetworkObj
     [SerializeField] float maxDistance = 1f;
     [SerializeField] float lerp = 11f;
 
-
-
     public class Info
     {
         public string key; //key
@@ -64,18 +62,18 @@ public class NetworkGem : NetworkObj
     public override string CollectInfo()
     {
         if (GameManager.isClient) return "";
-        if (gameObject.activeSelf || (!gameObject.activeSelf && firstFrameInactive))
+        /*if (gameObject.activeSelf || (!gameObject.activeSelf && firstFrameInactive))
         {
             if (gameObject.activeSelf) firstFrameInactive = true;
-            else firstFrameInactive = false;
+            else firstFrameInactive = false;*/
             info.x = Mathf.RoundToInt(transform.position.x*100f);
             info.y = Mathf.RoundToInt(transform.position.y*100f);
             info.z = Mathf.RoundToInt(transform.position.z*100f);
             info.t = gem.tierIndex;
             info.a = gameObject.activeSelf;
             return JsonUtility.ToJson(info);
-        }
-        return "";
+        //}
+        //return "";
         
         //else return "";
         
