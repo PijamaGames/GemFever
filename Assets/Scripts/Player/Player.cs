@@ -1018,6 +1018,20 @@ public class Player : MonoBehaviour
         ResetAnimations();
     }
 
+    public void UnFreeze()
+    {
+        joystick = Vector2.zero;
+        throwGemInput = 0f;
+
+        ResetAnimations();
+
+        rb.velocity = Vector3.zero;
+        rb.useGravity = true;
+        rb.isKinematic = false;
+
+        freeze = false;
+    }
+
     public void Freeze()
     {
         joystick = Vector2.zero;

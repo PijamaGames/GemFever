@@ -89,9 +89,6 @@ public class GameUIManager : MonoBehaviour
     {
         if (currentSeconds >= goalTime)
         {
-            foreach (Player player in FindObjectsOfType<Player>())
-                player.Freeze();
-
             //Online game
             if(!GameManager.isLocalGame)
             {
