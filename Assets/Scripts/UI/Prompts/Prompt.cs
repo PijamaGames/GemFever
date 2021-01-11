@@ -27,6 +27,7 @@ public class Prompt : MonoBehaviour
         //TODO: Colocar prompt en target point
         if(btn != null)
         {
+            if (cam == null || cam.gameObject == null) cam = Camera.main;
             Vector2 viewportPos = cam.WorldToViewportPoint(transform.position);
             
 
@@ -39,7 +40,7 @@ public class Prompt : MonoBehaviour
 
             //now you can set the position of the ui element
             btnRect.anchoredPosition = WorldObject_ScreenPosition;
-
+            btnRect.localPosition = new Vector3(btnRect.localPosition.x, btnRect.localPosition.y, 0f);
             //Debug.Log(viewportPos);
         }
     }

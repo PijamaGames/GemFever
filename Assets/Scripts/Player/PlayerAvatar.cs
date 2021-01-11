@@ -29,7 +29,6 @@ public class PlayerAvatar : MonoBehaviour
     [HideInInspector] Material hairMat;
     [SerializeField] SkinnedMeshRenderer hairRenderer;
 
-    [SerializeField] private CustomizeAvatarController customizeAvatarController;
 
     bool materialsInitiated = false;
 
@@ -44,6 +43,7 @@ public class PlayerAvatar : MonoBehaviour
 
     private void InitMaterials()
     {
+
         materialsInitiated = true;
 
         skinMat = Instantiate(skinRenderer.sharedMaterial);
@@ -94,12 +94,15 @@ public class PlayerAvatar : MonoBehaviour
     {
         randomColor = rnd.Next(InicializeAvatarVariables.characterColors.Length);
         randomSkin = rnd.Next(InicializeAvatarVariables.skinColors.Length);
-        randomFace= rnd.Next(customizeAvatarController.randFaceList.Count);
-        randomHat= rnd.Next(customizeAvatarController.randHatList.Count);
+        randomFace= rnd.Next(InicializeAvatarVariables.randFaceList.Count);
+        randomHat= rnd.Next(InicializeAvatarVariables.randHatList.Count);
     }
 
     public void UpdateVisuals()
     {
+        InicializeAvatarVariables.PrepareHatList();
+        InicializeAvatarVariables.PrepareFaceList();
+        if (!materialsInitiated) InitMaterials();
         if (user != null) SetUser(user);
         int skinId;
         int colorId;
@@ -112,8 +115,13 @@ public class PlayerAvatar : MonoBehaviour
             Random(out randomColor, out randomSkin, out randomFace, out randomHat);
             skinId = randomSkin;
             colorId = randomColor;
-            faceId = customizeAvatarController.randFaceList[randomFace];
-            hatId = customizeAvatarController.randHatList[randomHat];
+            faceId = InicializeAvatarVariables.randFaceList[randomFace];
+            hatId = InicializeAvatarVariables.randHatList[randomHat];
+
+            Client.user.avatar_skinTone = skinId;
+            Client.user.avatar_color = colorId;
+            Client.user.avatar_face = faceId;
+            Client.user.avatar_hat = hatId;
         }
         else
         {
@@ -121,21 +129,30 @@ public class PlayerAvatar : MonoBehaviour
             colorId = userInfo.color;
 
             if (!HatMeshes.hatsMeshes.ContainsKey(userInfo.hat))
-                hatId = customizeAvatarController.randHatList[0];
-            else
-                hatId = userInfo.hat;
+            {
+                int randomSkin, randomColor, randomFace, randomHat;
+                Random(out randomColor, out randomSkin, out randomFace, out randomHat);
+                skinId = randomSkin;
+                colorId = randomColor;
+                faceId = InicializeAvatarVariables.randFaceList[randomFace];
+                hatId = InicializeAvatarVariables.randHatList[randomHat];
 
-            if (!FaceTextures.facesTextures.ContainsKey(userInfo.face))
-                faceId = customizeAvatarController.randFaceList[0];
+                Client.user.avatar_skinTone = skinId;
+                Client.user.avatar_color = colorId;
+                Client.user.avatar_face = faceId;
+                Client.user.avatar_hat = hatId;
+            }
             else
+            {
                 faceId = userInfo.face;
+                hatId = userInfo.hat;
+            }
+
         }
 
-        if (!materialsInitiated) InitMaterials();
-
-        shirtRenderer.sharedMesh = InicializeAvatarVariables.shirts[userInfo.bodyType];
-        pantsRenderer.sharedMesh = InicializeAvatarVariables.pants[userInfo.bodyType];
-        hairRenderer.sharedMesh = InicializeAvatarVariables.hairs[userInfo.bodyType];
+        shirtRenderer.sharedMesh = InicializeAvatarVariables.shirts[Client.user.avatar_bodyType];
+        pantsRenderer.sharedMesh = InicializeAvatarVariables.pants[Client.user.avatar_bodyType];
+        hairRenderer.sharedMesh = InicializeAvatarVariables.hairs[Client.user.avatar_bodyType];
         hatRenderer.sharedMesh = HatMeshes.hatsMeshes[hatId].sharedMesh;
 
         faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);
@@ -146,4 +163,5 @@ public class PlayerAvatar : MonoBehaviour
         hatMat.SetTexture("Texture2D_E0F6099E", HatMeshes.hatsMeshes[hatId].sharedMaterial.mainTexture);
 
     }
+
 }

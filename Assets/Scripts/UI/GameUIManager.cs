@@ -53,15 +53,28 @@ public class GameUIManager : MonoBehaviour
         timer.text = minutesString + ":" + secondsString;
     }
 
-    public void UpdatePlayerUI(int playerNumber, int score)
+    public void UpdatePlayerUI(int playerNumber, int score, string playerName)
     {
-        playerScores[playerNumber - 1].text = "P" + playerNumber + ": " + score;
+        if (!GameManager.isLocalGame)
+            playerScores[playerNumber - 1].text = playerName + "\n" + score;
+        else
+        {
+            playerScores[playerNumber - 1].text = playerName + "" + playerNumber + ": " + score;
+        }
     }
 
-    public void ActivatePlayerUI(int playerNumber)
+    public void ActivatePlayerUI(int playerNumber, string playerName)
     {
         playerScores[playerNumber - 1].enabled = true;
-        playerScores[playerNumber - 1].text = "P" + playerNumber + ": 0";
+
+        if(!GameManager.isLocalGame)
+            playerScores[playerNumber - 1].text = playerName + "\n" + "0";
+        else
+        {
+            playerScores[playerNumber - 1].text = playerName + "" + playerNumber + " :0";
+        }
+
+        //TODO cambiar lo de P número al nombre de usuario y debajo las gemas que tiene
     }
 
     IEnumerator Timer()
@@ -76,7 +89,8 @@ public class GameUIManager : MonoBehaviour
     {
         if (currentSeconds >= goalTime)
         {
-            foreach (Player player in FindObjectsOfType<Player>())
+            var players = FindObjectsOfType<Player>();
+            foreach (var player in players)
                 player.Freeze();
 
             //Online game

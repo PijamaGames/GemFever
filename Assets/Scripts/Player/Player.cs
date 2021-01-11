@@ -48,27 +48,27 @@ public class Player : MonoBehaviour
     float maxVerticalSpeed;
 
     //Inputs
-    public Vector2 joystick = Vector2.zero;
+    [HideInInspector] public Vector2 joystick = Vector2.zero;
     float throwGemInput = 0f;
     public AndroidInputs androidInputs;
-    public bool promptInput = false;
+    [HideInInspector] public bool promptInput = false;
 
     //States
-    public bool climbingLadder = false;
-    public bool pickaxeOnLadder = false;
-    public bool ladderTopReached = false;
-    public bool isWalking = false;
-    public bool isInLadder = false;
-    public bool isStunned = false;
-    public bool isInvulnerable = false;
+   [HideInInspector] public bool climbingLadder = false;
+   [HideInInspector] public bool pickaxeOnLadder = false;
+   [HideInInspector] public bool ladderTopReached = false;
+   [HideInInspector] public bool isWalking = false;
+   [HideInInspector] public bool isInLadder = false;
+   [HideInInspector] public bool isStunned = false;
+   [HideInInspector] public bool isInvulnerable = false;
 
     //GemPouch
     [SerializeField] MeshRenderer pouchMeshRenderer;
     [SerializeField] MeshFilter pouchMeshFilter;
     [SerializeField] int maxPouchSize;
     [SerializeField] List<GemPouchTier> gemPouchTiers = new List<GemPouchTier>();
-    public int currentPouchSize = 0;
-    public GemPouchTier currentTier;
+    [HideInInspector] public int currentPouchSize = 0;
+    [HideInInspector] public GemPouchTier currentTier;
     GemPool gemPool;
 
     //Gems
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
     [SerializeField] RuntimeAnimatorController clientAnimator;
     Vector3 groundMeshOrientation = Vector3.zero;
     [SerializeField] GameObject playerMesh;
-    bool freeze = false;
+    [HideInInspector] public bool freeze = false;
     bool climbingAnimation = false;
     bool rotateAnimation = true;
 
@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
     PersistentAudioSource audioSource;
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip ladderSound;
+    [SerializeField] AudioClip gemThrowSound;
 
     //Network
     [HideInInspector] public NetworkPlayer networkPlayer;
@@ -115,7 +116,7 @@ public class Player : MonoBehaviour
         audioSource = FindObjectOfType<PersistentAudioSource>();
 
         if(!PlayerSpawnerManager.isInHub)
-            gameUIManager.ActivatePlayerUI(playerNumber);
+            gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
 
         rb = gameObject.GetComponent<Rigidbody>();
 
@@ -139,6 +140,24 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!PlayerSpawnerManager.isInHub && gameUIManager == null)
+        {
+            gameUIManager = FindObjectOfType<GameUIManager>();
+            if (gameUIManager != null)
+            {
+                if(!GameManager.isLocalGame)
+                    gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
+                else
+                {
+                    if(GameManager.english)
+                        gameUIManager.ActivatePlayerUI(playerNumber, "P");
+                    else
+                        gameUIManager.ActivatePlayerUI(playerNumber, "J");
+                }
+                    
+            }
+        }
+
         //Mobile
         MobileInputs();
 
@@ -151,16 +170,29 @@ public class Player : MonoBehaviour
                 //Recibir input por red
                 joystick = networkPlayer.inputInfo.joystick;
                 throwGemInput = networkPlayer.inputInfo.throwGemInput;
-                animator.speed = networkPlayer.info.animationSpeed;
+                animator.speed = networkPlayer.info.s;
+
                 ThrowGem();
             }
             else if(GameManager.isClient && networkPlayer.info != null)
             {
-                animator.speed = networkPlayer.info.animationSpeed;
-                score = networkPlayer.info.score;
-                currentPouchSize = networkPlayer.info.gems;
+                animator.speed = networkPlayer.info.s;
+                score = networkPlayer.info.sc;
+
+                if (gameUIManager == null)
+                {
+                    gameUIManager = FindObjectOfType<GameUIManager>();
+                    if (gameUIManager != null)
+                    {
+                        gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
+                    }
+                }
+                else
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
+
+                currentPouchSize = networkPlayer.info.g;
                 ChangePouchSize();
-                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
+                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rx*0.01f, networkPlayer.info.ry*0.01f, networkPlayer.info.rz*0.01f);
             }
         }
     }
@@ -295,6 +327,8 @@ public class Player : MonoBehaviour
                 gemThrowOnCooldown = true;
                 StartCoroutine(GemThrowCooldown());
 
+                PlaySound(gemThrowSound);
+
                 StartGemAnimation();
 
                 Vector3 direction = Vector3.ProjectOnPlane(playerMesh.transform.forward, Vector3.up);
@@ -386,8 +420,8 @@ public class Player : MonoBehaviour
                 if (GameManager.isHost)
                 {
                     //Manda input por red
-                    if (joystick.y == 0) networkPlayer.info.animationSpeed = 0f;
-                    else networkPlayer.info.animationSpeed = 1f;
+                    if (joystick.y == 0) networkPlayer.info.s = 0f;
+                    else networkPlayer.info.s = 1f;
                 }
             }
             else
@@ -396,7 +430,7 @@ public class Player : MonoBehaviour
                 if (GameManager.isHost)
                 {
                     //Manda input por red
-                    networkPlayer.info.animationSpeed = 1f;
+                    networkPlayer.info.s = 1f;
                 }
             }
                 
@@ -436,7 +470,10 @@ public class Player : MonoBehaviour
                 if (GameManager.isHost)
                 {
                     //Manda input por red
-                    networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+                    Vector3 eulerAngles = playerMesh.transform.rotation.eulerAngles;
+                    networkPlayer.info.rx = Mathf.RoundToInt(eulerAngles.x * 100f);
+                    networkPlayer.info.ry = Mathf.RoundToInt(eulerAngles.y * 100f);
+                    networkPlayer.info.rz = Mathf.RoundToInt(eulerAngles.z * 100f);
                 }
                 climbingAnimation = true;
                 rotateAnimation = false;
@@ -491,19 +528,24 @@ public class Player : MonoBehaviour
         if (joystick.x < 0f)
         {
             transform.forward = -Vector3.right;
+            playerMesh.transform.forward = -Vector3.right;
             groundMeshOrientation = -Vector3.right;
         }
         //Derecha
         else if (joystick.x > 0f)
         {
             transform.forward = Vector3.right;
+            playerMesh.transform.forward = Vector3.right;
             groundMeshOrientation = Vector3.right;
         }
 
         if (GameManager.isHost)
         {
             //Manda input por red
-            networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
+            Vector3 eulerAngles = playerMesh.transform.rotation.eulerAngles;
+            networkPlayer.info.rx = Mathf.RoundToInt(eulerAngles.x * 100f);
+            networkPlayer.info.ry = Mathf.RoundToInt(eulerAngles.y * 100f);
+            networkPlayer.info.rz = Mathf.RoundToInt(eulerAngles.z * 100f);
         }
     }
 
@@ -527,7 +569,7 @@ public class Player : MonoBehaviour
         if (GameManager.isHost)
         {
             //Manda input por red
-            networkPlayer.info.animationSpeed = 1f;
+            networkPlayer.info.s = 1f;
         }
         animator.SetBool("Stun", true);
         
@@ -654,7 +696,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        //Cambiar material del meshRenderer?
         pouchMeshFilter.mesh = currentTier.pouchMesh;
     }
     #endregion
@@ -663,8 +704,41 @@ public class Player : MonoBehaviour
     {
         this.score += score;
 
-        if(!PlayerSpawnerManager.isInHub)
-            gameUIManager.UpdatePlayerUI(playerNumber, this.score);
+        if(!GameManager.isLocalGame)
+        {
+            if (GameManager.isHost)
+            {
+                //Manda input por red
+                networkPlayer.info.sc = score;
+            }
+        }
+
+        if (!PlayerSpawnerManager.isInHub)
+        {
+            if(!GameManager.isLocalGame)
+            {
+                if (gameUIManager == null)
+                {
+                    gameUIManager = FindObjectOfType<GameUIManager>();
+                    if (gameUIManager != null)
+                    {
+                        gameUIManager.ActivatePlayerUI(playerNumber, userInfo.id);
+                        gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
+                    }
+                }
+                else
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, userInfo.id);
+            }
+            else
+            {
+                if(GameManager.english)
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, "P");
+                else
+                    gameUIManager.UpdatePlayerUI(playerNumber, this.score, "J");
+            }
+            
+        }
+            
     }
 
     #region Trigger Methods
@@ -687,6 +761,9 @@ public class Player : MonoBehaviour
                 float scoreObtained = 0;
                 float scoreMultiplier = 1f;
                 int currentGems = gemPouch.Count;
+
+                if (GameManager.isLocalGame || GameManager.isHost)
+                    other.GetComponent<Minecart>().ComboText(currentGems);
 
                 for(int i = 0; i < currentGems; i++)
                 {
@@ -727,7 +804,7 @@ public class Player : MonoBehaviour
             if (GameManager.isHost)
             {
                 //Manda input por red
-                networkPlayer.info.animationSpeed = 1f;
+                networkPlayer.info.s = 1f;
             }
         }
 
@@ -744,7 +821,7 @@ public class Player : MonoBehaviour
             if (GameManager.isHost)
             {
                 //Manda input por red
-                networkPlayer.info.animationSpeed = 1f;
+                networkPlayer.info.s = 1f;
             }
             animator.SetBool("Idle_Climb", false);
 
@@ -838,21 +915,78 @@ public class Player : MonoBehaviour
 
     void PlayFirstPositionAnim()
     {
-        animator.SetBool("Victory1", true);
+        if (!GameManager.isLocalGame)
+        {
+            if (GameManager.isClient)
+                animator.Play("Victory1");
+            else
+                animator.SetBool("Victory1", true);
+        }
+        else
+        {
+            animator.Play("Victory1");
+        }
     }
 
     void PlaySecondOrThirdPositionAnim()
     {
-        animator.SetBool("Victory2_3", true);
+        if(!GameManager.isLocalGame)
+        {
+            if (GameManager.isClient)
+                animator.Play("Victory2_3");
+            else
+                animator.SetBool("Victory2_3", true);
+        }
+        else
+        {
+            animator.Play("Victory2_3");
+        }
     }
 
     void PlayFourthPositionAnim()
     {
-        animator.SetBool("Victory4", true);
+        if (!GameManager.isLocalGame)
+        {
+            if (GameManager.isClient)
+                animator.Play("Victory4");
+            else
+                animator.SetBool("Victory4", true);
+        }
+        else
+        {
+            animator.Play("Victory4");
+        }
     }
 
     void ResetAnimations()
     {
+        rotateAnimation = true;
+
+        //Online game
+        if (!GameManager.isLocalGame)
+        {
+            //Caso de las máquinas del host
+            if (GameManager.isHost)
+            {
+                //Manda input por red
+                playerMesh.transform.forward = -Vector3.forward;
+                Vector3 eulerAngles = playerMesh.transform.rotation.eulerAngles;
+                networkPlayer.info.rx = Mathf.RoundToInt(eulerAngles.x * 100f);
+                networkPlayer.info.ry = Mathf.RoundToInt(eulerAngles.y * 100f);
+                networkPlayer.info.rz = Mathf.RoundToInt(eulerAngles.z * 100f);
+            }
+            else
+            {
+                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rx * 0.01f
+                    , networkPlayer.info.ry * 0.01f, networkPlayer.info.rz * 0.01f);
+            }
+        }
+        //Local game
+        else
+        {
+            playerMesh.transform.forward = -Vector3.forward;
+        }
+
         animator.SetBool("Idle_Walk", false);
         animator.SetBool("Idle_Climb", false);
         animator.SetBool("Idle_Mine", false);
@@ -865,6 +999,8 @@ public class Player : MonoBehaviour
         animator.SetBool("Victory2_3", false);
         animator.SetBool("Victory4", false);
 
+        animator.speed = 1f;
+
         animator.Play("Idle");
 
         climbingLadder = false;
@@ -875,41 +1011,41 @@ public class Player : MonoBehaviour
         isStunned = false;
         isInvulnerable = false;
 
-        GetComponent<Pickaxe>().ResetPickaxe();
-
-        //Online game
-        if (!GameManager.isLocalGame)
-        {
-            //Caso de las máquinas del host
-            if (GameManager.isHost)
-            {
-                //Manda input por red
-                playerMesh.transform.forward = -Vector3.forward;
-                networkPlayer.info.rotation = playerMesh.transform.rotation.eulerAngles;
-            }
-            else
-            {
-                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rotation.x, networkPlayer.info.rotation.y, networkPlayer.info.rotation.z);
-            }
-        }
-        //Local game
-        else
-        {
-            playerMesh.transform.forward = -Vector3.forward;
-        }         
+        GetComponentInChildren<Pickaxe>().ResetPickaxe();
     }
     #endregion
 
     public void Reset()
     {
+        gemPouch.Clear();
+
         currentPouchSize = 0;
         promptInput = false;
         score = 0;
         ResetAnimations();
     }
 
+    public void UnFreeze()
+    {
+        //joystick = Vector2.zero;
+        //throwGemInput = 0f;
+
+        ResetAnimations();
+
+        rb.velocity = Vector3.zero;
+        rb.useGravity = true;
+        rb.isKinematic = false;
+
+        freeze = false;
+    }
+
     public void Freeze()
     {
+        joystick = Vector2.zero;
+        throwGemInput = 0f;
+
+        ResetAnimations();
+
         rb.velocity = Vector3.zero;
         rb.useGravity = false;
         rb.isKinematic = true;

@@ -96,6 +96,10 @@ public class ShopController : MonoBehaviour
             if (!Client.user.items_faces.Contains(face) && Client.user.gems >= faces[face])
             {
                 List<string> aux = new List<string>(Client.user.items_faces);
+                if (face.Equals("faceglasses1"))
+                {
+                    aux.Add("faceglasses2");
+                }
                 aux.Add(face);
                 Client.user.gems -= faces[face];
                 Client.user.items_faces = aux.ToArray();

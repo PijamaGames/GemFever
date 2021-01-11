@@ -15,6 +15,13 @@ public class PodiumManager : MonoBehaviour
     private void Start()
     {
         victoryManager = FindObjectOfType<VictoryManager>();
+
+        foreach (var text in playerNames)
+            text.enabled = false;
+
+        foreach (var text in playerScores)
+            text.enabled = false;
+
         PlaceInPodium();
     }
 
@@ -33,10 +40,23 @@ public class PodiumManager : MonoBehaviour
 
             orderedPlayers[i].PlayVictoryAnimation(i);
 
-            //playerScores[i].text = orderedPlayers[i].score.ToString();
+            playerScores[i].enabled = true;
 
-            //TODO Nombre de los usuarios
+            playerScores[i].text = orderedPlayers[i].score.ToString();
 
+            playerNames[i].enabled = true;
+
+            if(!GameManager.isLocalGame)
+            {
+                playerNames[i].text = orderedPlayers[i].userInfo.id;
+            }
+            else
+            {
+                if (GameManager.english)
+                    playerNames[i].text = "P" + orderedPlayers[i].playerNumber;
+                else
+                    playerNames[i].text = "P" + orderedPlayers[i].playerNumber;
+            }
         }
     }
 

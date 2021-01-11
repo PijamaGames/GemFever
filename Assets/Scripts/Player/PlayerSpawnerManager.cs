@@ -5,9 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerSpawnerManager : MonoBehaviour
 {
-    [SerializeField] Transform networkPlayersParent;
+    Transform networkPlayersParent;
 
     public static bool isInHub = false;
+
+    public static bool firstTimeInHub = true;
 
     [SerializeField] bool hasJoined = false;
     private bool anyInputDone = false;
@@ -18,10 +20,22 @@ public class PlayerSpawnerManager : MonoBehaviour
 
     [SerializeField] List<GameObject> playerSpawnLocations = new List<GameObject>();
     [SerializeField] int maxPlayers = 4;
+    [SerializeField] GameObject joinButtons;
     int currentPlayers = 0;
 
     private void Start()
     {
+        if(joinButtons != null)
+        {
+            if (GameManager.isHandheld)
+                joinButtons.SetActive(false);
+            else if(firstTimeInHub)
+                joinButtons.SetActive(true);
+            else
+                joinButtons.SetActive(false);
+        }
+
+        networkPlayersParent = GameObject.FindGameObjectWithTag("NetworkPlayers").transform;
         isInHub = _isInHub;
 
         if(!GameManager.isLocalGame && isInHub)
@@ -79,7 +93,8 @@ public class PlayerSpawnerManager : MonoBehaviour
                     userInfo.frame = user.avatar_frame;
                     playerComp.SetUserInfo(userInfo);
 
-
+                    if(joinButtons != null)
+                        joinButtons.SetActive(false);
 
                     ClientInRoom.Spawn();
                 }
@@ -90,7 +105,7 @@ public class PlayerSpawnerManager : MonoBehaviour
             else
             {
                 anyInputDone = true;
-                //playerInput.GetComponent<PlayerAvatar>().UpdateVisuals();     
+                playerInput.GetComponent<PlayerAvatar>().UpdateVisuals();     
                 SpawnPlayerAtLocation(playerInput.gameObject);
             }
         }
@@ -107,6 +122,7 @@ public class PlayerSpawnerManager : MonoBehaviour
         comp.playerNumber = currentPlayers;
 
         player.transform.position = availableLocation;
+        //player.transform.SetParent(null);
         return comp;
     }
 }

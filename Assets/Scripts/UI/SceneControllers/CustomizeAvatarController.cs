@@ -23,9 +23,6 @@ public class CustomizeAvatarController : MonoBehaviour
     private Image[] skins;
     private Image[] colors;
 
-    public List<string> randHatList;
-    public List<string> randFaceList;
-
     private void Awake()
     {
         skins = skinParent.GetComponentsInChildren<Image>();
@@ -42,10 +39,11 @@ public class CustomizeAvatarController : MonoBehaviour
         }
 
         playerAvatar.SetUser(Client.user);
-        
+
         playerAvatar.UpdateVisuals();
 
-        body1Panel.SetActive(Client.user.avatar_bodyType==0);
+
+        body1Panel.SetActive(Client.user.avatar_bodyType == 0);
         body2Panel.SetActive(Client.user.avatar_bodyType == 1);
 
         if (Client.state == Client.signedUpState)
@@ -53,17 +51,15 @@ public class CustomizeAvatarController : MonoBehaviour
             next.gameObject.SetActive(true);
             next.onClick.AddListener(ClientSignedUp.SaveInfo);
             back.onClick.RemoveListener(ClientSignedIn.SaveInfo);
+            back.gameObject.SetActive(false);
         }
         else
         {
+            back.gameObject.SetActive(true);
             next.onClick.RemoveListener(ClientSignedUp.SaveInfo);
             back.onClick.AddListener(ClientSignedIn.SaveInfo);
             next.gameObject.SetActive(false);
         }
-
-
-        PrepareHatList();
-        PrepareFaceList();
     }
 
     public void SetSelectedSkin(int id)
@@ -71,8 +67,6 @@ public class CustomizeAvatarController : MonoBehaviour
         Client.user.avatar_skinTone = id;
         playerAvatar.UpdateVisuals();
     }
-
-    
 
     public void SetSelectedColor(int id)
     {
@@ -85,25 +79,14 @@ public class CustomizeAvatarController : MonoBehaviour
         int randomColor= rnd.Next(InicializeAvatarVariables.characterColors.Length);
         int randomSkin= rnd.Next(InicializeAvatarVariables.skinColors.Length);
         int randomBody= rnd.Next(InicializeAvatarVariables.numBodies);
-        int randomFace= rnd.Next(randFaceList.Count);
-        int randomHat = rnd.Next(randHatList.Count);
+        int randomFace= rnd.Next(InicializeAvatarVariables.randFaceList.Count);
+        int randomHat = rnd.Next(InicializeAvatarVariables.randHatList.Count);
 
-        SetCodeHat(randHatList[randomHat]);
-        SetFaceCode(randFaceList[randomFace]);
+        SetCodeHat(InicializeAvatarVariables.randHatList[randomHat]);
+        SetFaceCode(InicializeAvatarVariables.randFaceList[randomFace]);
         ChangeBody(randomBody==1);
         SetSelectedColor(randomColor);
         SetSelectedSkin(randomSkin);
-    }
-
-    public void PrepareHatList()
-    {
-        randHatList =new List<string>(Client.user.items_hats);
-        randHatList.RemoveAll((x) => !HatMeshes.hatsMeshes.ContainsKey(x));
-    }
-    public void PrepareFaceList()
-    {
-        randFaceList = new List<string>(Client.user.items_faces);
-        randFaceList.RemoveAll((x) => !FaceTextures.facesTextures.ContainsKey(x));
     }
 
     public void ChangeBody(bool body1)
@@ -116,7 +99,7 @@ public class CustomizeAvatarController : MonoBehaviour
         playerAvatar.UpdateVisuals();
     }
 
-    private void SetFaceCode(String id)
+    private void SetFaceCode(string id)
     {
         Client.user.avatar_face = id;
         playerAvatar.UpdateVisuals();

@@ -10,22 +10,25 @@ public class CameraController : MonoBehaviour
     private Camera cam;
     float defaultWidth;
     float lastAspect;
-
+    float lastDefaultSize;
    
     void Start()
     {
         cam = GetComponent<Camera>();
-        cam.orthographicSize = defaultSize;
-        defaultWidth = defaultSize * aspect;
         lastAspect = 0f;
+        cam.orthographicSize = defaultSize;
+        lastDefaultSize = defaultSize;
+        defaultWidth = defaultSize * aspect;
     }
 
     private void Update()
     {
-        if(cam.aspect != lastAspect)
+        if (cam.aspect != lastAspect || defaultSize != lastDefaultSize)
         {
+            defaultWidth = defaultSize * aspect;
             lastAspect = cam.aspect;
             cam.orthographicSize = defaultWidth / cam.aspect;
+            lastDefaultSize = defaultSize;
         }
     }
 }

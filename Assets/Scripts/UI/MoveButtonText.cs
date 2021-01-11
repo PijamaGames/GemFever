@@ -54,7 +54,6 @@ public class MoveButtonText : MonoBehaviour
         for (int i = 0; i < text.Length; i++)
         {
             pos[i] = originalPos[i];
-            pos[i].y-= moveYOnPressed;
             text[i].rectTransform.localPosition = pos[i];
         }
 

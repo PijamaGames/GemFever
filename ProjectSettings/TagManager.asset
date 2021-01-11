@@ -15,6 +15,7 @@ TagManager:
   - PlayerFeet
   - Floor
   - LadderTop
+  - NetworkPlayers
   layers:
   - Default
   - TransparentFX

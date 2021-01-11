@@ -7,7 +7,6 @@ public class GemPool : MonoBehaviour
     [SerializeField] int objectsInPool = 35;
     [SerializeField] GameObject prefab;
     Stack<GameObject> pool = new Stack<GameObject>();
-    public int availableObjects = 35;
     public bool isEmpty;
 
     private void Awake()
@@ -16,7 +15,7 @@ public class GemPool : MonoBehaviour
         for(int i = 0; i < objectsInPool; i++)
         {
             GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
-            obj.name = obj.name + i.ToString();
+            obj.name = i.ToString();
             obj.transform.SetParent(this.gameObject.transform);
             pool.Push(obj);
             obj.SetActive(false);
@@ -29,8 +28,6 @@ public class GemPool : MonoBehaviour
     {
         if (isEmpty) return null;
 
-        availableObjects--;
-
         GameObject gameObject = pool.Pop();
         gameObject.SetActive(true);
 
@@ -41,8 +38,6 @@ public class GemPool : MonoBehaviour
 
     public void ReturnObjectToPool(GameObject gameObject)
     {
-        availableObjects++;
-
         pool.Push(gameObject);
         gameObject.SetActive(false);
 

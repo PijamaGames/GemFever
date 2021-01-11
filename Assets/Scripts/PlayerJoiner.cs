@@ -18,8 +18,13 @@ public class UserInfo
 
 public class PlayerJoiner : MonoBehaviour
 {
-    [SerializeField] Transform networkPlayersParent;
+    Transform networkPlayersParent;
     [SerializeField] GameObject playerPrefab;
+
+    private void Awake()
+    {
+        networkPlayersParent = GameObject.FindGameObjectWithTag("NetworkPlayers").transform;
+    }
 
     public static Queue<UserInfo> queuedUsers = new Queue<UserInfo>();
 
