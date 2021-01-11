@@ -24,8 +24,6 @@ public class PlayerSpawnerManager : MonoBehaviour
     [SerializeField] GameObject joinButtons;
     int currentPlayers = 0;
 
-    [SerializeField] int debugID = 0;
-
     private void Start()
     {
         if(joinButtons != null)
@@ -121,7 +119,7 @@ public class PlayerSpawnerManager : MonoBehaviour
         //TODO CAMBIAR PUNTOS DE SPAWN SEGÚN EL NIVEL
         GameObject[] spawnLocations;
         if (!isInHub)
-            spawnLocations = playerSpawnLocations[/*GameManager.levelId*/ debugID].GetComponentsInChildren<GameObject>();
+            spawnLocations = playerSpawnLocations[GameManager.levelId].GetComponentsInChildren<GameObject>();
         else
             spawnLocations = hubSpawnLocations.ToArray();
 
