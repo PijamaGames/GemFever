@@ -19,9 +19,12 @@ public class PlayerSpawnerManager : MonoBehaviour
     [SerializeField] float timeToKickOut = 10f;
 
     [SerializeField] List<GameObject> playerSpawnLocations = new List<GameObject>();
+    [SerializeField] List<GameObject> hubSpawnLocations = new List<GameObject>();
     [SerializeField] int maxPlayers = 4;
     [SerializeField] GameObject joinButtons;
     int currentPlayers = 0;
+
+    [SerializeField] int debugID = 0;
 
     private void Start()
     {
@@ -116,8 +119,11 @@ public class PlayerSpawnerManager : MonoBehaviour
     private Player SpawnPlayerAtLocation(GameObject player)
     {
         //TODO CAMBIAR PUNTOS DE SPAWN SEGÚN EL NIVEL
-
-        GameObject[] spawnLocations = playerSpawnLocations[GameManager.levelId].GetComponentsInChildren<GameObject>();
+        GameObject[] spawnLocations;
+        if (!isInHub)
+            spawnLocations = playerSpawnLocations[/*GameManager.levelId*/ debugID].GetComponentsInChildren<GameObject>();
+        else
+            spawnLocations = hubSpawnLocations.ToArray();
 
         Vector3 availableLocation = spawnLocations[currentPlayers].transform.position;
 
