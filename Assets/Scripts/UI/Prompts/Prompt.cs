@@ -27,6 +27,7 @@ public class Prompt : MonoBehaviour
         //TODO: Colocar prompt en target point
         if(btn != null)
         {
+            if (cam == null || cam.gameObject == null) cam = Camera.main;
             Vector2 viewportPos = cam.WorldToViewportPoint(transform.position);
             
 
