@@ -9,6 +9,8 @@ public class PlayerSpawnerManager : MonoBehaviour
 
     public static bool isInHub = false;
 
+    public static bool firstTimeInHub = true;
+
     [SerializeField] bool hasJoined = false;
     private bool anyInputDone = false;
     private bool kicking = false;
@@ -27,7 +29,7 @@ public class PlayerSpawnerManager : MonoBehaviour
         {
             if (GameManager.isHandheld)
                 joinButtons.SetActive(false);
-            else
+            else if(firstTimeInHub)
                 joinButtons.SetActive(true);
         }
 
@@ -89,7 +91,7 @@ public class PlayerSpawnerManager : MonoBehaviour
                     userInfo.frame = user.avatar_frame;
                     playerComp.SetUserInfo(userInfo);
 
-                    if(joinButtons != null)
+                    if(joinButtons != null && firstTimeInHub)
                         joinButtons.SetActive(false);
 
                     ClientInRoom.Spawn();

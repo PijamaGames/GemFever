@@ -38,6 +38,7 @@ public class VictoryController : MonoBehaviour
         foreach (var player in players)
         {
             player.UnFreeze();
+            player.Reset();
         }
 
         if (GameManager.isLocalGame)
@@ -46,6 +47,7 @@ public class VictoryController : MonoBehaviour
         }
         else if (GameManager.isHost)
         {
+            PlayerSpawnerManager.firstTimeInHub = false;
             ClientInRoom.GoToHUBScene();
         }
     }

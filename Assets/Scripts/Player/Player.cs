@@ -1027,8 +1027,8 @@ public class Player : MonoBehaviour
 
     public void UnFreeze()
     {
-        joystick = Vector2.zero;
-        throwGemInput = 0f;
+        //joystick = Vector2.zero;
+        //throwGemInput = 0f;
 
         ResetAnimations();
 

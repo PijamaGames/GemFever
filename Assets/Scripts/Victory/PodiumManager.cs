@@ -15,13 +15,14 @@ public class PodiumManager : MonoBehaviour
     private void Start()
     {
         victoryManager = FindObjectOfType<VictoryManager>();
-        PlaceInPodium();
 
         foreach (var text in playerNames)
             text.enabled = false;
 
         foreach (var text in playerScores)
             text.enabled = false;
+
+        PlaceInPodium();
     }
 
     void PlaceInPodium()
