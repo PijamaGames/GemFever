@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
   <title>%UNITY_WEB_NAME%</title>
   <style>
     html {
@@ -132,9 +133,10 @@
     }
     gameInstance.progress.style.transform = `scaleX(${progress})`;
     if (progress === 1 && !gameInstance.removeTimeout) {
-      gameInstance.removeTimeout = setTimeout(function() {
+      loader.style.display = "none";
+      /*gameInstance.removeTimeout = setTimeout(function() {
         loader.style.display = "none";
-      }, 2000);
+      }, 2000);*/
     }
   }
 </script>

@@ -523,40 +523,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1333670681700085072, guid: d3ee420d4b657b64b95a136be816224c,
-        type: 3}
-      propertyPath: syncRate
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085073, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
       propertyPath: m_Name
       value: Frontend (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1333670681700085074, guid: d3ee420d4b657b64b95a136be816224c,
-        type: 3}
-      propertyPath: debugMessages
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1333670681700085074, guid: d3ee420d4b657b64b95a136be816224c,
-        type: 3}
-      propertyPath: urlIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1333670681700085074, guid: d3ee420d4b657b64b95a136be816224c,
-        type: 3}
-      propertyPath: debugMessagesSize
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1333670681700085074, guid: d3ee420d4b657b64b95a136be816224c,
-        type: 3}
-      propertyPath: messageSizeBytes
-      value: 16384
-      objectReference: {fileID: 0}
-    - target: {fileID: 1333670681700085074, guid: d3ee420d4b657b64b95a136be816224c,
-        type: 3}
-      propertyPath: debugState
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1333670681700085075, guid: d3ee420d4b657b64b95a136be816224c,
         type: 3}
@@ -1241,11 +1211,6 @@ PrefabInstance:
     - target: {fileID: 2884888735722536220, guid: 7eec1e99c5b42db46880c9b102809f6b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2884888735722536221, guid: 7eec1e99c5b42db46880c9b102809f6b,
-        type: 3}
-      propertyPath: debugMovile
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2884888735722536223, guid: 7eec1e99c5b42db46880c9b102809f6b,
