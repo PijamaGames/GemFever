@@ -9,7 +9,7 @@ public class HowToPlayController : MonoBehaviour
     [SerializeField] Button exitBtn;
 
     [SerializeField] GameObject[] pcTutorial;
-    [SerializeField] GameObject[] movileTutorial;
+    [SerializeField] GameObject[] mobileTutorial;
     GameObject[] tutorial;
     [SerializeField] Button nextBtn;
     [SerializeField] Button previousBtn;
@@ -30,10 +30,10 @@ public class HowToPlayController : MonoBehaviour
             exitBtn.gameObject.SetActive(false);
         }
 
-        foreach (var obj in movileTutorial) obj.SetActive(false);
+        foreach (var obj in mobileTutorial) obj.SetActive(false);
         foreach (var obj in pcTutorial) obj.SetActive(false);
 
-        tutorial = GameManager.isHandheld ? movileTutorial : pcTutorial;
+        tutorial = GameManager.isHandheld ? mobileTutorial : pcTutorial;
         maxIndex = tutorial.Length;
         UpdateUI();
     }
