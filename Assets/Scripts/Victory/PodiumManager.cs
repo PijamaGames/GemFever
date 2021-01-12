@@ -42,6 +42,8 @@ public class PodiumManager : MonoBehaviour
 
             orderedPlayers[i].PlayVictoryAnimation(i);
 
+            orderedPlayers[i].ForceLookForward();
+
             panels[i].enabled = true;
             
             playerScores[i].enabled = true;

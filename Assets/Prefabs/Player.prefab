@@ -135,13 +135,13 @@ MonoBehaviour:
   startingMaxHorizontalSpeed: 6
   startingVerticalSpeed: 150
   startingMaxVerticalSpeed: 5
-  stunTime: 1
-  invulnerabiltyTime: 1
+  stunTime: 1.5
+  invulnerabiltyTime: 2.5
   droppedGemsPerHit: 1
   maxGemsInPouch: 5
   knockBackReductionPerGemInPouch: 0.1
-  horizontalMovementReductionPerGemInPouch: 0.05
-  verticalMovementReductionPerGemInPouch: 0.05
+  horizontalMovementReductionPerGemInPouch: 0.1
+  verticalMovementReductionPerGemInPouch: 0.1
   gemThrowForce: 10
   gemThrowCooldown: 1
   throwGemPosition: {fileID: 7575612818429767386}

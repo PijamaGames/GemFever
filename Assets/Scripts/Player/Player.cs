@@ -375,7 +375,7 @@ public class Player : MonoBehaviour
         if(climbingLadder && joystick.x == 0 && !isStunned)
             rb.velocity = new Vector3(0f, rb.velocity.y, rb.velocity.z);
 
-        if (isStunned && !climbingLadder)
+        if (isStunned /*&& !climbingLadder*/)
             rb.useGravity = true;
 
         ClampVelocity();
@@ -433,9 +433,11 @@ public class Player : MonoBehaviour
                     networkPlayer.info.s = 1f;
                 }
             }
-                
 
-            rb.useGravity = false;
+            if (!isStunned)
+                rb.useGravity = false;
+            else
+                rb.useGravity = true;
 
             if(ladderTopReached)
             {
@@ -485,7 +487,7 @@ public class Player : MonoBehaviour
 
             finalMovement.y = verticalMovement;
         }
-        else
+        else if(!isStunned)
             rb.useGravity = true;        
 
         return finalMovement;
@@ -1076,6 +1078,12 @@ public class Player : MonoBehaviour
         rb.isKinematic = false;
 
         freeze = false;
+    }
+
+    public void ForceLookForward()
+    {
+        transform.forward = -Vector3.forward;
+        playerMesh.transform.forward = -Vector3.forward;
     }
 
     public void Freeze()
