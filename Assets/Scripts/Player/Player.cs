@@ -775,6 +775,17 @@ public class Player : MonoBehaviour
 
                     if (gemPool != null)
                         gemPool.ReturnObjectToPool(gem.gameObject);
+                    else
+                    {
+                        gemPool = FindObjectOfType<GemPool>();
+
+                        if (gemPool != null)
+                            gemPool.ReturnObjectToPool(gem.gameObject);
+                        else
+                        {
+                            Debug.LogError("Gem Pool Not Found");
+                        }
+                    }
                 }
 
                 if (currentPouchSize < 0) currentPouchSize = 0;
@@ -945,6 +956,32 @@ public class Player : MonoBehaviour
 
     void PlayFourthPositionAnim()
     {
+
+        //Online game
+        if (!GameManager.isLocalGame)
+        {
+            //Caso de las máquinas del host
+            if (GameManager.isHost)
+            {
+                //Manda input por red
+                playerMesh.transform.forward = -Vector3.right;
+                Vector3 eulerAngles = playerMesh.transform.rotation.eulerAngles;
+                networkPlayer.info.rx = Mathf.RoundToInt(eulerAngles.x * 100f);
+                networkPlayer.info.ry = Mathf.RoundToInt(eulerAngles.y * 100f);
+                networkPlayer.info.rz = Mathf.RoundToInt(eulerAngles.z * 100f);
+            }
+            else
+            {
+                playerMesh.transform.rotation = Quaternion.Euler(networkPlayer.info.rx * 0.01f
+                    , networkPlayer.info.ry * 0.01f, networkPlayer.info.rz * 0.01f);
+            }
+        }
+        //Local game
+        else
+        {
+            playerMesh.transform.forward = -Vector3.right;
+        }
+
         if (!GameManager.isLocalGame)
         {
             if (GameManager.isClient)
@@ -1018,6 +1055,8 @@ public class Player : MonoBehaviour
     public void Reset()
     {
         gemPouch.Clear();
+
+        gemPool = null;
 
         currentPouchSize = 0;
         promptInput = false;
