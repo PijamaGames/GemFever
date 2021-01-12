@@ -48,6 +48,9 @@ public class LevelsController : MonoBehaviour
     public void NextScene()
     {
         GameManager.levelId = levelSelected;
-        ClientSignedIn.CreateRoom();
+        if (GameManager.isLocalGame)
+        {
+            SceneLoader.instance.LoadHubScene();
+        } else ClientSignedIn.CreateRoom();
     }
 }
