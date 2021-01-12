@@ -34,6 +34,8 @@ public class PromptSpace : MonoBehaviour
 
                 if (userInfo.id != Client.user.id) return;
             }
+            else
+                if (requiresMoreThanOnePlayerInHub && FindObjectOfType<PlayerSpawnerManager>().currentJoinedPlayers <= 1) return;
 
             Prompt prompt = other.gameObject.GetComponentInChildren<Prompt>();
             promptTargets.Add(prompt);

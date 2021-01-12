@@ -22,7 +22,7 @@ public class PlayerSpawnerManager : MonoBehaviour
     [SerializeField] List<Transform> hubSpawnLocations = new List<Transform>();
     [SerializeField] int maxPlayers = 4;
     [SerializeField] GameObject joinButtons;
-    int currentJoinedPlayers = 0;
+    public int currentJoinedPlayers = 0;
 
     private void Start()
     {
