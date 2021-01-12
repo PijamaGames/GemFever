@@ -241,6 +241,8 @@ public class ClientInRoom : ClientState
         }
         players.Clear();
         waitingDict.Clear();
+        GameManager.isHost = false;
+        GameManager.isClient = false;
         lastMs = -1;
     }
 }
