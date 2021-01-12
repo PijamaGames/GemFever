@@ -7,7 +7,7 @@ public class VictoryManager : MonoBehaviour
     //Cuando salgas de la escena destruir a los jugadores y a sí mismo.
 
     public List<Player> players = new List<Player>();
-    [SerializeField] int gemsEarnedInLocal = 10;
+    int gemsEarnedInLocal = 100;
 
 
     // Start is called before the first frame update
