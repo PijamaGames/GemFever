@@ -163,8 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba2842065f30aa4db104ab95800c73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prediction: 0.08
   maxDistance: 1
-  lerp: 11
+  lerp: 12
 --- !u!1001 &6881307691642504579
 PrefabInstance:
   m_ObjectHideFlags: 0

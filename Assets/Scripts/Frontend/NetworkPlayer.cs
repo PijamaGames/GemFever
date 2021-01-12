@@ -29,6 +29,7 @@ public class NetworkPlayer : NetworkObj
 
     [SerializeField] float maxDistance = 1f;
     [SerializeField] float lerp = 3f;
+    [SerializeField] float prediction = 0.5f;
 
     [HideInInspector] public Info info;
     [HideInInspector] public InputInfo inputInfo;
@@ -117,9 +118,10 @@ public class NetworkPlayer : NetworkObj
             if (GameManager.isHost)
             {
                 //info.p = transform.position;
-                info.x = Mathf.RoundToInt(transform.position.x * 100f);
-                info.y = Mathf.RoundToInt(transform.position.y * 100f);
-                info.z = Mathf.RoundToInt(transform.position.z * 100f);
+                Vector3 pos = transform.position + rb.velocity * prediction;
+                info.x = Mathf.RoundToInt(pos.x * 100f);
+                info.y = Mathf.RoundToInt(pos.y * 100f);
+                info.z = Mathf.RoundToInt(pos.z * 100f);
 
                 var animClipInfo = anim.GetCurrentAnimatorClipInfo(0);
                 if(animClipInfo.Length > 0)

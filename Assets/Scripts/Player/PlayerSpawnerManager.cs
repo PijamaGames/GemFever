@@ -19,9 +19,10 @@ public class PlayerSpawnerManager : MonoBehaviour
     [SerializeField] float timeToKickOut = 10f;
 
     [SerializeField] List<GameObject> playerSpawnLocations = new List<GameObject>();
+    [SerializeField] List<Transform> hubSpawnLocations = new List<Transform>();
     [SerializeField] int maxPlayers = 4;
     [SerializeField] GameObject joinButtons;
-    int currentPlayers = 0;
+    int currentJoinedPlayers = 0;
 
     private void Start()
     {
@@ -55,7 +56,7 @@ public class PlayerSpawnerManager : MonoBehaviour
 
     void OnPlayerJoined(PlayerInput playerInput)
     {
-        if (currentPlayers >= maxPlayers)
+        if (currentJoinedPlayers >= maxPlayers)
         {
             Destroy(playerInput.gameObject);
             return;
@@ -116,14 +117,29 @@ public class PlayerSpawnerManager : MonoBehaviour
     private Player SpawnPlayerAtLocation(GameObject player)
     {
         //TODO CAMBIAR PUNTOS DE SPAWN SEGÚN EL NIVEL
+        Transform[] spawnLocations;
 
-        GameObject[] spawnLocations = playerSpawnLocations[GameManager.levelId].GetComponentsInChildren<GameObject>();
+        if (!_isInHub)
+        {
+            GameObject aux = playerSpawnLocations[GameManager.levelId];
+            spawnLocations = aux.GetComponentsInChildren<Transform>();
+            Debug.Log(" ");
+        }
+            
+        else
+            spawnLocations = hubSpawnLocations.ToArray();
 
-        Vector3 availableLocation = spawnLocations[currentPlayers].transform.position;
+        Vector3 availableLocation;
 
-        currentPlayers++;
+        if (!_isInHub)
+            //Ignorar componente del padre
+            availableLocation = spawnLocations[currentJoinedPlayers + 1].transform.position;
+        else
+            availableLocation = spawnLocations[currentJoinedPlayers].transform.position;
+
+        currentJoinedPlayers++;
         Player comp = player.GetComponent<Player>();
-        comp.playerNumber = currentPlayers;
+        comp.playerNumber = currentJoinedPlayers;
 
         player.transform.position = availableLocation;
         //player.transform.SetParent(null);

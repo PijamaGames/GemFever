@@ -9,6 +9,7 @@ public class PodiumManager : MonoBehaviour
     public List<GameObject> podiumPositions = new List<GameObject>();
     public List<TextMeshProUGUI> playerNames = new List<TextMeshProUGUI>();
     public List<TextMeshProUGUI> playerScores = new List<TextMeshProUGUI>();
+    [SerializeField] List<Image> panels=new List<Image>();
 
     VictoryManager victoryManager;
 
@@ -16,11 +17,12 @@ public class PodiumManager : MonoBehaviour
     {
         victoryManager = FindObjectOfType<VictoryManager>();
 
-        foreach (var text in playerNames)
-            text.enabled = false;
-
-        foreach (var text in playerScores)
-            text.enabled = false;
+        for (int i=0; i<0;i++)
+        {
+            playerNames[i].enabled = false;
+            playerScores[i].enabled = false;
+            panels[i].enabled = false;
+        }
 
         PlaceInPodium();
     }
@@ -40,6 +42,8 @@ public class PodiumManager : MonoBehaviour
 
             orderedPlayers[i].PlayVictoryAnimation(i);
 
+            panels[i].enabled = true;
+            
             playerScores[i].enabled = true;
 
             playerScores[i].text = orderedPlayers[i].score.ToString();

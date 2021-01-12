@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdcc4deecfb321447aaeef9a9aea85c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemIntoMinecart: {fileID: 0}
-  playerIntoMinecart: {fileID: 0}
+  gemIntoMinecart: {fileID: 8300000, guid: 90ac9f228e97b99409fdb86abffc224d, type: 3}
+  playerIntoMinecart: {fileID: 8300000, guid: d13365b5fb50d96429324bb00710f03e, type: 3}
   comboText: {fileID: 6835241650620784070}
   textFadeTime: 2
   comboString: 
@@ -251,7 +251,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8580961513272615701}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.69}
+  m_LocalPosition: {x: 0, y: 0, z: 2.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8583600406661252275}
@@ -259,7 +259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 283.3, y: -201.5}
+  m_AnchoredPosition: {x: 283.3, y: -201.52}
   m_SizeDelta: {x: 49.4, y: 11.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5426811782448421863

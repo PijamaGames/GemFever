@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class RoomInfoView : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class RoomInfoView : MonoBehaviour
     public Bilingual numPlayers;
     private Button btn;
     string player;
+
 
     private void Start()
     {
@@ -19,6 +21,7 @@ public class RoomInfoView : MonoBehaviour
             Debug.Log("PRESS JOIN: " + player);
             ClientSignedIn.JoinRoom(player);
         });
+
     }
 
     public void UpdateVisuals(PlayerRoomInfo info)
@@ -34,5 +37,6 @@ public class RoomInfoView : MonoBehaviour
         gameObject.SetActive(info != null);
     }
 
+  
 
 }

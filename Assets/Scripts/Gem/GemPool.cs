@@ -38,6 +38,8 @@ public class GemPool : MonoBehaviour
 
     public void ReturnObjectToPool(GameObject gameObject)
     {
+        gameObject.GetComponent<Gem>().ResetGemTier();
+
         pool.Push(gameObject);
         gameObject.SetActive(false);
 
