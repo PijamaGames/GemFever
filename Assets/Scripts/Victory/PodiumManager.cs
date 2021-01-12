@@ -17,7 +17,7 @@ public class PodiumManager : MonoBehaviour
     {
         victoryManager = FindObjectOfType<VictoryManager>();
 
-        for (int i=0; i<0;i++)
+        for (int i=0; i<playerNames.Count;i++)
         {
             playerNames[i].enabled = false;
             playerScores[i].enabled = false;
