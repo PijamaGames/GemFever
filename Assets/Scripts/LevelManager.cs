@@ -22,4 +22,9 @@ public class LevelManager : MonoBehaviour
         randomMusicId = rnd.Next(levelMusic.Count);
         persistentAudioSource.PlayMusic(levelMusic[randomMusicId]);
     }
+
+    private void OnDestroy()
+    {
+        persistentAudioSource.StopClip(levelMusic[randomMusicId]);
+    }
 }
