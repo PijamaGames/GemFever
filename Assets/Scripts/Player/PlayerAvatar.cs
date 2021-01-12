@@ -118,10 +118,10 @@ public class PlayerAvatar : MonoBehaviour
             faceId = InicializeAvatarVariables.randFaceList[randomFace];
             hatId = InicializeAvatarVariables.randHatList[randomHat];
 
-            Client.user.avatar_skinTone = skinId;
+            /*Client.user.avatar_skinTone = skinId;
             Client.user.avatar_color = colorId;
             Client.user.avatar_face = faceId;
-            Client.user.avatar_hat = hatId;
+            Client.user.avatar_hat = hatId;*/
         }
         else
         {
