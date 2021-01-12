@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern bool IsHandheld();
 
-    [SerializeField] bool debugMovile = false;
+    public bool debugMobile = false;
     public static bool isHandheld = false;
 
     [SerializeField] float blockedUIAlpha = 0.9f;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 #if (UNITY_WEBGL && !UNITY_EDITOR)
             isHandheld = IsHandheld();
 #else
-            isHandheld = debugMovile;
+            isHandheld = debugMobile;
 #endif
 
 
