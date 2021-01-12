@@ -116,6 +116,12 @@ public class Gem : MonoBehaviour
         gemMesh.material = currentTier.tierMaterial;
     }
 
+    public void ResetGemTier()
+    {
+        tierIndex = 0;
+        currentTier = tiers[0];
+    }
+
     public void UpdateGemTier(int tierIndex)
     {
         this.tierIndex = tierIndex;
