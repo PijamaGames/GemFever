@@ -88,7 +88,7 @@ Light:
   m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: NaN, y: 7.1e-44, z: 4.5907e-41, w: 0.0000000011090897}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 869306329547447990}
   - component: {fileID: 3167317833553832572}
   m_Layer: 0
-  m_Name: lantern
+  m_Name: levelLantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
