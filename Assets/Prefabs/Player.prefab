@@ -363,7 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 1
   lerp: 14
-  prediction: 0.5
+  prediction: 0.05
 --- !u!95 &6433302771336034677
 Animator:
   serializedVersion: 3
