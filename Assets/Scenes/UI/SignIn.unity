@@ -574,6 +574,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5702122043407427200, guid: 5b77d25fbedc6634bb90fd9189275572,
+        type: 3}
+      propertyPath: allClips.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5702122043407427201, guid: 5b77d25fbedc6634bb90fd9189275572,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2144,7 +2149,7 @@ MonoBehaviour:
         m_MethodName: PlayEffect
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: d8003bacb75c8c44cbb1c4d4971a09f9,
+          m_ObjectArgument: {fileID: 8300000, guid: 3758e3a55cd0ce64ebb628bf587c0162,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
@@ -2553,7 +2558,7 @@ MonoBehaviour:
         m_MethodName: PlayMusic
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 101eeb0bf5eba8c45a4930269d8971d4,
+          m_ObjectArgument: {fileID: 8300000, guid: a63385d4337e094428e4636a66994eb7,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
