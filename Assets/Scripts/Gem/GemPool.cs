@@ -28,6 +28,8 @@ public class GemPool : MonoBehaviour
     {
         if (isEmpty) return null;
 
+        Debug.Log("Getting from Pool");
+
         GameObject gameObject = pool.Pop();
         gameObject.SetActive(true);
 
@@ -38,6 +40,10 @@ public class GemPool : MonoBehaviour
 
     public void ReturnObjectToPool(GameObject gameObject)
     {
+        Debug.Log("Returning to Pool");
+
+        gameObject.GetComponent<Gem>().ResetGemTier();
+
         pool.Push(gameObject);
         gameObject.SetActive(false);
 
