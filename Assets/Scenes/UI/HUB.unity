@@ -51678,7 +51678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasJoined: 0
   _isInHub: 1
-  timeToKickOut: 10
+  timeToKickOut: 20
   playerSpawnLocations:
   - {fileID: 3375942996530340426}
   - {fileID: 3375942996032943073}
