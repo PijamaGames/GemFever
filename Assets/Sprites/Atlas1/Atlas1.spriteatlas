@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Atlas1
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: b0d9a08d548b5d048831e787143ff3ae, type: 3}
+    - {fileID: 2800000, guid: 3c5ba440f75f8ce44b94100213f70fe6, type: 3}
+    - {fileID: 2800000, guid: c4a4e6d2ffc87604aa215aafde2be881, type: 3}
+    - {fileID: 2800000, guid: 4b3327c78a8aa9d4a951db9b23fb89d1, type: 3}
+    - {fileID: 2800000, guid: 840f8ea3f316703449b86189aa54671f, type: 3}
+    - {fileID: 2800000, guid: 5354b072b1197154cbf7edc5d3a103a9, type: 3}
+    - {fileID: 2800000, guid: 6a2e586fc24b28e44a22d53f7211d383, type: 3}
+    - {fileID: 2800000, guid: 22d77bae632cf1c4bbb92224a9226aeb, type: 3}
+    - {fileID: 2800000, guid: 3f352dd4e3c8d9345a18e783231129e8, type: 3}
+    - {fileID: 2800000, guid: 6581e0bb23e9f9a448a9478061745be1, type: 3}
+    - {fileID: 2800000, guid: d4b5172ddd8535a4eb6c6b5b6c22c87d, type: 3}
+    - {fileID: 2800000, guid: 5afc66a7eaf6fad4ab38c197c582bc1c, type: 3}
+    - {fileID: 2800000, guid: 37a2d34736e29a44faea12e0d08f9aba, type: 3}
+    - {fileID: 2800000, guid: 01a85b81d5bea6c498e99625fc7af1f0, type: 3}
+    - {fileID: 2800000, guid: f2e815888426f5d42a436f32bb5eff46, type: 3}
+    - {fileID: 2800000, guid: 0fc3aa5c59639f146a8bac50a3651a35, type: 3}
+    - {fileID: 2800000, guid: 8b8fe30f24a4b724eb3ef9fc28d94deb, type: 3}
+    - {fileID: 2800000, guid: 48a11fca351559d40b1afdc2a98ffe05, type: 3}
+    - {fileID: 2800000, guid: a3f8c9108a7068b45afe154aa6ac1268, type: 3}
+    - {fileID: 2800000, guid: 99bea4d859d61da4eab985d2bae4c458, type: 3}
+    - {fileID: 2800000, guid: 31606f829ea301544a35b1cb99f8b527, type: 3}
+    - {fileID: 2800000, guid: 3c5633342c846074487e79e2c7f79604, type: 3}
+    - {fileID: 2800000, guid: 8028bbfffa1b5bb4fa56475974c95802, type: 3}
+    - {fileID: 2800000, guid: f55fcd328f0bc3b4aba2ac372e66256c, type: 3}
+    - {fileID: 2800000, guid: 762bc5d8e5380fe4baf4019d49d8be62, type: 3}
+    - {fileID: 2800000, guid: 98eb408434466f346975968a0794db95, type: 3}
+    - {fileID: 2800000, guid: 1f4a151eae01ae94da61e1f55e1d84b7, type: 3}
+    - {fileID: 2800000, guid: e42cd21343063884fa18704fef86fd2c, type: 3}
+    - {fileID: 2800000, guid: fba2ef2943fd81c49a951b3cad4402c2, type: 3}
+    - {fileID: 2800000, guid: f1b9e40459050f84ebbd22c66326de6c, type: 3}
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: a3f8c9108a7068b45afe154aa6ac1268, type: 3}
+  - {fileID: 21300000, guid: 3c5ba440f75f8ce44b94100213f70fe6, type: 3}
+  - {fileID: 21300000, guid: 01a85b81d5bea6c498e99625fc7af1f0, type: 3}
+  - {fileID: 21300000, guid: f55fcd328f0bc3b4aba2ac372e66256c, type: 3}
+  - {fileID: 21300000, guid: 5354b072b1197154cbf7edc5d3a103a9, type: 3}
+  - {fileID: 21300000, guid: 31606f829ea301544a35b1cb99f8b527, type: 3}
+  - {fileID: 21300000, guid: c4a4e6d2ffc87604aa215aafde2be881, type: 3}
+  - {fileID: 21300000, guid: e42cd21343063884fa18704fef86fd2c, type: 3}
+  - {fileID: 21300000, guid: 840f8ea3f316703449b86189aa54671f, type: 3}
+  - {fileID: 21300000, guid: f1b9e40459050f84ebbd22c66326de6c, type: 3}
+  - {fileID: 21300000, guid: 3c5633342c846074487e79e2c7f79604, type: 3}
+  - {fileID: 21300000, guid: 98eb408434466f346975968a0794db95, type: 3}
+  - {fileID: 21300000, guid: 3f352dd4e3c8d9345a18e783231129e8, type: 3}
+  - {fileID: 21300000, guid: 37a2d34736e29a44faea12e0d08f9aba, type: 3}
+  - {fileID: 21300000, guid: 5afc66a7eaf6fad4ab38c197c582bc1c, type: 3}
+  - {fileID: 21300000, guid: 4b3327c78a8aa9d4a951db9b23fb89d1, type: 3}
+  - {fileID: 21300000, guid: f2e815888426f5d42a436f32bb5eff46, type: 3}
+  - {fileID: 21300000, guid: 99bea4d859d61da4eab985d2bae4c458, type: 3}
+  - {fileID: 21300000, guid: 762bc5d8e5380fe4baf4019d49d8be62, type: 3}
+  - {fileID: 21300000, guid: fba2ef2943fd81c49a951b3cad4402c2, type: 3}
+  - {fileID: 21300000, guid: 48a11fca351559d40b1afdc2a98ffe05, type: 3}
+  - {fileID: 21300000, guid: 6581e0bb23e9f9a448a9478061745be1, type: 3}
+  - {fileID: 21300000, guid: 0fc3aa5c59639f146a8bac50a3651a35, type: 3}
+  - {fileID: 21300000, guid: d4b5172ddd8535a4eb6c6b5b6c22c87d, type: 3}
+  - {fileID: 21300000, guid: b0d9a08d548b5d048831e787143ff3ae, type: 3}
+  - {fileID: 21300000, guid: 1f4a151eae01ae94da61e1f55e1d84b7, type: 3}
+  - {fileID: 21300000, guid: 22d77bae632cf1c4bbb92224a9226aeb, type: 3}
+  - {fileID: 21300000, guid: 8b8fe30f24a4b724eb3ef9fc28d94deb, type: 3}
+  - {fileID: 21300000, guid: 6a2e586fc24b28e44a22d53f7211d383, type: 3}
+  - {fileID: 21300000, guid: 8028bbfffa1b5bb4fa56475974c95802, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - online
+  - backbuttonpushed
+  - inputcontroller
+  - sliderbar
+  - directionbutton
+  - scrollbar
+  - buy
+  - spur
+  - checkbox
+  - unchecked
+  - scrollbarHandle
+  - sound
+  - gem
+  - hiddenfield
+  - gempile
+  - check
+  - inputf
+  - randomize
+  - sliderbutton
+  - spuraxis
+  - music
+  - gembag
+  - inputk
+  - gemcart
+  - backbutton
+  - spanishbutton
+  - englishbutton
+  - local
+  - directionbuttonpushed
+  - shownfield
+  m_Tag: Atlas1
+  m_IsVariant: 0

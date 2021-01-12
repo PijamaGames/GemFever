@@ -9,6 +9,6 @@ public class ActivateKeyboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller.enabled = GameManager.isHandheld;
+        controller.enabled = GameManager.isHandheld && !GameManager.instance.debugMobile;
     }
 }
