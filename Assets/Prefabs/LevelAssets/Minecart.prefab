@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdcc4deecfb321447aaeef9a9aea85c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemIntoMinecart: {fileID: 0}
-  playerIntoMinecart: {fileID: 0}
+  gemIntoMinecart: {fileID: 8300000, guid: 90ac9f228e97b99409fdb86abffc224d, type: 3}
+  playerIntoMinecart: {fileID: 8300000, guid: d13365b5fb50d96429324bb00710f03e, type: 3}
   comboText: {fileID: 6835241650620784070}
   textFadeTime: 2
   comboString: 

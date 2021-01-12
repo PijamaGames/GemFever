@@ -184,7 +184,7 @@ MonoBehaviour:
   playerMesh: {fileID: 966143192252347051}
   freeze: 0
   walkSound: {fileID: 8300000, guid: f003c12049a7107448de6e63cc9fcf7b, type: 3}
-  ladderSound: {fileID: 0}
+  ladderSound: {fileID: 8300000, guid: 1e36bcf0b266b92469d9dbd4cb88aebf, type: 3}
   gemThrowSound: {fileID: 8300000, guid: f983119dd636e8c4f940474d015b561c, type: 3}
   networkPlayer: {fileID: 0}
 --- !u!114 &390191191207065865
@@ -641,7 +641,7 @@ MonoBehaviour:
   gemParryForce: 10
   hitOnCooldown: 0
   pickaxeReset: 0
-  pickaxeSwing: {fileID: 0}
+  pickaxeSwing: {fileID: 8300000, guid: fd1cd50274cfc3a4c8220d3db2d9e039, type: 3}
   pickaxeHitPlayer: {fileID: 8300000, guid: 90ac9f228e97b99409fdb86abffc224d, type: 3}
   parrySound: {fileID: 8300000, guid: 9509424fbdf067e439434420dcfc678b, type: 3}
 --- !u!65 &6386440380760899997
