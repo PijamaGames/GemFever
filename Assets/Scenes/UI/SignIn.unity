@@ -574,11 +574,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5702122043407427200, guid: 5b77d25fbedc6634bb90fd9189275572,
-        type: 3}
-      propertyPath: allClips.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5702122043407427201, guid: 5b77d25fbedc6634bb90fd9189275572,
         type: 3}
       propertyPath: m_LocalPosition.x

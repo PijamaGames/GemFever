@@ -108,6 +108,7 @@ public class PersistentAudioSource : MonoBehaviour
     {
         if (clip != null)
         {
+            //Debug.Log("effect: " + clip.name);
             TryPlayClip(clip, false, false);
             if (GameManager.isHost)
             {
