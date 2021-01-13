@@ -138,6 +138,8 @@ public class ClientSignedIn : ClientState
         if (Client.instance != null && Client.instance.socket != null)
             Client.instance.socket.SendMessage(msg);
 
+        GameManager.instance.BlockUI();
+
     }
 
     public static void SaveInfo()
