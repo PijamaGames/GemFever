@@ -2407,7 +2407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spanishText: 
-  englishText: Avaible games
+  englishText: Available games
 --- !u!114 &2140884722
 MonoBehaviour:
   m_ObjectHideFlags: 0
