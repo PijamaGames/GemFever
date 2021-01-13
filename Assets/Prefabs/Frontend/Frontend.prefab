@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   socket: {fileID: 0}
-  syncRate: 4
+  syncRate: 24
 --- !u!114 &1333670681700085074
 MonoBehaviour:
   m_ObjectHideFlags: 0
