@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 public class GameManager : MonoBehaviour
 {
-    public static float musicVolume = 0.5f;
+    public static float musicVolume = 0.1f;
     public static float effectsVolume = 0.5f;
     public static bool english = false;
     public static string username = "";
