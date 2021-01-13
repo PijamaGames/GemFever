@@ -107,6 +107,8 @@ public class Pickaxe : MonoBehaviour
 
     public void ResetPickaxe()
     {
+        if (GameManager.isHandheld) androidInputs = null;
+
         pickaxeInput = 0f;
 
         hitOnCooldown = false;
@@ -119,6 +121,9 @@ public class Pickaxe : MonoBehaviour
     {
         if (GameManager.isHandheld)
         {
+            if (androidInputs == null)
+                androidInputs = FindObjectOfType<AndroidInputs>();
+
             //Online game
             if (!GameManager.isLocalGame)
             {

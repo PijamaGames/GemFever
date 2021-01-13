@@ -201,6 +201,9 @@ public class Player : MonoBehaviour
     {
         if (GameManager.isHandheld)
         {
+            if (androidInputs == null)
+                androidInputs = FindObjectOfType<AndroidInputs>();
+
             //Online game
             if (!GameManager.isLocalGame)
             {
@@ -1056,6 +1059,8 @@ public class Player : MonoBehaviour
 
     public void Reset()
     {
+        if (GameManager.isHandheld) androidInputs = null;
+
         gemPouch.Clear();
 
         gemPool = null;
