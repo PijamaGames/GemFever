@@ -24,7 +24,9 @@ mergeInto(LibraryManager.library, {
   },
   SendWSMessage__deps:['socket'],
   SendWSMessage: function(jsonMsg){
-    jsonMsg = Pointer_stringify(jsonMsg);
-    _socket.send(jsonMsg);
+    if(_socket.readyState == 1){ //if open
+      jsonMsg = Pointer_stringify(jsonMsg);
+      _socket.send(jsonMsg);
+    }
   },
 });
