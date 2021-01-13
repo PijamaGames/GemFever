@@ -227,6 +227,7 @@ public class Player : MonoBehaviour
             {
                 joystick = androidInputs.GetMovementInput();
                 throwGemInput = androidInputs.GetThrowGemInput();
+                ThrowGem();
             }
         }
     }
