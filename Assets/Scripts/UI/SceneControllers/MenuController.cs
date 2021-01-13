@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
+    [SerializeField] GameObject errorPanel;
     [SerializeField] private PlayerAvatar playerAvatar;
     [SerializeField] Bilingual welcomeText;
     [SerializeField] Button exitButton;
@@ -17,6 +18,8 @@ public class MenuController : MonoBehaviour
     {
         if(Client.user != null)
         {
+            errorPanel.SetActive(ClientInRoom.error >= 0);
+            ClientInRoom.error = -1;
             welcomeText.spanishText = "¡Bienvenido/a " + Client.user.id + "!";
             welcomeText.englishText = "Welcome " + Client.user.id + "!";
             welcomeText.UpdateLanguage();

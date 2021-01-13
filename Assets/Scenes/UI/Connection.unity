@@ -1271,7 +1271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spanishText: 
-  englishText: Connecting with server...
+  englishText: Connecting to server...
 --- !u!114 &2127919126
 MonoBehaviour:
   m_ObjectHideFlags: 0

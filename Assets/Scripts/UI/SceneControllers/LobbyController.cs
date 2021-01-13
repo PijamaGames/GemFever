@@ -28,6 +28,7 @@ public class LobbyController : MonoBehaviour
         joinRandomBtn.onClick.AddListener(() =>
         {
             ClientSignedIn.JoinRoom("");
+            GameManager.instance.BlockUI();
         });
 
         ClientSignedIn.getRoomsEvent += UpdateUI;

@@ -150,9 +150,9 @@ public class PlayerAvatar : MonoBehaviour
 
         }
 
-        shirtRenderer.sharedMesh = InicializeAvatarVariables.shirts[Client.user.avatar_bodyType];
-        pantsRenderer.sharedMesh = InicializeAvatarVariables.pants[Client.user.avatar_bodyType];
-        hairRenderer.sharedMesh = InicializeAvatarVariables.hairs[Client.user.avatar_bodyType];
+        shirtRenderer.sharedMesh = InicializeAvatarVariables.shirts[userInfo.bodyType];
+        pantsRenderer.sharedMesh = InicializeAvatarVariables.pants[userInfo.bodyType];
+        hairRenderer.sharedMesh = InicializeAvatarVariables.hairs[userInfo.bodyType];
         hatRenderer.sharedMesh = HatMeshes.hatsMeshes[hatId].sharedMesh;
 
         faceMat.SetTexture("_BaseMap", FaceTextures.facesTextures[faceId]);

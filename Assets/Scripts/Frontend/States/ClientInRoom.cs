@@ -6,7 +6,7 @@ public class ClientInRoom : ClientState
 {
     private enum FrontendEvents { Error, GetInfo, Exit, AddPlayer, RemovePlayer, Spawn, ChangeScene };
     private enum BackendEvents { Exit, SendObjects, Spawn, ChangeScene, SaveGems };
-    public static int error;
+    public static int error = -1;
 
     public static List<string> queuedMessages = new List<string>();
 
@@ -20,6 +20,7 @@ public class ClientInRoom : ClientState
     override public void Begin()
     {
         base.Begin();
+        error = -1;
         exitRequested = false;
         SceneLoader.instance.LoadHubScene();
         Debug.Log("In room");
@@ -130,6 +131,7 @@ public class ClientInRoom : ClientState
         switch (evt)
         {
             case FrontendEvents.Error:
+                Debug.Log("ROOM ERROR");
                 error = data.error;
                 Client.SetState(Client.signedInState);
                 break;
