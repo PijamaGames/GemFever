@@ -18,6 +18,7 @@ public class ShopController : MonoBehaviour
 
     [SerializeField] private Button buyBtn;
     [SerializeField] private GameObject confirmPanel;
+    [SerializeField] private GameObject cantBuyPanel;
     [SerializeField] private TextMeshProUGUI numGems;
     
     [SerializeField] private Texture[] shopFaces;
@@ -47,6 +48,7 @@ public class ShopController : MonoBehaviour
         selectedHat = false;
         buyBtn.gameObject.SetActive(false);
         confirmPanel.SetActive(false);
+        cantBuyPanel.SetActive(false);
         UpdateGems();
     }
 
@@ -128,6 +130,38 @@ public class ShopController : MonoBehaviour
     private void UpdateGems()
     {
         numGems.SetText("" + Client.user.gems); 
+    }
+
+    public void OnClickBuy()
+    {
+        if (selectedFace)
+        {
+            if (!Client.user.items_faces.Contains(face))
+            {
+                confirmPanel.SetActive(true);
+            }
+            else
+            {
+                cantBuyPanel.SetActive(true);
+            }
+
+        }
+        else if (selectedHat)
+        {
+            if (!Client.user.items_hats.Contains(hat))
+            {
+                confirmPanel.SetActive(true);
+            }
+            else
+            {
+                cantBuyPanel.SetActive(true);
+            }
+
+        }
+        else if (selectedPack)
+        {
+            confirmPanel.SetActive(true);
+        }
     }
 
 }
