@@ -183,7 +183,7 @@ MonoBehaviour:
   clientAnimator: {fileID: 9100000, guid: 3e29601889fa79143ab17f1acdde2cd0, type: 2}
   playerMesh: {fileID: 966143192252347051}
   freeze: 0
-  walkSound: {fileID: 8300000, guid: f003c12049a7107448de6e63cc9fcf7b, type: 3}
+  walkSound: {fileID: 0}
   ladderSound: {fileID: 8300000, guid: 245eac3e6b18dab43882521442385d50, type: 3}
   gemThrowSound: {fileID: 8300000, guid: f983119dd636e8c4f940474d015b561c, type: 3}
   networkPlayer: {fileID: 0}
