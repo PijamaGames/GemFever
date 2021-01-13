@@ -2786,7 +2786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Juego \nonline"
+  m_text: "Juego \nen l\xEDnea"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5cc6a4dde19a84049bffe4d61ec34a92, type: 2}
   m_sharedMaterial: {fileID: 8230927105336383023, guid: 5cc6a4dde19a84049bffe4d61ec34a92,
